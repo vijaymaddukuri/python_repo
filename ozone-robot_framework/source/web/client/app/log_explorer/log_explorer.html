@@ -1,0 +1,56 @@
+<div layout="row">
+  <div>
+    <h3><ng-md-icon icon="format_align_center" size="40"></ng-md-icon> Log Explorer</h3>
+  </div>
+  <!--<div flex>
+  </div>-->
+  <div layout="column">
+    <md-progress-circular ng-show="showProgressbar" md-mode="indeterminate"></md-progress-circular>
+  </div>
+
+</div>
+
+<div class="row">
+
+  <div class="col-md-4">
+    <md-input-container>
+      <label>Category</label>
+      <input ng-model="filterCategory" style="width:200px;">
+    </md-input-container>
+
+    <md-input-container>
+      <label>Type</label>
+      <input ng-model="filterType" style="width:200px;">
+    </md-input-container>
+
+    <md-input-container>
+      <label>User</label>
+      <input ng-model="filterUser" style="width:200px;">
+    </md-input-container>
+    <table class="table">
+      <thead>
+      <tr>
+        <th>Category</th>
+        <th>File</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr ng-repeat="logFile in allLogFiles | filter :filterCategory | filter :filterUser | filter :filterType">
+        <td>{{logFile.category}}</td>
+        <td>{{logFile.fileName}}</td>
+        <td><button class="btn btn-default" ng-click="showLogFile(logFile.filePath)">Show</button></td>
+      </tr>
+      </tbody>
+    </table>
+
+  </div>
+  <div class="col-md-8">
+    <style>
+      .ace_editor { height: 800px; }
+    </style>
+    <div ui-ace="{document:'text',mode:'text'}" ng-model="logContent" ng-readonly="true">
+      </div>
+  </div>
+
+</div>
+

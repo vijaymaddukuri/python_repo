@@ -1,0 +1,17 @@
+node_modules
+public
+.tmp
+.idea
+client/bower_components
+dist
+/server/config/local.env.js
+npm-debug.log
+coverage
+logs
+scripts/input
+scripts/lic
+scripts/tmp
+scripts/logs
+server/components/ssl/certs
+doc
+!source/ozone-scripts/ehc-python-modules/ansible_modules/my_playbook.py

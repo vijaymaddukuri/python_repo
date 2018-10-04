@@ -1,0 +1,69 @@
+void runStages(String tag) {
+
+    docker.image(tag).inside("--privileged=true") {
+
+              stage('Execute OSS'){
+
+                        sh '''
+                          dir=$(pwd)
+                          mkdir middleware
+                          cd middleware
+                          git clone https://madduv:487367d96125a05c961180a4d9ca530f012481c1@github.emcrubicon.com/AAI/middlewareservice.git
+                          virtualenv venv -p python3
+                          source venv/bin/activate
+                          cd middlewareservice
+
+					      ls
+					      python3 setup.py install
+                          chmod +x $dir/middleware
+                          rm -rf ci
+                          rm -rf devops
+                          ls
+                          export DETECT_LATEST_RELEASE_VERSION=4.2.1
+                          curl -O https://artifactory.core.rcsops.com/artifactory/hub-detect/hub-detect-virtustream.sh
+                          chmod +x hub-detect-virtustream.sh
+                            ./hub-detect-virtustream.sh \
+                            --blackduck.hub.url='https://bduck01.core.rcsops.com' \
+                            --blackduck.hub.proxy.host=10.131.146.14 \
+                            --blackduck.hub.proxy.port=3128 \
+                            --blackduck.hub.api.token=N2E2MDkyODktNGZlNi00ZmNiLThhNDUtM2I5M2NmNjhiNTkwOmE3ZTBlYzAwLTRjOWEtNDhlNS1hNDkxLWE1ZjcwOWE3YzU1NA== \
+                            --detect.project.name=middlewareservice \
+                            --detect.project.version.name="0.0.4" \
+                            --detect.project.codelocation.delete.old.names=true \
+                            --detect.npm.include.dev.dependencies=false \
+                            --detect.excluded.bom.tool.types=npm \
+                            --detect.source.path=$dir/middleware/middlewareservice \
+                            --detect.code.location.name="jenkins_project_mw" \
+                            --detect.python.python3=true \
+                            --detect.pip.requirements.path=$dir/middleware/middlewareservice/requirements/production.txt
+
+                            '''
+                }
+
+    }
+}
+
+
+def vs = new devops.VariousStuff1().configure([notifyRecipients : 'sylus.anuranjan@virtustream.com'])
+
+vs.try_node('docker_engine') {
+
+    try {
+        deleteDir()
+        checkout scm
+
+        String imageTag
+
+        imageTag = vs.ensureDockerImage('devops/build-image')
+
+        runStages(imageTag)
+
+
+    } catch(e) {
+
+        def color = 'danger'
+        def err_message = "Job: ${JOB_NAME}:${BUILD_NUMBER} got an exception during Build stage: " + e.toString()
+        def info_message = "Job URL: ${BUILD_URL}"
+        throw (e)
+    }
+}

@@ -1,0 +1,67 @@
+# ------------------------------------------------------------------------------
+# Copyright (C) 2016-2017 DELL EMC Corporation. All Rights Reserved.
+
+# This software contains the intellectual property of DELL EMC Corporation
+# or is licensed to DELL EMC Corporation from third parties.  Use of this
+# software and the intellectual property contained therein is expressly
+# limited to the terms and conditions of the License Agreement under which
+# it is provided by or on behalf of DELL  EMC.
+
+# ------------------------------------------------------------------------------
+
+-
+    name: 'VCN - {{ step }} - {{ ssh_enable and "Enable" or "Disable"}} SSH service on a VMware Appliance'
+    hosts: '{{ vms }}'
+    gather_facts: no
+    any_errors_fatal: True
+    tags:
+                - 'VCN - {{ step }} - {{ ssh_enable and "Enable" or "Disable"}} SSH service on a VMware Appliance'
+    tasks:
+        -
+            name: 'VCN - {{ step }} - Validate SSH service on a VMware Appliance'
+            delegate_to: localhost
+            ehc_script_agent:
+                package_name: vcenter
+                module_name: toggleSSH
+                method_name: validateToggleSSHService
+                method_params:
+                    host: '{{ vmDict.host }}'
+                    user: '{{ vmDict.vmusername }}'
+                    password: '{{ vmDict.vmpassword }}'
+                    enable: '{{ ssh_enable }}'
+            register: validateConnectionResults
+            failed_when: not validateConnectionResults.data is defined or validateConnectionResults.data.err_message is defined or not validateConnectionResults.data.status == true
+            changed_when: validateConnectionResults.data is defined and not validateConnectionResults.data.err_message is defined and validateConnectionResults.data.status == true
+            ignore_errors: validateConnectionResults.failed_when_result
+        -
+            name: 'VCN - {{ step }} - {{ ssh_enable and "Enable" or "Disable"}} SSH service on a VMware Appliance'
+            delegate_to: localhost
+            ehc_script_agent:
+                package_name: vcenter
+                module_name: toggleSSH
+                method_name: toggleSSH
+                method_params:
+                    host: '{{ vmDict.host }}'
+                    user: '{{ vmDict.vmusername }}'
+                    password: '{{ vmDict.vmpassword }}'
+                    enable: '{{ ssh_enable }}'
+            register: enableSSHResults
+            failed_when: not enableSSHResults.data is defined or enableSSHResults.data.err_message is defined or not enableSSHResults.data.status == true
+            changed_when: enableSSHResults.data is defined and not enableSSHResults.data.err_message is defined and enableSSHResults.data.status == true
+            when: validateConnectionResults.failed_when_result
+        -
+            name: 'VCN - {{ step }} - Post Validate SSH service on a VMware Appliance'
+            delegate_to: localhost
+            ehc_script_agent:
+                package_name: vcenter
+                module_name: toggleSSH
+                method_name: validateToggleSSHService
+                method_params:
+                    host: '{{ vmDict.host }}'
+                    user: '{{ vmDict.vmusername }}'
+                    password: '{{ vmDict.vmpassword }}'
+                    enable: '{{ ssh_enable }}'
+            register: postValidateConnectionResults
+            failed_when: not postValidateConnectionResults.data is defined or postValidateConnectionResults.data.err_message is defined or not postValidateConnectionResults.data.status == true
+            changed_when: postValidateConnectionResults.data is defined and not postValidateConnectionResults.data.err_message is defined and postValidateConnectionResults.data.status == true
+            when: not enableSSHResults|skipped

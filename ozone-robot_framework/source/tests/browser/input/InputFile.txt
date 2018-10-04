@@ -1,0 +1,14 @@
+# Ozone Input Column - Copy this entire column to import into Ozone
+vrealize_orchestrator.vro_configurator_username=vmware
+vrealize_orchestrator.vro_configurator_password=Password123!
+vrealize_orchestrator.vcoadmin_password=vcoadmin
+vrealize_orchestrator.vroadmins_sso_group_name=vcoadmins
+vrealize_orchestrator.local_emc_vipr_vro_plugin_dar_path=z:/vRealize Orchestrator/6.0.3/Plugins/EMC-ViPR-vRO-Plugin-2.4.0.0.11.dar
+vrealize_orchestrator.vro_timezone=US/Pacific
+vrealize_orchestrator.local_emc_ehc_foundation_plugin_dar_path=Z:/ehc-foundation-4.1.0.0-build-40/Plugins/o11nplugin-ehc-foundation-4.1.0.0-build-40.dar
+vrealize_orchestrator.local_emc_ehc_nsx_plugin_dar_path=z:/vRealize Orchestrator/vRO-Plugins/o11nplugin-nsx_1.0.4.4160556.dar
+vrealize_orchestrator.local_emc_ehc_srm_plugin_dar_path=z:/vRealize Orchestrator/vRO-Plugins/srm-6.1.1.3884620.dar
+vrealize_orchestrator.local_o11n_vcac_vmoapp_path=z:/vRealize Orchestrator/6.0.3/Plugins/o11nplugin-vcac.dar
+vrealize_orchestrator.local_o11n_nsx_vmoapp_path=z:/NSX for vSphere/NSX for vSphere 6.2.3-3979471/o11nplugin-nsx-1.0.3.vmoapp
+vrealize_orchestrator.vro_root_password=Password123!
+common.vault_password=P@ssw0rd@123

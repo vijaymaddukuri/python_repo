@@ -1,0 +1,32 @@
+# ------------------------------------------------------------------------------
+# Copyright (C) 2016-2017 DELL EMC Corporation. All Rights Reserved.
+
+# This software contains the intellectual property of DELL EMC Corporation
+# or is licensed to DELL EMC Corporation from third parties.  Use of this
+# software and the intellectual property contained therein is expressly
+# limited to the terms and conditions of the License Agreement under which
+# it is provided by or on behalf of DELL  EMC.
+
+# ------------------------------------------------------------------------------
+
+-
+    name: '{{ step }} - Poll vRealize Business'
+    hosts: '{{ vms }}'
+    tasks:
+        -
+            name: '{{ step }} - Poll vRealize Business'
+            tags:
+                - '{{ step }} - Poll vRealize Business'
+            delegate_to: localhost
+            ehc_script_agent:
+                package_name: vrb
+                module_name: pollvRealizeBusiness
+                method_name: pollvRBWithoutCredential
+                method_params:
+                    vRBHost: '{{ ansible_host }}'
+            register: pollVrbResults
+            changed_when: pollVrbResults.data is defined and pollVrbResults.data.err_message is not defined and pollVrbResults.data.status == true
+            failed_when: not pollVrbResults.data is defined or pollVrbResults.data.err_message is defined or not pollVrbResults.data.status == true
+            until: pollVrbResults.data is defined and pollVrbResults.data.err_message is not defined and pollVrbResults.data.status == true
+            retries: '{{ poll_retries }}'
+            delay: '{{ poll_delay }}'

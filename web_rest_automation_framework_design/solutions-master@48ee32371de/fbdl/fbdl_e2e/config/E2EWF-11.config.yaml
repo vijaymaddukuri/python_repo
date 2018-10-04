@@ -1,0 +1,78 @@
+workflow_context:
+    assets_info:
+        [{
+            'local_path': '/root/automation/bdl/asset/',
+            'remote_path': '/tmp/',
+            'file_name': 'dir',
+            'visible_name': 'Auto_Dir_Asset'
+         }
+        ]
+    to_register_templates:
+        [
+        {'path':'/mnt/VPI7160/Packaging/Template',
+        'file_name':'template2.yaml',
+        'category':'template',
+        'type':'template',
+        'manifest_entry':{'WorkspaceId':'Aioria_WP'},
+        'visible_name':'Aioria',
+        'short_description':'Short description',
+        'user_name':'Aioria'}
+        ]
+    registered_templates:
+        []
+    submitted_templates:
+        []
+    accepted_templates:
+        []
+    to_register_assets:
+        [
+        {'path':'/mnt/VPI7160/DAC_CLI',
+        'file_name':'data1.csv',
+        'category':'data',
+        'type':'csv',
+        'class':'file',
+        'manifest_entry':{'WorkspaceId':'Aioria_WP','AssetMimeType':'Text','AssetFileEncoding':'utf-8'},
+        'visible_name':'GSE',
+        'short_description':'Short description',
+        'user_name':'GSE',
+        'work_email':'gse.automation@emc.com',
+        'work_phone':'60363282',
+        'hdfs_path':'',
+        'port':''}
+        ]
+    registered_assets:
+        []
+    submitted_assets:
+        []
+    accepted_assets:
+        []
+    register_asset_format:
+        {'path':'/mnt/VPI7160/DAC_CLI',
+        'file_name':'data.csv',
+        'category':'data',
+        'type':'csv',
+        'manifest_entry':{'WorkspaceId':'Aioria_WP','AssetMimeType':'Text','AssetFileEncoding':'utf-8'},
+        'visible_name':'Auto',
+        'short_description':'Short description',
+        'user_name':'Aioria',
+        'work_email':'aioria.guo@emc.com',
+        'work_phone':'60363282',
+        'hdfs_path':'',
+        'port':''
+        }
+    register_template_format:
+        {'path':'/mnt/VPI7160/Packaging/Template',
+        'file_name':'template2.yaml',
+        'category':'template',
+        'type':'template',
+        'manifest_entry':{'WorkspaceId':'Aioria_WP'},
+        'visible_name':'Aioria',
+        'short_description':'Short description',
+        'user_name':'Aioria'
+        }
+    search_data_sets:
+        {'AssetVisibleName': ['will-test1'],
+        'AssetPublishedDate': ['2016-04-08 07:17:37'],
+        'AssetRegisteredDate': ['2016-04-08 05:46:03'],
+        'TemplateType': ['localdirectory']
+        }

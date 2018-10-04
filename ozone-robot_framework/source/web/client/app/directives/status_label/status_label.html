@@ -1,0 +1,9 @@
+<div md-theme="{{statusTheme}}" ng-if="state">
+  <md-button aria-label="" md-theme-watch id="submitButton" class="md-primary md-hue-2" ng-click="null" tooltip-placement="auto" uib-tooltip="{{toolTip}}" style="cursor: default;background: transparent;">
+    {{statusText}}
+    <ng-md-icon icon="{{statusIcon}}" ng-class="{'fa-spin':statusIcon=='refresh'}" ng-if="statusIcon"></ng-md-icon>
+    <span ng-if="progress < 100">
+      {{progress}} %
+    </span>
+  </md-button>
+</div>

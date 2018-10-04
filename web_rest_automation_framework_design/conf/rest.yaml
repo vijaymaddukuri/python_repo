@@ -1,0 +1,12 @@
+
+vm_details:
+  hostname: localhost:8000
+  email: vijay.maddukuri@dell.com
+  password: Password1!
+
+vm_template:
+  template1: NewVMtemplate
+
+vs_policy:
+  policy: MySQL policy
+

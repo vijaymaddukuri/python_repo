@@ -1,0 +1,62 @@
+# ------------------------------------------------------------------------------
+# Copyright (C) 2016-2017 DELL EMC Corporation. All Rights Reserved.
+
+# This software contains the intellectual property of DELL EMC Corporation
+# or is licensed to DELL EMC Corporation from third parties.  Use of this
+# software and the intellectual property contained therein is expressly
+# limited to the terms and conditions of the License Agreement under which
+# it is provided by or on behalf of DELL  EMC.
+
+# ------------------------------------------------------------------------------
+
+---
+-
+    include: plays/power-off-vms.yml
+    vars:
+        step: BKP - BPB-550-010
+        vms: vrops_manager:vrops_data_nodes:vrops_remote_collectors
+        # vms: vrops_data_nodes:vrops_remote_collectors  ?
+
+-
+    include: plays/backup-snapshot.yml
+    vars:
+        step: BKP - BPB-550-030
+        description: 'Configure vROPS'
+        snapshot_name: BPB-550-CONFIGURE-VROPS
+        snapshot_description: BPB-550-CONFIGURE-VROPS
+        vms: vrops_manager:vrops_data_nodes:vrops_remote_collectors
+        dumpMemory: True
+        powerOffVM: False
+
+-
+    include:  plays/delete-snapshots-not-matching-name.yml
+    vars:
+        step: BKP - BPB-550-060
+        vms: vrops_manager:vrops_data_nodes:vrops_remote_collectors
+        inventoryPath: '/'
+        snapshotName:  BPB-550-CONFIGURE-VROPS
+
+-
+    include: plays/power-on-vms.yml
+    vars:
+        step: BKP - BPB-550-070
+        # Note: Needs to bring up all together, otherwise poll doesnt pass as vrops_remote_collectors are not up
+        vms: vrops_manager:vrops_data_nodes:vrops_remote_collectors
+
+-
+    include: plays/poll-vrops.yml
+    vars:
+        step: BKP - BPB-550-080
+        vms: vrops_data_nodes
+
+-
+    include: plays/power-on-vms.yml
+    vars:
+        step: BKP - BPB-550-090
+        vms: vrops_remote_collectors
+
+-
+    include: plays/poll-vrops.yml
+    vars:
+        step: BKP - BPB-550-100
+        vms: vrops_remote_collectors

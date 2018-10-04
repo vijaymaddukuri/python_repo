@@ -1,0 +1,62 @@
+-
+    name: 'VCN - {{ step }} - Configure NTP on PSC'
+    hosts: '{{ vms }}'
+    gather_facts: no
+    any_errors_fatal: True
+    tags:
+                - 'VCN - {{ step }} - Configure NTP on PSC'
+    tasks:
+        -
+            name: 'VCN - {{ step }} - Pre-Validate Configure NTP on PSC'
+            delegate_to: localhost
+            ehc_script_agent:
+                package_name: vcenter
+                module_name: configNTP
+                method_name: validateNTPServers
+                method_params:
+                    vCenterDict:
+                      host: '{{ vmDict.host }}'
+                      user: '{{ vmDict.vmusername }}'
+                      password: '{{ vmDict.vmpassword }}'
+                    ntpServers: '{{ ntp_servers }}'
+            register: validateNTPServersResults
+            failed_when: not validateNTPServersResults.data is defined or validateNTPServersResults.data.err_message is defined or not validateNTPServersResults.data.status == true
+            changed_when: validateNTPServersResults.data is defined and validateNTPServersResults.data.err_message is not defined and validateNTPServersResults.data.status == true
+            ignore_errors: validateNTPServersResults.failed_when_result
+
+        -
+            name: 'VCN - {{ step }} - Configure NTP on PSC'
+            delegate_to: localhost
+            ehc_script_agent:
+                package_name: vcenter
+                module_name: configNTP
+                method_name: configNTPServers
+                method_params:
+                    vCenterDict:
+                      host: '{{ vmDict.host }}'
+                      user: '{{ vmDict.vmusername }}'
+                      password: '{{ vmDict.vmpassword }}'
+                    ntpServers: '{{ ntp_servers }}'
+                    opeartion: 'replace'
+            register: configNTPServersResult
+            failed_when: not configNTPServersResult.data is defined or configNTPServersResult.data.err_message is defined or not configNTPServersResult.data.status == true
+            changed_when: configNTPServersResult.data is defined and configNTPServersResult.data.err_message is not defined and configNTPServersResult.data.status == true
+            when: validateNTPServersResults.failed_when_result
+
+        -
+            name: 'VCN - {{ step }} - Validate Configure NTP on PSC'
+            delegate_to: localhost
+            ehc_script_agent:
+                package_name: vcenter
+                module_name: configNTP
+                method_name: validateNTPServers
+                method_params:
+                    vCenterDict:
+                      host: '{{ vmDict.host }}'
+                      user: '{{ vmDict.vmusername }}'
+                      password: '{{ vmDict.vmpassword }}'
+                    ntpServers: '{{ ntp_servers }}'
+            register: postValidateNTPServersResults
+            failed_when: not postValidateNTPServersResults.data is defined or postValidateNTPServersResults.data.err_message is defined or not postValidateNTPServersResults.data.status == true
+            changed_when: postValidateNTPServersResults.data is defined and postValidateNTPServersResults.data.err_message is not defined and postValidateNTPServersResults.data.status == true
+            when: not configNTPServersResult|skipped

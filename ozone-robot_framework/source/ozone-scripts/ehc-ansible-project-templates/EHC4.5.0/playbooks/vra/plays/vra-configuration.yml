@@ -1,0 +1,900 @@
+# ------------------------------------------------------------------------------
+# Copyright (C) 2016-2017 DELL EMC Corporation. All Rights Reserved.
+
+# This software contains the intellectual property of DELL EMC Corporation
+# or is licensed to DELL EMC Corporation from third parties.  Use of this
+# software and the intellectual property contained therein is expressly
+# limited to the terms and conditions of the License Agreement under which
+# it is provided by or on behalf of DELL  EMC.
+
+# ------------------------------------------------------------------------------
+
+-
+    name: 'VRA - {{ step }} - vRA Appliance Configuration'
+    hosts: vra_servers
+    gather_facts: no
+    any_errors_fatal: True
+    vars:
+      step: 'EPB-450-080'
+    tags:
+                - 'VRA - {{ step }} - vRA Appliance Configuration'
+    tasks:
+        -
+            name: 'VRA - {{ step }} - Validate vRA Appliance Configuration'
+            delegate_to: localhost
+            ehc_script_agent:
+                method_name: validateConfiguration
+                method_params:
+                    vCenterDict: '{{ vcenter }}'
+                    vmDict: '{{ vmDict }}'
+                    applianceAddress: '{{ ansible_host }}'
+                    username: 'root'
+                    password: '{{ vrealize_automation.vra_root_password }}'
+                    ntpServerList: '{{ ntp_servers }}'
+                    timeZone: '{{ linux_timezone }}'
+                module_name: IConfig
+                package_name: vra
+            register: preValidateVrapplianceConfig
+            failed_when: not preValidateVrapplianceConfig.data is defined or preValidateVrapplianceConfig.data.err_message is defined or not preValidateVrapplianceConfig.data.status is defined or preValidateVrapplianceConfig.data.status == false
+            changed_when: preValidateVrapplianceConfig.data is defined and not preValidateVrapplianceConfig.data.err_message is defined and preValidateVrapplianceConfig.data.status is defined and preValidateVrapplianceConfig.data.status == true
+            ignore_errors: preValidateVrapplianceConfig.failed_when_result
+
+        -
+            name: 'VRA - {{ step }} - vRA Appliance Configuration'
+            delegate_to: localhost
+            ehc_script_agent:
+                method_name: configureAppliance
+                method_params:
+                    vCenterDict: '{{ vcenter }}'
+                    vmDict: '{{ vmDict }}'
+                    ntpServerList: '{{ ntp_servers }}'
+                    timeZone: '{{ linux_timezone }}'
+                module_name: IConfig
+                package_name: vra
+            register: vraApplianceConfigResults
+            failed_when: not vraApplianceConfigResults.data is defined or vraApplianceConfigResults.data.err_message is defined or not vraApplianceConfigResults.data.status is defined or vraApplianceConfigResults.data.status == false
+            changed_when: vraApplianceConfigResults.data is defined and not vraApplianceConfigResults.data.err_message is defined and vraApplianceConfigResults.data.status is defined and vraApplianceConfigResults.data.status == true
+            when: preValidateVrapplianceConfig.failed_when_result
+
+        -
+            name: 'VRA - {{ step }} - Post-Validate vRA Appliance Configuration'
+            delegate_to: localhost
+            ehc_script_agent:
+                method_name: validateConfiguration
+                method_params:
+                    vCenterDict: '{{ vcenter }}'
+                    vmDict: '{{ vmDict }}'
+                    applianceAddress: '{{ ansible_host }}'
+                    username: 'root'
+                    password: '{{ vrealize_automation.vra_root_password }}'
+                    ntpServerList: '{{ ntp_servers }}'
+                    timeZone: '{{ linux_timezone }}'
+                module_name: IConfig
+                package_name: vra
+            register: validateVraApplianceConfigResults
+            failed_when: not validateVraApplianceConfigResults.data is defined or validateVraApplianceConfigResults.data.err_message is defined or not validateVraApplianceConfigResults.data.status is defined or validateVraApplianceConfigResults.data.status == false
+            changed_when: validateVraApplianceConfigResults.data is defined and not validateVraApplianceConfigResults.data.err_message is defined and validateVraApplianceConfigResults.data.status is defined and validateVraApplianceConfigResults.data.status == true
+            when: not vraApplianceConfigResults|skipped
+
+
+-
+    name: 'VRA - {{ step }} - vRA Apply License'
+    hosts: vra_primary
+    gather_facts: no
+    any_errors_fatal: True
+    vars:
+      step: 'EPB-450-090'
+    tags:
+                - 'VRA - {{ step }} - Apply vRA License'
+    tasks:
+
+# Looks like license is already applied at this point. As part of the vRA installation. And validation succeeds.
+# But playbook requires to apply license again. So not running pre-validation here.
+#        -
+#            name: 'VRA - {{ step }} - Validate vRA License Application'
+#            delegate_to: localhost
+#            ehc_script_agent:
+#                package_name: vra
+#                module_name: applyApplianceLicense
+#                method_name: validateApplianceLicense
+#                method_params:
+#                    vcenterDict: '{{ vcenter }}'
+#                    vraInfo:
+#                      vmname: '{{ vmname }}'
+#                      port: 5480
+#                      vmusername: root
+#                      vmpassword: '{{ vrealize_automation.vra_root_password }}'
+#                    serialKey: '{{ license_key.vrealize_automation }}'
+#            register: preValidateApplianceLicenseResults
+#            failed_when: not preValidateApplianceLicenseResults.data is defined or preValidateApplianceLicenseResults.data.err_message is defined or not preValidateApplianceLicenseResults.data.status is defined or preValidateApplianceLicenseResults.data.status == false
+#            changed_when: preValidateApplianceLicenseResults.data is defined and not preValidateApplianceLicenseResults.data.err_message is defined and preValidateApplianceLicenseResults.data.status is defined and preValidateApplianceLicenseResults.data.status == true
+#            ignore_errors: preValidateApplianceLicenseResults.failed_when_result
+
+        -
+            name: 'VRA - {{ step }} - Apply vRA License'
+            delegate_to: localhost
+            ehc_script_agent:
+                package_name: vra
+                module_name: applyApplianceLicense
+                method_name: applyLicense
+                method_params:
+                    vcenterDict: '{{ vcenter }}'
+                    vraInfo:
+                      vmname: '{{ vmname }}'
+                      port: 5480
+                      vmusername: root
+                      vmpassword: '{{ vrealize_automation.vra_root_password }}'
+                    serialKey: '{{ license_key.vrealize_automation }}'
+            register: applyLicenseResults
+            failed_when: not applyLicenseResults.data is defined or applyLicenseResults.data.err_message is defined or not applyLicenseResults.data.status is defined or applyLicenseResults.data.status == false
+            changed_when: applyLicenseResults.data is defined and not applyLicenseResults.data.err_message is defined and applyLicenseResults.data.status is defined and applyLicenseResults.data.status == true
+#            when: preValidateApplianceLicenseResults.failed_when_result
+
+        -
+            name: 'VRA - {{ step }} - Post Validate vRA License'
+            delegate_to: localhost
+            ehc_script_agent:
+                package_name: vra
+                module_name: applyApplianceLicense
+                method_name: validateApplianceLicense
+                method_params:
+                    vcenterDict: '{{ vcenter }}'
+                    vraInfo:
+                      vmname: '{{ vmname }}'
+                      port: 5480
+                      vmusername: root
+                      vmpassword: '{{ vrealize_automation.vra_root_password }}'
+                    serialKey: '{{ license_key.vrealize_automation }}'
+            register: validateApplianceLicenseResults
+            failed_when: not validateApplianceLicenseResults.data is defined or validateApplianceLicenseResults.data.err_message is defined or not validateApplianceLicenseResults.data.status is defined or validateApplianceLicenseResults.data.status == false
+            changed_when: validateApplianceLicenseResults.data is defined and not validateApplianceLicenseResults.data.err_message is defined and validateApplianceLicenseResults.data.status is defined and validateApplianceLicenseResults.data.status == true
+            when: not applyLicenseResults|skipped
+
+-
+    name: 'VRA - {{ step }} - Set and Validate Kerberos Token'
+    hosts: vra_iaas_web_servers
+    gather_facts: no
+    any_errors_fatal: True
+    vars:
+      step: 'EPB-450-100'
+    tags:
+        - 'VRA - {{ step }} - Set Kerberos Token Size'
+    tasks:
+        -
+            name: 'VRA - {{ step }} - Validate Kerberos Token Size'
+            delegate_to: localhost
+            ehc_script_agent:
+                method_name: 'validateKerberosToken'
+                method_params:
+                    vCenterDict:  '{{ vcenter }}'
+                    vmDict:  '{{ vmDict }}'
+                    maxTokenSize: '{{ maxTokenSize }}'
+                    maxFieldLength: '{{ maxFieldLength }}'
+                    maxRequestBytes: '{{ maxRequestBytes }}'
+                module_name: setkerberosToken
+                package_name: vra
+            register: preValidateKerberosTokeSizeResults
+            failed_when: not preValidateKerberosTokeSizeResults.data is defined or preValidateKerberosTokeSizeResults.data.err_message is defined or preValidateKerberosTokeSizeResults.data == false
+            changed_when: preValidateKerberosTokeSizeResults.data is defined and not preValidateKerberosTokeSizeResults.data.err_message is defined and preValidateKerberosTokeSizeResults.data == true
+            ignore_errors: preValidateKerberosTokeSizeResults.failed_when_result
+
+        -
+            name: 'VRA - {{ step }} - Set Kerberos Token Size'
+            delegate_to: localhost
+            ehc_script_agent:
+                method_name: setKerberosTokenSize
+                method_params:
+                    vCenterDict:  '{{ vcenter }}'
+                    vmDict: '{{ vmDict }}'
+                    domainLocalGroups: '{{ domainLocalGroups }}'
+                    securityGlobalGroups: '{{ securityGlobalGroups }}'
+                    restartVM: True
+                    maxTokenSize: '{{ maxTokenSize }}'
+                    maxFieldLength: '{{ maxFieldLength }}'
+                    maxRequestBytes: '{{ maxRequestBytes }}'
+                module_name: setkerberosToken
+                package_name: vra
+            register: setKerberosTokenSizeResults
+            failed_when: not setKerberosTokenSizeResults.data is defined or setKerberosTokenSizeResults.data.err_message is defined or not setKerberosTokenSizeResults.data.successfullyUpdated is defined or setKerberosTokenSizeResults.data.successfullyUpdated == false
+            changed_when: setKerberosTokenSizeResults.data is defined and not setKerberosTokenSizeResults.data.err_message is defined and setKerberosTokenSizeResults.data.successfullyUpdated is defined and setKerberosTokenSizeResults.data.successfullyUpdated == true
+            when: preValidateKerberosTokeSizeResults.failed_when_result
+
+        -
+            name: 'VRA - {{ step }} - Post-Validate Kerberos Token Size'
+            delegate_to: localhost
+            ehc_script_agent:
+                method_name: 'validateKerberosToken'
+                method_params:
+                    vCenterDict:  '{{ vcenter }}'
+                    vmDict:  '{{ vmDict }}'
+                    maxTokenSize: '{{ maxTokenSize }}'
+                    maxFieldLength: '{{ maxFieldLength }}'
+                    maxRequestBytes: '{{ maxRequestBytes }}'
+                module_name: setkerberosToken
+                package_name: vra
+            register: validateKerberosTokenSizeResults
+            failed_when: not validateKerberosTokenSizeResults.data is defined or validateKerberosTokenSizeResults.data.err_message is defined or validateKerberosTokenSizeResults.data == false
+            changed_when: validateKerberosTokenSizeResults.data is defined and not validateKerberosTokenSizeResults.data.err_message is defined and validateKerberosTokenSizeResults.data == true
+            when: not setKerberosTokenSizeResults|skipped
+
+
+-
+    name: 'VRA - {{ step }} - Install vRA Designer'
+    hosts: vra_web_primary
+    gather_facts: no
+    any_errors_fatal: True
+    vars:
+      step: 'EPB-450-110'
+    tags:
+        - 'VRA - {{ step }} - Install vRA Designer'
+    tasks:
+        -
+            name: 'VRA - {{ step }} - Validate Install vRA Designer'
+            delegate_to: localhost
+            ehc_script_agent:
+                package_name: vra
+                module_name: installVraDesigner
+                method_name: validateInstallVraDesigner
+                method_params:
+                    vCenterDict:  '{{ vcenter }}'
+                    vmDict: '{{ vmDict | combine({"datacenter": vcenter_datacenter, "folderPath": "" }) }}'
+            register: preValidateInstallVraDesigner
+            failed_when: not preValidateInstallVraDesigner.data is defined or preValidateInstallVraDesigner.data.err_message is defined or not preValidateInstallVraDesigner.data.status is defined or not preValidateInstallVraDesigner.data.status == true
+            changed_when: preValidateInstallVraDesigner.data is defined and not preValidateInstallVraDesigner.data.err_message is defined and preValidateInstallVraDesigner.data.status == true
+            ignore_errors: preValidateInstallVraDesigner.failed_when_result
+        -
+            name: 'VRA - {{ step }} - Install vRA Designer'
+            delegate_to: localhost
+            ehc_script_agent:
+                package_name: vra
+                module_name: installVraDesigner
+                method_name: installVraDesigner
+                method_params:
+                    vCenterDict:  '{{ vcenter }}'
+                    vmDict: '{{ vmDict | combine({"datacenter": vcenter_datacenter, "folderPath": "" }) }}'
+            register: installVraDesignerResults
+            failed_when: not installVraDesignerResults.data is defined or installVraDesignerResults.data.err_message is defined or installVraDesignerResults.data.status == false
+            changed_when: installVraDesignerResults.data is defined and not installVraDesignerResults.data.err_message is defined and installVraDesignerResults.data.status == true
+            when: preValidateInstallVraDesigner.failed_when_result
+
+        -
+            name: 'VRA - {{ step }} - Post Validate Install vRA Designer'
+            delegate_to: localhost
+            ehc_script_agent:
+                package_name: vra
+                module_name: installVraDesigner
+                method_name: validateInstallVraDesigner
+                method_params:
+                    vCenterDict:  '{{ vcenter }}'
+                    vmDict: '{{ vmDict | combine({"datacenter": vcenter_datacenter, "folderPath": "" }) }}'
+            register: validateInstallVraDesigner
+            failed_when: not validateInstallVraDesigner.data is defined or validateInstallVraDesigner.data.err_message is defined or not validateInstallVraDesigner.data.status is defined or not validateInstallVraDesigner.data.status == true
+            changed_when: validateInstallVraDesigner.data is defined and not validateInstallVraDesigner.data.err_message is defined and validateInstallVraDesigner.data.status == true
+            when: not installVraDesignerResults|skipped
+
+-
+    name: 'VRA - {{ step }} - Prepare vRA IaaS for EHC lifecycle workflows package'
+    hosts: vra_primary
+    gather_facts: no
+    any_errors_fatal: True
+    vars:
+        step: 'EPB-450-120'
+        iaasWebServer:
+            -   vmname: '{{ hostvars["vra_web_primary"]["vmname"] }}'
+                vmusername: '{{ windows.default_username }}'
+                vmpassword: '{{  windows.default_password  }}'
+            -   features: '{{ iaaSWebServerFeatures }}'
+        iaasManagerServerList:
+            -
+                -   vmname: '{{ hostvars["vra_manager_primary"]["vmname"] }}'
+                    vmusername: '{{ windows.default_username }}'
+                    vmpassword: '{{  windows.default_password  }}'
+                -   features: '{{ iaaSManagerServerFeatures }}'
+
+            -
+                -   vmname: '{{ hostvars["vra_manager_secondary"]["vmname"]}}'
+                    vmusername: '{{ windows.default_username }}'
+                    vmpassword: '{{  windows.default_password  }}'
+                -   features: '{{ iaaSManagerServerFeatures }}'
+    tags:
+        - 'VRA - {{ step }} - Prepare vRA IaaS for EHC lifecycle workflows package'
+    tasks:
+        -
+            name: 'VRA - {{ step }} - Validate Preparation for lifecycle workflows package'
+            delegate_to: localhost
+            ehc_script_agent:
+                package_name: vra
+                module_name: prepareIaasServer
+                method_name: validateIaasServerPreparations
+                method_params:
+                    vCenterDict:  '{{ vcenter }}'
+                    iaasWebServer: '{{ iaasWebServer }}'
+                    iaasManagerServerList: '{{ iaasManagerServerList }}'
+            register: preValidateLifecycleWorkflowResults
+            failed_when: not preValidateLifecycleWorkflowResults.data is defined or preValidateLifecycleWorkflowResults.data.err_message is defined or not preValidateLifecycleWorkflowResults.data[0] is defined or preValidateLifecycleWorkflowResults.data[0] == false
+            changed_when: preValidateLifecycleWorkflowResults.data is defined and not preValidateLifecycleWorkflowResults.data.err_message is defined and preValidateLifecycleWorkflowResults.data[0] is defined and preValidateLifecycleWorkflowResults.data[0] == true
+            ignore_errors: preValidateLifecycleWorkflowResults.failed_when_result
+
+        -
+            name: 'VRA - {{ step }} - Prepare vRA IaaS for EHC lifecycle workflows package'
+            delegate_to: localhost
+            ehc_script_agent:
+                package_name: vra
+                module_name: prepareIaasServer
+                method_name: prepareIaasServer
+                method_params:
+                    vCenterDict:  '{{ vcenter }}'
+                    iaasPackagePath:  '{{ iaasPackagePath }}'
+                    iaasWebServer: '{{ iaasWebServer }}'
+                    iaasManagerServerList: '{{ iaasManagerServerList }}'
+            register: installLifeCycleWorkflowResults
+            failed_when: not installLifeCycleWorkflowResults.data is defined or installLifeCycleWorkflowResults.data.err_message is defined or false in installLifeCycleWorkflowResults.data|json_query('[].[status][]')
+            changed_when: installLifeCycleWorkflowResults.data is defined and not installLifeCycleWorkflowResults.data.err_message is defined and false not in installLifeCycleWorkflowResults.data|json_query('[].[status][]')
+            when: preValidateLifecycleWorkflowResults.failed_when_result
+
+        -
+            name: 'VRA - {{ step }} - Post-Validate Preparation for lifecycle workflows package'
+            delegate_to: localhost
+            ehc_script_agent:
+                package_name: vra
+                module_name: prepareIaasServer
+                method_name: validateIaasServerPreparations
+                method_params:
+                    vCenterDict:  '{{ vcenter }}'
+                    iaasWebServer: '{{ iaasWebServer }}'
+                    iaasManagerServerList: '{{ iaasManagerServerList }}'
+            register: validateLifecycleWorkflowResults
+            failed_when: not validateLifecycleWorkflowResults.data is defined or validateLifecycleWorkflowResults.data.err_message is defined or not validateLifecycleWorkflowResults.data[0] is defined or validateLifecycleWorkflowResults.data[0] == false
+            changed_when: validateLifecycleWorkflowResults.data is defined and not validateLifecycleWorkflowResults.data.err_message is defined and validateLifecycleWorkflowResults.data[0] is defined and validateLifecycleWorkflowResults.data[0] == true
+            when: not installLifeCycleWorkflowResults|skipped
+
+# This is not required in a single site setup as per Sean Leahy
+#-
+#    name: 'VRA - {{ step }} - Configure Datacenter location name'
+#    hosts: vra_primary
+#    gather_facts: no
+#    any_errors_fatal: True
+#    vars:
+#        step: 'EPB-450-130'
+#        iaasWebServerList:
+#            -
+#                -   vmname: '{{ hostvars["vra_web_primary"]["vmname"] }}'
+#                    vmusername: '{{windows.default_username}}'
+#                    vmpassword: '{{ windows.default_password }}'
+#                -   datacenterLocation: '{{ datacenterLocations }}'
+#                -   iaasInstallPath: ''
+#            -
+#                -   vmname: '{{ hostvars["vra_web_secondary"]["vmname"] }}'
+#                    vmusername: '{{windows.default_username}}'
+#                    vmpassword: '{{ windows.default_password }}'
+#                -   datacenterLocation: '{{ datacenterLocations }}'
+#                -   iaasInstallPath: ''
+#    tags:
+#        -   'VRA - {{ step }} - Configure Datacenter location name'
+#    tasks:
+#        -
+#            name: 'VRA - {{ step }} - Validate Datacenter location name'
+#            delegate_to: localhost
+#            ehc_script_agent:
+#                package_name: vra
+#                module_name: prepareIaasServer
+#                method_name: validateDatacenterLocationIaas
+#                method_params:
+#                    vCenterDict:  '{{ vcenter }}'
+#                    iaasWebServerList: '{{ iaasWebServerList }}'
+#            register: preValidateDCResults
+#            failed_when: not preValidateDCResults.data is defined or preValidateDCResults.data.err_message is defined or not preValidateDCResults.data[0] is defined or preValidateDCResults.data[0] == false
+#            changed_when: preValidateDCResults.data is defined and not preValidateDCResults.data.err_message is defined and preValidateDCResults.data[0] is defined and preValidateDCResults.data[0] == true
+#            ignore_errors: preValidateDCResults.failed_when_result
+#
+#        -
+#            name: 'VRA - {{ step }} - Configure Datacenter location name'
+#            delegate_to: localhost
+#            ehc_script_agent:
+#                package_name: vra
+#                module_name: prepareIaasServer
+#                method_name: configDatacenterLocationIaas
+#                method_params:
+#                    vCenterDict:  '{{ vcenter }}'
+#                    iaasWebServerList: '{{ iaasWebServerList }}'
+#            register: configureDCLocationsResults
+#            failed_when: not configureDCLocationsResults.data is defined or configureDCLocationsResults.data.err_message is defined
+#            changed_when: configureDCLocationsResults.data is defined and not configureDCLocationsResults.data.err_message is defined
+#            when: preValidateDCResults.failed_when_result
+#
+#        -
+#            name: 'VRA - {{ step }} - Post-Validate Datacenter location name'
+#            delegate_to: localhost
+#            ehc_script_agent:
+#                package_name: vra
+#                module_name: prepareIaasServer
+#                method_name: validateDatacenterLocationIaas
+#                method_params:
+#                    vCenterDict:  '{{ vcenter }}'
+#                    iaasWebServerList: '{{ iaasWebServerList }}'
+#            register: validateDCLocationNames
+#            failed_when: not validateDCLocationNames.data is defined or validateDCLocationNames.data.err_message is defined or not validateDCLocationNames.data[0] is defined or validateDCLocationNames.data[0] == false
+#            changed_when: validateDCLocationNames.data is defined and not validateDCLocationNames.data.err_message is defined and validateDCLocationNames.data[0] is defined and validateDCLocationNames.data[0] == true
+#            when: not configureDCLocationsResults|skipped
+
+-
+    name: 'VRA - {{ step }} - Import and IaaS Agent SSL certs to vRO'
+    hosts: vro_primary
+    gather_facts: no
+    any_errors_fatal: True
+    vars:
+      step: EPB-450-131
+      vmConfiguration:
+          vmName: '{{ vmname }}'
+          host: '{{ ansible_host }}'
+          vmUsername: '{{ vro_vm_username }}'
+          vcoPassword: '{{ vrealize_orchestrator.vro_root_password }}'
+    tags:
+                - 'VRA - {{ step }} - Import IaaS Agent SSL certs to vRO'
+    tasks:
+        -
+            name: 'VRA - {{ step }} - Import IaaS Agent SSL certs to vROs'
+            delegate_to: localhost
+            ehc_script_agent:
+                module_name: vroConfig
+                package_name: vro
+                method_name: importVROSSLCertificate
+                method_params:
+                    vmConfiguration: '{{ vmConfiguration }}'
+                    urls: '{{ ssl_certs_import_urls_2 }}'
+            register: importVROSSLCertificateResults
+            failed_when: not importVROSSLCertificateResults.data is defined or importVROSSLCertificateResults.data.err_message is defined or importVROSSLCertificateResults|json_query('data.* | [?statusCode!=`200`]')
+            changed_when: importVROSSLCertificateResults.data is defined and not importVROSSLCertificateResults.data.err_message is defined and not importVROSSLCertificateResults|json_query('data.* | [?statusCode!=`200`]')
+
+        -
+            name: 'VRA - {{ step }} - Validate Import IaaS Agent SSL certs to vRO'
+            delegate_to: localhost
+            ehc_script_agent:
+                package_name: vro
+                module_name: vroConfig
+                method_name: validateImportVROSSLCertificate
+                method_params:
+                    vmConfiguration: '{{ vmConfiguration }}'
+                    commonNames: '{{ ssl_certs_import_validation_names_2 }}'
+
+            register: validateImportVROSSLCertificateResults
+            failed_when: not validateImportVROSSLCertificateResults.data is defined or validateImportVROSSLCertificateResults.data.err_message is defined or validateImportVROSSLCertificateResults|json_query('data.* | contains(@, `false`)')
+            changed_when: validateImportVROSSLCertificateResults.data is defined and not validateImportVROSSLCertificateResults.data.err_message is defined and not validateImportVROSSLCertificateResults|json_query('data.* | contains(@, `false`)')
+
+-
+    name: 'VRA - {{ step }} - vRealize Automation Tenant and Infrastructure configuration'
+    hosts: vra_primary
+    gather_facts: no
+    any_errors_fatal: True
+    vars:
+      step: 'EPB-450-140'
+    tags:
+                - 'VRA - {{ step }} - Add EHC vRA Tenant'
+    tasks:
+
+        -
+            name: 'VRA - {{ step }} - Validate EHC vRA Tenant'
+            delegate_to: localhost
+            ehc_script_agent:
+                package_name: vra
+                module_name: addEHCTenant
+                method_name: validateTenant
+                method_params:
+                    vraCred: '{{ vraCred }}'
+                    tenantDict: '{{ tenantDict }}'
+            register: preValidateEhcTenants
+            failed_when: not preValidateEhcTenants.data is defined or preValidateEhcTenants.data.err_message is defined or preValidateEhcTenants|json_query('data.* | contains(@, `false`)')
+            changed_when: preValidateEhcTenants.data is defined and not preValidateEhcTenants.data.err_message is defined and not preValidateEhcTenants|json_query('data.* | contains(@, `false`)')
+            ignore_errors: preValidateEhcTenants.failed_when_result
+
+        -
+            name: 'VRA - {{ step }} - Add EHC vRA Tenant'
+            delegate_to: localhost
+            ehc_script_agent:
+                package_name: vra
+                module_name: addEHCTenant
+                method_name: addEHCTenant
+                method_params:
+                    vraCred: '{{ vraCred }}'
+                    tenantDict: '{{ tenantDict }}'
+            register: addEhcTenantResults
+            failed_when: not addEhcTenantResults.data is defined or addEhcTenantResults.data.err_message is defined
+            changed_when: addEhcTenantResults.data is defined and not addEhcTenantResults.data.err_message is defined
+            when: preValidateEhcTenants.failed_when_result
+
+        -
+            name: 'VRA - {{ step }} - Post-Validate EHC vRA Tenant'
+            delegate_to: localhost
+            ehc_script_agent:
+                package_name: vra
+                module_name: addEHCTenant
+                method_name: validateTenant
+                method_params:
+                    vraCred: '{{ vraCred }}'
+                    tenantDict: '{{ tenantDict }}'
+            register: validateEhcTenants
+            failed_when: not validateEhcTenants.data is defined or validateEhcTenants.data.err_message is defined or validateEhcTenants|json_query('data.* | contains(@, `false`)')
+            changed_when: validateEhcTenants.data is defined and not validateEhcTenants.data.err_message is defined and not validateEhcTenants|json_query('data.* | contains(@, `false`)')
+            when: not addEhcTenantResults|skipped
+
+
+-
+    name: 'VRA - {{ step }} - vRA Add SMTP Relay for vRA Notifications'
+    hosts: vra_primary
+    gather_facts: no
+    vars:
+      step: 'EPB-450-150'
+    any_errors_fatal: True
+    tags:
+                - 'VRA - {{ step }} - Add an SMTP relay for vRA notifications'
+    tasks:
+        -
+            name: 'VRA - {{ step }} - Validate SMTP relay for vRA notifications'
+            delegate_to: localhost
+            ehc_script_agent:
+                package_name: vra
+                module_name: vraConfig
+                method_name: validateSMTPInVRA
+                method_params:
+                    vraCred: '{{ vraTenantLocalCred }}'
+                    SMTPServerDict: '{{ SMTPServerDict }}'
+            register: preValidateSMTPResults
+            failed_when: not preValidateSMTPResults.data is defined or preValidateSMTPResults.data.err_message is defined or preValidateSMTPResults.data == false
+            changed_when: preValidateSMTPResults.data is defined and not preValidateSMTPResults.data.err_message is defined and preValidateSMTPResults.data == true
+            ignore_errors: preValidateSMTPResults.failed_when_result
+
+        -
+            name: 'VRA - {{ step }} - Add an SMTP relay for vRA notifications'
+            delegate_to: localhost
+            ehc_script_agent:
+                package_name: vra
+                module_name: vraConfig
+                method_name: addSMTPRelayForVRANotifications
+                method_params:
+                    vraCred: '{{ vraTenantLocalCred }}'
+                    SMTPServerDict: '{{ SMTPServerDict }}'
+            register: addSMTPRelayResults
+            failed_when: not addSMTPRelayResults.data is defined or addSMTPRelayResults.data.err_message is defined or addSMTPRelayResults.data == false
+            changed_when: addSMTPRelayResults.data is defined and not addSMTPRelayResults.data.err_message is defined and addSMTPRelayResults.data == true
+            when: preValidateSMTPResults.failed_when_result
+            retries: 2
+            delay: 10
+            until: addSMTPRelayResults.data is defined and not addSMTPRelayResults.data.err_message is defined and addSMTPRelayResults.data == true
+
+        -
+            name: 'VRA - {{ step }} - Post-Validate SMTP relay for vRA notifications'
+            delegate_to: localhost
+            ehc_script_agent:
+                package_name: vra
+                module_name: vraConfig
+                method_name: validateSMTPInVRA
+                method_params:
+                    vraCred: '{{ vraTenantLocalCred }}'
+                    SMTPServerDict: '{{ SMTPServerDict }}'
+            register: validateSMTPResults
+            failed_when: not validateSMTPResults.data is defined or validateSMTPResults.data.err_message is defined or validateSMTPResults.data == false
+            changed_when: validateSMTPResults.data is defined and not validateSMTPResults.data.err_message is defined and validateSMTPResults.data == true
+            when: not addSMTPRelayResults|skipped
+
+
+-
+    name: 'VRA - {{ step }} - Configure XaaS and EHC App Admins Architect Role'
+    hosts: vra_primary
+    gather_facts: no
+    vars:
+      step: 'EPB-450-160'
+    any_errors_fatal: True
+    tags:
+                - 'VRA - {{ step }} - Configure XaaS Architect Role'
+    tasks:
+        -
+            name: 'VRA - {{ step }} - Prepare vRA Group Role Map'
+            vars:
+              group_role: "{{ { ad_user_group[item.name].groupname: item.roles  } }}"
+            set_fact:
+                group_role_map: "{{ (group_role_map is defined and group_role_map | combine( group_role )) or group_role }}"
+            with_items: '{{ groupNameRoleMap }}'
+
+        -
+            name: 'VRA - {{ step }} - Validate XaaS Architect Role'
+            delegate_to: localhost
+            ehc_script_agent:
+                method_name: validateInfrastructureArchitectRole
+                method_params:
+                    vraCred: '{{ vraTenantLocalCred }}'
+                    groupNameRole: '{{ group_role_map }}'
+                module_name: vraConfig
+                package_name: vra
+            register: preValidateXaasArchResults
+            failed_when: not preValidateXaasArchResults.data is defined or preValidateXaasArchResults.data.err_message is defined or not preValidateXaasArchResults.data.invalid is defined or preValidateXaasArchResults.data.invalid | length
+            changed_when: preValidateXaasArchResults.data is defined and not preValidateXaasArchResults.data.err_message is defined and preValidateXaasArchResults.data.invalid is defined and not preValidateXaasArchResults.data.invalid | length
+            ignore_errors: preValidateXaasArchResults.failed_when_result
+
+        -
+            name: 'VRA - {{ step }} - Configure XaaS Architect Role'
+            delegate_to: localhost
+            ehc_script_agent:
+                method_name: createInfrastructureArchitectRole
+                method_params:
+                    vraCred: '{{ vraTenantLocalCred }}'
+                    groupNameRole: '{{ group_role_map }}'
+                    remainPreviousRole: True
+                module_name: vraConfig
+                package_name: vra
+            register: configureXaasArchResults
+            failed_when: not configureXaasArchResults.data is defined or configureXaasArchResults.data.err_message is defined or not configureXaasArchResults.data.invalid is defined or configureXaasArchResults.data.invalid | length
+            changed_when: configureXaasArchResults.data is defined and not configureXaasArchResults.data.err_message is defined and configureXaasArchResults.data.invalid is defined and not configureXaasArchResults.data.invalid | length
+            when: preValidateXaasArchResults.failed_when_result
+
+        -
+            name: 'VRA - {{ step }} - Post-Validate XaaS Architect Role'
+            delegate_to: localhost
+            ehc_script_agent:
+                method_name: validateInfrastructureArchitectRole
+                method_params:
+                    vraCred: '{{ vraTenantLocalCred }}'
+                    groupNameRole: '{{ group_role_map }}'
+                module_name: vraConfig
+                package_name: vra
+            register: validateXaasArchResults
+            failed_when: not validateXaasArchResults.data is defined or validateXaasArchResults.data.err_message is defined or not validateXaasArchResults.data.invalid is defined or configureXaasArchResults.data.invalid | length
+            changed_when: validateXaasArchResults.data is defined and not validateXaasArchResults.data.err_message is defined and validateXaasArchResults.data.invalid is defined and not configureXaasArchResults.data.invalid | length
+            when: not configureXaasArchResults|skipped
+
+
+-
+    name: 'VRA - {{ step }} - Configure Software Architect Role'
+    hosts: vra_primary
+    gather_facts: no
+    vars:
+      step: 'EPB-450-161'
+    any_errors_fatal: True
+    tags:
+                - 'VRA - {{ step }} - Configure Software Architect Role'
+    tasks:
+        -
+            name: 'VRA - {{ step }} - Prepare vRA User Role Map'
+            vars:
+              user_role: "{{ { (ad_user[item.name].username + '@' + ad_domain): item.roles  } }}"
+            set_fact:
+                user_role_map: "{{ (user_role_map is defined and user_role_map | combine( user_role )) or user_role }}"
+            with_items: '{{ userNameRoleMap }}'
+
+
+        -
+            name: 'VRA - {{ step }} - Pre-Validate Software Architect Role'
+            delegate_to: localhost
+            ehc_script_agent:
+                package_name: vra
+                module_name: vraConfig
+                method_name: validateUserRoleInvRA
+                method_params:
+                    vraCred: '{{ vraTenantLocalCred }}'
+                    userRoles: '{{ user_role_map }}'
+            register: preValidateSoftwareArchResults
+            failed_when: not preValidateSoftwareArchResults.data is defined or preValidateSoftwareArchResults.data.err_message is defined or not preValidateSoftwareArchResults.data.invalid is defined or preValidateSoftwareArchResults.data.invalid | length
+            changed_when: preValidateSoftwareArchResults.data is defined and not preValidateSoftwareArchResults.data.err_message is defined and preValidateSoftwareArchResults.data.invalid is defined and not preValidateSoftwareArchResults.data.invalid | length
+            ignore_errors: preValidateSoftwareArchResults.failed_when_result
+
+        -
+            name: 'VRA - {{ step }} - Configure Software Architect Role'
+            delegate_to: localhost
+            ehc_script_agent:
+                package_name: vra
+                module_name: vraConfig
+                method_name: assignUserRoleInvRA
+                method_params:
+                    vraCred: '{{ vraTenantLocalCred }}'
+                    userRoles: '{{ user_role_map }}'
+            register: configureSoftwareArchResults
+            failed_when: not configureSoftwareArchResults.data is defined or configureSoftwareArchResults.data.err_message is defined or not configureSoftwareArchResults.data.invalid is defined or configureSoftwareArchResults.data.invalid | length
+            changed_when: configureSoftwareArchResults.data is defined and not configureSoftwareArchResults.data.err_message is defined and configureSoftwareArchResults.data.invalid is defined and not configureSoftwareArchResults.data.invalid | length
+            when: preValidateSoftwareArchResults.failed_when_result
+
+        -
+            name: 'VRA - {{ step }} - Validate Software Architect Role'
+            delegate_to: localhost
+            ehc_script_agent:
+                package_name: vra
+                module_name: vraConfig
+                method_name: validateUserRoleInvRA
+                method_params:
+                    vraCred: '{{ vraTenantLocalCred }}'
+                    userRoles: '{{ user_role_map }}'
+            register: validateSoftwareArchResults
+            failed_when: not validateSoftwareArchResults.data is defined or validateSoftwareArchResults.data.err_message is defined or not validateSoftwareArchResults.data.invalid is defined or validateSoftwareArchResults.data.invalid | length
+            changed_when: validateSoftwareArchResults.data is defined and not validateSoftwareArchResults.data.err_message is defined and validateSoftwareArchResults.data.invalid is defined and not validateSoftwareArchResults.data.invalid | length
+            when: not configureSoftwareArchResults|skipped
+
+-
+    name: 'VRA - {{ step }} - Execute vRA Configure Workflow'
+    hosts: vra_primary
+    gather_facts: no
+    vars:
+      step: 'EPB-450-170'
+    any_errors_fatal: True
+    tags:
+                - 'VRA - {{ step }} - Execute vRA Configure Workflow'
+    tasks:
+        -
+            name: 'VRA - {{ step }} - Validate vRA Configurations'
+            delegate_to: localhost
+            ehc_script_agent:
+                package_name: vra
+                module_name: executeWorkflow
+                method_name: validateVRAConfigWorkflow
+                method_params:
+                    vraDetails: '{{ vraTenantLocalCred }}'
+                    machinePrefixDetails: '{{ machinePrefixDetails }}'
+                    businessGroupDetails: '{{ businessGroupDetails }}'
+                    endpointDetails: '{{ endPointDetails }}'
+            register: preValidateVraConfigurations
+            failed_when: not preValidateVraConfigurations.data is defined or preValidateVraConfigurations.data.err_message is defined or preValidateVraConfigurations|json_query('data.* | contains(@, `false`)')
+            changed_when: preValidateVraConfigurations.data is defined and not preValidateVraConfigurations.data.err_message is defined and not preValidateVraConfigurations|json_query('data.* | contains(@, `false`)')
+            ignore_errors: True
+
+        -
+            name: 'VRA - {{ step }} - Execute vRA Configure Workflow'
+            delegate_to: localhost
+            ehc_script_agent:
+                package_name: vra
+                module_name: executeWorkflow
+                method_name: executeVRAConfigWorkflow
+                method_params:
+                    vroInfo: '{{ vroWorkflowInfo }}'
+                    workflowID: '{{ vraConfigWorkflowID }}'
+                    workflowData: '{{ vraConfigWorkflowData }}'
+            register: executeVraWorkflowResults
+            failed_when: not executeVraWorkflowResults.data is defined or executeVraWorkflowResults.data.err_message is defined
+            changed_when: executeVraWorkflowResults.data is defined and not executeVraWorkflowResults.data.err_message is defined
+            when: preValidateVraConfigurations.failed_when_result
+
+        -
+            name: 'VRA - {{ step }} - Post-Validate vRA Configurations'
+            delegate_to: localhost
+            ehc_script_agent:
+                package_name: vra
+                module_name: executeWorkflow
+                method_name: validateVRAConfigWorkflow
+                method_params:
+                    vraDetails: '{{ vraTenantLocalCred }}'
+                    machinePrefixDetails: '{{ machinePrefixDetails }}'
+                    businessGroupDetails: '{{ businessGroupDetails }}'
+                    endpointDetails: '{{ endPointDetails }}'
+            register: validateVraWorkflowResults
+            failed_when: not validateVraWorkflowResults.data is defined or validateVraWorkflowResults.data.err_message is defined or validateVraWorkflowResults|json_query('data.* | contains(@, `false`)')
+            changed_when: validateVraWorkflowResults.data is defined and not validateVraWorkflowResults.data.err_message is defined and not validateVraWorkflowResults|json_query('data.* | contains(@, `false`)')
+            when: not executeVraWorkflowResults|skipped
+
+-
+    name: 'VRA - {{ step }} - Add vRO to vRealize Automation'
+    hosts: vra_primary
+    gather_facts: no
+    any_errors_fatal: True
+    vars:
+        step: 'EPB-450-180'
+    tags:
+                - 'VRA - {{ step }} - Add vRO to vRealize Automation'
+    tasks:
+        -
+            name: 'VRA - {{ step }} - Validate vRO configuration on vRealize Automation'
+            delegate_to: localhost
+            ehc_script_agent:
+                package_name: vra
+                module_name: orchestration
+                method_name: validateVROConfiguration
+                method_params:
+                    vraCred: '{{ vraTenantSysAdminCred }}'
+                    vroDetails: '{{ vroWorkflowInfo }}'
+            register: preValidateAddVroToVraResults
+            failed_when: not preValidateAddVroToVraResults.data is defined or preValidateAddVroToVraResults.data.err_message is defined or preValidateAddVroToVraResults.data.status == false
+            changed_when: preValidateAddVroToVraResults.data is defined and not preValidateAddVroToVraResults.data.err_message is defined and preValidateAddVroToVraResults.data.status == true
+            ignore_errors: True
+
+        -
+            name: 'VRA - {{ step }} - Add vRO to vRealize Automation'
+            delegate_to: localhost
+            ehc_script_agent:
+                package_name: vra
+                module_name: orchestration
+                method_name: configureVRO
+                method_params:
+                    vraCred: '{{ vraTenantSysAdminCred }}'
+                    vroDetails: '{{ vroWorkflowInfo }}'
+            register: addVroToVraResults
+            failed_when: not addVroToVraResults.data is defined or addVroToVraResults.data.err_message is defined
+            changed_when: addVroToVraResults.data is defined and not addVroToVraResults.data.err_message is defined
+            when:  preValidateAddVroToVraResults.failed_when_result
+
+        -
+            name: 'VRA - {{ step }} - Post-Validate vRO configuration on vRealize Automation'
+            delegate_to: localhost
+            ehc_script_agent:
+                package_name: vra
+                module_name: orchestration
+                method_name: validateVROConfiguration
+                method_params:
+                    vraCred: '{{ vraTenantSysAdminCred }}'
+                    vroDetails: '{{ vroWorkflowInfo }}'
+            register: validateAddVroToVraResults
+            failed_when: not validateAddVroToVraResults.data is defined or validateAddVroToVraResults.data.err_message is defined or validateAddVroToVraResults.data.status == false
+            changed_when: validateAddVroToVraResults.data is defined and not validateAddVroToVraResults.data.err_message is defined and validateAddVroToVraResults.data.status == true
+            when: not addVroToVraResults|skipped
+
+-   include: ../../vrli/install-vrli-agent.yml
+    vars:
+      log_insight_agent_file_path: '{{ hostvars["log_insight"].log_insight_linux_agent_file }}'
+      vms:  vra_servers
+      step: VRA - EPB-450-190
+      serial: 1
+
+-   include: ../../vrli/install-vrli-agent.yml
+    vars:
+      log_insight_agent_file_path: '{{ hostvars["log_insight"].log_insight_windows_agent_file }}'
+      vms:  vra_iaas_servers
+      step: VRA - EPB-450-200
+      serial: 1
+
+-
+    name: 'NSX - {{ step }} - Re-Configure Load Balancer'
+    hosts: nsx_manager
+    vars:
+      step: EPB-450-210
+      secondary_state: enabled
+    tags:
+        - 'NSX - {{ step }} - Re-Configure Load Balancer'
+    tasks:
+        -
+            name: '{{ step }} - Prepare Pool Mappings'
+            vars:
+             pool_mapping: "{{ { item.pool_name:  item.reconfigure_monitor_name } }}"
+            set_fact:
+                pool_mappings: "{{ (pool_mappings is defined and pool_mappings | combine( pool_mapping )) or pool_mapping }}"
+            with_items: '{{ poolMappings }}'
+
+        -
+            name: '{{ step }} - Prepare Virtual Server Mappings'
+            vars:
+             vip_mapping: "{{ { item.name:  item.profile_mapping } }}"
+            set_fact:
+                vip_mappings: "{{ (vip_mappings is defined and vip_mappings | combine( vip_mapping )) or vip_mapping }}"
+            with_items: '{{ virtualServersMapping }}'
+
+        -
+            name: 'NSX - {{ step }} - Get Loadbalancer Edge ID'
+            delegate_to: localhost
+            ehc_script_agent:
+                method_name: getEdgeId
+                method_params:
+                    nsxManager: '{{ nsxManager }}'
+                    edgeName: '{{ nsx_load_balancer_load_balancer_name }}'
+                module_name: configureLoadBalancer
+                package_name: nsx
+            register: edgeId
+
+        -
+            name: 'NSX - {{ step }} - Re-Configure Load Balancer'
+            delegate_to: localhost
+            ehc_script_agent:
+                package_name: nsx
+                module_name: configureLoadBalancer
+                method_name: reConfigureLoadBalancer
+                method_params:
+                    nsxManager: '{{ nsxManager | combine(ehc_nsx_ent_admin) }}'
+                    edgeId: '{{ edgeId.data }}'
+                    requestParameters:
+                        enabled: true
+                        enableServiceInsertion: true
+                        accelerationEnabled: true
+                        logging:
+                            enable: true
+                            logLevel: INFO
+                        applicationProfile: '{{ applicationProfiles}}'
+                        monitor: '{{ monitors }}'
+                        pool: '{{ pools }}'
+                        virtualServer: '{{ virtualServers }}'
+                    poolMappings: '{{ pool_mappings }}'
+                    vipMappings: '{{ vip_mappings }}'
+            register: configureLBResults
+            failed_when: not configureLBResults.data is defined or configureLBResults.data.err_message is defined or false in configureLBResults.data|json_query('*.*[]')
+            changed_when: configureLBResults.data is defined and not configureLBResults.data.err_message is defined and false not in configureLBResults.data|json_query('*.*[]')

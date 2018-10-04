@@ -1,0 +1,39 @@
+# ------------------------------------------------------------------------------
+# Copyright (C) 2016-2017 DELL EMC Corporation. All Rights Reserved.
+
+# This software contains the intellectual property of DELL EMC Corporation
+# or is licensed to DELL EMC Corporation from third parties.  Use of this
+# software and the intellectual property contained therein is expressly
+# limited to the terms and conditions of the License Agreement under which
+# it is provided by or on behalf of DELL  EMC.
+
+# ------------------------------------------------------------------------------
+
+-
+    name: '{{ step|default(None) }} - Poll vROPS'
+    hosts: '{{ vms }}'
+    serial: '{{ serial | default(20) }}'
+    gather_facts: no
+    any_errors_fatal: True
+    tasks:
+        -
+            name: '{{ step|default(None) }} - Poll vROPS'
+            tags:
+                - '{{ step|default(None) }} - Poll vROPS'
+            delegate_to: localhost
+            run_once: true
+            ehc_script_agent:
+                package_name: vrops
+                module_name: pollvROps
+                method_name: validatevROPsNodes
+                method_params:
+                    vROpsDict:
+                        host: '{{ ansible_host_ip }}'
+                        username: admin
+                        password: '{{ vrealize_operations_manager.vrops_admin_password }}'
+            register: pollVropsResults
+            failed_when: not pollVropsResults.data is defined or pollVropsResults.data.err_message is defined or not pollVropsResults.data.status == true
+            changed_when: pollVropsResults.data is defined and not pollVropsResults.data.err_message is defined and pollVropsResults.data.status == true
+            until: pollVropsResults.data is defined and not pollVropsResults.data.err_message is defined and pollVropsResults.data.status == true
+            retries: '{{ poll_retries }}'
+            delay: '{{ poll_delay }}'

@@ -1,0 +1,50 @@
+-
+    name: 'VROPS - {{ step }} - Configure vROPs to monitor Cloud vCenter Server'
+    hosts: vrops_manager
+    gather_facts: no
+    any_errors_fatal: True
+    tags:
+                - 'VROPS - {{ step }} - Configure vROPS to monitor vCenter'
+    tasks:
+        -
+            name: 'VROPS - {{ step }} - Pre-Validate vROPS to monitor vCenter'
+            delegate_to: localhost
+            ehc_script_agent:
+                package_name: vrops
+                module_name: configurevCenterAdapterInstance
+                method_name: validatevCenterAdapterInstance
+                method_params:
+                    vROpsDict: '{{ vROPsDict }}'
+                    vCenterDict: '{{ vCenterDict }}'
+            register: preValidateCloudvCenter
+            failed_when: 'not preValidateCloudvCenter.data is defined or preValidateCloudvCenter.data == false or not preValidateCloudvCenter.data.status == true or preValidateCloudvCenter.data.err_message is defined'
+            changed_when: 'preValidateCloudvCenter.data is defined and preValidateCloudvCenter.data.err_message is not defined and preValidateCloudvCenter.data.status == true and preValidateCloudvCenter.data.start == true'
+            ignore_errors: True
+        -
+            name: 'VROPS - {{ step }} - Configure vROPS to monitor vCenter'
+            delegate_to: localhost
+            ehc_script_agent:
+                package_name: vrops
+                module_name: configurevCenterAdapterInstance
+                method_name: createvCenterAdapterInstance
+                method_params:
+                    vROpsDict: '{{ vROPsDict }}'
+                    vCenterDict: '{{ vCenterDict }}'
+            register: configCloudvCenter
+            failed_when: 'not configCloudvCenter.data is defined or configCloudvCenter.data.err_message is defined or not configCloudvCenter.data == true '
+            changed_when: 'configCloudvCenter.data is defined and configCloudvCenter.data.err_message is not defined and configCloudvCenter.data == true'
+            when: preValidateCloudvCenter.failed_when_result
+        -
+            name: 'VROPS - {{ step }} - Post Validate Configure vROPS to monitor vCenter'
+            delegate_to: localhost
+            ehc_script_agent:
+                package_name: vrops
+                module_name: configurevCenterAdapterInstance
+                method_name: validatevCenterAdapterInstance
+                method_params:
+                    vROpsDict: '{{ vROPsDict }}'
+                    vCenterDict: '{{ vCenterDict }}'
+            register: validateConfigCloudvCenter
+            failed_when: 'not validateConfigCloudvCenter.data is defined or validateConfigCloudvCenter.data.err_message is defined or not validateConfigCloudvCenter.data.status == true or not validateConfigCloudvCenter.data.start == true'
+            changed_when: 'validateConfigCloudvCenter.data is defined and validateConfigCloudvCenter.data.err_message is not defined and validateConfigCloudvCenter.data.status == true and validateConfigCloudvCenter.data.start == true'
+            when: not configCloudvCenter|skipped

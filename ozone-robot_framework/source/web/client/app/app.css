@@ -1,0 +1,98 @@
+
+/**
+ * Bootstrap Fonts
+ */
+
+@font-face {
+  font-family: 'Glyphicons Halflings';
+  src: url('../bower_components/bootstrap/fonts/glyphicons-halflings-regular.eot');
+  src: url('../bower_components/bootstrap/fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'),
+  url('../bower_components/bootstrap/fonts/glyphicons-halflings-regular.woff') format('woff'),
+  url('../bower_components/bootstrap/fonts/glyphicons-halflings-regular.ttf') format('truetype'),
+  url('../bower_components/bootstrap/fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg');
+}
+
+/**
+ *Font Awesome Fonts
+ */
+
+@font-face {
+  font-family: 'FontAwesome';
+  src: url('../bower_components/font-awesome/fonts/fontawesome-webfont.eot?v=4.1.0');
+  src: url('../bower_components/font-awesome/fonts/fontawesome-webfont.eot?#iefix&v=4.1.0') format('embedded-opentype'),
+  url('../bower_components/font-awesome/fonts/fontawesome-webfont.woff?v=4.1.0') format('woff'),
+  url('../bower_components/font-awesome/fonts/fontawesome-webfont.ttf?v=4.1.0') format('truetype'),
+  url('../bower_components/font-awesome/fonts/fontawesome-webfont.svg?v=4.1.0#fontawesomeregular') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+/**
+ * App-wide Styles
+ */
+
+.browserupgrade {
+  margin: 0.2em 0;
+  background: #ccc;
+  color: #000;
+  padding: 0.2em 0;
+}
+
+.userblock {
+
+  padding-left:10px;
+  text-align: center;
+}
+
+.user {
+  display: block;
+  width: 150px;
+  height: 150px;
+  margin: 1em auto;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  -webkit-border-radius: 99em;
+  -moz-border-radius: 99em;
+  border-radius: 99em;
+  border: 0px solid #eee;
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.5);
+  background-image: url("/assets/images/users/user-1.jpg");
+}
+
+
+.EMCLogo {
+  background-image: url("/assets/images/logo.png");
+}
+
+.md-cell h4{
+  margin-top:2px;
+  margin-bottom:2px;
+}
+
+
+.hint {
+  /* Copy styles from ng-messages */
+  font-size: 12px;
+  /* Set our own color */
+  color: grey; }
+
+
+.md-input[type=password]:-webkit-autofill ~ label:not(.md-no-float) {
+  transform: translate3d(0, 6px, 0) scale(0.75);
+  transition: transform cubic-bezier(0.25, 0.8, 0.25, 1) 0.4s, width cubic-bezier(0.25, 0.8, 0.25, 1) 0.4s;
+  width: ~"calc((100% - 18px) / 0.75)";
+  color: rgba(0,0,0,0.54);
+}
+
+
+h3 {
+  color: #595959;
+  color: #4393B9;
+}
+
+h3 ng-md-icon {
+  height: 40px;
+  margin-right: 10px;
+  fill: #4393B9;
+}

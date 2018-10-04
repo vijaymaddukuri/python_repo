@@ -1,0 +1,125 @@
+# ------------------------------------------------------------------------------
+# Copyright (C) 2016-2017 DELL EMC Corporation. All Rights Reserved.
+
+# This software contains the intellectual property of DELL EMC Corporation
+# or is licensed to DELL EMC Corporation from third parties.  Use of this
+# software and the intellectual property contained therein is expressly
+# limited to the terms and conditions of the License Agreement under which
+# it is provided by or on behalf of DELL  EMC.
+
+# ------------------------------------------------------------------------------
+
+---
+-
+    include: plays/power-off-and-destroy-vms.yml
+    vars:
+        step: RPB - RPB-200-050
+        vms: nsx_load_balancers, additional_pscs
+
+-
+    include: plays/power-off-vms.yml
+    vars:
+        step: RPB - RPB-200-070
+        vms: nsx_manager, vrops_manager
+
+# TODO: If playbook fails between this step and 140, we may lose the esx owner information.
+#       Store this persistently?
+-
+    include: plays/get-esx-by-vm.yml
+    vars:
+        step: RPB - RPB-200-075
+        vms: vcenter_server, psc01
+
+-
+    include: plays/power-off-vms-esxi.yml
+    vars:
+        step: RPB - RPB-200-080
+        vms: vcenter_server
+        serial: 1
+        esxi_host: '{{ findESXiHostbyVMResults.data|default(None) and (first_esxi_host | combine({"host":findESXiHostbyVMResults.data.host,"fqdn":findESXiHostbyVMResults.data.host})) or first_esxi_host }}'
+
+-
+    include: plays/power-off-vms-esxi.yml
+    vars:
+        step: RPB - RPB-200-090
+        vms: psc01
+        serial: 1
+        esxi_host: '{{ findESXiHostbyVMResults.data|default(None) and (first_esxi_host | combine({"host":findESXiHostbyVMResults.data.host,"fqdn":findESXiHostbyVMResults.data.host})) or first_esxi_host }}'
+
+-
+    include: plays/restore-snapshot-esxi.yml
+    vars:
+        step: RPB - RPB-200-100
+        description:
+        vms: vcenter_server, psc01
+        snapshot_name: BPB-150-Deploy-Automation-Pod
+        esxi_host: '{{ findESXiHostbyVMResults.data|default(None) and (first_esxi_host | combine({"host":findESXiHostbyVMResults.data.host,"fqdn":findESXiHostbyVMResults.data.host})) or first_esxi_host }}'
+
+-
+    include: plays/power-on-vms-esxi.yml
+    vars:
+        step: RPB - RPB-200-120
+        vms: psc01
+        serial: 1
+        esxi_host: '{{ findESXiHostbyVMResults.data|default(None) and (first_esxi_host | combine({"host":findESXiHostbyVMResults.data.host,"fqdn":findESXiHostbyVMResults.data.host})) or first_esxi_host }}'
+
+-
+    include: plays/poll-psc-single.yml
+    vars:
+        step: RPB - RPB-200-130
+        vms: psc01
+        serial: 1
+
+-
+    include: plays/power-on-vms-esxi.yml
+    vars:
+        step: RPB - RPB-200-140
+        vms: vcenter_server
+        serial: 1
+        esxi_host: '{{ findESXiHostbyVMResults.data|default(None) and (first_esxi_host | combine({"host":findESXiHostbyVMResults.data.host,"fqdn":findESXiHostbyVMResults.data.host})) or first_esxi_host }}'
+
+-
+    include: plays/poll-vcenter.yml
+    vars:
+        step: RPB - RPB-200-150
+        vms: vcenter_server
+
+-
+    include: plays/restore-snapshot.yml
+    vars:
+        step: RPB - RPB-200-160
+        description: 'Rollback NSX'
+        snapshot_name: BPB-150-Deploy-Automation-Pod
+        vms: nsx_manager
+
+-
+    include: plays/restore-snapshot.yml
+    vars:
+        step: RPB - RPB-200-160
+        description: 'Rollback vROPS'
+        snapshot_name: BPB-500-CONFIGURE-VROPS
+        vms: vrops_manager
+
+-
+    include: plays/power-on-vms.yml
+    vars:
+        step: RPB - RPB-200-170
+        vms: nsx_manager
+
+-
+    include: plays/poll-nsx-manager.yml
+    vars:
+        step: RPB - RPB-200-180
+        vms: nsx_manager
+
+-
+    include: plays/power-on-vms.yml
+    vars:
+        step: RPB - RPB-200-190
+        vms: vrops_manager
+
+-
+    include: plays/poll-vrops.yml
+    vars:
+        step: RPB - RPB-200-200
+        vms: vrops_manager

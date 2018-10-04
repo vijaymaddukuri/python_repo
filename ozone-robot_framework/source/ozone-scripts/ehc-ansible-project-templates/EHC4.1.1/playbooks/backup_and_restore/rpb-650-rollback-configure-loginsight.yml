@@ -1,0 +1,25 @@
+# ------------------------------------------------------------------------------
+# Copyright (C) 2016-2017 DELL EMC Corporation. All Rights Reserved.
+
+# This software contains the intellectual property of DELL EMC Corporation
+# or is licensed to DELL EMC Corporation from third parties.  Use of this
+# software and the intellectual property contained therein is expressly
+# limited to the terms and conditions of the License Agreement under which
+# it is provided by or on behalf of DELL  EMC.
+
+# ------------------------------------------------------------------------------
+
+---
+-
+    include: plays/power-off-vms.yml
+    vars:
+        step: RPB - RPB-650-050
+        vms: log_insight_servers:log_insight_workers:log_insight_forwarders
+
+-
+    include: plays/restore-snapshot.yml
+    vars:
+        step: RPB - RPB-650-080
+        description: 'Rollback-Configure-LogInsight'
+        snapshot_name: BPB-150-Deploy-Automation-Pod
+        vms: log_insight_servers:log_insight_workers:log_insight_forwarders

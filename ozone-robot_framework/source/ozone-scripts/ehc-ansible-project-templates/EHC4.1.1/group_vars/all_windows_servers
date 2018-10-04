@@ -1,0 +1,164 @@
+# ------------------------------------------------------------------------------
+# Copyright (C) 2016-2017 DELL EMC Corporation. All Rights Reserved.
+
+# This software contains the intellectual property of DELL EMC Corporation
+# or is licensed to DELL EMC Corporation from third parties.  Use of this
+# software and the intellectual property contained therein is expressly
+# limited to the terms and conditions of the License Agreement under which
+# it is provided by or on behalf of DELL  EMC.
+
+# ------------------------------------------------------------------------------
+
+# This connection details are not currently used anywhere. Declaring these for future purpose
+ansible_connection: winrm
+ansible_port: '5986'
+ansible_winrm_server_cert_validation: ignore
+ansible_user: '{{windows.default_username}}'
+ansible_password: '{{ windows.default_password }}'
+
+# Get computer name from fqdn. Limit to 15 characters
+computer_name: '{{ ansible_host.split(".")[0][:14] }}'
+
+windows_guest_id: 'windows8Server64Guest'
+        # https://pubs.vmware.com/vsphere-60/index.jsp?topic=%2Fcom.vmware.wssdk.apiref.doc%2Fvim.vm.GuestOsDescriptor.GuestOsIdentifier.html
+        # https://blogs.msdn.microsoft.com/msgulfcommunity/2012/04/19/windows-server-8-is-now-officially-windows-server-2012/
+
+osVersion: '6.3.9600'
+
+vm_version: 'vmx-11'
+
+vmDict:
+    vmname: '{{ vmname }}'
+    vmusername: '{{ windows.default_username }}'
+    vmpassword: '{{  windows.default_password  }}'
+    username: '{{ windows.default_username }}'
+    password: '{{  windows.default_password  }}'
+    ostype: 1
+    guestOSFlavor: server
+    guestOSVersion: version-2012R2
+
+deploy_args:
+    package_name: common
+    module_name: vCenterOps
+    method_name: deployAutomationPodVM
+    method_params:
+        vCenterDataDict:
+            vCenterIPAddress: '{{ vcenter.ip }}'
+            vCenterUsername: '{{ vcenter.username }}'
+            vCenterPassword: '{{ vcenter.password }}'
+            port: 443
+        templateName: '{{windows.server_template_name}}'
+        vmDetails:
+            -
+                vmName: '{{ vmname }}'
+                dataCenterName: '{{ vcenter_datacenter }}'
+                dataStoreName: '{{  vcenter_datastore  }}'
+                clusterName: '{{ vcenter_cluster }}'
+                resourcePool: '{{ resource_pools.auto }}'
+                powerON: True
+                cpuConfig:
+                    numCPUs:  '{{ sizing[inventory_hostname].cpus | int }}'
+                    numCoresPerSocket: '{{ sizing[inventory_hostname].cpu_cores_per_socket | int }}'
+                vmMemoryConfig:
+                    memorySize: '{{ sizing[inventory_hostname].memory_size_gb | int }}'
+        guestCustomization:
+            userFullName: '{{ windows.default_username }}'
+            userOrgName: '{{ active_directory.ehc_ou }}'
+            windowsProductKey: '{{ license_key.windows_license_key }}'
+
+            joinDomain: '{{ ad_domain }}'
+            domainAdmin: '{{common.domain_administrator_username}}'
+            domainAdminPassword: '{{common.domain_administrator_password}}'
+            #domainAdmin: '{{ ad_user.adbind_sso.username }}'
+            #domainAdminPassword: '{{ ad_user.adbind_sso.password }}'
+
+            vmLicenseAutoMode: 'perServer'
+            # TODO Confirm this number
+            vmLicenseAutoUsers: 5
+            administratorPassword: '{{ windows.default_password }}'
+            vmTimeZone: '{{ windows_time_zones[windows.timezone] }}'
+            vmAutoLogon: True
+            vmAutoLogonCount: 1
+            vmIPFixedIPAddress: '{{ ansible_host_ip }}'
+            vmIPSubnetMask: '{{common.management_network_netmask}}'
+            vmIPGateway: '{{common.management_network_gateway}}'
+            vmIPDNSServerList: '{{common.dns_server_ip.split(",")[0]}}'
+            # Generate VM Specification name using time-stamp
+            vmCustomSpecInfoName: spec-{{ vmname }}-{{ lookup('pipe','date "+%Y%m%d%H%M%S"') }}
+            vmCustomSpecInfoDescription: 'Description'
+            vmCustomSpecInfoType: 'Windows'
+            computerName: '{{ computer_name }}'
+        timeout: 3600
+
+
+
+# -----------------------------------------------------
+#               Template Creation Parameters
+# -----------------------------------------------------
+
+#sourceXMLISODir: '{{ repository.windows_customization_dir }}'
+sourceXMLISODir: '{{ windows_template_dependency_dir_path }}'
+templateTestVmName: 'ehc-win-template-test-vm'
+
+templateDict:
+    sourceXMLISODir: '{{ sourceXMLISODir }}'
+    fileNameXmlIsoDatastore: 'ehc_win_xml.iso'
+    targetXMLISOFile: '{{ sw_repository_manifest.base_path  | win_splitdrive | first }}/ehc_win_xml.iso'
+    fileNameIsoDatastore: 'ehc_win.iso'
+    datastoreDir: '/ehc-win-iso-dir/'
+    localFilePathIso: '{{ sw_repository_manifest.base_path }}/{{ sw_repository_manifest.content.windows_iso.relative_path }}/{{ sw_repository_manifest.content.windows_iso.file_name }}'
+    tempDriveLabel: 'CD/DVD drive 2'
+    createWinTimeOut: 3600
+
+templateVmConfDict:
+    name: '{{ windows.server_template_name }}'
+    hostname: '{{ common.external_vcenter_ovadeployhost|default(None) or vcenter_details.ovadeployhost }}'
+    dataCenter: '{{ vcenter_datacenter }}'
+    clusterName: '{{ vcenter_cluster }}'
+    memoryMB: '{{ sizing[inventory_hostname].memory_size_gb | int * 1024  }}'
+    numCPUs: '{{ sizing[inventory_hostname].cpus | int }}'
+    guestId: '{{ windows_guest_id }}'
+    version: '{{ vm_version }}' # on newer vSphere version, newer version would be supported
+    resourcePool: '{{ resource_pools.auto }}'
+    dataStore: '{{ vcenter_datastore }}' #'Longevity_Developer2_RG8_lun25'
+    SetStaticIP: True
+    # TODO Check the IP for the test windows. Uses random IP of any windows host
+    ip: '{{ ansible_host_ip }}'
+    Netmask: '{{ common.management_network_netmask }}'
+    DefaultGateway: '{{ common.management_network_gateway }}'
+    PreferredDNS: '{{ common.dns_server_ip.split(",") | first }}'
+    AlternateDNS: ''
+    hdds:
+        - 40
+    numCdrom: 2
+    SCSI:
+        - sharing: noSharing
+    NIC:
+        - network: '{{ vcenter_network }}'
+          shouldNICIndvSwitch: True
+    osVersion: '{{ osVersion }}'
+
+    # These are used for validation
+    sourceXMLISODir: '{{ sourceXMLISODir }}'
+    uac: '0'
+    powershellversion: '4.0'
+    netversion: '3.5'
+    rdenabled : 'true'
+    networkdiscovery: 'yes'
+    msdtc: '{{ msdtc_enbled|default("true") }}'
+    ipvsix: 'false'
+    python: '2.7.10'
+    driveletter: 'C'
+    drivefs: 'ntfs'
+    dnsenabled: '{{ common.dns_server_ip.split(",") | first }}'
+
+# 1 CD ROM is removed after Template creation. During validation only 1 CD Drive is present
+# For validation vmname is test vmname
+validateTemplateVmConfDict: '{{ templateVmConfDict | combine({"name": vmname, "numCdrom": 1}) }}'
+
+
+answerFileDict:
+    TimeZone: '{{ windows_time_zones[windows.timezone] }}'
+    ProductKey: "{{ license_key.windows_license_key }}"
+    UserLocale: "{{ windows.user_locale }}"
+    UILanguage: "{{ windows.ui_language }}"

@@ -1,0 +1,87 @@
+# ------------------------------------------------------------------------------
+# Copyright (C) 2016-2017 DELL EMC Corporation. All Rights Reserved.
+
+# This software contains the intellectual property of DELL EMC Corporation
+# or is licensed to DELL EMC Corporation from third parties.  Use of this
+# software and the intellectual property contained therein is expressly
+# limited to the terms and conditions of the License Agreement under which
+# it is provided by or on behalf of DELL  EMC.
+
+# ------------------------------------------------------------------------------
+
+-
+    name: '{{ step }} - Add Harddrives to Windows Virtual Machines'
+    hosts: all_windows_servers
+    any_errors_fatal: True
+    tags:
+      - '{{ step }} - Add data drive to the Windows Servers'
+    tasks:
+        -
+            name: '{{ step }} - Validate data drives to the Windows Servers'
+            delegate_to: localhost
+            ehc_script_agent:
+                package_name: common
+                module_name: formatDisk
+                method_name: validateFormatDiskRemote
+                method_params:
+                    vCenterDict: '{{ vcenter }}'
+                    vmDict:
+                        vmname: '{{ vmname }}'
+                        vmusername: '{{ ansible_user }}'
+                        vmpassword: '{{ ansible_password }}'
+                    diskLetter: '{{ sizing_info.disks[0].diskLetter }}'
+                    guestOSType: 1
+                    guestOSFlavor: server
+                    guestOSVersion: version-2012R2
+                    TextInFile: 'Hello` Good` Morning..!'
+            register: preValidateDiskResult
+            failed_when: not preValidateDiskResult.data is defined or preValidateDiskResult.data.err_message is defined or preValidateDiskResult.data[0]|default(1) == 1
+            changed_when: preValidateDiskResult.data is defined and not preValidateDiskResult.data.err_message is defined and preValidateDiskResult.data[0]|default(1) == 0
+            when: sizing_info is defined and sizing_info.disks is defined
+            ignore_errors: True
+
+        -
+            name: '{{ step }} - Add data drive to the Windows Servers'
+            delegate_to: localhost
+            ehc_script_agent:
+                method_name: addHDD
+                method_params:
+                    vCenterConfDict: '{{ vcenter }}'
+                    vmConfDict:
+                        vmname: '{{ vmname }}'
+                        vmusername: '{{ ansible_user }}'
+                        vmpassword: '{{ ansible_password }}'
+                        guestOSType: 1
+                        guestOSFlavor: server
+                        guestOSVersion: version-2012R2
+                        TextInFile: 'Hello` Good` Morning..!'
+                    diskInfoDictList: '{{ sizing_info.disks }}'
+                module_name: formatDisk
+                package_name: common
+            register: diskAddResult
+            failed_when: not diskAddResult.data is defined or diskAddResult.data.err_message is defined or not diskAddResult.data[0] is defined or diskAddResult.data[0].status == false
+            changed_when: diskAddResult.data is defined and not diskAddResult.data.err_message is defined and diskAddResult.data[0] is defined and diskAddResult.data[0].status == true
+            when: sizing_info is defined and sizing_info.disks is defined and preValidateDiskResult.failed_when_result
+
+        -
+            name: '{{ step }} - Post-Validate data drives to the Windows Servers'
+            delegate_to: localhost
+            ehc_script_agent:
+                package_name: common
+                module_name: formatDisk
+                method_name: validateFormatDiskRemote
+                method_params:
+                    vCenterDict: '{{ vcenter }}'
+                    vmDict:
+                        vmname: '{{ vmname }}'
+                        vmusername: '{{ ansible_user }}'
+                        vmpassword: '{{ ansible_password }}'
+                    diskLetter: '{{ sizing_info.disks[0].diskLetter }}'
+                    guestOSType: 1
+                    guestOSFlavor: server
+                    guestOSVersion: version-2012R2
+                    TextInFile: 'Hello` Good` Morning..!'
+            register: postValidateDiskResult
+            failed_when: not postValidateDiskResult.data is defined or postValidateDiskResult.data.err_message is defined or postValidateDiskResult.data[0]|default(1) == 1
+            changed_when: postValidateDiskResult.data is defined and not postValidateDiskResult.data.err_message is defined and postValidateDiskResult.data[0]|default(1) == 0
+            when: not diskAddResult|skipped

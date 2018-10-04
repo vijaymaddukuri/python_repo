@@ -1,0 +1,111 @@
+# ------------------------------------------------------------------------------
+# Copyright (C) 2016-2017 DELL EMC Corporation. All Rights Reserved.
+
+# This software contains the intellectual property of DELL EMC Corporation
+# or is licensed to DELL EMC Corporation from third parties.  Use of this
+# software and the intellectual property contained therein is expressly
+# limited to the terms and conditions of the License Agreement under which
+# it is provided by or on behalf of DELL  EMC.
+
+# ------------------------------------------------------------------------------
+
+---
+# Playbook File -sql-configure-databases.yml
+
+-
+    name: 'SQL - {{ step }} - Prepare for DB Creation - Upload SQL Scripts to script server'
+    hosts: sql_server
+    gather_facts: no
+    vars:
+      step: EPB-250-100
+    tasks:
+        -
+            name: 'SQL - {{ step }} - Prepare for DB Creation - Upload SQL Scripts to script server'
+            tags:
+                - 'SQL - {{ step }} - Prepare for DB Creation - Upload SQL Scripts to script server'
+            delegate_to: localhost
+            ehc_script_agent:
+                method_name: update_config_file
+                method_params:
+                    file_path: "{{ item.remote_file_path }}"
+                    file_contents: "{{lookup('file', item.local_file_path )}}"
+                module_name: update_config_file
+                package_name: special
+            with_items: '{{ sql_scripts_copy_list }}'
+            register: result
+            changed_when: result.data is defined and result.data.err_message is not defined and result.data == true
+            failed_when: result.data is not defined or result.data.err_message is defined or result.data == false
+
+-
+    name: 'SQL - {{ step }} - Create IaaS Database Login User'
+    hosts: sql_server
+    vars:
+      step: EPB-250-100
+    gather_facts: no
+    tasks:
+        -
+            name: 'SQL - {{ step }} - Create IaaS Database Login User'
+            tags:
+                - 'SQL - {{ step }} - Create IaaS Database Login User'
+            delegate_to: localhost
+            ehc_script_agent:
+                package_name: common
+                module_name: sqlUtils
+                method_name: executeSQLFile
+                method_params:
+                    dbDict: '{{ dbDict }}'
+                    sqlFiles: '{{ dbConfigureParams.createIaasLoginUser.sqlFiles }}'
+                    dbParams: '{{ dbConfigureParams.createIaasLoginUser.dbParams }}'
+            register: result
+            changed_when: result.data is defined and result.data.error is not defined and result.data == true and result.data.err_message is not defined
+            failed_when: not result.data is defined or result.data.error is defined or result.data.err_message is defined
+
+-
+    name: 'SQL - {{ step }} - Create vRO Database'
+    hosts: sql_server
+    vars:
+      step: EPB-250-110
+    gather_facts: no
+    tasks:
+        -
+            name: 'SQL - {{ step }} - Create vRO Database'
+            tags:
+                - 'SQL - {{ step }} - Create vRO Database'
+            delegate_to: localhost
+            ehc_script_agent:
+                package_name: common
+                module_name: sqlUtils
+                method_name: executeSQLFile
+                method_params:
+                    dbDict: '{{ dbDict }}'
+                    sqlFiles: '{{ dbConfigureParams.createVroDatabase.sqlFiles }}'
+                    dbParams: '{{ dbConfigureParams.createVroDatabase.dbParams }}'
+
+            register: result
+            changed_when: result.data is defined and result.data.err_message is not defined and result.data.error is not defined and result.data == true
+            failed_when: not result.data is defined or result.data.error is defined or result.data.err_message is defined or not result.data == true
+
+
+-
+    name: 'SQL - {{ step }} - Create EHC Object Model vRO Database'
+    hosts: sql_server
+    vars:
+      step: EPB-250-120
+    gather_facts: no
+    tasks:
+        -
+            name: 'SQL - {{ step }} - Create EHC Object Model vRO Database'
+            tags:
+                - 'SQL - {{ step }} - Create EHC Object Model vRO Database'
+            delegate_to: localhost
+            ehc_script_agent:
+                package_name: common
+                module_name: sqlUtils
+                method_name: executeSQLFile
+                method_params:
+                    dbDict: '{{ dbDict }}'
+                    sqlFiles: '{{ dbConfigureParams.createObjModelVroDatabase.sqlFiles }}'
+                    dbParams: '{{ dbConfigureParams.createObjModelVroDatabase.dbParams }}'
+            register: result
+            changed_when: result.data is defined and result.data.err_message is not defined and result.data.error is not defined and result.data == true
+            failed_when: not result.data is defined or result.data.error is defined or result.data.err_message is defined or not result.data == true

@@ -1,0 +1,102 @@
+# ------------------------------------------------------------------------------
+# Copyright (C) 2016-2017 DELL EMC Corporation. All Rights Reserved.
+
+# This software contains the intellectual property of DELL EMC Corporation
+# or is licensed to DELL EMC Corporation from third parties.  Use of this
+# software and the intellectual property contained therein is expressly
+# limited to the terms and conditions of the License Agreement under which
+# it is provided by or on behalf of DELL  EMC.
+
+# ------------------------------------------------------------------------------
+
+-
+    name: 'VCN - {{ step }} - Import Machine SSL and Solution Certificates'
+    hosts: '{{ vms }}'
+    gather_facts: no
+    any_errors_fatal: True
+    tasks:
+        -
+            name: 'VCN - {{ step }} - Validate {{ description }}'
+            tags:
+                - 'VCN - {{ step }} - Validate {{ description }}'
+                - 'VCN - {{ step }} - {{ description }}'
+            delegate_to: localhost
+            ehc_script_agent:
+                package_name: common
+                module_name: sslCertificates
+                method_name: validatePSCCertificate
+                method_params:
+                    pscDetails:
+                        hosting_vcenter_fqdn: '{{ vcenter.fqdn }}'
+                        hosting_vcenter_user: '{{ vcenter.user }}'
+                        hosting_venter_password: '{{ vcenter.password }}'
+                        vmname: '{{ vmname }}'
+                        vmip: '{{ vmDict.ip }}'
+                        vmusername: '{{ vmDict.vmusername }}'
+                        vmpassword: '{{ vmDict.vmpassword }}'
+                    certificates:
+                        machineSSLCertFilepath: '{{ certificates_params_dict[inventory_hostname].machineSSLCert.certificateFilePath }}'
+                        machineCertFilepath: '{{ certificates_params_dict[inventory_hostname].machineCert.certificateFilePath }}'
+                        vsphereWebclientCertFilepath: '{{ certificates_params_dict[inventory_hostname].vsphereWebclientCert.certificateFilePath }}'
+            register: validatePSCCertificateResults
+            failed_when: validatePSCCertificateResults|failed or not validatePSCCertificateResults.data is defined or validatePSCCertificateResults.data.err_message is defined or not validatePSCCertificateResults.data.status == true
+            changed_when: validatePSCCertificateResults.data is defined and not validatePSCCertificateResults.data.err_message is defined and validatePSCCertificateResults.data.status == true
+            ignore_errors: validatePSCCertificateResults.failed_when_result
+        -
+            name: 'VCN - {{ step }} - {{ description }}'
+            tags:
+                - 'VCN - {{ step }} - {{ description }}'
+            delegate_to: localhost
+            ehc_script_agent:
+                package_name: common
+                module_name: sslCertificates
+                method_name: importPSCCertificate
+                method_params:
+                    pscDetails:
+                        hosting_vcenter_fqdn: '{{ vcenter.fqdn }}'
+                        hosting_vcenter_user: '{{ vcenter.user }}'
+                        hosting_venter_password: '{{ vcenter.password }}'
+                        vmname: '{{ vmname }}'
+                        vmip: '{{ vmDict.ip }}'
+                        vmusername: '{{ vmDict.vmusername }}'
+                        vmpassword: '{{ vmDict.vmpassword }}'
+                    vcDetails:
+                        hosting_vcenter_fqdn: '{{ vcenter.fqdn }}'
+                        hosting_vcenter_user: '{{ vcenter.user }}'
+                        hosting_venter_password: '{{ vcenter.password }}'
+                        vmname: '{{ vcenter.vmname }}'
+                        vmip: '{{ vcenter.ip }}'
+                        vmusername: '{{ vcenter.vmusername }}'
+                        vmpassword: '{{ vcenter.vmpassword }}'
+                        rebootNeeded: '{{ vCenterRebootNeeded | default(False) }}'
+                    certificates: '{{ certificates_params_dict[inventory_hostname] }}'
+            register: importPSCCertificateResults
+            failed_when: importPSCCertificateResults|failed or not importPSCCertificateResults.data is defined or importPSCCertificateResults.data.err_message is defined or not importPSCCertificateResults.data.status == true
+            changed_when: importPSCCertificateResults.data is defined and not importPSCCertificateResults.data.err_message is defined and importPSCCertificateResults.data.status == true
+            when: validatePSCCertificateResults.failed_when_result
+        -
+            name: 'VCN - {{ step }} - Post Validate {{ description }}'
+            tags:
+                - 'VCN - {{ step }} - {{ description }}'
+            delegate_to: localhost
+            ehc_script_agent:
+                package_name: common
+                module_name: sslCertificates
+                method_name: validatePSCCertificate
+                method_params:
+                    pscDetails:
+                        hosting_vcenter_fqdn: '{{ vcenter.fqdn }}'
+                        hosting_vcenter_user: '{{ vcenter.user }}'
+                        hosting_venter_password: '{{ vcenter.password }}'
+                        vmname: '{{ vmname }}'
+                        vmip: '{{ vmDict.ip }}'
+                        vmusername: '{{ vmDict.vmusername }}'
+                        vmpassword: '{{ vmDict.vmpassword }}'
+                    certificates:
+                        machineSSLCertFilepath: '{{ certificates_params_dict[inventory_hostname].machineSSLCert.certificateFilePath }}'
+                        machineCertFilepath: '{{ certificates_params_dict[inventory_hostname].machineCert.certificateFilePath }}'
+                        vsphereWebclientCertFilepath: '{{ certificates_params_dict[inventory_hostname].vsphereWebclientCert.certificateFilePath }}'
+            register: postValidatePSCCertificateResults
+            failed_when: postValidatePSCCertificateResults|failed or not postValidatePSCCertificateResults.data is defined or postValidatePSCCertificateResults.data.err_message is defined or not postValidatePSCCertificateResults.data.status == true
+            changed_when: postValidatePSCCertificateResults.data is defined and not postValidatePSCCertificateResults.data.err_message is defined and postValidatePSCCertificateResults.data.status == true
+            when: not importPSCCertificateResults|skipped

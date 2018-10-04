@@ -1,0 +1,12 @@
+workflow_context:
+    assets_info:
+        [{
+        'local_path': '/root/automation/bdl/asset/',
+        'remote_path': '/tmp/',
+        'file_name': 'it-csv.csv',
+        'visible_name': 'Auto'
+        },]
+    accepted_datasets_queue:
+        []
+    accepted_tools_queue:
+        []

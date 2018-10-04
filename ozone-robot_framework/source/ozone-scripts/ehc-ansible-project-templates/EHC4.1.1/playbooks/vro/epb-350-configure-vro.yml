@@ -1,0 +1,73 @@
+# ------------------------------------------------------------------------------
+# Copyright (C) 2016-2017 DELL EMC Corporation. All Rights Reserved.
+
+# This software contains the intellectual property of DELL EMC Corporation
+# or is licensed to DELL EMC Corporation from third parties.  Use of this
+# software and the intellectual property contained therein is expressly
+# limited to the terms and conditions of the License Agreement under which
+# it is provided by or on behalf of DELL  EMC.
+
+# ------------------------------------------------------------------------------
+
+---
+# Playbook file: vro.yml
+-
+    include:  ../backup_and_restore/plays/power-on-vms.yml
+    vars:
+        vms: vro_servers
+        step: VRO - EPB-350-010
+
+-
+    include:  ../backup_and_restore/plays/poll-vro.yml
+    vars:
+        step: VRO - EPB-350-020
+        vms: vro_servers
+
+-
+    include:  plays/initial-configuration.yml
+    vars:
+        step: VRO - EPB-350-030
+
+-
+    include:  plays/configure-vro-database.yml
+    vars:
+        step: VRO - EPB-350-040
+
+-
+    include:  plays/reload-all-plugins.yml
+    vars:
+        step: VRO - EPB-350-050
+        vms: vro_primary
+
+-
+    include:  plays/import-ssl-certs.yml
+    vars:
+        step: VRO - EPB-350-060
+        vms: vro_primary
+
+-
+    include:  plays/configure-authentication-provider.yml
+    vars:
+        step: VRO - EPB-350-070
+        vms: vro_primary
+
+-
+    include:  plays/replace-ssl-certs.yml
+    vars:
+        step: VRO - EPB-350-080
+        vms: vro_primary
+
+-
+    include:  plays/install-vro-plugins.yml
+    vars:
+        step: VRO - EPB-350-090
+        vms: vro_primary
+        plugins: '{{ plugins_1st_set }}'
+
+-
+    include:  plays/reload-all-plugins.yml
+    vars:
+        step: VRO - EPB-350-100
+        vms: vro_servers
+        serial: 1
+

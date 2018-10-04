@@ -1,0 +1,43 @@
+def getRepoSlug() {
+    tokens = "${env.JOB_NAME}".tokenize('/')
+    org = tokens[tokens.size()-3]
+    repo = tokens[tokens.size()-2]
+    println "inside repo slug function"
+    println "${org}/${repo}"
+    return "${org}/${repo}"
+}
+
+void setBuildStatus(context, message, state) {
+
+  step([
+      $class: "GitHubCommitStatusSetter",
+      contextSource: [$class: "ManuallyEnteredCommitContextSource", context: context],
+      reposSource: [$class: "ManuallyEnteredRepositorySource", url: "https://github.emcrubicon.com/AAI/TAveche"],
+      errorHandlers: [[$class: "ChangingBuildStatusErrorHandler", result: "UNSTABLE"]],
+      statusResultSource: [ $class: "ConditionalStatusResultSource", results: [[$class: "AnyBuildResult", message: message, state: state]] ]
+  ]);
+}
+
+
+
+node{
+  try {
+  	
+    deleteDir()
+	checkout scm
+	
+	sh "echo hi > vij"
+    stage('Build') {    
+        sh 'ls'
+        setBuildStatus("job", "SUCCESS Build New", "PASS")
+    }
+	
+	} catch(e) {
+
+        def color = 'danger'
+        def err_message = "Job: ${JOB_NAME}:${BUILD_NUMBER} got an exception during Build stage: " + e.toString()
+        def info_message = "Job URL: ${BUILD_URL}"
+        throw (e)
+    }
+	
+}

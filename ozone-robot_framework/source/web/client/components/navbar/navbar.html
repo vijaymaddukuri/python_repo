@@ -1,0 +1,113 @@
+<md-toolbar class="md-small" style="height: 40px; min-height: 40px;">
+      <div class="md-toolbar-tools">
+        <!-- fill up the space between left and right area -->
+        <div class="navbar-header" style="font-size: 18px;">
+          <div class="navbar-brand">
+            <a href="#/" id="logo">
+              <div class="EMCLogo" width="75" alt="EMC"></div>
+            </a>
+          </div>
+        </div>
+        <a href="/" ><span><img src="/assets/icons/EHC_White_lores_Icon.png" style="padding-bottom: 7px;"> <img src="/assets/icons/DellEMC_Logo_Hz_Wht_rgb.png" style="padding-bottom: 7px;height: 28px;"> EHC Automated Install  </span></a>
+        <span flex></span>
+        <ul class="nav navbar-nav navbar-right">
+          <!--<li ng-hide="nav.isLoggedIn()" ui-sref-active="active"><a ui-sref="signup">Sign up</a></li>-->
+          <li ng-hide="nav.isLoggedIn()" ui-sref-active="active"><a ui-sref="login">Login</a></li>
+          <li ng-show="nav.isAdmin()" ui-sref-active="active"><a ui-sref="admin">Admin</a></li>
+          <!--<li ng-show="nav.isLoggedIn()"><p class="navbar-text">Hello {{ nav.getCurrentUser().name }}</p> </li>-->
+          <!--<li ng-show="nav.isLoggedIn()" ui-sref-active="active"><a ui-sref="settings"><span class="glyphicon glyphicon-cog"></span></a></li>-->
+          <!--<li ng-show="nav.isLoggedIn()" ui-sref-active="active"><a class="nav-button" ng-click="showEmailUs($event)" href=""> <ng-md-icon icon="email" size="24"></ng-md-icon> Email Us</a>-->
+          </li>
+          <li ng-show="nav.isLoggedIn()"><a ui-sref="logout">Logout</a></li>
+        </ul>
+
+      </div>
+    </md-toolbar>
+
+<div flex layout="row" style="height: 95%;">
+
+  <!-- Container #3 -->
+  <md-sidenav ng-if="!hideMenu" class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="$mdMedia('gt-sm')" ng-click="toggleLeft()" style="width:200px;height: 100%;">
+    <div class="userblock">
+      <!--<a ng-href="/" href="/">
+        <div class="user" style="background-image: url({{ nav.getCurrentUser().insideEMCData.thumbnailUrl }})"></div>
+      </a>-->
+      <h3 class="md-heading">{{ nav.getCurrentUser().name }}</h3>
+      <!--<h5 class="md-heading">EMC Corporation</h5>-->
+      <h4>{{selectedProject.name}}</h4>
+      <md-input-container style="margin-top: 50px;">
+        <label>Projects</label>
+        <md-select ng-change="projectChanged(selectedProject)" ng-model="selectedProject" ng-model-options="{trackBy: '$value.name'}" style="width:120px;">
+          <md-option ng-repeat="project in projects" ng-value="project">
+            {{project.name}}
+          </md-option>
+        </md-select>
+      </md-input-container>
+
+    </div>
+    <md-list>
+
+      <!--<md-list-item >
+        <md-button href="/dashboard" style="text-align:left;" >
+          <ng-md-icon icon="view_comfy" style=""></ng-md-icon>
+          <span> Dashboard </span>
+        </md-button>
+      </md-list-item>-->
+
+      <md-list-item >
+        <md-button id="projects_link" style="text-align:left;" href="/projects" >
+          <ng-md-icon icon="business"></ng-md-icon>
+          <span> Projects </span>
+        </md-button>
+
+      </md-list-item>
+
+      <md-list-item >
+        <md-button href="/design" style="text-align:left;">
+          <ng-md-icon icon="create"></ng-md-icon>
+          <span> Design </span>
+        </md-button>
+      </md-list-item>
+
+      <md-list-item >
+        <md-button href="/deploy" style="text-align:left;" >
+          <ng-md-icon icon="flight"></ng-md-icon>
+          Deploy
+        </md-button>
+      </md-list-item>
+
+
+      <md-list-item >
+        <md-button href="/log_explorer" style="text-align:left;" >
+          <ng-md-icon icon="format_align_center" ></ng-md-icon>
+          Log Viewer
+        </md-button>
+      </md-list-item>
+
+      <md-list-item >
+        <md-button href="/system" style="text-align:left;" >
+          <ng-md-icon icon="bug_report" ></ng-md-icon>
+          System
+        </md-button>
+      </md-list-item>
+
+
+      <md-list-item ng-if="!isMasterPasswordSet">
+        <md-button class="md-primary" md-theme="red" ng-click="showSetMasterPasswordDialog()" style="text-align:left;" >
+          <ng-md-icon icon="error" ></ng-md-icon>
+          Set Master Password
+        </md-button>
+      </md-list-item>
+
+    </md-list>
+  </md-sidenav>
+
+  <!-- Container #4 -->
+  <md-content flex id="content" layout-padding > <!--style="background: #fbfbfb"-->
+    <!-- Add your site or application content here -->
+
+    <div ui-view=""></div>
+    <footer></footer>
+  </md-content>
+
+</div>

@@ -1,0 +1,45 @@
+<h2>{{componentKey}}</h2>
+<md-button class="md-raised md-hue-2" ng-click="edit()" ng-show="!editMode">
+  Edit
+  <ng-md-icon icon="mode_edit"></ng-md-icon>
+</md-button>
+<div md-theme="{{buttontheme}}" ng-show="editMode">
+  <md-input-container>
+    <md-checkbox  ng-model="showPassword">
+      Show Password
+    </md-checkbox>
+  </md-input-container>
+
+  <md-input-container>
+    <md-button class="md-raised" ng-click="updateDomain()">Update Domain</md-button>
+  </md-input-container>
+  <md-button md-theme-watch id="submitButton" class="md-raised md-primary md-hue-2" ng-click="submitForm()" tooltip-placement="right" uib-tooltip="{{errmsg}}">
+    {{buttontext}}
+    <ng-md-icon icon="{{buttonicon}}" ng-class="{'fa-spin':buttonicon=='refresh'}" ng-if="buttonicon"></ng-md-icon>
+  </md-button>
+  <md-button class="md-raised " ng-click="cancelForm()">
+    Cancel
+  </md-button>
+  <md-button md-theme="red" aria-label="Reset Form" class="md-raised md-primary md-hue-2" ng-click="resetForm($event)">
+    Reset to Defaults
+    <ng-md-icon icon="{{resetbuttonicon}}" ng-class="{'fa-spin':resetbuttonicon=='refresh'}" ng-if="resetbuttonicon"></ng-md-icon>
+  </md-button>
+
+</div>
+
+<md-table-container>
+  <table md-table md-progress="promise">
+    <thead md-head >
+    <tr md-row>
+      <th md-column>Key</th>
+      <th md-column>Value</th>
+    </tr>
+    </thead>
+    <tbody md-body>
+    <tr md-row ng-repeat="(key, value) in vars">
+      <td md-cell>{{key}}</td>
+      <td md-cell ng-click="editMode && editValue($event,vars, key)">{{value}}</td>
+    </tr>
+    </tbody>
+  </table>
+</md-table-container>

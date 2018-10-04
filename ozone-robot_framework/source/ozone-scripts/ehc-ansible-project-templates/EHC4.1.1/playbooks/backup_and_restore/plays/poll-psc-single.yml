@@ -1,0 +1,42 @@
+# ------------------------------------------------------------------------------
+# Copyright (C) 2016-2017 DELL EMC Corporation. All Rights Reserved.
+
+# This software contains the intellectual property of DELL EMC Corporation
+# or is licensed to DELL EMC Corporation from third parties.  Use of this
+# software and the intellectual property contained therein is expressly
+# limited to the terms and conditions of the License Agreement under which
+# it is provided by or on behalf of DELL  EMC.
+
+# ------------------------------------------------------------------------------
+
+-
+    name: '{{ step|default(None) }} - Poll PSC Single'
+    hosts: '{{ vms }}'
+    serial: '{{ serial | default(20) }}'
+    gather_facts: no
+    any_errors_fatal: True
+    tasks:
+        -
+            name: '{{ step|default(None) }} - Poll PSC Single'
+            tags:
+                - '{{ step|default(None) }} - Poll PSC Single'
+            delegate_to: localhost
+            run_once: true
+            ehc_script_agent:
+                package_name: vcenter
+                module_name: pollPscSingle
+                method_name: pollPscSingleByHost
+                method_params:
+                    pscDict:
+                        vmName: '{{ vmname }}'
+                        datacenter: '{{ vcenter_details.datacenter }}'
+                        folderPath: '{{ vcenter_folderPath }}'
+                        loginUsername: root
+                        loginPassword: '{{ vmDict.vmpassword }}'
+                    esxiDict: '{{ first_esxi_host }}'
+            register: pollPSCResults
+            failed_when: not pollPSCResults.data is defined or pollPSCResults.data.err_message is defined or not pollPSCResults.data.status == true
+            changed_when: pollPSCResults.data is defined and not pollPSCResults.data.err_message is defined and pollPSCResults.data.status == true
+            until: pollPSCResults.data is defined and not pollPSCResults.data.err_message is defined and pollPSCResults.data.status == true
+            retries: '{{ poll_retries }}'
+            delay: '{{ poll_delay }}'

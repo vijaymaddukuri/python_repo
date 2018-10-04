@@ -1,0 +1,65 @@
+<h2>New Project</h2>
+
+<md-content layout-padding>
+  <div>
+    <form name="projectForm">
+      <div layout-gt-xs="row">
+        <md-input-container>
+          <label>Title</label>
+          <md-icon ng-md-icon icon="group_work" style="fill:grey;"></md-icon>
+          <input ng-model="project.name" style="width:300px;">
+        </md-input-container>
+        <md-input-container class="md-block">
+          <label>Type</label>
+          <!--<md-icon ng-md-icon style="fill:grey;"></md-icon>-->
+          <md-select id="type" ng-model="project.type" style="width:300px;" ng-readonly="!editMode">
+            <md-option ng-repeat="(type,values) in projects.defaultConfigData" value="{{type}}">
+              {{type}}
+            </md-option>
+          </md-select>
+          <div ng-messages="projectForm.type.$error" role="alert" multiple>
+            <div ng-message="required" class="my-message">This is required</div>
+          </div>
+        </md-input-container>
+      </div>
+
+      <!--<div layout-gt-xs="row">
+        <md-input-container class="md-block">
+          <label>Company </label>
+          <md-icon ng-md-icon icon="business" style="fill:grey;"></md-icon>
+          <input ng-model="project.site">
+        </md-input-container>
+        <md-input-container class="md-block">
+          <label>Site ID </label>
+          <input name="siteID" ng-model="project.siteID" placeholder="12345678"
+                 ng-pattern="/^[0-9]{8}$/" md-maxlength="8">
+          <div ng-messages="projectForm.siteID.$error" role="alert" multiple>
+            <div ng-message="pattern" class="my-message">That doesn't look like a valid SiteID.
+            </div>
+          </div>
+        </md-input-container>
+      </div>-->
+
+      <!--<div layout-gt-xs="row">
+        <md-input-container ng-show="selectedProject">
+            <md-checkbox name="copyComponents" ng-model="copyComponents">
+            Copy Componenets from Selected project
+          </md-checkbox>
+        </md-input-container>
+      </div>-->
+
+
+      <div md-theme="{{buttontheme}}">
+        <md-button md-theme-watch id="submitButton" class="md-raised md-primary md-hue-2" ng-click="submitForm()" tooltip-placement="right" tooltip-is-open="errmsg && true || false" uib-tooltip="{{errmsg}}">
+          <span ng-if="formStatus=='pending'">Submit</span>
+          <span ng-if="formStatus=='success'">Success</span>
+          <span ng-if="formStatus=='Fail'">Retry</span>
+          <ng-md-icon icon="{{buttonicon}}" ng-class="{'fa-spin':buttonicon=='refresh'}" ng-if="buttonicon"></ng-md-icon>
+        </md-button>
+        <md-button class="md-raised" ng-click="cancelForm()">
+          Cancel
+        </md-button>
+      </div>
+    </form>
+  </div>
+</md-content>

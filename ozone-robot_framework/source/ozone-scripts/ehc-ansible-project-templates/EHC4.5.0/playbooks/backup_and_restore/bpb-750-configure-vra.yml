@@ -1,0 +1,119 @@
+# ------------------------------------------------------------------------------
+# Copyright (C) 2016-2017 DELL EMC Corporation. All Rights Reserved.
+
+# This software contains the intellectual property of DELL EMC Corporation
+# or is licensed to DELL EMC Corporation from third parties.  Use of this
+# software and the intellectual property contained therein is expressly
+# limited to the terms and conditions of the License Agreement under which
+# it is provided by or on behalf of DELL  EMC.
+
+# ------------------------------------------------------------------------------
+
+---
+-
+    include: plays/power-off-vms.yml
+    vars:
+        step: BKP - BPB-750-010
+        vms: vra_iaas_agent_servers:vra_iaas_worker_servers:vra_iaas_manager_servers:vra_iaas_web_servers:vra_servers
+        serial: 2
+
+-
+    include: plays/backup-snapshot.yml
+    vars:
+        step: BKP - BPB-750-060
+        description: 'Configure vRA'
+        snapshot_name: BPB-750-CONFIGURE-VRA
+        snapshot_description: BPB-750-CONFIGURE-VRA
+        vms: vra_iaas_agent_servers:vra_iaas_worker_servers:vra_iaas_manager_servers:vra_iaas_web_servers:vra_servers
+        dumpMemory: True
+        powerOffVM: False
+
+-
+    include:  plays/backup-sql-db.yml
+    vars:
+        step: BKP - BPB-750-110
+        dbName: '{{ databases.vra_database }}'
+        backupName: 'BPB-750-CONFIGURE-VRA.bak'
+        vms: sql_server
+
+-
+    include: plays/delete-snapshots-not-matching-name.yml
+    vars:
+        step: BKP - BPB-750-120
+        vms: vra_iaas_agent_servers:vra_iaas_worker_servers:vra_iaas_manager_servers:vra_iaas_web_servers:vra_servers
+        inventoryPath: '/'
+        #snapshotName:  BPB-600-CONFIGURE-VRB
+        snapshotName:  BPB-750-CONFIGURE-VRA
+
+-
+    include:  plays/delete-sql-db.yml
+    vars:
+        step: BKP - BPB-750-170
+        dbName: '{{ databases.vra_database }}'
+        backupName: 'BPB-750-CONFIGURE-VRA.bak'
+        vms: sql_server
+
+-
+    include: plays/power-on-vms.yml
+    vars:
+        step: BKP - BPB-750-180
+        vms: vra_servers
+
+-
+    include: plays/poll-vra-5480.yml
+    vars:
+        step: BKP - BPB-750-190
+        vms: vra_servers
+-
+    include: plays/power-on-vms.yml
+    vars:
+        step: BKP - BPB-750-200
+        vms: vra_iaas_web_servers
+
+-
+    include: plays/poll-vra-web.yml
+    vars:
+        step: BKP - BPB-750-210
+        vms: vra_iaas_web_servers
+
+-
+    include: plays/power-on-vms.yml
+    vars:
+        step: BKP - BPB-750-220
+        vms: vra_iaas_manager_servers
+
+-
+    include: plays/poll-vra-manager.yml
+    vars:
+        step: BKP - BPB-750-230
+        vms: vra_iaas_manager_servers
+
+-
+    include: plays/power-on-vms.yml
+    vars:
+        step: BKP - BPB-750-240
+        vms: vra_iaas_worker_servers
+
+-
+    include: plays/poll-vra-dem.yml
+    vars:
+        step: BKP - BPB-750-250
+        vms: vra_iaas_worker_servers
+
+-
+    include: plays/power-on-vms.yml
+    vars:
+        step: BKP - BPB-750-260
+        vms: vra_iaas_agent_servers
+
+-
+    include: plays/poll-vra-dem.yml
+    vars:
+        step: BKP - BPB-750-270
+        vms: vra_iaas_agent_servers
+
+-
+    include: plays/poll-vra-app.yml
+    vars:
+        step: BKP - BPB-750-280
+        vms: vra_primary

@@ -1,0 +1,2 @@
+class TenantCreationException(Exception):
+    pass

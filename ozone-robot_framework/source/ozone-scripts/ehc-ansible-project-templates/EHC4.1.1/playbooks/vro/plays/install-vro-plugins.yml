@@ -1,0 +1,77 @@
+# ------------------------------------------------------------------------------
+# Copyright (C) 2016-2017 DELL EMC Corporation. All Rights Reserved.
+
+# This software contains the intellectual property of DELL EMC Corporation
+# or is licensed to DELL EMC Corporation from third parties.  Use of this
+# software and the intellectual property contained therein is expressly
+# limited to the terms and conditions of the License Agreement under which
+# it is provided by or on behalf of DELL  EMC.
+
+# ------------------------------------------------------------------------------
+
+-
+    # Install Plugins
+    name: '{{ step }} - Install vRO plugins'
+    hosts: vro_servers
+    # Needs to be done one after another as per build guide
+    serial: 1
+    gather_facts: no
+    any_errors_fatal: True
+    tags:
+                - '{{ step }} - Install vRO plugins'
+    tasks:
+        -
+            name: '{{ step }} - Pre-Validate vRO plugins'
+            delegate_to: localhost
+            ehc_script_agent:
+                package_name: vro
+                module_name: plugins
+                method_name: validateInstallPlugins
+                method_params:
+                    vroInfo: '{{ vroInfo }}'
+                    pluginName: '{{ item.name }}'
+                    pluginVersion: '{{ item.version }}'
+            register: validateResults
+            failed_when: not validateResults.data is defined or validateResults.data.err_message is defined or validateResults.data[item.name].pluginFound == false
+            changed_when: validateResults.data is defined and not validateResults.data.err_message is defined and validateResults.data[item.name].pluginFound == true
+            with_items: '{{ plugins }}'
+            ignore_errors: validateResults.failed_when_result
+
+        -
+            name: '{{ step }} - Install vRO plugins'
+            delegate_to: localhost
+            ehc_script_agent:
+                package_name: vro
+                module_name: plugins
+                method_name: installVROPlugins
+                method_params:
+                    vroInfo: '{{ vroInfo }}'
+                    fileToUpload: '{{ item.0.path }}'
+                    restartService: True
+            register: installResults
+            failed_when: not installResults.data is defined or installResults.data.err_message is defined or installResults.data[item.0.name].statuscode != 200
+            changed_when: installResults.data is defined and not installResults.data.err_message is defined and (installResults.data[item.0.name].statuscode == 200 or installResults.data[item.0.name].state == "ALREADY_INSTALLED")
+            with_together:
+              -   '{{ plugins }}'
+              -   '{{ validateResults.results }}'
+            when: item.1.failed_when_result
+            ignore_errors: True
+
+        -
+            name: '{{ step }} - Validate vRO plugins'
+            delegate_to: localhost
+            ehc_script_agent:
+                package_name: vro
+                module_name: plugins
+                method_name: validateInstallPlugins
+                method_params:
+                    vroInfo: '{{ vroInfo }}'
+                    pluginName: '{{ item.0.name }}'
+                    pluginVersion: '{{ item.0.version }}'
+            register: validateResults
+            failed_when: not validateResults.data is defined or validateResults.data.err_message is defined or validateResults.data[item.0.name].pluginFound == false
+            changed_when: validateResults.data is defined and not validateResults.data.err_message is defined and validateResults.data[item.0.name].pluginFound == true
+            with_together:
+              -   '{{ plugins }}'
+              -   '{{ installResults.results }}'
+            when: not item.1|skipped

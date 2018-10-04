@@ -1,0 +1,13 @@
+workflow_context:
+    assets_info:
+        [{
+        'local_path': '/root/automation/bdl/asset/',
+        'remote_path': '/tmp/',
+        'file_name': 'pcfa.rpm',
+        'visible_name': 'Auto'
+        },]
+    accepted_datasets:
+        []
+    accepted_tools:
+        []
+

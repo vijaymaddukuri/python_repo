@@ -1,0 +1,20 @@
+-
+    name: 'CLN - {{ step }} - Destroy vAPP'
+    hosts: vro_primary
+    any_errors_fatal: True
+    tags:
+      - 'CLN - {{ step }} - Destroy vAPP'
+    tasks:
+        -
+            name: 'CLN - {{ step }} - Destroy vAPP'
+            delegate_to: localhost
+            ehc_script_agent:
+                package_name: vcenter
+                module_name: destroyVApp
+                method_name: destroyVApp
+                method_params:
+                    vRODict: '{{ vroWorkflowInfoSysadmin }}'
+                    vAppName: 'EHC-Automation-Tool'
+            register: destroyVAppResults
+            failed_when: not destroyVAppResults.data is defined or destroyVAppResults.data.err_message is defined or destroyVAppResults.data.status == false
+            changed_when: destroyVAppResults.data is defined and not destroyVAppResults.data.err_message is defined and destroyVAppResults.data.status == true

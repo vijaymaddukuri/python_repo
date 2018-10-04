@@ -1,0 +1,18 @@
+shared:
+    current_browser:
+        type:
+        instance:
+        launched: False
+launch_browser:
+    browserType: firefox
+    baseUrl: http://www.google.com
+login:
+    primary:
+        username:
+        password:
+        role:
+    secondary:
+        username:
+        password:
+        role:
+

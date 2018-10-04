@@ -1,0 +1,171 @@
+# ------------------------------------------------------------------------------
+# Copyright (C) 2016-2017 DELL EMC Corporation. All Rights Reserved.
+
+# This software contains the intellectual property of DELL EMC Corporation
+# or is licensed to DELL EMC Corporation from third parties.  Use of this
+# software and the intellectual property contained therein is expressly
+# limited to the terms and conditions of the License Agreement under which
+# it is provided by or on behalf of DELL  EMC.
+
+# ------------------------------------------------------------------------------
+
+-
+    name: 'VROPS - {{ step }} - Integrate and Validate vROPs with AD'
+    hosts: vrops_manager
+    gather_facts: no
+    any_errors_fatal: True
+    vars:
+      step: EPB-500-050
+    tags:
+                - 'VROPS - {{ step }} - Integrate vROps with AD'
+    tasks:
+        -
+            name: 'VROPS - {{ step }} - Pre-Validate vROps with AD Integration'
+            delegate_to: localhost
+            ehc_script_agent:
+                package_name: vrops
+                module_name: integrateAD
+                method_name: validateintegrateAD
+                method_params:
+                    vropsDetails: '{{ vROPsDict }}'
+                    adDetails: '{{ adDetails }}'
+                    adUserGroups: '{{ adUserGroupsToImport }}'
+            register: preValidateADIntegration
+            failed_when: not preValidateADIntegration.data is defined or preValidateADIntegration.data.err_message is defined or not preValidateADIntegration.data.status == true
+            changed_when: preValidateADIntegration.data is defined and preValidateADIntegration.data.err_message is not defined and preValidateADIntegration.data.status == true
+            ignore_errors: preValidateADIntegration.failed_when_result
+        -
+            name: 'VROPS - {{ step }} - Integrate vROps with AD'
+            delegate_to: localhost
+            ehc_script_agent:
+                package_name: vrops
+                module_name: integrateAD
+                method_name: integrateAD
+                method_params:
+                    vropsDetails: '{{ vROPsDict }}'
+                    adDetails: '{{ adDetails }}'
+                    adUserGroups: '{{ adUserGroupsToImport }}'
+            register: vROPsADIntegration
+            failed_when: not vROPsADIntegration.data is defined or vROPsADIntegration.data.err_message is defined or not vROPsADIntegration.data.status == true
+            changed_when: vROPsADIntegration.data is defined and vROPsADIntegration.data.err_message is not defined and vROPsADIntegration.data.status == true
+            when: preValidateADIntegration.failed_when_result
+        -
+            name: 'VROPS - {{ step }} - Validate vROps with AD Integration'
+            delegate_to: localhost
+            ehc_script_agent:
+                package_name: vrops
+                module_name: integrateAD
+                method_name: validateintegrateAD
+                method_params:
+                    vropsDetails: '{{ vROPsDict }}'
+                    adDetails: '{{ adDetails }}'
+                    adUserGroups: '{{ adUserGroupsToImport }}'
+            register: validateADIntegration
+            failed_when: not validateADIntegration.data is defined or validateADIntegration.data.err_message is defined or not validateADIntegration.data.status == true
+            changed_when: validateADIntegration.data is defined and validateADIntegration.data.err_message is not defined and validateADIntegration.data.status == true
+            when: not vROPsADIntegration|skipped
+
+-
+    name: 'VROPS - {{ step }} - Create and Verify local application users'
+    hosts: vrops_manager
+    gather_facts: no
+    any_errors_fatal: True
+    serial: 1
+    vars:
+      step: EPB-500-060
+    tags:
+                - 'VROPS - {{ step }} - Create local application users'
+    tasks:
+        -
+            name: 'VROPS - {{ step }} - Pre-Validate local application users'
+            delegate_to: localhost
+            ehc_script_agent:
+                package_name: vrops
+                module_name: config
+                method_name: validateLocalUsersToApplication
+                method_params:
+                    vropsInfo: '{{ vROPsDict }}'
+                    usersDetails: '{{ usersDetails }}'
+            register: preValidateLocalAppUser
+            failed_when: 'not preValidateLocalAppUser.data is defined or preValidateLocalAppUser.data.err_message is defined or not preValidateLocalAppUser.data.status == true '
+            changed_when: 'preValidateLocalAppUser.data is defined and preValidateLocalAppUser.data.err_message is not defined and preValidateLocalAppUser.data.status == true'
+            ignore_errors: True
+        -
+            name: 'VROPS - {{ step }} - Create local application users'
+            delegate_to: localhost
+            ehc_script_agent:
+                package_name: vrops
+                module_name: config
+                method_name: addLocalUsersToApplication
+                method_params:
+                    vropsInfo: '{{ vROPsDict }}'
+                    usersDetails: '{{ usersDetails }}'
+            register: createLocalAppUser
+            failed_when: 'not createLocalAppUser.data is defined or createLocalAppUser.data.err_message is defined or not createLocalAppUser.data.status == true '
+            changed_when: 'createLocalAppUser.data is defined and createLocalAppUser.data.err_message is not defined and createLocalAppUser.data.status == true'
+            when: preValidateLocalAppUser.failed_when_result
+        -
+            name: 'VROPS - {{ step }} - Validate local application users'
+            delegate_to: localhost
+            ehc_script_agent:
+                package_name: vrops
+                module_name: config
+                method_name: validateLocalUsersToApplication
+                method_params:
+                    vropsInfo: '{{ vROPsDict }}'
+                    usersDetails: '{{ usersDetails }}'
+            register: validateLocalAppUser
+            failed_when: 'not validateLocalAppUser.data is defined or validateLocalAppUser.data.err_message is defined or not validateLocalAppUser.data.status == true '
+            changed_when: 'validateLocalAppUser.data is defined and validateLocalAppUser.data.err_message is not defined and validateLocalAppUser.data.status == true'
+            when: not createLocalAppUser|skipped
+
+-
+    name: 'VROPS - {{ step }} - Installing and Validating vRealize Automation Management Pack'
+    hosts: vrops_manager
+    gather_facts: no
+    any_errors_fatal: True
+    vars:
+      step: EPB-500-070
+    tags:
+                - 'VROPS - {{ step }} - Installing vRealize Automation Management Pack'
+    tasks:
+        -
+            name: 'VROPS - {{ step }} - Pre-Validate vRealize Automation Management Pack'
+            delegate_to: localhost
+            ehc_script_agent:
+                package_name: vrops
+                module_name: vRAAdapter
+                method_name: validatevRAAdapterStatus
+                method_params:
+                    vropsDict: '{{ vROPsDict }}'
+            register: preValidateVraManagementPack
+            failed_when: 'not preValidateVraManagementPack.data is defined or preValidateVraManagementPack.data.err_message is defined or not preValidateVraManagementPack.data == true '
+            changed_when: 'preValidateVraManagementPack.data is defined and preValidateVraManagementPack.data.err_message is not defined and preValidateVraManagementPack.data == true'
+            ignore_errors: True
+        -
+            name: 'VROPS - {{ step }} - Installing vRealize Automation Management Pack'
+            delegate_to: localhost
+            ehc_script_agent:
+                package_name: vrops
+                module_name: vRAAdapter
+                method_name: installvRAAdapterPackage
+                method_params:
+                    vropsDict: '{{ vROPsDict }}'
+                    packageFile: '{{ packageFile }}'
+            register: installVraManagementPack
+            failed_when: 'not installVraManagementPack.data is defined or installVraManagementPack.data.err_message is defined or not installVraManagementPack.data == true '
+            changed_when: 'installVraManagementPack.data is defined and installVraManagementPack.data.err_message is not defined and installVraManagementPack.data == true'
+            when: preValidateVraManagementPack.failed_when_result
+        -
+            name: 'VROPS - {{ step }} - Validate vRealize Automation Management Pack'
+            delegate_to: localhost
+            ehc_script_agent:
+                package_name: vrops
+                module_name: vRAAdapter
+                method_name: validatevRAAdapterStatus
+                method_params:
+                    vropsDict: '{{ vROPsDict }}'
+            register: validateVraManagementPack
+            failed_when: 'not validateVraManagementPack.data is defined or validateVraManagementPack.data.err_message is defined or not validateVraManagementPack.data == true '
+            changed_when: 'validateVraManagementPack.data is defined and validateVraManagementPack.data.err_message is not defined and validateVraManagementPack.data == true'
+            when: not installVraManagementPack|skipped

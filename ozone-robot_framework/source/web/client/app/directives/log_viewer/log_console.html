@@ -1,0 +1,110 @@
+  <md-dialog>
+    <md-toolbar>
+      <div class="md-toolbar-tools">
+        <h2>Logs</h2>
+        <span flex></span>
+        <md-button class="md-icon-button" ng-click="cancel()">
+          <ng-md-icon icon="close"></ng-md-icon>
+        </md-button>
+      </div>
+    </md-toolbar>
+
+    <md-dialog-content class="md-padding" style="padding-top:25px;">
+
+      <div layout="row">
+
+        <div layout="column">
+          <h3 ng-show="view=='table'"><ng-md-icon icon="equalizer" style="fill: #4393B9"></ng-md-icon>Run Statistics</h3>
+        </div>
+        <div flex></div>
+
+        <div layout="column">
+          <md-input-container class="md-block">
+            <label>Jobs</label>
+            <!--<md-icon ng-md-icon style="fill:grey;"></md-icon>-->
+            <md-select md-on-close="showLogs()" id="type" ng-model="selectedJob.job" style="width:300px;">
+              <md-option ng-repeat="job in jobObjects" ng-value="job">
+                {{job.date | date : 'medium'}}
+              </md-option>
+            </md-select>
+          </md-input-container>
+        </div>
+
+        <div layout="column" ng-show="ansibleOutput">
+          <button class="btn btn-default" ng-click="view = (view === 'console' ? 'table' : 'console')">Toggle View</button>
+        </div>
+
+      </div>
+
+
+      <div style="background:black;color:lightgrey;width:100%;padding:20px;" ng-show="view=='console'">
+        <p class="logconsole" ng-bind-html="logContent || tile.logOutput"></p>
+      </div>
+
+      <div ng-if="ansibleOutputObject" ng-show="view=='table'" style="margin-top:20px;">
+
+
+        <div class="table-responsive">
+          <table class="table">
+            <thead>
+            <tr>
+              <th>Host</th>
+              <th>Ok</th>
+              <th>Changed</th>
+              <th>Skipped</th>
+              <th>Unreachable</th>
+              <th>Failures</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="(host, stats) in stats">
+              <td>{{host}}</td>
+              <td>{{stats.ok}}</td>
+              <td><span ng-class="{'label label-success': stats.changed}">{{stats.changed}}</span></td>
+              <td><span ng-class="{'label label-warning': stats.skipped}">{{stats.skipped}}</span></td>
+              <td><span ng-class="{'label label-danger': stats.unreachable}">{{stats.unreachable}}</span></td>
+              <td><span ng-class="{'label label-danger': stats.failures}">{{stats.failures}}</span></td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="table-responsive">
+          <table class="table" >
+            <thead>
+              <tr>
+                <th>Task</th>
+                <th>Host</th>
+                <th>Method</th>
+                <th>Changed</th>
+                <th>Skipped</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat-start="taskObject in ansibleOutputObject">
+                <td><ng-md-icon ng-click="expandRow(taskObject)" icon="{{taskObject.icon}}"></ng-md-icon>{{taskObject.taskName}}</td>
+                <td>{{taskObject.hostName}}</td>
+                <td>{{taskObject.method}}</td>
+                <td>{{taskObject.changed}}</td>
+                <td>{{taskObject.skipped}}</td>
+              </tr>
+              <tr ng-repeat-end>
+                <td colspan="6">
+                  <div ng-show="taskObject.showLogs">
+                    <div class="col-md-12" ng-if="taskObject.hostObject.stdout" ><p style="color:lightgrey;" class="logconsole" ng-bind-html="taskObject.hostObject.stdout | replaceLineBreaks"></p></div>
+                    <div class="col-md-12" ng-if="taskObject.hostObject.msg" ><p style="color:lightgrey;" class="logconsole" ng-bind-html="taskObject.hostObject.msg | replaceLineBreaks"></p></div>
+                    <div class="col-md-12" ng-if="taskObject.hostObject.stderr" ><p style="color:#cd616b;" class="logconsole" ng-bind-html="taskObject.hostObject.stderr | replaceLineBreaks"></p></div>
+                    <div class="col-md-12" ng-if="taskObject.hostObject.module_stderr" ><p style="color:#cd616b;" class="logconsole" ng-bind-html="taskObject.hostObject.module_stderr | replaceLineBreaks"></p></div>
+                    <div class="col-md-12" ng-if="taskObject.hostObject.warnings.length" ><p style="color:darkorange;" class="logconsole" ng-bind-html="taskObject.hostObject.warnings.join('\n') | replaceLineBreaks"></p></div>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+
+    </md-dialog-content>
+
+  </md-dialog>

@@ -1,0 +1,143 @@
+# ------------------------------------------------------------------------------
+# Copyright (C) 2016-2017 DELL EMC Corporation. All Rights Reserved.
+
+# This software contains the intellectual property of DELL EMC Corporation
+# or is licensed to DELL EMC Corporation from third parties.  Use of this
+# software and the intellectual property contained therein is expressly
+# limited to the terms and conditions of the License Agreement under which
+# it is provided by or on behalf of DELL  EMC.
+
+# ------------------------------------------------------------------------------
+
+ansible_host: '{{  host_address.sql_server.fqdn }}'
+ansible_host_ip: '{{ host_address.sql_server.ip }}'
+
+# TODO Check if this is how it is always going to be. Enable TCP/IP requries host name in caps
+ansible_host_name: '{{  sql_server_fqdn.split(".")|first|upper }}'
+
+db_user: 'sa'
+db_user_password: '{{sql_server_details.sa_password}}'
+
+sql_config_local_template_path: '../templates/SQLConfigTemplate.ini.j2'
+
+windowsShell: 'C:/Windows/System32/WindowsPowerShell/v1.0/powershell.exe'
+
+vmDict:
+    vmname: '{{vmname}}'
+    vmusername: '{{windows.default_username}}'
+    vmpassword: '{{ windows.default_password }}'
+    ostype: '1'
+    guestOSFlavor: server
+    guestOSVersion: version-2012R2
+    shell: '{{ windowsShell }}'
+
+datastorenameToPlaceSQLImage: '{{ vcenter_datastore }}'
+
+ova_manifest_lookup: '{{ sw_repository_manifest.content.sql_server_iso }}'
+localsqlisopath: '{{ sw_repository_manifest.base_path }}/{{ ova_manifest_lookup.relative_path }}/{{ ova_manifest_lookup.file_name }}'
+
+# Remote datastore path to put the SQL ISO. Cannot put in the root as it doesn't work for VxRail.
+remoteDataStoreFilePathName: '/SQL_TEMP_DIR4/SQL.iso'
+
+tempDatabase: 'tempdb'
+
+# Used for creating IaaS Database Login User, creating vRO Database
+dbDict:
+    host: '{{ ansible_host }}'
+    user: '{{ db_user }}'
+    password: '{{ db_user_password }}'
+    database: '{{ tempDatabase }}'
+
+
+sql_server_details_ehc_om_database: EHCOM
+
+# List of SQL Scripts to be copied from local to remote.
+# These scripts are required to create and configure databases.
+access_multiple_db_local_path: '{{ playbook_dir }}/../templates/access_multiple_db.sql'
+access_multiple_db_remote_path: 'common\\access_multiple_db.sql'
+
+assign_db_roles_local_path: '{{ playbook_dir }}/../templates/assign_db_roles.sql'
+assign_db_roles_remote_path: 'common\\assign_db_roles.sql'
+
+create_db_local_path: '{{ playbook_dir }}/../templates/create_db.sql'
+create_db_remote_path: 'common\\create_db.sql'
+
+create_db_login_user_local_path: '{{ playbook_dir }}/../templates/create_db_login_user.sql'
+create_db_login_user_remote_path: 'common\\create_db_login_user.sql'
+
+create_db_user_iaas_local_path: '{{ playbook_dir }}/../templates/create_db_user_iaas.sql'
+create_db_user_iaas_remote_path: 'common\\create_db_user_iaas.sql'
+
+# List of SQL Scripts to be copied from local to remote.
+# These scripts are required to create databases.
+sql_scripts_copy_list:
+    -
+      local_file_path: "{{ access_multiple_db_local_path }}"
+      remote_file_path: "{{ access_multiple_db_remote_path }}"
+    -
+      local_file_path: "{{ assign_db_roles_local_path }}"
+      remote_file_path: "{{ assign_db_roles_remote_path }}"
+
+    -
+      local_file_path: "{{ create_db_local_path }}"
+      remote_file_path: "{{ create_db_remote_path }}"
+
+    -
+      local_file_path: "{{ create_db_login_user_local_path }}"
+      remote_file_path: "{{ create_db_login_user_remote_path }}"
+
+    -
+      local_file_path: "{{ create_db_user_iaas_local_path }}"
+      remote_file_path: "{{ create_db_user_iaas_remote_path }}"
+
+
+# Database configuration parameters - vRO and EHCOM
+
+dbConfigureParams:
+    createIaasLoginUser:
+        sqlFiles:
+            -   '{{ create_db_user_iaas_remote_path }}'
+        dbParams:
+            '$db_name': 'master'
+            '$db_rolename': 'sysadmin'
+            '$db_login_user': '{{ ad_domain_name }}\{{ ad_user.svc_iaas.username }}'
+            '$language': 'us_english'
+    createVroDatabase:
+        sqlFiles:
+            -   '{{ create_db_remote_path }}'
+            -   '{{ access_multiple_db_remote_path }}'
+            -   '{{ create_db_login_user_remote_path }}'
+            -   '{{ assign_db_roles_remote_path }}'
+        dbParams:
+            '$db_name': '{{  databases.vro_database  }}'
+            '$mdf_filepath': '{{ sql_server_details.data_disk }}:{{ sql_server_details.data_directory }}'
+            '$db_sizeinMB': '10'
+            '$db_fileGrowthPercentage': '10'
+            '$db_name_log': vro_log
+            '$ldf_filepath': '{{ sql_server_details.log_disk }}:{{ sql_server_details.data_directory }}'
+            '$log_sizeinKB': '5000'
+            '$log_fileGrowthPercentage': '10'
+            '$db_rolename': 'db_owner'
+            '$db_login_user': '{{ ad_domain_name }}\{{ad_user.svc_vro.username}}'
+            '$language': us_english
+    createObjModelVroDatabase:
+        sqlFiles:
+            -   '{{ create_db_remote_path }}'
+            -   '{{ access_multiple_db_remote_path }}'
+            -   '{{ create_db_login_user_remote_path }}'
+            -   '{{ assign_db_roles_remote_path }}'
+        dbParams:
+            '$db_name': '{{ databases.ehc_om_database }}'
+            '$mdf_filepath': '{{sql_server_details.data_disk}}:{{ sql_server_details.data_directory }}'
+            '$db_sizeinMB': '10'
+            '$db_fileGrowthPercentage': '10'
+            '$db_name_log': EHCOM_log
+            '$ldf_filepath': '{{sql_server_details.log_disk}}:{{ sql_server_details.data_directory }}'
+            '$log_sizeinKB': '5000'
+            '$log_fileGrowthPercentage': '10'
+            '$db_rolename': 'db_owner'
+            '$db_login_user': '{{ ad_domain_name }}\{{ad_user.app_vro_sql.username}}'
+            '$language': us_english
+
+# Used for Firewall Configuration
+componentType: "IaaS SQL Server"

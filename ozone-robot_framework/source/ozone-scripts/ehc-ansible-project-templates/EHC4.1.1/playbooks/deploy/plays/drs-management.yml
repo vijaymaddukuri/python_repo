@@ -1,0 +1,135 @@
+# ------------------------------------------------------------------------------
+# Copyright (C) 2016-2017 DELL EMC Corporation. All Rights Reserved.
+
+# This software contains the intellectual property of DELL EMC Corporation
+# or is licensed to DELL EMC Corporation from third parties.  Use of this
+# software and the intellectual property contained therein is expressly
+# limited to the terms and conditions of the License Agreement under which
+# it is provided by or on behalf of DELL  EMC.
+
+# ------------------------------------------------------------------------------
+
+---
+# Playbook file: drs-management.yml
+-
+    name: '{{ step }} - {{ description }}'
+    hosts: '{{ vms }}'
+    any_errors_fatal: true
+    tags:
+                - '{{ step }} - {{ description }}'
+    tasks:
+        -
+            name: '{{ step }} - Validate {{ description }}'
+            delegate_to: localhost
+            run_once: true
+            ehc_script_agent:
+                package_name: vcenter
+                module_name: clusterDRSConfig
+                method_name: validateDRS
+                method_params:
+                    vCenter: '{{ vcenter }}'
+                    dcName: '{{ vcenter_datacenter }}'
+                    clusterName: '{{ vcenter_cluster }}'
+                    enableDRS: '{{ enableDRS | default(True) }}'
+            register: validateDRSResults
+            failed_when: validateDRSResults.data is not defined or validateDRSResults.data.err_message is defined or not validateDRSResults.data.status == true
+            changed_when: validateDRSResults.data is defined and validateDRSResults.data.err_message is not defined and validateDRSResults.data.status == true
+            ignore_errors: validateDRSResults.failed_when_result
+
+        -
+            name: '{{ step }} - {{ description }}'
+            delegate_to: localhost
+            run_once: true
+            ehc_script_agent:
+                package_name: vcenter
+                module_name: clusterDRSConfig
+                method_name: toggleDRS
+                method_params:
+                    vCenter: '{{ vcenter }}'
+                    dcName: '{{ vcenter_datacenter }}'
+                    clusterName: '{{ vcenter_cluster }}'
+                    enableDRS: '{{ enableDRS | default(True) }}'
+            register: toggleDRSResults
+            failed_when: toggleDRSResults.data is not defined or toggleDRSResults.data.err_message is defined or not toggleDRSResults.data.status == true
+            changed_when: toggleDRSResults.data is defined and toggleDRSResults.data.err_message is not defined and toggleDRSResults.data.status == true
+            when:  validateDRSResults.failed_when_result
+
+        -
+            name: '{{ step }} - Post Validate {{ description }}'
+            delegate_to: localhost
+            run_once: true
+            ehc_script_agent:
+                package_name: vcenter
+                module_name: clusterDRSConfig
+                method_name: validateDRS
+                method_params:
+                    vCenter: '{{ vcenter }}'
+                    dcName: '{{ vcenter_datacenter }}'
+                    clusterName: '{{ vcenter_cluster }}'
+                    enableDRS: '{{ enableDRS | default(True) }}'
+            register: postValidateDRSResults
+            failed_when: postValidateDRSResults.data is not defined or postValidateDRSResults.data.err_message is defined or not postValidateDRSResults.data.status == true
+            changed_when: postValidateDRSResults.data is defined and postValidateDRSResults.data.err_message is not defined and postValidateDRSResults.data.status == true
+            when: not toggleDRSResults|skipped
+
+
+-
+    name: '{{ step }} - Set DRS Automation Level on cluster to {{ automation_level }} Automated'
+    hosts: '{{ vms }}'
+    any_errors_fatal: true
+    tags:
+                - '{{ step }} - Set DRS Automation Level on cluster to {{ automation_level }} Automated'
+    tasks:
+        -
+            name: '{{ step }} - Validate DRS Automation Level on cluster'
+            delegate_to: localhost
+            run_once: true
+            ehc_script_agent:
+                package_name: vcenter
+                module_name: clusterDRSConfig
+                method_name: validateAutomationLevel
+                method_params:
+                    vCenter: '{{ vcenter }}'
+                    dcName: '{{ vcenter_datacenter }}'
+                    clusterName: '{{ vcenter_cluster }}'
+                    automationLevel: '{{ automation_level }}'
+            register: validateAutomationLevelResults
+            failed_when: validateAutomationLevelResults.data is not defined or validateAutomationLevelResults.data.err_message is defined or not validateAutomationLevelResults.data.status == true
+            changed_when: validateAutomationLevelResults.data is defined and validateAutomationLevelResults.data.err_message is not defined and validateAutomationLevelResults.data.status == true
+            ignore_errors: validateAutomationLevelResults.failed_when_result
+
+        -
+            name: '{{ step }} - Set DRS Automation Level on cluster to {{ automation_level }} Automated'
+            delegate_to: localhost
+            run_once: true
+            ehc_script_agent:
+                package_name: vcenter
+                module_name: clusterDRSConfig
+                method_name: setAutomationLevel
+                method_params:
+                    vCenter: '{{ vcenter }}'
+                    dcName: '{{ vcenter_datacenter }}'
+                    clusterName: '{{ vcenter_cluster }}'
+                    automationLevel: '{{ automation_level }}'
+            register: setAutomationLevelResults
+            failed_when: setAutomationLevelResults.data is not defined or setAutomationLevelResults.data.err_message is defined or not setAutomationLevelResults.data.status == true
+            changed_when: setAutomationLevelResults.data is defined and setAutomationLevelResults.data.err_message is not defined and setAutomationLevelResults.data.status == true
+            when:  validateAutomationLevelResults.failed_when_result
+
+        -
+            name: '{{ step }} - Post Validate DRS Automation Level on cluster'
+            delegate_to: localhost
+            run_once: true
+            ehc_script_agent:
+                package_name: vcenter
+                module_name: clusterDRSConfig
+                method_name: validateAutomationLevel
+                method_params:
+                    vCenter: '{{ vcenter }}'
+                    dcName: '{{ vcenter_datacenter }}'
+                    clusterName: '{{ vcenter_cluster }}'
+                    automationLevel: '{{ automation_level }}'
+            register: postValidateAutomationLevelResults
+            failed_when: postValidateAutomationLevelResults.data is not defined or postValidateAutomationLevelResults.data.err_message is defined or not postValidateAutomationLevelResults.data.status == true
+            changed_when: postValidateAutomationLevelResults.data is defined and postValidateAutomationLevelResults.data.err_message is not defined and postValidateAutomationLevelResults.data.status == true
+            when: not setAutomationLevelResults|skipped

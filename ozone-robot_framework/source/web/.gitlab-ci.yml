@@ -1,0 +1,22 @@
+#image: node:4.4.0
+
+build:
+  stage: build
+  script:
+   - npm install
+   - bower install --allow-root
+   - grunt --force
+  cache:
+    paths:
+    - node_modules/
+    - client/bower_components/
+  artifacts:
+    paths:
+    - dist
+    - node_modules/
+    - client/bower_components/
+
+run:
+  stage: deploy
+  script:
+  - grunt serve:dist --force

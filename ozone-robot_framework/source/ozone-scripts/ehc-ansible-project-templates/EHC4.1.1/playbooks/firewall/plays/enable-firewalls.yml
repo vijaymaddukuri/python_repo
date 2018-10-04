@@ -1,0 +1,63 @@
+# ------------------------------------------------------------------------------
+# Copyright (C) 2016-2017 DELL EMC Corporation. All Rights Reserved.
+
+# This software contains the intellectual property of DELL EMC Corporation
+# or is licensed to DELL EMC Corporation from third parties.  Use of this
+# software and the intellectual property contained therein is expressly
+# limited to the terms and conditions of the License Agreement under which
+# it is provided by or on behalf of DELL  EMC.
+
+# ------------------------------------------------------------------------------
+
+-
+    name: '{{ step }} - Enable Firewalls'
+    hosts: all_windows_servers
+    tags:
+        - '{{ step }} - Enable Firewalls'
+    tasks:
+
+        # TODO: Waiting for bug EHCINSTALL-1170 to close.
+        -
+            name: '{{ step }} - Check if firewall is enabled'
+            delegate_to: localhost
+            ehc_script_agent:
+                package_name: common
+                module_name: configFirewall
+                method_name: validateFirewall
+                method_params:
+                    vCenterDict: '{{ vcenter }}'
+                    VMDict: '{{ vmDict }}'
+            register: validateFirewallResults
+            failed_when: not validateFirewallResults.data is defined or validateFirewallResults.data.err_message is defined or validateFirewallResults.data.status == false
+            changed_when: validateFirewallResults.data is defined and not validateFirewallResults.data.err_message is defined and validateFirewallResults.data.status == true
+            ignore_errors: validateFirewallResults.failed_when_result
+
+        -
+            name: '{{ step }} - Enable Firewall'
+            delegate_to: localhost
+            ehc_script_agent:
+                package_name: common
+                module_name: configFirewall
+                method_name: enableFirewall
+                method_params:
+                    vCenterDict: '{{ vcenter }}'
+                    VMDict: '{{ vmDict }}'
+            register: enableFirewallResults
+            failed_when: not enableFirewallResults.data is defined or enableFirewallResults.data.err_message is defined or enableFirewallResults.data.status == false
+            changed_when: enableFirewallResults.data is defined and not enableFirewallResults.data.err_message is defined and enableFirewallResults.data.status == true
+            when: validateFirewallResults.failed_when_result
+
+        -
+            name: '{{ step }} - Post-Validate Enabling Firewall'
+            delegate_to: localhost
+            ehc_script_agent:
+                package_name: common
+                module_name: configFirewall
+                method_name: validateFirewall
+                method_params:
+                    vCenterDict: '{{ vcenter }}'
+                    VMDict: '{{ vmDict }}'
+            register: postValidateFirewallResults
+            failed_when: not postValidateFirewallResults.data is defined or postValidateFirewallResults.data.err_message is defined or postValidateFirewallResults.data.status == false
+            changed_when: postValidateFirewallResults.data is defined and not postValidateFirewallResults.data.err_message is defined and postValidateFirewallResults.data.status == true
+            when: not enableFirewallResults|skipped

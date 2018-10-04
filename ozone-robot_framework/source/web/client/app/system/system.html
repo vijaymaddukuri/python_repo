@@ -1,0 +1,226 @@
+<div ng-cloak>
+  <md-content>
+    <md-tabs md-dynamic-height md-border-bottom>
+      <md-tab label="System Health">
+        <md-content class="md-padding">
+          <p>Show health status of System components - </p>
+          <md-button class="md-raised" ng-click="getHealthStatus()">
+            <ng-md-icon ng-if="refreshOzoneHealthIcon" icon="{{refreshOzoneHealthIcon}}" ng-class="{'fa-spin':refreshOzoneHealthIcon == 'refresh'}"></ng-md-icon>
+            Refresh
+          </md-button>
+
+          <div layout="row">
+            <div layout="column">
+
+              <md-card  md-theme="{{'red'}}" md-theme-watch>
+                <md-card-title>
+                  <md-card-title-text>
+                    <span class="md-headline">Redis</span>
+                    <span class="md-subhead">{{redis.data.redis_version}}</span>
+                  </md-card-title-text>
+                  <md-card-title-media>
+                    <status-label state="redis.state"  md-raised="'noRaise'" completed-text="''" progress-text="''" default-text="''"></status-label>
+                  </md-card-title-media>
+
+                </md-card-title>
+                <md-card-content>
+
+                  <div ng-repeat="item in redisFilteredDataArray" ng-click="null">
+                    <h4>{{ item.key | humanizeText }} - {{ item.value }}</h4>
+                  </div>
+
+                </md-card-content>
+                <md-card-actions layout="row" layout-align="end center">
+                  <md-button  class="md-raised" ng-click="fetchLogs(redis.logsType)">Logs</md-button>
+                  <!--<md-button>Action 2</md-button>-->
+                </md-card-actions>
+              </md-card>
+
+            </div>
+            <div layout="column" >
+
+              <md-button class="md-raised" ng-click="startServices()">
+                <ng-md-icon icon="{{startServicesJobsIcon}}" ng-class="{'fa-spin':startServicesJobsIcon == 'refresh'}"></ng-md-icon>
+                Start Services
+              </md-button>
+              <div class="alert danger" ng-if="startServicesError">
+                <strong>Error!</strong> {{startServicesError}}
+              </div>
+
+              <div layout="row" ng-repeat="service in services">
+                <md-card md-theme="blue" md-theme-watch>
+                  <md-card-title>
+                    <md-card-title-text>
+                      <span class="md-headline">{{service.name}}</span>
+                      <span class="md-subhead">Uptime - <span timespan="service.uptime" timespan-opts="timespanConfig"></span></span>
+                    </md-card-title-text>
+
+                    <md-card-title-media>
+                      <status-label state="service.status"  icon-size="35" md-raised="'noRaise'" completed-text="" progress-text="" default-text=""></status-label>
+                    </md-card-title-media>
+
+                  </md-card-title>
+                  <md-card-content>
+
+                    <h4>Restarts - {{ service.data.restarts }}</h4>
+
+                  </md-card-content>
+                  <md-card-actions layout="row" layout-align="end center">
+                    <md-button class="md-raised" ng-click="fetchLogs(service.logsType)">Logs</md-button>
+                    <!--<md-button>Action 2</md-button>-->
+                  </md-card-actions>
+                </md-card>
+              </div>
+
+            </div>
+
+            <div layout="column" >
+              <md-card md-theme="blue" md-theme-watch>
+                <md-card-title>
+                  <md-card-title-text>
+                    <span class="md-headline">Master Server</span>
+                    <span class="md-subhead">Version - {{ appConfig.ozoneVersion }}</span>
+                  </md-card-title-text>
+
+                </md-card-title>
+                <md-card-content>
+
+                </md-card-content>
+
+              </md-card>
+
+
+              <md-card md-theme="blue" md-theme-watch>
+                <md-card-title>
+                  <md-card-title-text>
+                    <span class="md-headline">Worker Agent</span>
+                    <span class="md-subhead">{{agentInfo.host_address}} - Agent Version {{agentInfo.agent_version}}</span>
+                  </md-card-title-text>
+
+                  <md-card-title-media>
+                    <status-label state="agentInfo.state"  icon-size="35" md-raised="'noRaise'" completed-text="" progress-text="" default-text=""></status-label>
+                  </md-card-title-media>
+
+                </md-card-title>
+                <md-card-content>
+
+                  <h4>Current running threads - {{agentInfo.running_threads.length}}</h4>
+                  <h4 ng-repeat="thread in agentInfo.running_threads">
+                    {{thread.module_name}} - {{thread.method_name}}
+                  </h4>
+
+                </md-card-content>
+                <md-card-actions layout="row" layout-align="end center">
+                  <md-button class="md-raised" ng-click="fetchLogs('Agent Logs')">Logs</md-button>
+                  <!--<md-button>Action 2</md-button>-->
+                </md-card-actions>
+              </md-card>
+
+            </div>
+
+
+            <div layout="column" >
+              <div layout="row" >
+                <md-card md-theme="blue" md-theme-watch>
+                  <md-card-title>
+                    <md-card-title-text>
+                      <span class="md-headline">Queue Data - Exec</span>
+                      <span class="md-subhead">Ansible workflow jobs</span>
+                    </md-card-title-text>
+                    <ng-md-icon icon="{{queueJobsIcon}}" ng-class="{'fa-spin':queueJobsIcon == 'refresh'}"></ng-md-icon>
+
+                  </md-card-title>
+                  <md-card-content>
+
+                    <h4 ng-repeat="(key, value) in queueStats.exec">
+                      {{key}} - {{value}}
+                    </h4>
+
+                    <div class="alert danger" ng-if="queueErrorMessage">
+                      <strong>Error!</strong> {{queueErrorMessage}}
+                    </div>
+
+                  </md-card-content>
+                  <md-card-actions layout="row" layout-align="end center">
+                  </md-card-actions>
+                </md-card>
+              </div>
+
+
+              <div layout="row" >
+                <md-card md-theme="blue" md-theme-watch>
+                  <md-card-title>
+                    <md-card-title-text>
+                      <span class="md-headline">Queue Data - statusUpdate</span>
+                      <span class="md-subhead">Jobs to update results of Ansible task execution</span>
+                    </md-card-title-text>
+                    <ng-md-icon icon="{{queueJobsIcon}}" ng-class="{'fa-spin':queueJobsIcon == 'refresh'}"></ng-md-icon>
+
+                  </md-card-title>
+                  <md-card-content>
+
+                    <h4 ng-repeat="(key, value) in queueStats.statusUpdate">
+                      {{key}} - {{value}}
+                    </h4>
+
+                    <div class="alert danger" ng-if="queueErrorMessage">
+                      <strong>Error!</strong> {{queueErrorMessage}}
+                    </div>
+
+                    <div class="alert alert-success" ng-if="requeueSuccessMessage">
+                      <strong>Success!</strong> {{requeueSuccessMessage}}
+                    </div>
+
+                    <div class="alert danger" ng-if="requeueErrorMessage">
+                      <strong>Error!</strong> {{requeueErrorMessage}}
+                    </div>
+
+                    <div class="alert alert-success" ng-if="cleanupSuccessMessage">
+                      <strong>Success!</strong> {{cleanupSuccessMessage}}
+                    </div>
+
+                    <div class="alert danger" ng-if="cleanupErrorMessage">
+                      <strong>Error!</strong> {{cleanupErrorMessage}}
+                    </div>
+
+                  </md-card-content>
+                  <md-card-actions layout="row" layout-align="end center">
+                    <md-button class="md-raised" ng-click="requeueJobs()">
+                      <ng-md-icon icon="{{requeueJobsIcon}}" ng-class="{'fa-spin':requeueJobsIcon == 'refresh'}"></ng-md-icon>
+                      Re-queue Stuck Jobs
+                    </md-button>
+                  </md-card-actions>
+
+
+                  <md-card-actions layout="row" layout-align="end center">
+                    <md-button class="md-raised" ng-click="cleanupQueue()">
+                      <ng-md-icon icon="{{cleanupJobsIcon}}" ng-class="{'fa-spin':cleanupJobsIcon == 'refresh'}"></ng-md-icon>
+                      Cleanup Old Jobs
+                    </md-button>
+                  </md-card-actions>
+
+
+                </md-card>
+              </div>
+
+            </div>
+
+          </div>
+
+        </md-content>
+      </md-tab>
+      <!--<md-tab label="two">
+        <md-content class="md-padding">
+          <h1 class="md-display-2">Tab Two</h1>
+
+        </md-content>
+      </md-tab>
+      <md-tab label="three">
+        <md-content class="md-padding">
+          <h1 class="md-display-2">Tab Three</h1>
+
+        </md-content>
+      </md-tab>-->
+    </md-tabs>
+  </md-content>
+</div>

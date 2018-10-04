@@ -1,0 +1,6 @@
+<div md-theme="{{buttontheme}}">
+  <md-button aria-label="button" ng-disabled="disabled" md-theme-watch id="submitButton" class="{{mdRaised}} md-primary md-hue-2" ng-click="action()" tooltip-placement="auto" uib-tooltip="{{toolTip}}">
+    {{buttonText}}
+    <ng-md-icon icon="{{buttonicon}}" ng-class="{'fa-spin':buttonicon=='refresh'}" ng-if="buttonicon"></ng-md-icon>
+  </md-button>
+</div>

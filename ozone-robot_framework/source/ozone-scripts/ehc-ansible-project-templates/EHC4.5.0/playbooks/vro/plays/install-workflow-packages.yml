@@ -1,0 +1,107 @@
+# ------------------------------------------------------------------------------
+# Copyright (C) 2016-2017 DELL EMC Corporation. All Rights Reserved.
+
+# This software contains the intellectual property of DELL EMC Corporation
+# or is licensed to DELL EMC Corporation from third parties.  Use of this
+# software and the intellectual property contained therein is expressly
+# limited to the terms and conditions of the License Agreement under which
+# it is provided by or on behalf of DELL  EMC.
+
+# ------------------------------------------------------------------------------
+
+-
+    name: '{{ step }} - Install Workflow Packages'
+    hosts: vro_primary
+    gather_facts: no
+    any_errors_fatal: True
+    tasks:
+        -
+            name: '{{ step }} -Poll vRO'
+            tags:
+                - '{{ step }} -Poll vRO'
+            delegate_to: localhost
+            ehc_script_agent:
+                package_name: vro
+                module_name: pollvRO
+                method_name: validatevRO
+                method_params:
+                    vroDict: '{{ vroInfo }}'
+            register: pollPrimaryVroResults
+            changed_when: pollPrimaryVroResults.data is defined and pollPrimaryVroResults.data.err_message is not defined and pollPrimaryVroResults.data.status
+            failed_when: pollPrimaryVroResults.data is not defined or pollPrimaryVroResults.data.err_message is defined or not pollPrimaryVroResults.data.status
+            until: pollPrimaryVroResults.data is defined and pollPrimaryVroResults.data.err_message is not defined and pollPrimaryVroResults.data.status
+            retries: '{{ poll_retries }}'
+            delay: '{{ poll_delay }}'
+
+        -
+            name: '{{ step }} -Pre-Validate vRO workflow packages'
+            tags:
+                - '{{ step }} -Pre-Validate vRO workflow packages'
+                - '{{ step }} -Install vRO workflow packages'
+            delegate_to: localhost
+            ehc_script_agent:
+                package_name: vro
+                module_name: packages
+                method_name: validatePackageImport
+                method_params:
+                    vroServer: '{{ ansible_host_ip }}'
+                    username: '{{ vroWorkflowInfo.username }}'
+                    password: '{{ vroWorkflowInfo.password }}'
+                    packageName: '{{ item.name }}'
+            register: validateWorkflowResults
+            failed_when: not validateWorkflowResults.data is defined or validateWorkflowResults.data.err_message is defined or validateWorkflowResults.data == false
+            changed_when: validateWorkflowResults.data is defined and not validateWorkflowResults.data.err_message is defined and validateWorkflowResults.data == true
+            with_items: '{{ packages }}'
+            ignore_errors: True
+
+        -
+            name: '{{ step }} -Install vRO workflow packages'
+            tags:
+                - '{{ step }} -Install vRO workflow packages'
+            delegate_to: localhost
+            ehc_script_agent:
+                package_name: vro
+                module_name: packages
+                method_name: importPackage
+                method_params:
+                    vroServer: '{{ ansible_host_ip }}'
+                    username: '{{ vroWorkflowInfo.username }}'
+                    password: '{{ vroWorkflowInfo.password }}'
+                    packageFileName: '{{ item.0.path }}'
+                    packageName: '{{ item.0.name }}'
+                    overwrite: True
+                    restart: True
+                    controlCenterUsername: '{{ vroInfo.username }}'
+                    controlCenterPassword: '{{ vroInfo.password }}'
+                    # TODO What is tagImportMode?
+                    tagImportMode: ImportAndOverwriteExistingValue
+            register: installWorkflowResults
+            failed_when: not installWorkflowResults.data is defined or installWorkflowResults.data.err_message is defined
+            changed_when: installWorkflowResults.data is defined and not installWorkflowResults.data.err_message is defined
+            with_together:
+              -   '{{ packages }}'
+              -   '{{ validateWorkflowResults.results }}'
+            when: item.1.failed_when_result
+            ignore_errors: True
+
+        -
+            name: '{{ step }} -Validate vRO workflow packages'
+            tags:
+                - '{{ step }} -Install vRO workflow packages'
+            delegate_to: localhost
+            ehc_script_agent:
+                package_name: vro
+                module_name: packages
+                method_name: validatePackageImport
+                method_params:
+                    vroServer: '{{ ansible_host_ip }}'
+                    username: '{{ vroWorkflowInfo.username }}'
+                    password: '{{ vroWorkflowInfo.password }}'
+                    packageName: '{{ item.0.name }}'
+            register: validateWorkflowResults
+            failed_when: not validateWorkflowResults.data is defined or validateWorkflowResults.data.err_message is defined or validateWorkflowResults.data == false
+            changed_when: validateWorkflowResults.data is defined and not validateWorkflowResults.data.err_message is defined and validateWorkflowResults.data == true
+            with_together:
+              -   '{{ packages }}'
+              -   '{{ installWorkflowResults.results }}'
+            when: not item.1|skipped

@@ -1,0 +1,91 @@
+# ------------------------------------------------------------------------------
+# Copyright (C) 2016-2017 DELL EMC Corporation. All Rights Reserved.
+
+# This software contains the intellectual property of DELL EMC Corporation
+# or is licensed to DELL EMC Corporation from third parties.  Use of this
+# software and the intellectual property contained therein is expressly
+# limited to the terms and conditions of the License Agreement under which
+# it is provided by or on behalf of DELL  EMC.
+
+# ------------------------------------------------------------------------------
+
+ansible_connection: ssh
+ovaType: vrops
+ovaVersion: '6.2'
+
+ova_manifest_lookup: '{{ sw_repository_manifest.content.vrops_ova }}'
+ovaSource: '{{ sw_repository_manifest.base_path }}/{{ ova_manifest_lookup.relative_path }}/{{ ova_manifest_lookup.file_name }}'
+
+ovaConfigDict:
+    size: '{{ vrealize_operations_manager.ova_size }}'
+    network: '{{   vcenter_network   }}'
+    ip: '{{ ansible_host_ip }}'
+    gateway: '{{ common.management_network_gateway }}'
+    netmask: '{{ common.management_network_netmask }}'
+    dns: '{{ common.dns_server_ip }}'
+
+
+vROPsDict:
+    host: '{{host_address.vrops_manager.fqdn}}'
+    username: admin
+    password: '{{ vrealize_operations_manager.vrops_admin_password }}'
+
+initialConfig:
+    # Check this password
+    password: '{{ vrealize_operations_manager.vrops_admin_password }}'
+    ntpServer: '{{ common.ntp_servers_comma_separated }}'
+    pemFilePath: '{{ service_cert_file_path.vrops_svc }}'
+    licenseKey: '{{ license_key.vrealize_operations_manager }}'
+
+
+adDetails:
+    name: "ACTIVE_DIRECTORY"
+    host: '{{ common.domain_controller_ip }}'
+    # TODO: Check this
+    user-name: '{{ ad_user.adbind_vrops.username }}'
+    password: '{{ ad_user.adbind_vrops.password }}'
+    use-ssl: '{{ active_directory.use_ssl | bool }}'
+    display-name:  '{{ ad_domain_name }}'
+    base-domain: '{{ active_directory.user_base_dn }}'
+    common-name: 'userPrincipalName'
+    port: '{{ ad_domain_port }}'
+    group-search-criteria: '(|(objectClass=group)(objectClass=groupOfNames))'
+    member-attribute: "member"
+
+# Local application users to be created
+usersDetails:
+# Removing this as per Sean
+#    -
+#        username: '{{ ad_user.app_vrb_vrops.username }}'
+#        password: '{{ ad_user.app_vrb_vrops.password }}'
+#        enabled: true
+    -
+        username: '{{ ad_user.app_logi_vrops.username }}'
+        password: '{{ ad_user.app_logi_vrops.password }}'
+        enabled: true
+
+packageFile: '{{ sw_repository_manifest.base_path }}/{{ sw_repository_manifest.content.vrops_management_pack.relative_path }}/{{ sw_repository_manifest.content.vrops_management_pack.file_name }}'
+
+vCenterDict:
+    name: "vCenter Adapter"
+    description: "vCenter Adapter"
+    host: '{{ vcenter.fqdn }}'
+    username: '{{ ad_user.app_vrops_vcenter.username }}@{{ ad_domain }}'
+    password: '{{ ad_user.app_vrops_vcenter.password }}'
+
+# TODO Check these credentials
+vRADict:
+  host: "{{ host_address.vra_load_balancer.fqdn }}"
+  sysadminName: 'administrator@vsphere.local'
+  sysadminPassword: '{{ vrealize_automation.default_tenant.password }}'
+  superUsername: '{{ ad_user.app_vrops_vra.username }}@{{ ad_domain }}'
+  superUserPassword: '{{ ad_user.app_vrops_vra.password }}'
+  name: "vRA"
+  description: "vRealize Automation Description"
+
+
+
+
+adUserGroupsToImport:
+    - "{{ ad_user_group.vrops_app_logins_rw.groupname }}"
+    - "{{ ad_user_group.vrops_admins.groupname }}"

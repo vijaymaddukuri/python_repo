@@ -1,0 +1,35 @@
+# ------------------------------------------------------------------------------
+# Copyright (C) 2016-2017 DELL EMC Corporation. All Rights Reserved.
+
+# This software contains the intellectual property of DELL EMC Corporation
+# or is licensed to DELL EMC Corporation from third parties.  Use of this
+# software and the intellectual property contained therein is expressly
+# limited to the terms and conditions of the License Agreement under which
+# it is provided by or on behalf of DELL  EMC.
+
+# ------------------------------------------------------------------------------
+
+-
+    name: '{{ step }} - Shutdown Down VMs with ESXi'
+    hosts: '{{ vms }}'
+    gather_facts: no
+    any_errors_fatal: True
+    serial: '{{ serial|default(20) }}'
+    tasks:
+        -
+            name: '{{ step }} - Shutdown Down Virtual Machines with ESXi'
+            tags:
+                - '{{ step }} - Shutdown Down Virtual Machines with ESXi'
+            delegate_to: localhost
+            ehc_script_agent:
+                package_name: common
+                module_name: vmUtils
+                method_name: powerDownVMByESXi
+                method_params:
+                    esxiDict: '{{ esxi_host }}'
+                    vmDict:
+                        vmName: '{{ vmname }}'
+                        vmIP: '{{ ansible_host_ip }}'
+            register: powerOffVMsEsxi
+            failed_when: not powerOffVMsEsxi.data is defined or powerOffVMsEsxi.data.err_message is defined or powerOffVMsEsxi.data.status == false
+            changed_when: powerOffVMsEsxi.data is defined and not powerOffVMsEsxi.data.err_message is defined and powerOffVMsEsxi.data.status == true

@@ -1,0 +1,46 @@
+# ------------------------------------------------------------------------------
+# Copyright (C) 2016-2017 DELL EMC Corporation. All Rights Reserved.
+
+# This software contains the intellectual property of DELL EMC Corporation
+# or is licensed to DELL EMC Corporation from third parties.  Use of this
+# software and the intellectual property contained therein is expressly
+# limited to the terms and conditions of the License Agreement under which
+# it is provided by or on behalf of DELL  EMC.
+
+# ------------------------------------------------------------------------------
+
+vmname: '{{ inventory_hostname in host_address and host_address[inventory_hostname].vmname or "localhost" }}'
+ansible_host: '{{ inventory_hostname in host_address and host_address[inventory_hostname].fqdn or "localhost" }}'
+ansible_host_ip: '{{ inventory_hostname in host_address and host_address[inventory_hostname].ip or "127.0.0.1" }}'
+
+ansible_connection: ssh
+
+
+ovaType: 'vRealize Log Insight'
+ovaVersion: '3.6'
+
+ova_manifest_lookup: '{{ sw_repository_manifest.content.log_insight_ova }}'
+ovaSource: '{{ sw_repository_manifest.base_path }}/{{ ova_manifest_lookup.relative_path }}/{{ ova_manifest_lookup.file_name }}'
+
+ovaConfigDict:
+    # TODO Check the VM Size
+    size: '{{ vrealize_log_insight.ova_size }}'
+    network: '{{   vcenter_network   }}'
+    hostname: '{{ ansible_host }}'
+    ip: '{{ ansible_host_ip }}'
+    gateway: '{{ common.management_network_gateway }}'
+    netmask: '{{ common.management_network_netmask }}'
+    dns: '{{ common.dns_server_ip }}'
+    root_password: '{{ vrealize_log_insight.root_password }}'
+    # TODO Check this certificate path. Should this be the generated certificate?
+    ssh_pub_key: '{{ service_cert_file_path.vrli_svc }}'
+
+
+vips:
+    -
+        highAvailabilityIP: '{{ vrealize_log_insight.log_insight_load_balancer.ip }}'
+        highAvailabilityFQDN: '{{ vrealize_log_insight.log_insight_load_balancer.fqdn }}'
+        # highAvailabilityIP: '{{ host_address.log_insight.ip }}'
+        # highAvailabilityFQDN: '{{ host_address.log_insight.fqdn }}'
+        # TODO: Should this be user configurable?
+        networkInterface: eth0

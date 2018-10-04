@@ -1,0 +1,12 @@
+.logconsole {
+  font-family: "Consolas", "Ubuntu Mono", "Courier New", "andale mono", "lucida console", monospace;
+  color: lightgrey;
+  background: black;
+  padding: 8px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 10px;
+  font-size: 12px;
+  width: 1600px;
+  word-wrap: break-word;
+}

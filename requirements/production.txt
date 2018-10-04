@@ -1,0 +1,17 @@
+# Core
+Django==2.0.7
+gunicorn==19.8.1
+whitenoise==4.0
+django-configurations==2.0
+pika==0.12.0
+PyYAML==3.13
+
+
+# Rest apis
+djangorestframework==3.8.2
+django-filter==2.0.0
+requests==2.19.1
+
+#Documentation using Swagger
+django-rest-swagger==2.2.0
+

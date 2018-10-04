@@ -1,0 +1,363 @@
+# ------------------------------------------------------------------------------
+# Copyright (C) 2016-2017 DELL EMC Corporation. All Rights Reserved.
+
+# This software contains the intellectual property of DELL EMC Corporation
+# or is licensed to DELL EMC Corporation from third parties.  Use of this
+# software and the intellectual property contained therein is expressly
+# limited to the terms and conditions of the License Agreement under which
+# it is provided by or on behalf of DELL  EMC.
+
+# ------------------------------------------------------------------------------
+
+# https://pubs.vmware.com/vrealize-automation-71/topic/com.vmware.ICbase/PDF/vrealize-automation-71-load-balancing.pdf
+
+MonitorInterval: 3
+MonitorTimeout: 9
+MonitorMaxRetries: 3
+MonitorMethod: GET
+LoadBalancerAlgorithm: round-robin
+VipProtocol: HTTPS
+
+nsx_load_balancer_vra_va_web_app_profile_name: vRA-App-Profile
+nsx_load_balancer_vra_iaas_web_app_profile_name: vRA-Web-App-Profile
+nsx_load_balancer_vra_iaas_manager_app_profile_name: vRA-Manager-App-Profile
+nsx_load_balancer_vro_app_profile_name: vRO-App-Profile
+nsx_load_balancer_vra_va_web_monitor_name: vRA-monitor
+nsx_load_balancer_vra_iaas_web_monitor_name: vRA-Web-monitor
+nsx_load_balancer_vra_iaas_manager_monitor_name: vRA-Manager-monitor
+nsx_load_balancer_vro_monitor_name: vRO-monitor
+nsx_load_balancer_vra_va_web_pool_name: vRA-Pool
+nsx_load_balancer_vra_console_pool_name: vRA-Console-Pool
+nsx_load_balancer_vra_vami_pool_name: vRA-VAMI-Pool
+nsx_load_balancer_vra_iaas_web_pool_name: vRA-Web-Pool
+nsx_load_balancer_vra_iaas_manager_pool_name: vRA-Manager-Pool
+nsx_load_balancer_vro_8281_pool_name: vRO-8281-Pool
+nsx_load_balancer_vra_vip_name: vRA-VIP
+nsx_load_balancer_vra_console_vip_name: vRA-Console-VIP
+nsx_load_balancer_vra_vami_vip_name: vRA-VAMI-VIP
+nsx_load_balancer_vra_iaas_web_vip_name: vRA-Web-VIP
+nsx_load_balancer_vra_iaas_manager_vip_name: vRA-Manager-VIP
+nsx_load_balancer_vro_8281_vip_name: vRO-8281-VIP
+
+
+# TODO: Add application profile timeout and check template, insertXForwardedFor and sslPassthrough values
+applicationProfiles:
+    -
+        name: '{{ nsx_load_balancer_vra_va_web_app_profile_name }}'
+        template: HTTPS
+        insertXForwardedFor: true
+        sslPassthrough: true
+        persistence:
+            expire: '1800'
+            method: sourceip
+
+    -
+        name: '{{ nsx_load_balancer_vra_iaas_web_app_profile_name }}'
+        template: HTTPS
+        insertXForwardedFor: true
+        sslPassthrough: true
+        persistence:
+            expire: '1800'
+            method: sourceip
+
+    -
+        name: '{{ nsx_load_balancer_vra_iaas_manager_app_profile_name }}'
+        template: HTTPS
+        insertXForwardedFor: true
+        sslPassthrough: true
+
+    -
+        name: '{{ nsx_load_balancer_vro_app_profile_name }}'
+        template: HTTPS
+        insertXForwardedFor: true
+        sslPassthrough: true
+
+monitors:
+    -
+        name: '{{ nsx_load_balancer_vra_va_web_monitor_name }}'
+        type: HTTPS
+        interval: '{{ MonitorInterval }}'
+        timeout: '{{ MonitorTimeout }}'
+        maxRetries: '{{ MonitorMaxRetries }}'
+        method: '{{ MonitorMethod }}'
+        url: /vcac/services/api/health
+        expected: 204
+        # receive:
+
+    -
+        name: '{{ nsx_load_balancer_vra_iaas_web_monitor_name }}'
+        type: HTTPS
+        interval: '{{ MonitorInterval }}'
+        timeout: '{{ MonitorTimeout }}'
+        maxRetries: '{{ MonitorMaxRetries }}'
+        method: '{{ MonitorMethod }}'
+        url: /wapi/api/status/web
+        # expected:
+        receive: REGISTERED
+
+    -
+        name: '{{ nsx_load_balancer_vra_iaas_manager_monitor_name }}'
+        type: HTTPS
+        interval: '{{ MonitorInterval }}'
+        timeout: '{{ MonitorTimeout }}'
+        maxRetries: '{{ MonitorMaxRetries }}'
+        method: '{{ MonitorMethod }}'
+        url: /VMPSProvision
+        # expected:
+        receive: ProvisionService
+
+    -
+        name: '{{ nsx_load_balancer_vro_monitor_name }}'
+        type: HTTPS
+        interval: '{{ MonitorInterval }}'
+        timeout: '{{ MonitorTimeout }}'
+        maxRetries: '{{ MonitorMaxRetries }}'
+        method: '{{ MonitorMethod }}'
+        url: /vco/api/healthstatus
+        # expected:
+        receive: RUNNING
+
+pools:
+    -
+        name: '{{ nsx_load_balancer_vra_va_web_pool_name }}'
+        description: vRA-Pool
+        transparent: False
+        algorithm: '{{ LoadBalancerAlgorithm }}'
+        member:
+            -
+                name: vRA01
+                condition: enabled
+                ipAddress: '{{ host_address.vra_primary.ip }}'
+                port: 443
+                monitorPort: 443
+
+            -
+                name: vRA02
+                condition: '{{ secondary_state | default("disabled") }}'
+                ipAddress: '{{ host_address.vra_secondary.ip }}'
+                port: 443
+                monitorPort: 443
+
+    -
+        name: '{{ nsx_load_balancer_vra_console_pool_name }}'
+        description: vRA-Console-Pool
+        transparent: False
+        algorithm: '{{ LoadBalancerAlgorithm }}'
+        member:
+            -
+                name: vRA01
+                condition: enabled
+                ipAddress: '{{ host_address.vra_primary.ip }}'
+                port: 8444
+                monitorPort: 443
+
+            -
+                name: vRA02
+                condition: '{{ secondary_state | default("disabled") }}'
+                ipAddress: '{{ host_address.vra_secondary.ip }}'
+                port: 8444
+                monitorPort: 443
+
+    -
+        name: '{{ nsx_load_balancer_vra_vami_pool_name }}'
+        description: vRA-VAMI-Pool
+        transparent: False
+        algorithm: '{{ LoadBalancerAlgorithm }}'
+        member:
+            -
+                name: vRA01
+                condition: enabled
+                ipAddress: '{{ host_address.vra_primary.ip }}'
+                port: 5480
+                monitorPort: 5480
+
+            -
+                name: vRA02
+                condition: '{{ secondary_state | default("disabled") }}'
+                ipAddress: '{{ host_address.vra_secondary.ip }}'
+                port: 5480
+                monitorPort: 5480
+
+    -
+        name: '{{ nsx_load_balancer_vra_iaas_web_pool_name }}'
+        description: vRA-Web-Pool
+        transparent: False
+        algorithm: '{{ LoadBalancerAlgorithm }}'
+        member:
+            -
+                name: Web01
+                condition: enabled
+                ipAddress: '{{ host_address.vra_web_primary.ip }}'
+                port: 443
+                monitorPort: 443
+
+            -
+                name: Web02
+                condition: '{{ secondary_state | default("disabled") }}'
+                ipAddress: '{{ host_address.vra_web_secondary.ip }}'
+                port: 443
+                monitorPort: 443
+
+    -
+        name: '{{ nsx_load_balancer_vra_iaas_manager_pool_name }}'
+        description: vRA-Manager-Pool
+        transparent: False
+        algorithm: '{{ LoadBalancerAlgorithm }}'
+        member:
+            -
+                name: Manager01
+                condition: enabled
+                ipAddress: '{{ host_address.vra_manager_primary.ip }}'
+                port: 443
+                monitorPort: 443
+
+            -
+                name: Manager02
+                condition: '{{ secondary_state | default("disabled") }}'
+                ipAddress: '{{ host_address.vra_manager_secondary.ip }}'
+                port: 443
+                monitorPort: 443
+
+    -
+        name: '{{ nsx_load_balancer_vro_8281_pool_name }}'
+        description: vRO-8281-Pool
+        transparent: False
+        algorithm: '{{ LoadBalancerAlgorithm }}'
+        member:
+            -
+                name: vRO01
+                condition: enabled
+                ipAddress: '{{ host_address.vro_primary.ip }}'
+                port: 8281
+                monitorPort: 8281
+
+            -
+                name: vRO02
+                # TODO: Check if secondary vRO need to be disabled at the beginning?
+                condition: '{{ secondary_state | default("disabled") }}'
+                ipAddress: '{{ host_address.vro_secondary.ip }}'
+                port: 8281
+                monitorPort: 8281
+
+# Pool Mappings with Initial monitor name and second monitor name used later during reconfiguration
+poolMappings:
+    -
+      pool_name: '{{ nsx_load_balancer_vra_va_web_pool_name }}'
+      # This is the initial monitor assigned before vRA installation
+      initial_monitor_name:  default_tcp_monitor
+      # This is the monitor assigned after vRA installation when LB is re-configured
+      reconfigure_monitor_name: '{{ nsx_load_balancer_vra_va_web_monitor_name }}'
+    -
+      pool_name: '{{ nsx_load_balancer_vra_console_pool_name }}'
+      initial_monitor_name:  default_tcp_monitor
+      reconfigure_monitor_name: '{{ nsx_load_balancer_vra_va_web_monitor_name }}'
+    -
+      pool_name: '{{ nsx_load_balancer_vra_iaas_web_pool_name }}'
+      initial_monitor_name:  default_tcp_monitor
+      reconfigure_monitor_name: '{{ nsx_load_balancer_vra_iaas_web_monitor_name }}'
+    -
+      pool_name: '{{ nsx_load_balancer_vra_iaas_manager_pool_name }}'
+      initial_monitor_name:  default_tcp_monitor
+      reconfigure_monitor_name: '{{ nsx_load_balancer_vra_iaas_manager_monitor_name }}'
+    -
+      pool_name:  '{{ nsx_load_balancer_vra_vami_pool_name }}'
+      initial_monitor_name:  default_tcp_monitor
+      # Default tcp is ok here as we don’t need to monitor any services, just tcp availability.
+      reconfigure_monitor_name: default_tcp_monitor
+    -
+      pool_name: vRO-8281-Pool
+      initial_monitor_name:  '{{ nsx_load_balancer_vro_monitor_name }}'
+      reconfigure_monitor_name: '{{ nsx_load_balancer_vro_monitor_name }}'
+
+
+# -----------------------------------------
+#  Virtual Servers Configurations
+# -----------------------------------------
+virtualServers:
+    -
+        name: '{{ nsx_load_balancer_vra_vip_name }}'
+        description: vRA-VIP
+        enabled: true
+        ipAddress: '{{ host_address.vra_load_balancer.ip }}'
+        protocol: '{{ VipProtocol }}'
+        port: 443
+
+    -
+        name: '{{ nsx_load_balancer_vra_console_vip_name }}'
+        description: vRA-Console-VIP
+        enabled: true
+        ipAddress: '{{ host_address.vra_load_balancer.ip }}'
+        protocol: '{{ VipProtocol }}'
+        port: 8444
+
+    -
+        name: '{{ nsx_load_balancer_vra_vami_vip_name }}'
+        description: vRA-VAMI-VIP
+        enabled: true
+        ipAddress: '{{ host_address.vra_load_balancer.ip }}'
+        protocol: '{{ VipProtocol }}'
+        port: 5480
+
+    -
+        name: '{{ nsx_load_balancer_vra_iaas_web_vip_name }}'
+        description: vRA-Web-VIP
+        enabled: true
+        ipAddress: '{{ host_address.vra_web_load_balancer.ip }}'
+        protocol: '{{ VipProtocol }}'
+        port: 443
+
+    -
+        name: '{{ nsx_load_balancer_vra_iaas_manager_vip_name }}'
+        description: vRA-Manager-VIP
+        enabled: true
+        ipAddress: '{{ host_address.vra_manager_load_balancer.ip }}'
+        protocol: '{{ VipProtocol }}'
+        port: 443
+
+    -
+        name: '{{ nsx_load_balancer_vro_8281_vip_name }}'
+        description: vRO-8281-VIP
+        enabled: true
+        ipAddress: '{{ host_address.vro_load_balancer.ip }}'
+        protocol: '{{ VipProtocol }}'
+        port: 8281
+
+
+virtualServersMapping:
+    -
+        name: '{{ nsx_load_balancer_vra_vip_name }}'
+        # The vitual server to profile and pool mapping will be generated based on the below
+        profile_mapping:
+          applicationProfile: '{{ nsx_load_balancer_vra_va_web_app_profile_name }}'
+          pool: '{{ nsx_load_balancer_vra_va_web_pool_name }}'
+
+    -
+        name: '{{ nsx_load_balancer_vra_console_vip_name }}'
+        profile_mapping:
+          applicationProfile: '{{ nsx_load_balancer_vra_va_web_app_profile_name }}'
+          pool: '{{ nsx_load_balancer_vra_console_pool_name }}'
+
+    -
+        name: '{{ nsx_load_balancer_vra_vami_vip_name }}'
+        profile_mapping:
+          applicationProfile: '{{ nsx_load_balancer_vra_va_web_app_profile_name }}'
+          pool: '{{ nsx_load_balancer_vra_vami_pool_name }}'
+
+    -
+        name: '{{ nsx_load_balancer_vra_iaas_web_vip_name }}'
+        profile_mapping:
+          applicationProfile: '{{ nsx_load_balancer_vra_iaas_web_app_profile_name }}'
+          pool: '{{ nsx_load_balancer_vra_iaas_web_pool_name }}'
+
+    -
+        name: '{{ nsx_load_balancer_vra_iaas_manager_vip_name }}'
+        profile_mapping:
+          applicationProfile: '{{ nsx_load_balancer_vra_iaas_manager_app_profile_name }}'
+          pool: '{{ nsx_load_balancer_vra_iaas_manager_pool_name }}'
+
+    -
+        name: '{{ nsx_load_balancer_vro_8281_vip_name }}'
+        profile_mapping:
+          applicationProfile: '{{ nsx_load_balancer_vro_app_profile_name }}'
+          pool: '{{ nsx_load_balancer_vro_8281_pool_name }}'
+

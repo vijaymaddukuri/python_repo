@@ -1,0 +1,38 @@
+# ------------------------------------------------------------------------------
+# Copyright (C) 2016-2017 DELL EMC Corporation. All Rights Reserved.
+
+# This software contains the intellectual property of DELL EMC Corporation
+# or is licensed to DELL EMC Corporation from third parties.  Use of this
+# software and the intellectual property contained therein is expressly
+# limited to the terms and conditions of the License Agreement under which
+# it is provided by or on behalf of DELL  EMC.
+
+# ------------------------------------------------------------------------------
+
+-
+    name: '{{ step }} - Pre Validation - Active Directory NTP'
+    hosts: localhost
+    gather_facts: no
+    any_errors_fatal: True
+    tasks:
+        -
+            name: '{{ step }} - Validate Active Directory NTP'
+            tags:
+                - '{{ step }} - Validate Active Directory NTP'
+            ehc_script_agent:
+                package_name: preDeploymentValidation
+                module_name: validateAD
+                method_name: validateADTime
+                method_params:
+                    adDict:
+                      host: '{{ active_directory.host }}'
+                      username: '{{ad_domain_name}}\{{ ad_user.adbind_sso.username }}'
+                      password: '{{ ad_user.adbind_sso.password }}'
+                    ntpServer: '{{ common.ntp_servers_comma_separated.split(",") | first }}'
+            register: validateADTimeResults
+            failed_when: not validateADTimeResults.data is defined or validateADTimeResults.data.err_message is defined or not validateADTimeResults.data.status == true
+            changed_when: validateADTimeResults.data is defined and validateADTimeResults.data.err_message is not defined or validateADTimeResults.data.status == true
+            ignore_errors: '{{ ignore_errors|default(False) }}'
+            retries: 2
+            delay: 10
+            until: validateADTimeResults.data is defined and validateADTimeResults.data.err_message is not defined or validateADTimeResults.data.status == true

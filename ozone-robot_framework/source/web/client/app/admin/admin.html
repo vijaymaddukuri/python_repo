@@ -1,0 +1,27 @@
+<!--<div layout="column" layout-align="center end">
+  <md-button class="md-raised" href="/upgrade"><ng-md-icon icon="file_upload" style="fill:grey;"></ng-md-icon>Upgrade</md-button>
+</div>-->
+<div class="container">
+  <!--<p>The delete user and user index api routes are restricted to users with the 'admin' role.</p>-->
+  <h2>Users - {{admin.users.length}}</h2>
+
+  <ul class="list-group user-list">
+    <li class="list-group-item" ng-repeat="user in admin.users">
+	    <div class="user-info">
+	        <strong>{{user.name}}</strong><br>
+	        <span class="text-muted">{{user.email}}</span>
+
+	    </div>
+      <div>
+
+        <md-select aria-label="Update user role" ng-change='admin.updateRole(user)' ng-model="user.role" style="width:300px;">
+          <md-option ng-repeat="role in admin.roles" ng-value="role">
+            {{role}}
+          </md-option>
+        </md-select>
+      </div>
+
+        <a ng-click="admin.delete(user)" class="trash"><span class="fa fa-trash fa-2x"></span></a>
+    </li>
+  </ul>
+</div>

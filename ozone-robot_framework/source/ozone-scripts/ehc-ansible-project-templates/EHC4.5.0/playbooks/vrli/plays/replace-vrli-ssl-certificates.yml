@@ -1,0 +1,66 @@
+# ------------------------------------------------------------------------------
+# Copyright (C) 2016-2017 DELL EMC Corporation. All Rights Reserved.
+
+# This software contains the intellectual property of DELL EMC Corporation
+# or is licensed to DELL EMC Corporation from third parties.  Use of this
+# software and the intellectual property contained therein is expressly
+# limited to the terms and conditions of the License Agreement under which
+# it is provided by or on behalf of DELL  EMC.
+
+# ------------------------------------------------------------------------------
+
+-
+    name: '{{ step }} - Replace vRealize Log Insight SSL Certificate'
+    hosts: log_insight
+    gather_facts: no
+    any_errors_fatal: True
+    tags:
+        - '{{ step }} - Replace Certificate'
+    tasks:
+        -
+            name: '{{ step }} - Validate Certificate'
+            delegate_to: localhost
+            ehc_script_agent:
+                package_name: vrli
+                module_name: logInsightReplaceCert
+                method_name: validateCertificate
+                method_params:
+                    vcenterConfiguration: '{{ vcenter }}'
+                    vmConfiguration: '{{ vmDict }}'
+                    sslCertificate: '{{ service_cert_file_path.vrli_svc }}'
+            register: certValidationResults
+            failed_when: not certValidationResults.data is defined or certValidationResults.data.err_message is defined or not certValidationResults.data.status == true
+            changed_when: certValidationResults.data is defined and certValidationResults.data.err_message is not defined and certValidationResults.data.status == true
+            ignore_errors: certValidationResults.failed_when_result
+
+        -
+            name: '{{ step }} - Replace Certificate'
+            delegate_to: localhost
+            ehc_script_agent:
+                package_name: vrli
+                module_name: logInsightReplaceCert
+                method_name: importCertificate
+                method_params:
+                    vcenterConfiguration: '{{ vcenter }}'
+                    vmConfiguration: '{{ vmDict }}'
+                    sslCertificate: '{{ service_cert_file_path.vrli_svc }}'
+            register: replaceCertResults
+            failed_when: not replaceCertResults.data is defined or replaceCertResults.data.err_message is defined or not replaceCertResults.data.status == 0
+            changed_when: replaceCertResults.data is defined and replaceCertResults.data.err_message is not defined and replaceCertResults.data.status == 0
+            when: certValidationResults.failed_when_result
+
+        -
+            name: '{{ step }} - Post Validate Certificate'
+            delegate_to: localhost
+            ehc_script_agent:
+                package_name: vrli
+                module_name: logInsightReplaceCert
+                method_name: validateCertificate
+                method_params:
+                    vcenterConfiguration: '{{ vcenter }}'
+                    vmConfiguration: '{{ vmDict }}'
+                    sslCertificate: '{{ service_cert_file_path.vrli_svc }}'
+            register: postCertValidationResults
+            failed_when: not postCertValidationResults.data is defined or postCertValidationResults.data.err_message is defined or not postCertValidationResults.data.status == true
+            changed_when: postCertValidationResults.data is defined and postCertValidationResults.data.err_message is not defined and postCertValidationResults.data.status == true
+            when: not replaceCertResults|skipped

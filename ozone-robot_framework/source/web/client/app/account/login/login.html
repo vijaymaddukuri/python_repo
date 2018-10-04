@@ -1,0 +1,61 @@
+<style>
+  .md-sidenav-left{
+    display:none;
+  }
+
+  md-sidenav.md-locked-open, md-sidenav.md-locked-open.md-closed, md-sidenav.md-locked-open.md-closed.md-sidenav-left, md-sidenav.md-locked-open.md-closed, md-sidenav.md-locked-open.md-closed.md-sidenav-right, md-sidenav.md-locked-open-remove.md-closed{
+    display:none;
+  }
+
+  ui-view{
+    padding:0px;
+  }
+
+  .layout-padding{
+    padding:0px;
+  }
+
+  .layout-padding, .layout-padding-gt-sm, .layout-padding-md, .layout-padding > *, .layout-padding-gt-sm > *, .layout-padding-md > *, .layout-padding > .flex, .layout-padding > .flex-gt-sm, .layout-padding > .flex-md {
+    padding: 0px;
+  }
+
+  md-toolbar.md-default-theme:not(.md-menu-toolbar), md-toolbar:not(.md-menu-toolbar){
+    background:#2c95dd;
+  }
+</style>
+
+<title>Login</title>
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12">
+      <img src="/assets/icons/DellEMC_Logo_Hz_Gry_rgb.png" style="padding-bottom: 7px;height: 28px;">
+      <h1 style="color: grey;">Login</h1>
+    </div>
+    <div class="col-sm-12">
+
+      <form name="loginForm" ng-submit="vm.login(loginForm)" style=" text-align: center;">
+        <md-input-container>
+          <label>Username</label>
+          <input ng-model="vm.user.email">
+          <!--<div class="hint">without domain name <br> eg: mannam4</div>-->
+        </md-input-container>
+        <br>
+        <md-input-container>
+          <input ng-model="vm.user.password" type="password">
+          <label>Password</label>
+        </md-input-container>
+        <md-input-container layout="row" layout-align="center center">
+          <div layout="row" layout-sm="column" layout-margin>
+            <div md-theme="{{buttontheme}}" tooltip-placement="left" tooltip-is-open="errmsg && true || false" uib-tooltip="{{ errmsg }}">
+              <md-button md-theme-watch type="submit" class="md-raised md-primary" flex="50" flex-sm="100">Login
+                <md-icon ng-md-icon ng-if="buttonIcon" icon="{{buttonIcon}}" ng-class="{'fa-spin' : buttonIcon == 'refresh'}" style="color:white;"></md-icon>
+              </md-button>
+            </div>
+            <!--<md-button class="md-raised md-primary" flex="50" flex-sm="100">Register</md-button>-->
+          </div>
+        </md-input-container>
+      </form>
+    </div>
+  </div>
+  <hr>
+</div>

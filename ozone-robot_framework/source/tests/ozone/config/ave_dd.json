@@ -1,0 +1,1204 @@
+{
+  "ad_user_group": {
+    "ehc_xaas_architects": {
+      "groupname": "EHC_XaaS_Architects"
+    },
+    "ehc_fabric_admins": {
+      "groupname": "EHC_Fabric_Admins"
+    },
+    "sso_admins": {
+      "groupname": "SSO_Admins"
+    },
+    "avamar_admins": {
+      "groupname": "Avamar_Admins"
+    },
+    "log_insight_admins": {
+      "groupname": "Log_Insight_Admins"
+    },
+    "vrops_app_logins_rw": {
+      "groupname": "VROPS_App_Logins_RW"
+    },
+    "sql_admins": {
+      "groupname": "SQL_Admins"
+    },
+    "vc_app_logins_rw": {
+      "groupname": "VC_App_Logins_RW"
+    },
+    "sql_app_logins_ro": {
+      "groupname": "SQL_App_Logins_RO"
+    },
+    "tenant_bg_managers": {
+      "groupname": "Tenant_BG_Managers"
+    },
+    "ehc_tenant_admins": {
+      "groupname": "EHC_Tenant_Admins"
+    },
+    "vc_app_logins_ro": {
+      "groupname": "VC_App_Logins_RO"
+    },
+    "vc_admins": {
+      "groupname": "VC_Admins"
+    },
+    "vrops_admins": {
+      "groupname": "VROPS_Admins"
+    },
+    "vc_readonly": {
+      "groupname": "VC_ReadOnly"
+    },
+    "ehc_system_admins": {
+      "groupname": "EHC_System_Admins"
+    },
+    "nsx_ent_admins": {
+      "groupname": "NSX_Ent_Admins"
+    },
+    "ehc_app_admins": {
+      "groupname": "ehc_app_admins"
+    },
+    "vro_admins": {
+      "groupname": "VRO_Admins"
+    },
+    "ehc_iaas_admins": {
+      "groupname": "EHC_IaaS_Admins"
+    }
+  },
+  "vrealize_business_standard": {
+    "vra_business_administrator_password": "",
+    "vra_business_currency": "USD - US Dollar"
+  },
+  "smtp": {
+    "username": "None",
+    "sender_address": "",
+    "auth_required": false,
+    "sender_name": "",
+    "server": "",
+    "enable_starttls": false,
+    "ssl": false,
+    "receiver_address": "",
+    "password": "None",
+    "port": 25,
+    "self_signed_certificate_accepted": true
+  },
+  "vrealize_orchestrator": {
+    "vro_root_password": ""
+  },
+  "sql_server_details": {
+    "log_disk": "F",
+    "sa_password": "",
+    "data_disk": "E",
+    "data_directory": "\\Program Files\\Microsoft SQL Server\\MSSQL11.MSSQLSERVER\\MSSQL\\Data"
+  },
+  "vcenter_details": {
+    "datacenter": "Datacenter",
+    "ovadeployhost": "192.168.133.110",
+    "disk_mode": "thin",
+    "autopsc01": {
+      "root_password": "",
+      "site": ""
+    },
+    "esxi_host": {
+      "esxiVersion": "6.0.0",
+      "ntp_servers": "",
+      "password": "",
+      "esxiBuild": 3568940
+    },
+    "site": "Default-First-Site",
+    "psc02": {
+      "root_password": ""
+    },
+    "cluster": "Clean_Compute",
+    "esxi_hosts": [
+      {
+        "hostName": "",
+        "esxiName": ""
+      },
+      {
+        "hostName": "",
+        "esxiName": ""
+      },
+      {
+        "hostName": "",
+        "esxiName": ""
+      },
+      {
+        "hostName": "",
+        "esxiName": ""
+      },
+      {
+        "hostName": "",
+        "esxiName": ""
+      },
+      {
+        "hostName": "",
+        "esxiName": ""
+      },
+      {
+        "hostName": "",
+        "esxiName": ""
+      },
+      {
+        "hostName": "",
+        "esxiName": ""
+      },
+      {
+        "hostName": "",
+        "esxiName": ""
+      },
+      {
+        "hostName": "",
+        "esxiName": ""
+      },
+      {
+        "hostName": "",
+        "esxiName": ""
+      },
+      {
+        "hostName": "",
+        "esxiName": ""
+      },
+      {
+        "hostName": "",
+        "esxiName": ""
+      },
+      {
+        "hostName": "",
+        "esxiName": ""
+      },
+      {
+        "hostName": "",
+        "esxiName": ""
+      },
+      {
+        "hostName": "",
+        "esxiName": ""
+      },
+      {
+        "hostName": "",
+        "esxiName": ""
+      },
+      {
+        "hostName": "",
+        "esxiName": ""
+      },
+      {
+        "hostName": "",
+        "esxiName": ""
+      },
+      {
+        "hostName": "",
+        "esxiName": ""
+      },
+      {
+        "hostName": "",
+        "esxiName": ""
+      },
+      {
+        "hostName": "",
+        "esxiName": ""
+      },
+      {
+        "hostName": "",
+        "esxiName": ""
+      },
+      {
+        "hostName": "",
+        "esxiName": ""
+      },
+      {
+        "hostName": "",
+        "esxiName": ""
+      },
+      {
+        "hostName": "",
+        "esxiName": ""
+      },
+      {
+        "hostName": "",
+        "esxiName": ""
+      },
+      {
+        "hostName": "",
+        "esxiName": ""
+      },
+      {
+        "hostName": "",
+        "esxiName": ""
+      },
+      {
+        "hostName": "",
+        "esxiName": ""
+      },
+      {
+        "hostName": "",
+        "esxiName": ""
+      },
+      {
+        "hostName": "",
+        "esxiName": ""
+      },
+      {
+        "hostName": "",
+        "esxiName": ""
+      },
+      {
+        "hostName": "",
+        "esxiName": ""
+      },
+      {
+        "hostName": "",
+        "esxiName": ""
+      },
+      {
+        "hostName": "",
+        "esxiName": ""
+      },
+      {
+        "hostName": "",
+        "esxiName": ""
+      },
+      {
+        "hostName": "",
+        "esxiName": ""
+      },
+      {
+        "hostName": "",
+        "esxiName": ""
+      },
+      {
+        "hostName": "",
+        "esxiName": ""
+      },
+      {
+        "hostName": "",
+        "esxiName": ""
+      },
+      {
+        "hostName": "",
+        "esxiName": ""
+      },
+      {
+        "hostName": "",
+        "esxiName": ""
+      },
+      {
+        "hostName": "",
+        "esxiName": ""
+      },
+      {
+        "hostName": "",
+        "esxiName": ""
+      },
+      {
+        "hostName": "",
+        "esxiName": ""
+      },
+      {
+        "hostName": "",
+        "esxiName": ""
+      },
+      {
+        "hostName": "",
+        "esxiName": ""
+      },
+      {
+        "hostName": "",
+        "esxiName": ""
+      },
+      {
+        "hostName": "",
+        "esxiName": ""
+      },
+      {
+        "hostName": "",
+        "esxiName": ""
+      },
+      {
+        "hostName": "",
+        "esxiName": ""
+      },
+      {
+        "hostName": "",
+        "esxiName": ""
+      },
+      {
+        "hostName": "",
+        "esxiName": ""
+      },
+      {
+        "hostName": "",
+        "esxiName": ""
+      },
+      {
+        "hostName": "",
+        "esxiName": ""
+      },
+      {
+        "hostName": "",
+        "esxiName": ""
+      },
+      {
+        "hostName": "",
+        "esxiName": ""
+      },
+      {
+        "hostName": "",
+        "esxiName": ""
+      },
+      {
+        "hostName": "",
+        "esxiName": ""
+      },
+      {
+        "hostName": "",
+        "esxiName": ""
+      },
+      {
+        "hostName": "",
+        "esxiName": ""
+      },
+      {
+        "hostName": "",
+        "esxiName": ""
+      },
+      {
+        "hostName": "",
+        "esxiName": ""
+      }
+    ],
+    "datastore": "pod1",
+    "folderpath": "/Discovered virtual machine",
+    "sso_domain": {
+      "username": "administrator",
+      "password": "Password1!",
+      "name": "vsphere.local"
+    },
+    "psc01": {
+      "root_password": ""
+    },
+    "vcenter_server": {
+      "root_password": "Password1!"
+    }
+  },
+  "vrealize_automation": {
+    "max_request_bytes": 1677716,
+    "system_business_group_notifications_email_address": "",
+    "vcenter_endpoint_name": "vCenter",
+    "local_admin_username": "local_admin",
+    "security_global_groups": 90,
+    "max_token_size": 65535,
+    "initial_machine_prefix_next_number": 2,
+    "ehcoperations_user_groups": "",
+    "domain_local_groups": 600,
+    "initial_fabric_group_name": "EHC_Initial_Fabric_Group",
+    "system_business_group_admin_email_address": "",
+    "default_tenant": {
+      "username": "administrator",
+      "password": "",
+      "id": "vsphere.local"
+    },
+    "ehcoperations_support_groups": "",
+    "vra_root_password": "",
+    "initial_machine_prefix_number_of_digits": 2,
+    "merger_restriction": false,
+    "operation_business_group_admin_email_address": "",
+    "ehcsystem_user_groups": "",
+    "operation_business_group_notifications_email_address": "",
+    "ehcsystem_support_groups": "",
+    "initial_machine_prefix_name": "mp1",
+    "local_admin_password": "",
+    "max_field_length": 65534,
+    "iaas_sql_db_passphrase": "",
+    "tenants": [{
+      "id": "tenant_1",
+      "url": "tenant_1",
+      "name": "tenant_1",
+      "description": "First Tenant"
+    }]
+  },
+  "ad_user": {
+    "app_vro_vcenter": {
+      "username": "app_vro_vcenter",
+      "password": ""
+    },
+    "svc_sqlsvr": {
+      "username": "svc_sqlsvr",
+      "password": ""
+    },
+    "ehc_iaas_admin": {
+      "username": "ehc_iaas_admin",
+      "password": ""
+    },
+    "ehc_sql_admin": {
+      "username": "ehc_sql_admin",
+      "password": ""
+    },
+    "ehc_app_admin": {
+      "username": "ehc_app_admin",
+      "password": ""
+    },
+    "adbind_logi": {
+      "username": "adbind_logi",
+      "password": ""
+    },
+    "adp_vrops_vcenter": {
+      "username": "adp_vrops_vcenter",
+      "password": ""
+    },
+    "app_vra_nsx": {
+      "username": "app_vra_nsx",
+      "password": ""
+    },
+    "ehc_vrops_admin": {
+      "username": "ehc_vrops_admin",
+      "password": ""
+    },
+    "ehc_sysadmin": {
+      "username": "ehc_sysadmin",
+      "password": ""
+    },
+    "svc_iaas": {
+      "username": "svc_iaas",
+      "password": ""
+    },
+    "app_logi_vrops": {
+      "username": "app_logi_vrops",
+      "password": ""
+    },
+    "app_vro_nsx": {
+      "username": "app_vro_nsx",
+      "password": ""
+    },
+    "app_vra_vcenter": {
+      "username": "app_vra_vcenter",
+      "password": ""
+    },
+    "adbind_vrops": {
+      "username": "adbind_vrops",
+      "password": ""
+    },
+    "ehc_vc_admin": {
+      "username": "ehc_vc_admin",
+      "password": ""
+    },
+    "svc_vcenter": {
+      "username": "svc_vcenter",
+      "password": ""
+    },
+    "app_vro_rest": {
+      "username": "app_vro_rest",
+      "password": ""
+    },
+    "app_vrops_vra": {
+      "username": "app_vrops_vra",
+      "password": ""
+    },
+    "ehc_avamar_admin": {
+      "username": "ehc_avamar_admin",
+      "password": "Password1"
+    },
+    "svc_vro": {
+      "username": "svc_vro",
+      "password": ""
+    },
+    "app_vro_iaas": {
+      "username": "app_vro_iaas",
+      "password": ""
+    },
+    "ehc_logi_admin": {
+      "username": "ehc_logi_admin",
+      "password": ""
+    },
+    "app_vra_sso": {
+      "username": "app_vra_sso",
+      "password": ""
+    },
+    "adbind_sso": {
+      "username": "adbind_sso",
+      "password": ""
+    },
+    "app_vrb_vcenter": {
+      "username": "app_vrb_vcenter",
+      "password": ""
+    },
+    "app_vrops_vcenter": {
+      "username": "app_vrops_vcenter",
+      "password": ""
+    },
+    "ehc_nsx_ent_admin": {
+      "username": "ehc_nsx_ent_admin",
+      "password": ""
+    },
+    "ehc_fabric_admin": {
+      "username": "ehc_fabric_admin",
+      "password": ""
+    },
+    "app_vro_sql": {
+      "username": "app_vro_sql",
+      "password": ""
+    },
+    "app_vro_sso": {
+      "username": "app_vro_sso",
+      "password": ""
+    },
+    "adbind_vro": {
+      "username": "adbind_vro",
+      "password": ""
+    },
+    "app_nsx_vcenter": {
+      "username": "app_nsx_vcenter",
+      "password": ""
+    },
+    "svc_sqlsvragent": {
+      "username": "svc_sqlsvragent",
+      "password": ""
+    },
+    "app_nsx_sso": {
+      "username": "app_nsx_sso",
+      "password": ""
+    },
+    "app_vra_vro": {
+      "username": "app_vra_vro",
+      "password": ""
+    },
+    "app_logi_vcenter": {
+      "username": "app_logi_vcenter",
+      "password": ""
+    },
+    "adbind_vra": {
+      "username": "adbind_vra",
+      "password": ""
+    },
+    "ehc_vro_admin": {
+      "username": "ehc_vro_admin",
+      "password": ""
+    },
+    "ehc_tenant_admin": {
+      "username": "ehc_tenant_admin",
+      "password": ""
+    }
+  },
+  "nsx_load_balancer": {
+    "cli_user_password": "",
+    "primary_ip_address": ""
+  },
+  "repository": {
+    "certs": {
+      "vcenter_machinessl_svc_key_path": "",
+      "autopsc01_vsphere_web_client_svc_cert_path": "",
+      "vro_svc_key_path": "",
+      "autopsc01_vsphere_web_client_svc_key_path": "",
+      "vra_iaas_web_cert_path": "",
+      "ca_chain_p7b_path": "",
+      "root_cert_path": "",
+      "autopsc01_machinessl_svc_cert_path": "",
+      "vrops_svc_cert_path": "",
+      "vcenter_vshpere_webclient_svc_key_path": "",
+      "psc01_machinessl_svc_key_path": "",
+      "vrli_svc_cert_path": "",
+      "avamar_svc_key_path": "Z:/certs/license.lic",
+      "psc01_machine_svc_cert_path": "",
+      "vra_iaas_manager_cert_path": "",
+      "psc01_machinessl_svc_cert_path": "",
+      "nsx_key_path": "",
+      "psc02_machine_svc_cert_path": "",
+      "vro_svc_cert_path": "",
+      "autopsc01_machinessl_svc_key_path": "",
+      "vcenter_machinessl_svc_cert_path": "",
+      "vrli_svc_key_path": "",
+      "psc02_vsphere_web_client_svc_key_path": "",
+      "psc02_machinessl_svc_cert_path": "",
+      "autopsc01_machine_svc_key_path": "",
+      "vcenter_vpxd_ext_svc_key_path": "",
+      "vcenter_vshpere_webclient_svc_cert_path": "",
+      "nsx_cert_path": "",
+      "vcenter_vpxd_ext_svc_cert_path": "",
+      "vra_svc_key_path": "",
+      "psc01_vsphere_web_client_svc_cert_path": "",
+      "vrb_svc_key_path": "",
+      "psc02_machinessl_svc_key_path": "",
+      "vra_iaas_web_key_path": "",
+      "vra_svc_cert_path": "",
+      "psc01_machine_svc_key_path": "",
+      "autopsc01_machine_svc_cert_path": "",
+      "vra_iaas_manager_key_path": "",
+      "vrops_svc_key_path": "",
+      "vcenter_vpxd_svc_key_path": "",
+      "psc02_machine_svc_key_path": "",
+      "vcenter_machine_svc_cert_path": "",
+      "vrb_svc_cert_path": "",
+      "vcenter_vpxd_svc_cert_path": "",
+      "psc01_vsphere_web_client_svc_key_path": "",
+      "vcenter_machine_svc_key_path": "",
+      "psc02_vsphere_web_client_svc_cert_path": ""
+    }
+  },
+  "vrealize_log_insight": {
+    "log_insight_load_balancer": {
+      "ip": "",
+      "fqdn": ""
+    },
+    "ova_size": "small",
+    "notification_emails_csv": "",
+    "admin_password": "",
+    "admin_email": "",
+    "root_password": ""
+  },
+  "ehcauto_worker_vm": {
+    "ip": "192.168.193.18",
+    "password": "Password123!"
+  },
+  "license_key": {
+    "vrealize_business_standard": "",
+    "nsx_manager": "",
+    "windows_license_key": "",
+    "vrealize_automation": "",
+    "vrealize_log_insight": "",
+    "vrealize_operations_manager": ""
+  },
+  "host_address": {
+    "log_insight_worker_1": {
+      "ip": "",
+      "vmname": "",
+      "fqdn": "",
+      "portgroup": ""
+    },
+    "vra_proxy_agent_secondary": {
+      "ip": "",
+      "vmname": "",
+      "fqdn": "",
+      "portgroup": ""
+    },
+    "log_insight_worker_3": {
+      "ip": "",
+      "vmname": "",
+      "fqdn": "",
+      "portgroup": ""
+    },
+    "log_insight_worker_2": {
+      "ip": "",
+      "vmname": "",
+      "fqdn": "",
+      "portgroup": ""
+    },
+    "log_insight_worker_5": {
+      "ip": "",
+      "vmname": "",
+      "fqdn": "",
+      "portgroup": ""
+    },
+    "log_insight_worker_4": {
+      "ip": "",
+      "vmname": "",
+      "fqdn": "",
+      "portgroup": ""
+    },
+    "log_insight_worker_7": {
+      "ip": "",
+      "vmname": "",
+      "fqdn": "",
+      "portgroup": ""
+    },
+    "vra_worker_primary": {
+      "ip": "",
+      "vmname": "",
+      "fqdn": "",
+      "portgroup": ""
+    },
+    "log_insight_worker_8": {
+      "ip": "",
+      "vmname": "",
+      "fqdn": "",
+      "portgroup": ""
+    },
+    "vrops_remote_collector_node_8": {
+      "ip": "",
+      "vmname": "",
+      "fqdn": "",
+      "portgroup": ""
+    },
+    "vra_manager_primary": {
+      "ip": "",
+      "vmname": "",
+      "fqdn": "",
+      "portgroup": ""
+    },
+    "vrops_data_node_8": {
+      "ip": "",
+      "vmname": "",
+      "fqdn": "",
+      "portgroup": ""
+    },
+    "vra_web_primary": {
+      "ip": "",
+      "vmname": "",
+      "fqdn": "",
+      "portgroup": ""
+    },
+    "vro_primary": {
+      "ip": "",
+      "vmname": "",
+      "fqdn": "",
+      "portgroup": ""
+    },
+    "avamar_proxy": {
+      "ip": "192.168.193.15",
+      "vmname": "avamarp5",
+      "fqdn": "avamarp5.pod1.local",
+      "portgroup": "Automation"
+    },
+    "vrops_remote_collector_node_1": {
+      "ip": "",
+      "vmname": "",
+      "fqdn": "",
+      "portgroup": ""
+    },
+    "vrops_data_node_2": {
+      "ip": "",
+      "vmname": "",
+      "fqdn": "",
+      "portgroup": ""
+    },
+    "vrops_remote_collector_node_2": {
+      "ip": "",
+      "vmname": "",
+      "fqdn": "",
+      "portgroup": ""
+    },
+    "vrops_data_node_3": {
+      "ip": "",
+      "vmname": "",
+      "fqdn": "",
+      "portgroup": ""
+    },
+    "log_insight_worker_6": {
+      "ip": "",
+      "vmname": "",
+      "fqdn": "",
+      "portgroup": ""
+    },
+    "vra_primary": {
+      "ip": "",
+      "vmname": "",
+      "fqdn": "",
+      "portgroup": ""
+    },
+    "vrops_data_node_1": {
+      "ip": "",
+      "vmname": "",
+      "fqdn": "",
+      "portgroup": ""
+    },
+    "vrops_remote_collector_node_5": {
+      "ip": "",
+      "vmname": "",
+      "fqdn": "",
+      "portgroup": ""
+    },
+    "avamar_server": {
+      "ip": "192.168.193.19",
+      "vmname": "avamar5",
+      "fqdn": "avamar5.pod1.local",
+      "portgroup": "Automation"
+    },
+    "vra_web_load_balancer": {
+      "ip": "",
+      "fqdn": ""
+    },
+    "log_insight": {
+      "ip": "10.136.15.118",
+      "vmname": "",
+      "fqdn": "",
+      "portgroup": ""
+    },
+    "vrops_remote_collector_node_4": {
+      "ip": "",
+      "vmname": "",
+      "fqdn": "",
+      "portgroup": ""
+    },
+    "vrops_data_node_6": {
+      "ip": "",
+      "vmname": "",
+      "fqdn": "",
+      "portgroup": ""
+    },
+    "log_insight_forwarder_7": {
+      "ip": "",
+      "vmname": "",
+      "fqdn": "",
+      "portgroup": ""
+    },
+    "sql_server": {
+      "ip": "",
+      "vmname": "",
+      "fqdn": "",
+      "portgroup": ""
+    },
+    "vrops_manager": {
+      "ip": "",
+      "vmname": "",
+      "fqdn": "",
+      "portgroup": ""
+    },
+    "vra_manager_secondary": {
+      "ip": "",
+      "vmname": "",
+      "fqdn": "",
+      "portgroup": ""
+    },
+    "log_insight_forwarder_5": {
+      "ip": "",
+      "vmname": "",
+      "fqdn": "",
+      "portgroup": ""
+    },
+    "vrops_remote_collector_node_6": {
+      "ip": "",
+      "vmname": "",
+      "fqdn": "",
+      "portgroup": ""
+    },
+    "vrops_data_node_4": {
+      "ip": "",
+      "vmname": "",
+      "fqdn": "",
+      "portgroup": ""
+    },
+    "vra_web_secondary": {
+      "ip": "",
+      "vmname": "",
+      "fqdn": "",
+      "portgroup": ""
+    },
+    "vra_load_balancer": {
+      "ip": "",
+      "fqdn": ""
+    },
+    "log_insight_forwarder_8": {
+      "ip": "",
+      "vmname": "",
+      "fqdn": "",
+      "portgroup": ""
+    },
+    "autopsc01": {
+      "ip": "",
+      "vmname": "",
+      "fqdn": "",
+      "portgroup": ""
+    },
+    "vra_proxy_agent_primary": {
+      "ip": "",
+      "vmname": "",
+      "fqdn": "",
+      "portgroup": ""
+    },
+    "vrops_remote_collector_node_3": {
+      "ip": "",
+      "vmname": "",
+      "fqdn": "",
+      "portgroup": ""
+    },
+    "vrops_data_node_5": {
+      "ip": "",
+      "vmname": "",
+      "fqdn": "",
+      "portgroup": ""
+    },
+    "nsx_manager": {
+      "ip": "",
+      "vmname": "",
+      "fqdn": "",
+      "portgroup": ""
+    },
+    "vro_load_balancer": {
+      "ip": "",
+      "fqdn": ""
+    },
+    "vrops_data_node_7": {
+      "ip": "",
+      "vmname": "",
+      "fqdn": "",
+      "portgroup": ""
+    },
+    "vrops_remote_collector_node_7": {
+      "ip": "",
+      "vmname": "",
+      "fqdn": "",
+      "portgroup": ""
+    },
+    "vra_worker_secondary": {
+      "ip": "",
+      "vmname": "",
+      "fqdn": "",
+      "portgroup": ""
+    },
+    "data_domain_server": {
+      "ip": "192.168.193.14",
+      "portgroup1": "Automation",
+      "vmname": "ddve1",
+      "fqdn": "ddve1.pod1.local",
+      "portgroup2": "Automation"
+    },
+    "log_insight_forwarder_2": {
+      "ip": "",
+      "vmname": "",
+      "fqdn": "",
+      "portgroup": ""
+    },
+    "log_insight_forwarder_3": {
+      "ip": "",
+      "vmname": "",
+      "fqdn": "",
+      "portgroup": ""
+    },
+    "log_insight_forwarder_1": {
+      "ip": "",
+      "vmname": "",
+      "fqdn": "",
+      "portgroup": ""
+    },
+    "log_insight_forwarder_6": {
+      "ip": "",
+      "vmname": "",
+      "fqdn": "",
+      "portgroup": ""
+    },
+    "vro_secondary": {
+      "ip": "",
+      "vmname": "",
+      "fqdn": "",
+      "portgroup": ""
+    },
+    "log_insight_forwarder_4": {
+      "ip": "",
+      "vmname": "",
+      "fqdn": "",
+      "portgroup": ""
+    },
+    "vra_secondary": {
+      "ip": "",
+      "vmname": "",
+      "fqdn": "",
+      "portgroup": ""
+    },
+    "vra_manager_load_balancer": {
+      "ip": "",
+      "fqdn": ""
+    },
+    "vr_business": {
+      "ip": "",
+      "vmname": "",
+      "fqdn": "",
+      "portgroup": ""
+    },
+    "psc02": {
+      "ip": "",
+      "vmname": "",
+      "fqdn": "",
+      "portgroup": ""
+    },
+    "psc01": {
+      "ip": "",
+      "vmname": "",
+      "fqdn": "",
+      "portgroup": ""
+    },
+    "vcenter_server": {
+      "ip": "192.168.133.114",
+      "vmname": "vcenter6-01",
+      "fqdn": "vcenter6-01.pod1.local",
+      "portgroup": "VM Network"
+    }
+  },
+  "nsx_manager_info": {
+    "cli_user_password": "",
+    "nsx_pfx_password": "",
+    "enterprise_admin_group": "",
+    "distributed_vswitch_port_group_name": "",
+    "admin_user_password": "",
+    "syslog_server": ""
+  },
+  "sizing": {
+    "sql_server": {
+      "disks" : [
+             {"diskSize" : "", "diskLabel": "DATA", "fileSystem": "NTFS", "partitionStyle": "MBR", "diskLetter": "E"},
+             {"diskSize" : "", "diskLabel": "LOG", "fileSystem": "NTFS", "partitionStyle": "MBR", "diskLetter": "F"}
+              ],
+      "cpus": "",
+      "memory_size_gb": "",
+      "cpu_cores_per_socket": ""
+    },
+    "vra_proxy_agent_secondary": {
+      "cpu_cores_per_socket": "",
+      "cpus": "",
+      "memory_size_gb": ""
+    },
+    "vra_proxy_agent_primary": {
+      "cpu_cores_per_socket": "",
+      "cpus": "",
+      "memory_size_gb": ""
+    },
+    "vra_manager_secondary": {
+      "cpu_cores_per_socket": "",
+      "cpus": "",
+      "memory_size_gb": ""
+    },
+    "vra_worker_primary": {
+      "cpu_cores_per_socket": "",
+      "cpus": "",
+      "memory_size_gb": ""
+    },
+    "vra_manager_primary": {
+      "cpu_cores_per_socket": "",
+      "cpus": "",
+      "memory_size_gb": ""
+    },
+    "vra_worker_secondary": {
+      "cpu_cores_per_socket": "",
+      "cpus": "",
+      "memory_size_gb": ""
+    },
+    "vra_web_secondary": {
+      "cpu_cores_per_socket": "",
+      "cpus": "",
+      "memory_size_gb": ""
+    },
+    "vrops_data_node_3": {
+      "disks" : [
+             {"diskName": "", "diskSize" : ""}
+              ],
+      "cpu_cores_per_socket": "",
+      "cpus": "",
+      "memory_size_gb": ""
+    },
+    "vra_web_primary": {
+      "cpu_cores_per_socket": "",
+      "cpus": "",
+      "memory_size_gb": ""
+    },
+    "vrops_data_node_1": {
+      "disks" : [
+             {"diskName": "", "diskSize" : ""}
+              ],
+      "cpu_cores_per_socket": "",
+      "cpus": "",
+      "memory_size_gb": ""
+    },
+    "vrops_data_node_6": {
+      "disks" : [
+             {"diskName": "", "diskSize" : ""}
+              ],
+      "cpu_cores_per_socket": "",
+      "cpus": "",
+      "memory_size_gb": ""
+    },
+    "vrops_data_node_2": {
+      "disks" : [
+             {"diskName": "", "diskSize" : ""}
+              ],
+      "cpu_cores_per_socket": "",
+      "cpus": "",
+      "memory_size_gb": ""
+    },
+    "vrops_data_node_4": {
+      "disks" : [
+             {"diskName": "", "diskSize" : ""}
+              ],
+      "cpu_cores_per_socket": "",
+      "cpus": "",
+      "memory_size_gb": ""
+    },
+    "vrops_data_node_5": {
+      "disks" : [
+             {"diskName": "", "diskSize" : ""}
+              ],
+      "cpu_cores_per_socket": "",
+      "cpus": "",
+      "memory_size_gb": ""
+    },
+    "vrops_data_node_8": {
+      "disks" : [
+             {"diskName": "", "diskSize" : ""}
+              ],
+      "cpu_cores_per_socket": "",
+      "cpus": "",
+      "memory_size_gb": ""
+    },
+    "vrops_data_node_7": {
+      "disks" : [
+             {"diskName": "", "diskSize" : ""}
+              ],
+      "cpu_cores_per_socket": "",
+      "cpus": "",
+      "memory_size_gb": ""
+    }
+  },
+  "windows": {
+    "server_template_name": "ehc-win-template",
+    "user_locale": "en-US",
+    "default_username": "administrator",
+    "timezone": "Eastern Standard Time",
+    "ui_language": "en-US",
+    "default_password": ""
+  },
+  "data_domain": {
+    "dc_password": "Password2",
+    "prompt": "ddve1",
+    "ip_protocol": "IPv4",
+    "user_password": "Password1",
+    "dc_group": "pod1\\DD_Admins",
+    "ip_policy": "fixedPolicy",
+    "sys_admin_password": "changeme",
+    "interface": "ethV0",
+    "dc_user": "administrator@pod1.local",
+    "dc_host": "dc01.pod1.local",
+    "sys_admin_username": "sysadmin",
+    "deployment_option": "8TB",
+    "local_user": "LocalUser1",
+    "license_path": "Z:/certs/ddlicense.lic"
+  },
+  "ehcauto_master_vm": {
+    "ip": "192.168.193.16",
+    "password": "Password123!"
+  },
+  "active_directory": {
+    "group": "Avamar_Admins",
+    "name": "dc01",
+    "ave_domain": "/",
+    "url": "ldap://pod1.local:389",
+    "user_base_dn": "",
+    "host": "pod1.local",
+    "role": "ADMIN",
+    "use_ssl": false,
+    "group_base_dn": "",
+    "ehc_ou": "",
+    "port": 389
+  },
+  "common": {
+    "domain": "pod1.local",
+    "domain_administrator_username": "administrator",
+    "primary_dns": "192.168.194.101",
+    "management_network_netmask": "255.255.252.0",
+    "dns_server_ip": "192.168.194.101",
+    "domain_administrator_password": "Password2",
+    "ntp_servers_comma_separated": "10.1.219.12",
+    "domain_controller_ip": "192.168.194.101",
+    "secondry_dns": "",
+    "management_network_gateway": "192.168.192.1"
+  },
+  "avamar": {
+    "username": "admin",
+    "avamar_proxy_root_password": "avam@r",
+    "vm_exception": "EHCAuto-Master,EHCAuto-Worker,vcenter6-01,psc01.pod1.local,avamar5,avamarp5,ddve1",
+    "vmpassword": "changeme",
+    "snmp_port": 663,
+    "proxy_name": "clients/localhost.localdom",
+    "vmusername": "root",
+    "mc_password": "Password1_",
+    "password": "Password1_",
+    "new_ave_root_password": "Password1_"
+  },
+  "vrealize_operations_manager": {
+    "ova_size": "xsmall",
+    "vrops_admin_password": ""
+  }
+}

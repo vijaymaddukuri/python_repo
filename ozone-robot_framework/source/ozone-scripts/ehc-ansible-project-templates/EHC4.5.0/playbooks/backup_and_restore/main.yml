@@ -1,0 +1,32 @@
+# ------------------------------------------------------------------------------
+# Copyright (C) 2016-2017 DELL EMC Corporation. All Rights Reserved.
+
+# This software contains the intellectual property of DELL EMC Corporation
+# or is licensed to DELL EMC Corporation from third parties.  Use of this
+# software and the intellectual property contained therein is expressly
+# limited to the terms and conditions of the License Agreement under which
+# it is provided by or on behalf of DELL  EMC.
+
+# ------------------------------------------------------------------------------
+
+---
+-
+    name: 'Restore environment to last known good state'
+    hosts: '{{last_known_good_condition.vms}}'
+    # hosts: localhost
+    gather_facts: no
+    vars_files:
+        -   known-good-configurations.yml
+    vars:
+#        last_revert_condition_query: '{{ EHC_REVERT_TO_STATE is defined and ("[?last_known_good_state==''" + EHC_REVERT_TO_STATE + "'']") or "[*]"}}'
+#        last_known_good_condition: "{{ last_good_conditions|json_query( last_revert_condition_query ) | last }}"
+         last_known_good_condition: "{{ last_good_conditions | last }}"
+    tasks:
+        -
+            name: 'Restore Environment'
+            include: '{{last_known_good_condition.restore_tasks_file}}'
+            static: yes
+            when: '{{ last_known_good_condition }}'
+
+    
+

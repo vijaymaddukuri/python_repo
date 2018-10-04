@@ -1,0 +1,36 @@
+<div layout="row">
+  <div>
+    <h3><ng-md-icon icon="search" size="40"></ng-md-icon> Monitor</h3>
+  </div>
+  <div flex>
+
+  </div>
+  <!--<div>
+    <md-input-container>
+      <label>Projects</label>
+      <md-select ng-model="selectedProject" ng-model-options="{trackBy: '$value.name'}" style="width:300px;">
+        <md-option ng-repeat="project in projects" ng-value="project">
+          {{project.name}}
+        </md-option>
+      </md-select>
+    </md-input-container>
+  </div>-->
+</div>
+
+<div layout="row" class="md-whiteframe-1dp" style="padding:20px;margin:10px;" ng-if="!hasMonitorRole">
+  <h4>You do not have sufficient privileges to view this page</h4>
+  <md-button md-theme="green" class="md-raised md-primary md-hue-2" ng-click="showEmailUs($event)" href=""> <ng-md-icon icon="email" size="24"></ng-md-icon> Request Access </md-button>
+</div>
+
+<div ng-cloak>
+  <md-content ng-if="hasMonitorRole">
+    <md-tabs md-dynamic-height md-border-bottom>
+      <md-tab md-active="tab.isActive" md-on-select="go(tab.route)" ng-repeat="tab in tabs" label="{{tab.name}}">
+        <md-content class="md-padding">
+
+        </md-content>
+      </md-tab>
+    </md-tabs>
+    <ui-view></ui-view>
+  </md-content>
+</div>

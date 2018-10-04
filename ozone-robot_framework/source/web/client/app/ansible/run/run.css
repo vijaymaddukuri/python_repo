@@ -1,0 +1,9 @@
+tr.dragging {
+  left: 100px;
+  top: 100px;
+}
+
+
+table.md-table.md-row-select tbody.md-body > tr.md-row.md-selected {
+  background-color: white;
+}

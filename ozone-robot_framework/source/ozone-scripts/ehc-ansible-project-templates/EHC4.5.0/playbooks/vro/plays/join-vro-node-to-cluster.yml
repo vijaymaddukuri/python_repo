@@ -1,0 +1,124 @@
+# ------------------------------------------------------------------------------
+# Copyright (C) 2016-2017 DELL EMC Corporation. All Rights Reserved.
+
+# This software contains the intellectual property of DELL EMC Corporation
+# or is licensed to DELL EMC Corporation from third parties.  Use of this
+# software and the intellectual property contained therein is expressly
+# limited to the terms and conditions of the License Agreement under which
+# it is provided by or on behalf of DELL  EMC.
+
+# ------------------------------------------------------------------------------
+
+-
+    name: '{{ step }} - Join vRO Node to Cluster'
+    hosts: '{{ vms }}'
+    gather_facts: no
+    any_errors_fatal: True
+    tasks:
+        -
+            name: '{{ step }} - Pre-Validate Join vRO Node to Cluster'
+            tags:
+                - '{{ step }} - Pre-Validate Join vRO Node to Cluster'
+                - '{{ step }} - Join vRO Node to Cluster'
+            delegate_to: localhost
+            ehc_script_agent:
+                package_name: vro
+                module_name: vroConfig
+                method_name: validateJoinNodeToVROCluster
+                method_params:
+                    vmConfiguration: '{{ vroInfo }}'
+                    vroClusterConfiguration: '{{ vroClusterConfiguration }}'
+            register: preValidateJoinClusterResults
+            failed_when: not preValidateJoinClusterResults.data is defined or preValidateJoinClusterResults.data.err_message is defined or preValidateJoinClusterResults.data.status == false
+            changed_when: preValidateJoinClusterResults.data is defined and not preValidateJoinClusterResults.data.err_message is defined and preValidateJoinClusterResults.data.status == true
+            ignore_errors: True
+
+        -
+            name: '{{ step }} - Join vRO Node to Cluster'
+            tags:
+                - '{{ step }} - Join vRO Node to Cluster'
+            delegate_to: localhost
+            ehc_script_agent:
+                package_name: vro
+                module_name: vroConfig
+                method_name: joinNodeToVROCluster
+                method_params:
+                    vmConfiguration: '{{ vroInfo }}'
+                    vroClusterConfiguration: '{{ vroClusterConfiguration }}'
+            register: joinClusterResults
+            failed_when: not joinClusterResults.data is defined or joinClusterResults.data.err_message is defined or joinClusterResults.data.joinNodeToCluster.status != 200
+            changed_when: joinClusterResults.data is defined and not joinClusterResults.data.err_message is defined and joinClusterResults.data.joinNodeToCluster.status == 200
+            when: preValidateJoinClusterResults.failed_when_result
+
+        -
+            name: '{{ step }} - Shutdown vRealize Orchestrator'
+            tags:
+                - '{{ step }} - Join vRO Node to Cluster'
+            delegate_to: localhost
+            ehc_script_agent:
+                package_name: common
+                module_name: IVMManagement
+                method_name: powerOffVM
+                method_params:
+                    vCenterDict: '{{ vcenter }}'
+                    vmDict:
+                        vmname: '{{ vmname }}'
+
+            register: result
+            failed_when: result.data is defined and result.data.err_message is defined
+            changed_when: result.data is defined and not result.data.err_message is defined
+            when: joinClusterResults is defined and joinClusterResults|changed
+
+        -
+            name: '{{ step }} - Start vRealize Orchestrator'
+            tags:
+                - '{{ step }} - Join vRO Node to Cluster'
+            delegate_to: localhost
+            ehc_script_agent:
+                package_name: common
+                module_name: IVMManagement
+                method_name: powerOnVM
+                method_params:
+                    vCenterDict: '{{ vcenter }}'
+                    vmDict:
+                        vmname: '{{ vmname }}'
+            register: result
+            failed_when: result.data is defined and result.data.err_message is defined
+            changed_when: result.data is defined and not result.data.err_message is defined
+            when: joinClusterResults is defined and joinClusterResults|changed
+
+        -
+            name: '{{ step }} - Wait for node to be active'
+            tags:
+                - '{{ step }} - Join vRO Node to Cluster'
+            delegate_to: localhost
+            ehc_script_agent:
+                package_name: vro
+                module_name: vroConfig
+                method_name: waitForServicesToBeUp
+                method_params:
+                    host: '{{ ansible_host }}'
+                    username: '{{ vro_vm_username }}'
+                    password: '{{ vrealize_orchestrator.vro_root_password }}'
+                    timeout: 600
+            register: result
+            failed_when: not result.data is defined or result.data.err_message is defined or result.data != true
+            changed_when: result.data is defined and not result.data.err_message is defined and result.data == true
+            when: joinClusterResults is defined and joinClusterResults|changed
+
+        -
+            name: '{{ step }} - Validate Join vRO Node to Cluster'
+            tags:
+                - '{{ step }} - Join vRO Node to Cluster'
+            delegate_to: localhost
+            ehc_script_agent:
+                package_name: vro
+                module_name: vroConfig
+                method_name: validateJoinNodeToVROCluster
+                method_params:
+                    vmConfiguration: '{{ vroInfo }}'
+                    vroClusterConfiguration: '{{ vroClusterConfiguration }}'
+            register: validateJoinClusterResults
+            failed_when: not validateJoinClusterResults.data is defined or validateJoinClusterResults.data.err_message is defined or validateJoinClusterResults.data.status == false
+            changed_when: validateJoinClusterResults.data is defined and not validateJoinClusterResults.data.err_message is defined and validateJoinClusterResults.data.status == true
+            when: not joinClusterResults|skipped

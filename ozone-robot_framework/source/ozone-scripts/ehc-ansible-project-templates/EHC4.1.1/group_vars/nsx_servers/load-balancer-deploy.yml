@@ -1,0 +1,115 @@
+# ------------------------------------------------------------------------------
+# Copyright (C) 2016-2017 DELL EMC Corporation. All Rights Reserved.
+
+# This software contains the intellectual property of DELL EMC Corporation
+# or is licensed to DELL EMC Corporation from third parties.  Use of this
+# software and the intellectual property contained therein is expressly
+# limited to the terms and conditions of the License Agreement under which
+# it is provided by or on behalf of DELL  EMC.
+
+# ------------------------------------------------------------------------------
+
+nsx_load_balancer_load_balancer_name:  AutoPOD_LB
+
+nsx_deploy_parameters:
+    deploy:
+        execute: true
+        timeout: 3600
+        vCenter: '{{ nsxDeployvCenter }}'
+        ova: '{{ nsxOva }}'
+    config:
+        execute: false
+        timeout: 1500
+    license: '{{ nsxLicenseParameters }}'
+
+
+nsx_configure_parameters:
+    deploy:
+        execute: false
+        timeout: 3600
+        vCenter: '{{ nsxDeployvCenter }}'
+        ova: '{{ nsxOva }}'
+    config:
+        execute: true
+        timeout: 1500
+        sso:
+            ssoAdminUsername: '{{ psc01Dict.username }}'
+            ssoAdminUserpassword: '{{ psc01Dict.password }}'
+#            ssoAdminUsername: '{{ ad_user.app_nsx_sso.username }}@{{ ad_domain }}'
+#            ssoAdminUserpassword: '{{ ad_user.app_nsx_sso.password }}'
+            ssoLookupServiceServer: '{{ psc01Dict.fqdn }}'
+        syslog:
+            # TODO: Check if its OK to default IP like this. If not IP comes in through input file, the API call fails.
+            host: '{{ nsx_manager_info.syslog_server | default("192.168.1.1") }}'
+        vCenter:
+            vCenterIPAddress: '{{ vcenter.fqdn }}'
+#            vCenterUsername: '{{ ad_user.app_nsx_vcenter.username }}@{{ ad_domain }}'
+#            vCenterPassword: '{{ ad_user.app_nsx_vcenter.password }}'
+            vCenterUsername: '{{ vcenter.username }}'
+            vCenterPassword: '{{ vcenter.password }}'
+    license: '{{ nsxLicenseParameters }}'
+
+
+
+loadBalancerDeployParameters:
+    description: 'Description for the edge gateway'
+    datacenterName: '{{ vcenter_datacenter }}'
+    tenant: default
+    name: '{{ nsx_load_balancer_load_balancer_name }}'
+    enableAesni: true
+    enableFips: false
+    vseLogLevel: emergency
+    vnics:
+        -
+            # This label gets ignored and a default label vNic_0 is applied. Probably issue with the script. Hence leaving this to default label.
+            # label: tenant_uplink
+            label: 'vNic_0'
+            name: tenant_uplink
+            type: internal
+            mtu: 1500
+            portgroupName: '{{ vcenter_network }}'
+            isConnected: true
+            addressGroups:
+                -
+                    subnetMask: '{{ common.management_network_netmask }}'
+                    primaryAddress: '{{ nsx_load_balancer.primary_ip_address }}'
+                    subnetPrefixLength: 25
+                    secondaryAddresses:
+                        -   '{{ host_address.vra_load_balancer.ip }}'
+                        -   '{{ host_address.vra_web_load_balancer.ip }}'
+                        -   '{{ host_address.vra_manager_load_balancer.ip }}'
+                        -   '{{ host_address.vro_load_balancer.ip }}'
+    appliancesSettings:
+        applianceSize: compact
+        enableCoreDump: true
+        appliances:
+            -
+                datastoreName: '{{ vcenter_datastore }}'
+                hostName: '{{ vcenter_ovadeployhost }}'
+                vmFolderName: vm
+                resourcePoolName: '{{ resource_pools.nei }}'
+    defaultRoute:
+        vnic: 0
+        gatewayAddress: '{{ common.management_network_gateway }}'
+        description: 'Default Route Description'
+        adminDistance: 1
+    highAvailability:
+        enabled: true
+        vnic: 0
+        declareDeadTime: 6
+        logging:
+            logLevel: info
+            enable: true
+    cliSettings:
+        userName: 'admin'
+        password: '{{ nsx_load_balancer.cli_user_password }}'
+        remoteAccess: true
+    autoConfiguration:
+        rulePriority: high
+        enabled: true
+    firewall:
+        defaultPolicy:
+            action: accept
+            loggingEnabled: true
+        enabled: true
+

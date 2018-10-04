@@ -1,0 +1,8 @@
+.tmp
+.idea
+logs
+input
+#lic
+tmp
+Test.py
+__pycache__

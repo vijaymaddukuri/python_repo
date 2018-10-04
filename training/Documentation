@@ -1,0 +1,14 @@
+############
+To open the python doc in browser
+############
+In cmd prompt
+cd <C:\Python27\Tools\Scripts>
+pydoc3 -p 1234
+
+
+######################
+Ravi: ravi.goglobium@gmail.com
+9790916181
+
+https://github.com/ravijaya/python3_materials
+https://github.com/ravijaya/python-training-emc-bangalore-25-27-2017

@@ -1,0 +1,90 @@
+# ------------------------------------------------------------------------------
+# Copyright (C) 2016-2017 DELL EMC Corporation. All Rights Reserved.
+
+# This software contains the intellectual property of DELL EMC Corporation
+# or is licensed to DELL EMC Corporation from third parties.  Use of this
+# software and the intellectual property contained therein is expressly
+# limited to the terms and conditions of the License Agreement under which
+# it is provided by or on behalf of DELL  EMC.
+
+# ------------------------------------------------------------------------------
+
+---
+-
+    name: '{{ step }} - Validate Active Directory'
+    hosts: localhost
+    gather_facts: no
+    any_errors_fatal: True
+    tags:
+        - '{{ step }} - Validate Active Directory'
+    tasks:
+      -
+          name: '{{ step }} - AD Validation - Prepare Group Names for Validation'
+          vars:
+          set_fact:
+              user_group_names_list: "{{ (user_group_names_list is defined and (user_group_names_list + [ item.value.groupname] ) ) or [ item.value.groupname ] }}"
+          with_dict: '{{ ad_user_group }}'
+
+      -
+          name: '{{ step }} - AD Validation - Prepare User Groups for validation'
+          vars:
+            group_info: "{{ { ad_user_group[item.name].groupname:  ad_user|filter_keys(item.members)|json_query('*.username')|list_lowercase } }}"
+          set_fact:
+              user_groups: "{{ (user_groups is defined and user_groups | combine( group_info )) or group_info }}"
+          with_items: '{{ ad_user_group_membership }}'
+
+      -
+          name: '{{ step }} - AD Validation - Prepare Nested Groups for validation'
+          vars:
+            group_info: "{{ { ad_user_group[item.name].groupname:  ad_user_group|filter_keys(item.parent_groups)|json_query('*.groupname')|list_lowercase } }}"
+          set_fact:
+              nested_groups: "{{ (nested_groups is defined and nested_groups | combine( group_info )) or group_info }}"
+          with_items: '{{ ad_nested_group_membership }}'
+
+      -
+          name: '{{ step }} - AD Validation - Validate Active Directory Configuration'
+          ehc_script_agent:
+              package_name: preDeploymentValidation
+              module_name: validateAD
+              method_name: validateADConfiguration
+              no_log: True
+              method_params:
+                  domainName: '{{ ad_domain }}'
+                  userName: '{{ad_domain_name}}\{{ ad_user.adbind_sso.username }}'
+                  password: '{{ ad_user.adbind_sso.password }}'
+                  tcpPorts:
+                  # prepare_user_credentials is a custom filter used to convert user credentials to required format in python
+                  userCredentialToBeChecked: '{{ ad_user | prepare_user_credentials(ad_domain_name_with_backslash) }}'
+                  baseDN: '{{ active_directory.user_base_dn }}'
+                  groupNames: '{{ user_group_names_list }}'
+
+                  groupMembershipSearchBase: '{{ active_directory.group_base_dn }}'
+                  userInGroup: '{{ user_groups }}'
+                  emailSearchBase: '{{ active_directory.user_base_dn }}'
+                  usersToBeCheckedForEmail:
+                      - '{{ ad_domain_name_with_backslash + ad_user.svc_iaas.username }}'
+                      - '{{ ad_domain_name_with_backslash + ad_user.svc_sqlsvr.username }}'
+                      - '{{ ad_domain_name_with_backslash + ad_user.svc_sqlsvragent.username }}'
+                  nestedGroupBaseDN: '{{ active_directory.group_base_dn }}'
+                  nestedGroupMembershipToCheck: '{{nested_groups}}'
+
+          register: validateADConfigurationResults
+          failed_when: not validateADConfigurationResults.data is defined or validateADConfigurationResults.data.err_message is defined or not validateADConfigurationResults.data.status is defined or validateADConfigurationResults.data.status == False
+          changed_when: validateADConfigurationResults.data is defined and validateADConfigurationResults.data.err_message is not defined and validateADConfigurationResults.data.status == True
+          ignore_errors: '{{ ignore_errors|default(False) }}'
+#
+#      # Prefer assert over json_query to display error better
+#      -
+#            name: '{{ step }} - AD Validation - Check Active Directory Groups'
+#            assert:
+#                that:
+#                    - '{{item.ForwardLookup}} and {{item.ReverseLookup}}'
+#
+#      -
+#          name: '{{ step }} - AD Validation - Check Active Directory Groups'
+#          vars:
+##            step: VAL - EPB-100-060
+#            group_info: "{{ { ad_user_group[item.name].groupname:  ad_user_group|filter_keys(item.parent_groups)|json_query('*.groupname')|list_lowercase } }}"
+#          set_fact:
+#              nested_groups: "{{ (nested_groups is defined and nested_groups | combine( group_info )) or group_info }}"
+#          with_items: '{{ ad_nested_group_membership }}'

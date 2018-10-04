@@ -1,0 +1,84 @@
+# ------------------------------------------------------------------------------
+# Copyright (C) 2016-2017 DELL EMC Corporation. All Rights Reserved.
+
+# This software contains the intellectual property of DELL EMC Corporation
+# or is licensed to DELL EMC Corporation from third parties.  Use of this
+# software and the intellectual property contained therein is expressly
+# limited to the terms and conditions of the License Agreement under which
+# it is provided by or on behalf of DELL  EMC.
+
+# ------------------------------------------------------------------------------
+
+-
+    name: 'VCN - {{ step }} - Create SSO Groups and add members'
+    hosts: vcenter_server
+    gather_facts: no
+    any_errors_fatal: True
+    tags:
+                - 'VCN - {{ step }} - Create SSO Group for vRO'
+    tasks:
+        # TODO: Improve pre-validation
+        -
+            name: 'VCN - {{ step }} - Create SSO Group for vRO'
+            delegate_to: localhost
+            ehc_script_agent:
+                package_name: sso
+                module_name: createSSOGroup
+                method_name: createSSOGroup
+                method_params:
+                    pscDict: '{{ psc01Dict }}'
+                    groupName: '{{ item.name }}'
+                    groupDesc: '{{ item.description }}'
+            register: createSSOGroupResults
+            failed_when: createSSOGroupResults|failed or not createSSOGroupResults.data is defined or createSSOGroupResults.data.err_message is defined or not createSSOGroupResults.data.status == true
+            changed_when: createSSOGroupResults.data is defined and createSSOGroupResults.data.err_message is not defined and createSSOGroupResults.data.status == true
+            with_items: '{{ ssoGroups }}'
+            ignore_errors: True
+
+        -
+            name: 'VCN - {{ step }} - Validate SSO Group Creation'
+            delegate_to: localhost
+            ehc_script_agent:
+                package_name: sso
+                module_name: createSSOGroup
+                method_name: validateCreateSSOGroup
+                method_params:
+                    pscDict: '{{ psc01Dict }}'
+                    groupName: '{{ item.name }}'
+            register: validateCreateSSOGroupResults
+            failed_when: not validateCreateSSOGroupResults.data is defined or validateCreateSSOGroupResults.data.err_message is defined or not validateCreateSSOGroupResults.data.status == true
+            changed_when: validateCreateSSOGroupResults.data is defined and validateCreateSSOGroupResults.data.err_message is not defined and validateCreateSSOGroupResults.data.status == true
+            with_items: '{{ ssoGroups }}'
+
+        -
+            name: 'VCN - {{ step }} - Assign Users and Groups to SSO Group'
+            delegate_to: localhost
+            ehc_script_agent:
+                package_name: sso
+                module_name: addUsersAndGroupsToSSOGroup
+                method_name: addUsersAndGroupsToSSOGroup
+                method_params:
+                    pscDict: '{{ psc01Dict }}'
+                    group: '{{ item }}'
+                    groupAccounts: '{{ item.members }}'
+            register: addUsersAndGroupsToSSOGroupResults
+            failed_when: not addUsersAndGroupsToSSOGroupResults.data is defined or addUsersAndGroupsToSSOGroupResults.data.err_message is defined or not addUsersAndGroupsToSSOGroupResults.data == true
+            changed_when: addUsersAndGroupsToSSOGroupResults.data is defined and addUsersAndGroupsToSSOGroupResults.data.err_message is not defined and addUsersAndGroupsToSSOGroupResults.data == true
+            with_items: '{{ ssoGroups }}'
+            ignore_errors: True
+
+        -
+            name: 'VCN - {{ step }} - Validate Assign Users and Groups to SSO Group'
+            delegate_to: localhost
+            ehc_script_agent:
+                package_name: sso
+                module_name: addUsersAndGroupsToSSOGroup
+                method_name: validateAddUsersAndGroupsToSSOGroup
+                method_params:
+                    pscDict: '{{ psc01Dict }}'
+                    group: '{{ item }}'
+                    groupAccounts: '{{ item.members }}'
+            register: validateAddUsersAndGroupsToSSOGroupResults
+            failed_when: not validateAddUsersAndGroupsToSSOGroupResults.data is defined or validateAddUsersAndGroupsToSSOGroupResults.data.err_message is defined or not validateAddUsersAndGroupsToSSOGroupResults.data == true
+            changed_when: validateAddUsersAndGroupsToSSOGroupResults.data is defined and validateAddUsersAndGroupsToSSOGroupResults.data.err_message is not defined and validateAddUsersAndGroupsToSSOGroupResults.data == true
+            with_items: '{{ ssoGroups }}'

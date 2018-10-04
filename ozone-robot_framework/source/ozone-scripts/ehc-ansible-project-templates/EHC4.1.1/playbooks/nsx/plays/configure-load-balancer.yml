@@ -1,0 +1,115 @@
+# ------------------------------------------------------------------------------
+# Copyright (C) 2016-2017 DELL EMC Corporation. All Rights Reserved.
+
+# This software contains the intellectual property of DELL EMC Corporation
+# or is licensed to DELL EMC Corporation from third parties.  Use of this
+# software and the intellectual property contained therein is expressly
+# limited to the terms and conditions of the License Agreement under which
+# it is provided by or on behalf of DELL  EMC.
+
+# ------------------------------------------------------------------------------
+
+-
+    name: 'NSX - {{ step }} - Configure Load Balancer'
+    hosts: '{{ vms }}'
+    tags:
+        - 'NSX - {{ step }} - Configure Load Balancer'
+    tasks:
+
+        # This task is a helper task that prepares the data in the correct format for function input.
+        -
+            name: '{{ step }} - Prepare Pool Mappings'
+            vars:
+             pool_mapping: "{{ { item.pool_name:  item.initial_monitor_name } }}"
+            set_fact:
+                pool_mappings: "{{ (pool_mappings is defined and pool_mappings | combine( pool_mapping )) or pool_mapping }}"
+            with_items: '{{ poolMappings }}'
+
+        # This task is a helper task that prepares the data in the correct format for function input.
+        -
+            name: '{{ step }} - Prepare Virtual Server Mappings'
+            vars:
+             vip_mapping: "{{ { item.name:  item.profile_mapping } }}"
+            set_fact:
+                vip_mappings: "{{ (vip_mappings is defined and vip_mappings | combine( vip_mapping )) or vip_mapping }}"
+            with_items: '{{ virtualServersMapping }}'
+
+        -
+            name: 'NSX - {{ step }} - Validate Load Balancer'
+            delegate_to: localhost
+            ehc_script_agent:
+                method_name: validateLoadBalancer
+                method_params:
+                    nsxManager: '{{ nsxManager }}'
+                    edgeId: '{{ edgeId.data }}'
+                    requestParameters:
+                        enabled: true
+                        enableServiceInsertion: true
+                        accelerationEnabled: true
+                        logging:
+                            enable: true
+                            logLevel: INFO
+                        applicationProfile: '{{ applicationProfiles }}'
+                        monitor: '{{ monitors }}'
+                        pool: '{{ pools }}'
+                        virtualServer: '{{ virtualServers }}'
+                module_name: configureLoadBalancer
+                package_name: nsx
+            register: preValidateLBResults
+            failed_when: not preValidateLBResults.data is defined or preValidateLBResults.data.err_message is defined or preValidateLBResults.data.status == false
+            changed_when: preValidateLBResults.data is defined and not preValidateLBResults.data.err_message is defined and preValidateLBResults.data.status == true
+            ignore_errors: True
+
+        -
+            name: 'NSX - {{ step }} - Configure Load Balancer'
+            delegate_to: localhost
+            ehc_script_agent:
+                method_name: configureLoadBalancer
+                method_params:
+                    nsxManager: '{{ nsxManager }}'
+                    edgeId: '{{ edgeId.data }}'
+                    requestParameters:
+                        enabled: true
+                        enableServiceInsertion: true
+                        accelerationEnabled: true
+                        logging:
+                            enable: true
+                            logLevel: INFO
+                        applicationProfile: '{{ applicationProfiles }}'
+                        monitor: '{{ monitors }}'
+                        pool: '{{ pools }}'
+                        virtualServer: '{{ virtualServers }}'
+                    poolMappings: '{{ pool_mappings }}'
+                    vipMappings: '{{ vip_mappings }}'
+                module_name: configureLoadBalancer
+                package_name: nsx
+            register: configureLBResults
+            failed_when: not configureLBResults.data is defined or configureLBResults.data.err_message is defined or false in configureLBResults.data|json_query('*.*[]')
+            changed_when: configureLBResults.data is defined and not configureLBResults.data.err_message is defined and false not in configureLBResults.data|json_query('*.*[]')
+            when: preValidateLBResults.failed_when_result
+
+        -
+            name: 'NSX - {{ step }} - Post-Validate Load Balancer'
+            delegate_to: localhost
+            ehc_script_agent:
+                method_name: validateLoadBalancer
+                method_params:
+                    nsxManager: '{{ nsxManager }}'
+                    edgeId: '{{ edgeId.data }}'
+                    requestParameters:
+                        enabled: true
+                        enableServiceInsertion: true
+                        accelerationEnabled: true
+                        logging:
+                            enable: true
+                            logLevel: INFO
+                        applicationProfile: '{{ applicationProfiles }}'
+                        monitor: '{{ monitors }}'
+                        pool: '{{ pools }}'
+                        virtualServer: '{{ virtualServers }}'
+                module_name: configureLoadBalancer
+                package_name: nsx
+            register: validateLBResults
+            failed_when: not validateLBResults.data is defined or validateLBResults.data.err_message is defined or validateLBResults.data.status == false
+            changed_when: validateLBResults.data is defined and not validateLBResults.data.err_message is defined and validateLBResults.data.status == true
+            when: not configureLBResults|skipped

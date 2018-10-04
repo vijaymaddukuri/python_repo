@@ -1,0 +1,53 @@
+<md-dialog>
+  <md-toolbar>
+    <div class="md-toolbar-tools">
+      <h2>Create Snapshot</h2>
+      <span flex></span>
+      <md-button class="md-icon-button" ng-click="cancel()">
+        <ng-md-icon icon="close"></ng-md-icon>
+      </md-button>
+    </div>
+  </md-toolbar>
+
+  <md-dialog-content class="md-padding" style="padding-top:25px;">
+
+    <div layout="row">
+      <div layout="column">
+        <md-input-container>
+          <label>Snapshot Name</label>
+          <md-icon ng-md-icon icon="photo_camera" style="fill:grey;"></md-icon>
+          <input ng-model="snapshotName" style="width:300px;">
+        </md-input-container>
+      </div>
+      <div layout="column" >
+        <md-input-container>
+          <md-checkbox name="shutdownGuest" ng-true-value="'Shutdown'" ng-false-value="'NoShutdown'" ng-model="shutdownGuest">
+            Shutdown Guest
+          </md-checkbox>
+          <div role="info">
+            <div class="hint">Shutdown the guest OS during operation</div>
+          </div>
+        </md-input-container>
+      </div>
+
+    </div>
+
+    <div layout="row">
+      <md-input-container class="md-block" style="width:100%">
+        <label>Snapshot Description</label>
+        <textarea ng-model="snapshotDescription" md-maxlength="150" rows="5" md-select-on-focus></textarea>
+      </md-input-container>
+    </div>
+
+  </md-dialog-content>
+
+  <md-dialog-actions>
+    <md-button class="md-raised md-primary" ng-click="create()">
+      Create
+    </md-button>
+    <md-button class="md-raised" ng-click="cancel()">
+      Cancel
+    </md-button>
+  </md-dialog-actions>
+
+</md-dialog>

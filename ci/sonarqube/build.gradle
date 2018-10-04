@@ -1,0 +1,39 @@
+buildscript {
+    repositories {
+        maven { url "http://artifactory.core.rcsops.com/artifactory/java-libs-virtual"
+            credentials {
+                username = mvn_username
+                password = mvn_password
+            }
+        }
+    }
+    dependencies {
+        classpath 'com.virtustream:vs-gradle-core:1.1.+'
+        classpath 'com.netflix.nebula:gradle-ospackage-plugin:4.1.0'
+        classpath 'org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:2.6.2'
+    }
+}
+
+apply plugin: 'VsGradleCore'
+apply plugin: 'org.sonarqube'
+
+allprojects {
+    repositories {
+        maven { url "http://repo.maven.apache.org/maven2" }
+        maven { url "http://artifactory.core.rcsops.com/artifactory/java-libs-virtual" }
+    }
+}
+
+sonarqube  {
+    properties {
+        property 'sonar.projectKey', "middlewareservice"
+        property 'sonar.projectName', "middlewareservice"
+        property 'sonar.sources', "."
+        property 'sonar.exclusions', "venv/**/**/* , venv/**/* , ci , devops , ONBFactory , manage.py ,  wait_for_postgres.py, ONBFactory/* , ONBFactory/**/* , **/tests/* , backup/tests , middlewareservice/config/common.py , common/tests.py , middlewareservice/config/local.py , middlewareservice/urls.py , common/constants.py , setup.py , middlewareservice/config/__init__.py "
+        property 'sonar.language', 'py'
+        property 'sonar.sourceEncoding', 'UTF-8'
+        property 'sonar.python.coverage.reportPath', 'coverage.xml'
+        property 'sonar.python.coveragePlugin', 'cobertura'
+        property 'sonar.python.xunit.reportPath', 'nosetests.xml'
+    }
+}

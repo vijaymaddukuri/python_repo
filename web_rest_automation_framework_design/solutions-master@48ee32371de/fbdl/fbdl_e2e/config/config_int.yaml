@@ -1,0 +1,100 @@
+global_ui_address:
+    https://fbdl-gui.apps.pcf.fbdl-int-03.local
+primary_user:
+    username: irene.yu@emc.com
+    password: password
+    role: manager
+secondary_user:
+    username: cracie.zhuang@emc.com
+    password: password
+    role: developer
+history_dir:
+    /root/automation/bdl/history/
+created_workspace_names:
+    ['cracie05060517pm','irene050619']
+search_tools_name:
+    {'AssetVisibleName': ['MySQL for Pivotal Cloud Foundry']}
+pcf_mysql_info:
+    [{
+    name: MySQL for Pivotal Cloud Foundry,
+    instance: mysql4pcf,
+    }, ]
+pcf_mongodb_info:
+    [{
+    name: MongoDB for Pivotal Cloud Foundry,
+    instance: mongodb4pcf,
+    }, ]
+dac_cloudera_info:
+    [{
+    name: cloudera_small,
+    instance: ireneCdh,
+    }, ]
+dac_hortonworks_info:
+    [{
+    name: hortonworks_small ,
+    instance: hortonworks4dac,
+    }, ]
+services_to_be_deployed:
+    [{
+    name: RabbitMQ,
+    instance: svc_RabbitMQ,
+    }, ]
+deployed_services:
+    []
+deployed_tools:
+    []
+datasets_to_be_deployed:
+    [{'AssetVisibleName': 'Auto1604151527',
+    'DataContainer': 'mysql_4_pcf',
+    'WorkingSetName': 'automation',
+    'TableName': 'automation_table'
+    },]
+deployed_datasets:
+    []
+collaborators_to_be_added:
+    [{username: chenyang.yang@emc.com,
+    password: password,
+    role: developer,
+    },]
+added_collaborators:
+    []
+search_data_sets:
+    {'AssetVisibleName': ['will-test1'],
+    'AssetPublishedDate': ['2016-04-08 07:17:37'],
+    'AssetRegisteredDate': ['2016-04-08 05:46:03'],
+    'TemplateType': ['csv']
+    }
+registered_tools:
+    []
+data_set_to_be_deleted:
+    'Auto1604151527'
+registered_datasets:
+    []
+working_set_to_be_deleted:
+    'test publish data set'
+dac_service:
+    restservice.apps.pcf.fbdl-int-03.local
+dac_cli_address:
+    172.16.64.112
+dac_cli_username:
+    fbdl
+dac_cli_password:
+    'heac|Twak3'
+pcf_info:
+    {
+    'organization': 'fbdl-mc',
+    'api_url': 'https://api.system.pcf.fbdl-int-03.local',
+    'uaa_url': 'https://uaa.system.pcf.fbdl-int-03.local'
+    }
+vSphere_info:
+    {
+    'host_address': '172.16.0.5',
+    'username': 'fbdl',
+    'password': 'fbdl1234!',
+    'port': 443
+    }
+deployed_apps_guid:
+    [
+    ]
+accepted_datasets_queue:
+    []

@@ -1,0 +1,411 @@
+# ------------------------------------------------------------------------------
+# Copyright (C) 2016-2017 DELL EMC Corporation. All Rights Reserved.
+
+# This software contains the intellectual property of DELL EMC Corporation
+# or is licensed to DELL EMC Corporation from third parties.  Use of this
+# software and the intellectual property contained therein is expressly
+# limited to the terms and conditions of the License Agreement under which
+# it is provided by or on behalf of DELL  EMC.
+
+# ------------------------------------------------------------------------------
+
+# NOTE: Can't perform Validation at this point as server has two drives by now. Validation script works only for one disk.
+#-
+#    name: 'Validate SQL Windows Customization Complete'
+#    hosts: sql_server
+#    gather_facts: no
+#    vars:
+#        step: 'EPB-250-030'
+#    tasks:
+#        -
+#            name: 'SQL - {{ step }} - Validate Windows Customization is complete'
+#            tags:
+#                - 'SQL - {{ step }} - Validate Windows Customization is complete'
+#            delegate_to: localhost
+#            run_once: true
+#            ehc_script_agent:
+#                package_name: common
+#                module_name: validateWindows
+#                method_name: validateWindowsServer
+#                method_params:
+#                    vCenterDict: '{{ vcenter }}'
+#                    vMDict:  '{{ vmDict }}'
+#                    vmConfDict: '{{ validateTemplateVmConfDict }}'
+#            register: validateWindowsTemplateResults
+#            failed_when: validateWindowsTemplateResults.data is not defined or validateWindowsTemplateResults.data.err_message is defined or false in validateWindowsTemplateResults|json_query('data.*.status')
+#            changed_when: validateWindowsTemplateResults.data is defined and validateWindowsTemplateResults.data.err_message is not defined and false not in validateWindowsTemplateResults|json_query('data.*.status')
+
+
+-
+    name: 'SQL - {{ step }} - Modify TCP/IP v4 properties of a Windows VM'
+    hosts: sql_server
+    gather_facts: no
+    vars:
+        step: 'EPB-250-050'
+    tasks:
+        -
+            name: 'SQL - {{ step }} - Enable Net BIOS of a Windows VM'
+            tags:
+                - 'SQL - {{ step }} - Enable Net BIOS of a Windows VM'
+            delegate_to: localhost
+            run_once: true
+            ehc_script_agent:
+                package_name: common
+                module_name: tcpProperties
+                method_name: enableNetBIOS
+                method_params:
+                    vCenterConfDict: '{{ vcenter }}'
+                    vmConfDict:  '{{ vmDict }}'
+            register: enableNetBIOSResults
+            failed_when: enableNetBIOSResults.data is not defined or enableNetBIOSResults.data.err_message is defined or enableNetBIOSResults.data != 0
+            changed_when: enableNetBIOSResults.data is defined and enableNetBIOSResults.data.err_message is not defined and enableNetBIOSResults.data == 0
+
+        -
+            name: 'SQL - {{ step }} - Enable Primary Parent DNS'
+            tags:
+                - 'SQL - {{ step }} - Enable Primary Parent DNS'
+            delegate_to: localhost
+            run_once: true
+            ehc_script_agent:
+                package_name: common
+                module_name: tcpProperties
+                method_name: enablePrimaryParentDNS
+                method_params:
+                    vCenterConfDict: '{{ vcenter }}'
+                    vmConfDict:  '{{ vmDict }}'
+            register: enablePrimaryParentDNSResults
+            failed_when: enablePrimaryParentDNSResults.data is not defined or enablePrimaryParentDNSResults.data.err_message is defined or enablePrimaryParentDNSResults.data != 0
+            changed_when: enablePrimaryParentDNSResults.data is defined and enablePrimaryParentDNSResults.data.err_message is not defined and enablePrimaryParentDNSResults.data == 0
+
+
+
+-
+    name: 'SQL - {{ step }} - Add users to local admin group and set rights'
+    hosts: sql_server
+    gather_facts: no
+    vars:
+        step: 'EPB-250-060'
+    tags:
+                - 'SQL - {{ step }} - Add users to local admin group and set rights'
+    tasks:
+        -
+            name: 'SQL - {{ step }} - Validate user permissions on SQL Server'
+            delegate_to: localhost
+            ehc_script_agent:
+                method_name: validateIaasVMSetup
+                method_params:
+                    serviceAccount: '{{ item }}'
+                    vCenterDataDict: '{{ vcenter }}'
+                    vmDetails:
+                        -   '{{ vmDict }}'
+                module_name: iaasVMSetup
+                package_name: vra
+            with_items:
+                - '{{ad_domain_name}}\{{ad_user.svc_sqlsvr.username}}'
+                - '{{ad_domain_name}}\{{ad_user.svc_sqlsvragent.username}}'
+            register: validatePermissionsOnSqlServerResults
+            failed_when: not validatePermissionsOnSqlServerResults['data'][vmname] is defined or not validatePermissionsOnSqlServerResults['data'][vmname]['SeBatchLogonRight'] or not validatePermissionsOnSqlServerResults['data'][vmname]['SeServiceLogonRight'] or not validatePermissionsOnSqlServerResults['data'][vmname]['localAdminAdded']
+            changed_when: validatePermissionsOnSqlServerResults['data'][vmname] is defined and validatePermissionsOnSqlServerResults['data'][vmname]['SeBatchLogonRight'] and validatePermissionsOnSqlServerResults['data'][vmname]['SeServiceLogonRight'] and validatePermissionsOnSqlServerResults['data'][vmname]['localAdminAdded']
+            ignore_errors: validatePermissionsOnSqlServerResults.failed_when_result
+
+        -
+            name: 'SQL - {{ step }} - Add users to local admin group and set rights'
+            delegate_to: localhost
+            ehc_script_agent:
+                package_name: vra
+                module_name: iaasVMSetup
+                method_name: iaasVMSetup
+                method_params:
+                    serviceAccount: '{{ item }}'
+                    domain: '{{ common.domain }}'
+                    sqlServer:
+                        host: null
+                        user: null
+                        password: null
+                        database: null
+                    vCenterDataDict: '{{ vcenter }}'
+                    vmDetails:
+                        -   '{{ vmDict }}'
+            with_items:
+                - '{{ad_domain_name}}\\{{ad_user.svc_sqlsvr.username}}'
+                - '{{ad_domain_name}}\\{{ad_user.svc_sqlsvragent.username}}'
+            register: assignPermissionOnSqlServerResult
+            failed_when: not resultassignPermissionOnSqlServerResult['data'][vmname] is defined or not assignPermissionOnSqlServerResult['data'][vmname]['SeBatchLogonRight'] or not assignPermissionOnSqlServerResult['data'][vmname]['onDomain'] or not assignPermissionOnSqlServerResult['data'][vmname]['SeServiceLogonRight'] or not assignPermissionOnSqlServerResult['data'][vmname]['localAdminAdded']
+            changed_when: assignPermissionOnSqlServerResult['data'][vmname] is defined and assignPermissionOnSqlServerResult['data'][vmname]['SeBatchLogonRight'] and assignPermissionOnSqlServerResult['data'][vmname]['onDomain'] and assignPermissionOnSqlServerResult['data'][vmname]['SeServiceLogonRight'] and assignPermissionOnSqlServerResult['data'][vmname]['localAdminAdded']
+            ignore_errors: True
+
+        -
+            name: 'SQL - {{ step }} - Post Validate user permissions on SQL Server'
+            delegate_to: localhost
+            ehc_script_agent:
+                method_name: validateIaasVMSetup
+                method_params:
+                    serviceAccount: '{{ item }}'
+                    vCenterDataDict: '{{ vcenter }}'
+                    vmDetails:
+                        -   '{{ vmDict }}'
+                module_name: iaasVMSetup
+                package_name: vra
+            with_items:
+                - '{{ad_domain_name}}\{{ad_user.svc_sqlsvr.username}}'
+                - '{{ad_domain_name}}\{{ad_user.svc_sqlsvragent.username}}'
+            register: validateUserPermissionsOnSQL
+            failed_when: not validateUserPermissionsOnSQL['data'][vmname] is defined or not validateUserPermissionsOnSQL['data'][vmname]['SeBatchLogonRight'] or not validateUserPermissionsOnSQL['data'][vmname]['SeServiceLogonRight'] or not validateUserPermissionsOnSQL['data'][vmname]['localAdminAdded']
+            changed_when: validateUserPermissionsOnSQL['data'][vmname] is defined and validateUserPermissionsOnSQL['data'][vmname]['SeBatchLogonRight'] and validateUserPermissionsOnSQL['data'][vmname]['SeServiceLogonRight'] and validateUserPermissionsOnSQL['data'][vmname]['localAdminAdded']
+            when: not assignPermissionOnSqlServerResult|skipped
+
+#-
+#    name: 'SQL - {{ step }} - Prepare Windows for SQL Server Installation - MSDTC Install'
+#    hosts: sql_server
+#    gather_facts: no
+#    vars:
+#        step: 'EPB-250-070'
+#    tasks:
+#        -
+#            name: 'SQL - {{ step }} - Validate SQL Server Preparation'
+#            delegate_to: localhost
+#            ehc_script_agent:
+#                package_name: common
+#                module_name: sqlUtils
+#                method_name: validatePrepareSQLServer
+#                method_params:
+#                    vCenterDict: '{{ vcenter }}'
+#                    VMDict: '{{ vmDict }}'
+#                    firewallConfig:
+#                        'SQL Server': '{{ sql_server_port }}'
+#            register: preValidationResult
+#            failed_when: preValidationResult|failed or not preValidationResult.data is defined or preValidationResult.data.err_message is defined or not preValidationResult.data.msdtcValidateDict is defined or false in preValidationResult.data|json_query('msdtcValidateDict.*.Status')
+#            changed_when: preValidationResult.data is defined and not preValidationResult.data.err_message is defined and preValidationResult.data.msdtcValidateDict is defined and false not in preValidationResult.data|json_query('msdtcValidateDict.*.Status')
+#            ignore_errors: preValidationResult.failed_when_result
+#
+#        -
+#            name: 'SQL - {{ step }} - Prepare SQL Server'
+#            delegate_to: localhost
+#            ehc_script_agent:
+#                package_name: common
+#                module_name: sqlUtils
+#                method_name: prepareSQLServer
+#                method_params:
+#                    vCenterDict: '{{ vcenter }}'
+#                    VMDict: '{{ vmDict }}'
+#                    firewallConfig:
+#                        'SQL Server': '{{ sql_server_port }}'
+#                    reboot: 'True'
+#            register: prepareSqlResult
+#            failed_when: prepareSqlResult|failed or not prepareSqlResult.data is defined or preValidationResult.data.err_message is defined and ( not prepareSqlResult.data.firewallConfigured or not prepareSqlResult.data.firewallConfigured)
+#            changed_when: prepareSqlResult.data is defined and not preValidationResult.data.err_message is defined and prepareSqlResult.data.firewallConfigured and prepareSqlResult.data.firewallConfigured
+#            when: preValidationResult.failed_when_result
+#            ignore_errors: True
+#        -
+#            name: 'SQL - {{ step }} - Post Validate SQL Server Preparation'
+#            delegate_to: localhost
+#            ehc_script_agent:
+#                package_name: common
+#                module_name: sqlUtils
+#                method_name: validatePrepareSQLServer
+#                method_params:
+#                    vCenterDict: '{{ vcenter }}'
+#                    VMDict: '{{ vmDict }}'
+#                    firewallConfig:
+#                        'SQL Server': '{{ sql_server_port }}'
+#            register: validateSQLResult
+#            failed_when: validateSQLResult|failed or not validateSQLResult.data is defined or validateSQLResult.data.err_message is defined or not validateSQLResult.data.msdtcValidateDict is defined or false in validateSQLResult.data|json_query('msdtcValidateDict.*.Status')
+#            changed_when: validateSQLResult.data is defined and not validateSQLResult.data.err_message is defined and validateSQLResult.data.msdtcValidateDict is defined and false not in validateSQLResult.data|json_query('msdtcValidateDict.*.Status')
+#            when: not prepareSqlResult|skipped
+
+
+-
+    name: 'SQL - {{ step }} - Install SQL Server'
+    hosts: sql_server
+    gather_facts: no
+    vars:
+        step: 'EPB-250-080'
+    tags:
+                - 'SQL - {{ step }} - Install SQL Server'
+    tasks:
+        -
+            name: 'SQL - {{ step }} - Create user profile for SQL Server'
+            delegate_to: localhost
+            ehc_script_agent:
+                package_name: common
+                module_name: createUserProfileForADUser
+                method_name: createUserProfileForADUser
+                method_params:
+                    vCenterInfo: '{{ vcenter }}'
+                    vmInfo:
+                        datacenter: '{{ vcenter_datacenter }}'
+                        vmName: '{{ vmname }}'
+                        # 'folderPath': None, #the VM has no folder, so no need folderPath
+                        adminUsername: '{{windows.default_username}}'
+                        adminPassword: '{{ windows.default_password }}'
+                    adCredential:
+                        username: '{{ad_domain_name}}\{{ad_user.svc_sqlsvr.username}}'
+                        password: '{{ad_user.svc_sqlsvr.password}}'
+            register: createUserProfileForADUserResults
+            failed_when: not createUserProfileForADUserResults.data is defined or createUserProfileForADUserResults.data.err_message is defined or not createUserProfileForADUserResults.data.status == true
+            changed_when: createUserProfileForADUserResults.data is defined and createUserProfileForADUserResults.data.err_message is not defined and createUserProfileForADUserResults.data.status == true
+            # Adding retry as it failed once with random error
+            retries: 2
+            until: createUserProfileForADUserResults.data is defined and createUserProfileForADUserResults.data.err_message is not defined and createUserProfileForADUserResults.data.status == true
+            delay: 10
+
+        -
+            name: 'SQL - {{ step }} - Update SQL Server Config file'
+            delegate_to: localhost
+            ehc_script_agent:
+                method_name: update_config_file
+                method_params:
+                    file_path: "common/SQLConfigTemplate.ini"
+                    file_contents: "{{lookup('template', sql_config_local_template_path)}}"
+                module_name: update_config_file
+                package_name: special
+
+        -
+            name: 'SQL - {{ step }} - Check SQL Service Status'
+            delegate_to: localhost
+            ehc_script_agent:
+                method_name: checkSQLServiceStatus
+                method_params:
+                    vCenterDict:
+                        host: '{{vcenter.fqdn}}'
+                        user: '{{vcenter.username}}'
+                        password: '{{vcenter.password}}'
+                    vmDict:
+                        vmname: '{{vmname}}'
+                        vmusername: '{{ad_domain_name}}\{{ad_user.svc_sqlsvr.username}}'
+                        vmpassword: '{{ad_user.svc_sqlsvr.password}}'
+                        ostype: '1'
+                        # Note: Do not change the shell path here. It has to be this format with back slashes.
+                        shell: 'C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe'
+                module_name: sqlUtils
+                package_name: common
+            register: preCheckSQLServiceResults
+            failed_when: not preCheckSQLServiceResults is defined or not preCheckSQLServiceResults.data is defined or preCheckSQLServiceResults.data.err_message is defined or not preCheckSQLServiceResults.data.SQLServiceStatus is defined or not preCheckSQLServiceResults.data.BrowserServiceStatus is defined or preCheckSQLServiceResults.data.SQLServiceStatus == "Service Not found" or preCheckSQLServiceResults.data.SQLServiceStatus == "Exception occurred while checking for Service" or preCheckSQLServiceResults.data.BrowserServiceStatus == "Service Not found" or preCheckSQLServiceResults.data.BrowserServiceStatus == "Exception occurred while checking for Service"
+            changed_when: preCheckSQLServiceResults is defined and preCheckSQLServiceResults.data is defined and preCheckSQLServiceResults.data.SQLServiceStatus is defined and preCheckSQLServiceResults.data.BrowserServiceStatus is defined and preCheckSQLServiceResults.data.SQLServiceStatus != "Service Not found" and preCheckSQLServiceResults.data.BrowserServiceStatus != "Service Not found" and preCheckSQLServiceResults.data.SQLServiceStatus != "Exception occurred while checking for Service" and preCheckSQLServiceResults.data.BrowserServiceStatus != "Exception occurred while checking for Service"
+            ignore_errors: True
+
+        -
+            name: 'SQL - {{ step }} - Install SQL Server'
+            delegate_to: localhost
+            ehc_script_agent:
+                method_name: installSQL
+                method_params:
+                    lcsData:
+                        # TODO: Check these passwords
+                        AGTSVCPASSWORD: '{{ ad_user.svc_sqlsvragent.password }}'
+                        SQLSVCPASSWORD: '{{ ad_user.svc_sqlsvr.password }}'
+                        # SAPWD: '{{ ad_user.svc_sqlsvr.password }}'
+                        SAPWD: '{{ db_user_password }}'
+                        SECURITYMODE: SQL
+                        BROWSERSVCSTARTUPTYPE: Automatic
+                    vCenterDict:
+                        host: '{{ vcenter.host }}'
+                        user: '{{ vcenter.user }}'
+                        password: '{{ vcenter.password }}'
+                        datastorename: '{{ datastorenameToPlaceSQLImage }}'
+                        remotefilepathname: '{{ remoteDataStoreFilePathName }}'
+                    vmDict:
+                        vmname: '{{vmname}}'
+                        vmusername: '{{ad_domain_name}}\{{ad_user.svc_sqlsvr.username}}'
+                        vmpassword: '{{ad_user.svc_sqlsvr.password}}'
+                        ostype: '1'
+                        localsqlisopath: '{{ localsqlisopath }}'
+                        shell: '{{ windowsShell }}'
+                module_name: sqlUtils
+                package_name: common
+            register: installSQLServerResults
+            failed_when: installSQLServerResults|failed or not installSQLServerResults is defined or not installSQLServerResults.data is defined or installSQLServerResults.data == false or installSQLServerResults.data.err_message is defined
+            changed_when: installSQLServerResults is defined and installSQLServerResults.data is defined and installSQLServerResults.data != False and not installSQLServerResults.data.err_message is defined
+            when: preCheckSQLServiceResults.failed_when_result
+        -
+            name: 'SQL - {{ step }} - Post Check SQL Service Status'
+            delegate_to: localhost
+            ehc_script_agent:
+                method_name: checkSQLServiceStatus
+                method_params:
+                    vCenterDict: '{{ vcenter }}'
+                    vmDict:
+                        vmname: '{{vmname}}'
+                        vmusername: '{{ad_domain_name}}\{{ad_user.svc_sqlsvr.username}}'
+                        vmpassword: '{{ad_user.svc_sqlsvr.password}}'
+                        ostype: '1'
+                        # Note: Do not change the shell path here. It has to be this format with back slashes.
+                        shell: 'C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe'
+                module_name: sqlUtils
+                package_name: common
+            register: checkSqlServiceResults
+            failed_when: not checkSqlServiceResults is defined or not checkSqlServiceResults.data is defined or checkSqlServiceResults.data.err_message is defined or not checkSqlServiceResults.data.SQLServiceStatus is defined or not checkSqlServiceResults.data.BrowserServiceStatus is defined or checkSqlServiceResults.data.SQLServiceStatus == "Service Not found" or checkSqlServiceResults.data.SQLServiceStatus == "Exception occurred while checking for Service" or checkSqlServiceResults.data.BrowserServiceStatus == "Service Not found" or checkSqlServiceResults.data.BrowserServiceStatus == "Exception occurred while checking for Service"
+            changed_when: checkSqlServiceResults is defined and checkSqlServiceResults.data is defined and checkSqlServiceResults.data.SQLServiceStatus is defined and checkSqlServiceResults.data.BrowserServiceStatus is defined and checkSqlServiceResults.data.SQLServiceStatus != "Service Not found" and checkSqlServiceResults.data.BrowserServiceStatus != "Service Not found" and checkSqlServiceResults.data.SQLServiceStatus != "Exception occurred while checking for Service" and checkSqlServiceResults.data.BrowserServiceStatus != "Exception occurred while checking for Service"
+            when: not installSQLServerResults|skipped
+
+
+-
+    name: 'SQL - {{ step }} - Enable TCP/IP Network Protocol'
+    hosts: sql_server
+    gather_facts: no
+    vars:
+        step: 'EPB-250-090'
+    tags:
+                - 'SQL - {{ step }} - Enable TCP/IP Network Protocol'
+    tasks:
+        -
+            name: 'SQL - {{ step }} - Validate TCP/IP Network Protocol'
+            delegate_to: localhost
+            ehc_script_agent:
+                package_name: common
+                module_name: sqlUtils
+                method_name: validateEnabledSQLTCPIP
+                method_params:
+                    vCenterDict: '{{ vcenter }}'
+                    vmDict: '{{ vmDict }}'
+                    guestOSDict:
+                      guestOSFlavor: '{{ vmDict.guestOSFlavor }}'
+                      guestOSVersion: '{{ vmDict.guestOSVersion }}'
+                    sqlInfo:
+                      serviceName: '{{ ansible_host_name }}'
+                      instanceName: MSSQLSERVER
+            register: validateEnabledSQLTCPIPResults
+            failed_when: not validateEnabledSQLTCPIPResults.data is defined or validateEnabledSQLTCPIPResults.data.err_message is defined or not validateEnabledSQLTCPIPResults.data.status == true
+            changed_when: validateEnabledSQLTCPIPResults.data is defined and validateEnabledSQLTCPIPResults.data.err_message is not defined and validateEnabledSQLTCPIPResults.data.status == true
+            ignore_errors: validateEnabledSQLTCPIPResults.failed_when_result
+
+        -
+            name: 'SQL - {{ step }} - Enable TCP/IP Network Protocol'
+            delegate_to: localhost
+            ehc_script_agent:
+                package_name: common
+                module_name: sqlUtils
+                method_name: enableSQLTCPIP
+                method_params:
+                    vCenterDict: '{{ vcenter }}'
+                    vmDict: '{{ vmDict }}'
+                    guestOSDict:
+                      guestOSFlavor: '{{ vmDict.guestOSFlavor }}'
+                      guestOSVersion: '{{ vmDict.guestOSVersion }}'
+                    sqlInfo:
+                      serviceName: '{{ ansible_host_name }}'
+                      instanceName: MSSQLSERVER
+            register: enableSQLTCPIPResults
+            failed_when: not enableSQLTCPIPResults.data is defined or enableSQLTCPIPResults.data.err_message is defined or not enableSQLTCPIPResults.data.status == true
+            changed_when: enableSQLTCPIPResults.data is defined and enableSQLTCPIPResults.data.err_message is not defined and enableSQLTCPIPResults.data.status == true
+
+        -
+            name: 'SQL - {{ step }} - Post Validate TCP/IP Network Protocol'
+            delegate_to: localhost
+            ehc_script_agent:
+                package_name: common
+                module_name: sqlUtils
+                method_name: validateEnabledSQLTCPIP
+                method_params:
+                    vCenterDict: '{{ vcenter }}'
+                    vmDict: '{{ vmDict }}'
+                    guestOSDict:
+                      guestOSFlavor: '{{ vmDict.guestOSFlavor }}'
+                      guestOSVersion: '{{ vmDict.guestOSVersion }}'
+                    sqlInfo:
+                      serviceName: '{{ ansible_host_name }}'
+                      instanceName: MSSQLSERVER
+            register: postValidateEnabledSQLTCPIPResults
+            failed_when: not postValidateEnabledSQLTCPIPResults.data is defined or postValidateEnabledSQLTCPIPResults.data.err_message is defined or not postValidateEnabledSQLTCPIPResults.data.status == true
+            changed_when: postValidateEnabledSQLTCPIPResults.data is defined and postValidateEnabledSQLTCPIPResults.data.err_message is not defined and postValidateEnabledSQLTCPIPResults.data.status == true
+            ignore_errors: not enableSQLTCPIPResults|skipped

@@ -1,0 +1,34 @@
+# ------------------------------------------------------------------------------
+# Copyright (C) 2016-2017 DELL EMC Corporation. All Rights Reserved.
+
+# This software contains the intellectual property of DELL EMC Corporation
+# or is licensed to DELL EMC Corporation from third parties.  Use of this
+# software and the intellectual property contained therein is expressly
+# limited to the terms and conditions of the License Agreement under which
+# it is provided by or on behalf of DELL  EMC.
+
+# ------------------------------------------------------------------------------
+
+---
+# Playbook file: vra.yml
+-   include:  ../backup_and_restore/plays/power-on-vms.yml vms=vra_iaas_servers step='VRA - EPB-450-010'
+# Poll vmtools is included in power-on-vms.yml
+
+-
+    include:  ../deploy/plays/validate-windows.yml
+    vars:
+        vms: vra_iaas_servers
+        step: VRA - EPB-450-025
+        msdtc_enbled: true
+
+-   include:  plays/validate-internet-access.yml vms='vra_iaas_servers' step='VRA - EPB-450-030'
+
+-   include:  ../backup_and_restore/plays/power-on-vms.yml vms='vra_servers' step='VRA - EPB-450-040'
+
+-   include:  ../backup_and_restore/plays/poll-vra-5480.yml vms='vra_servers' step='VRA - EPB-450-050'
+
+#-   include:  plays/configure-msdtc.yml vms='vra_iaas_servers' step='EPB-450-041'
+
+-   include:  plays/vra-installation.yml
+
+-   include:  plays/vra-configuration.yml

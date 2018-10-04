@@ -1,0 +1,86 @@
+# ------------------------------------------------------------------------------
+# Copyright (C) 2016-2017 DELL EMC Corporation. All Rights Reserved.
+
+# This software contains the intellectual property of DELL EMC Corporation
+# or is licensed to DELL EMC Corporation from third parties.  Use of this
+# software and the intellectual property contained therein is expressly
+# limited to the terms and conditions of the License Agreement under which
+# it is provided by or on behalf of DELL  EMC.
+
+# ------------------------------------------------------------------------------
+
+-
+    name: '{{ step }} - Size Linux VMs'
+    hosts: vrops_servers,vrops_data_nodes,log_insight_servers,log_insight_workers
+    any_errors_fatal: True
+    vars:
+      json_query: '[].{hddName: diskName, hddCapacity: diskSize}'
+    tags:
+      - '{{ step }} - Size Virtual Machines'
+    tasks:
+        -
+            name: '{{ step }} - Validate Linux VM Sizing'
+            delegate_to: localhost
+            ehc_script_agent:
+                package_name: common
+                module_name: IVMManagement
+                method_name: IvalidateResizeVM
+                method_params:
+                    vCenterDict: '{{ vcenter }}'
+                    vmDict:
+                        vmname: '{{ vmname }}'
+                    cpuConfig:
+                      numCPUs: '{{ sizing_info.cpus }}'
+                      numCoresPerSocket: '{{ sizing_info.cpu_cores_per_socket }}'
+                    vmMemoryConfig:
+                      memorySize: '{{ sizing_info.memory_size_gb }}'
+                    hddConfig: '{{ sizing_info.disks | json_query(json_query) }}'
+            register: preValidateVMSizingResult
+            failed_when: not preValidateVMSizingResult.data is defined or preValidateVMSizingResult.data.err_message is defined or preValidateVMSizingResult.data.status == false
+            changed_when: preValidateVMSizingResult.data is defined and not preValidateVMSizingResult.data.err_message is defined and preValidateVMSizingResult.data.status == true
+            when: sizing_info is defined and sizing_info.disks is defined or sizing_info.cpus is defined or sizing_info.cpu_cores_per_socket is defined or sizing_info.memory_size_gb is defined
+            ignore_errors: preValidateVMSizingResult.failed_when_result
+
+        -
+            name: '{{ step }} - Size Virtual Machines'
+            delegate_to: localhost
+            ehc_script_agent:
+                package_name: common
+                module_name: IVMManagement
+                method_name: IResizeVM
+                method_params:
+                    vCenterDict: '{{ vcenter }}'
+                    vmDict:
+                        vmname: '{{ vmname }}'
+                    cpuConfig:
+                      numCPUs: '{{ sizing_info.cpus }}'
+                      numCoresPerSocket: '{{ sizing_info.cpu_cores_per_socket }}'
+                    vmMemoryConfig:
+                      memorySize: '{{ sizing_info.memory_size_gb }}'
+                    hddConfig: '{{ sizing_info.disks | json_query(json_query) }}'
+            register: vmSizingResult
+            failed_when: not vmSizingResult.data is defined or vmSizingResult.data.err_message is defined or not vmSizingResult.data.state is defined or not vmSizingResult.data.state == 'success'
+            changed_when: vmSizingResult.data is defined and not vmSizingResult.data.err_message is defined and vmSizingResult.data.state is defined and vmSizingResult.data.state == 'success'
+            when: sizing_info is defined and sizing_info.disks is defined and preValidateVMSizingResult.failed_when_result
+
+        -
+            name: '{{ step }} - Post Validate VM Sizing'
+            delegate_to: localhost
+            ehc_script_agent:
+                package_name: common
+                module_name: IVMManagement
+                method_name: IvalidateResizeVM
+                method_params:
+                    vCenterDict: '{{ vcenter }}'
+                    vmDict:
+                        vmname: '{{ vmname }}'
+                    cpuConfig:
+                      numCPUs: '{{ sizing_info.cpus }}'
+                      numCoresPerSocket: '{{ sizing_info.cpu_cores_per_socket }}'
+                    vmMemoryConfig:
+                      memorySize: '{{ sizing_info.memory_size_gb }}'
+                    hddConfig: '{{ sizing_info.disks | json_query(json_query) }}'
+            register: postValidateVMSizingResult
+            failed_when: not postValidateVMSizingResult.data is defined or postValidateVMSizingResult.data.err_message is defined or postValidateVMSizingResult.data.status == false
+            changed_when: postValidateVMSizingResult.data is defined and not postValidateVMSizingResult.data.err_message is defined and postValidateVMSizingResult.data.status == true
+            when: not vmSizingResult|skipped

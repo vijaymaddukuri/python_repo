@@ -1,0 +1,14 @@
+def short(l):
+    newList=[]
+    valueDict={}
+    for i in l:
+        newList=newList+list(i)
+    unqiueList=list(set(newList))
+    for i in unqiueList:
+        itemCount = newList.count(i)
+        valueDict[i]=itemCount
+    return valueDict
+
+a=[{1, 2, 3}, {2, 3, 4}]
+newDic=short(a)
+print newDic

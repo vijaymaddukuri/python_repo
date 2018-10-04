@@ -1,0 +1,5 @@
+ITechnology:
+    SeleniumTech:
+        enabled: True
+    FBDLTech:
+        enabled: False

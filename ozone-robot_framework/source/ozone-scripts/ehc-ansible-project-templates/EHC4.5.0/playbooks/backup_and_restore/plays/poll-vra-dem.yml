@@ -1,0 +1,56 @@
+# ------------------------------------------------------------------------------
+# Copyright (C) 2016-2017 DELL EMC Corporation. All Rights Reserved.
+
+# This software contains the intellectual property of DELL EMC Corporation
+# or is licensed to DELL EMC Corporation from third parties.  Use of this
+# software and the intellectual property contained therein is expressly
+# limited to the terms and conditions of the License Agreement under which
+# it is provided by or on behalf of DELL  EMC.
+
+# ------------------------------------------------------------------------------
+
+-
+    name: '{{ step|default(None) }} - Poll vRA DEM Workers'
+    hosts: '{{ vms }}'
+    serial: '{{ serial | default(20) }}'
+    gather_facts: no
+    any_errors_fatal: True
+    tasks:
+        -
+            name: '{{ step|default(None) }} - Poll vRA DEM Workers'
+            tags:
+                - '{{ step|default(None) }} - Poll vRA DEM Workers'
+            delegate_to: localhost
+            run_once: true
+            ehc_script_agent:
+                package_name: vra
+                module_name: pollvRADEM
+                method_name: pollvRADEM
+                method_params:
+                    vCenterDict: '{{ vcenter }}'
+                    vRADEMVms:
+                        -
+                                dcName: '{{ vcenter_details.datacenter }}'
+                                folderPath: ''
+                                vmHost: '{{ host_address.vra_worker_primary.ip }}'
+                                vmName: '{{ host_address.vra_worker_primary.vmname }}'
+                                vmUserName: '{{ windows.default_username }}'
+                                vmPassword: '{{ windows.default_password }}'
+                                guestOSFlavor: "server"
+                                guestOSVersion: "version-2012R2"
+                                servicePrefix: "'VMware DEM-Worker'"
+                        -
+                                dcName: '{{ vcenter_details.datacenter }}'
+                                folderPath: ''
+                                vmHost: '{{ host_address.vra_worker_secondary.ip }}'
+                                vmName: '{{ host_address.vra_worker_secondary.vmname }}'
+                                vmUserName: '{{ windows.default_username }}'
+                                vmPassword: '{{ windows.default_password }}'
+                                guestOSFlavor: "server"
+                                guestOSVersion: "version-2012R2"
+                                servicePrefix: "'VMware DEM-Worker'"
+            register: pollvRADemResults
+            failed_when: not pollvRADemResults.data is defined or pollvRADemResults.data.err_message is defined or not pollvRADemResults.data.status == true
+            changed_when: pollvRADemResults.data is defined and not pollvRADemResults.data.err_message is defined and pollvRADemResults.data.status == true
+            until: pollvRADemResults.data is defined and not pollvRADemResults.data.err_message is defined and pollvRADemResults.data.status == true
+            retries: '{{ poll_retries }}'

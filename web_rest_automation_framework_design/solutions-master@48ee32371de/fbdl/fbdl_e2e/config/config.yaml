@@ -1,0 +1,85 @@
+global_ui_address:
+    https://auto-dedicate.apps.pcf.bdl-auto.local
+primary_user:
+    username: cyan.ni@emc.com
+    password: password
+    role: manager
+secondary_user:
+    username: wesley.peng@emc.com
+    password: password
+    role: developer
+history_dir:
+    /root/automation/bdl/history/
+search_tools_name:
+    {'AssetVisibleName': ['MySQL for Pivotal Cloud Foundry']}
+pcf_mysql_info:
+    [{
+    name: MySQL for Pivotal Cloud Foundry,
+    instance: mysql4pcf,
+    }, ]
+pcf_mongodb_info:
+    [{
+    name: MongoDB for Pivotal Cloud Foundry,
+    instance: mongodb4pcf,
+    }, ]
+dac_cloudera_info:
+    [{
+    name: cloudera_small,
+    instance: cloudera4dac,
+    }, ]
+dac_hortonworks_info:
+    [{
+    name: hortonworks_small ,
+    instance: hortonworks4dac,
+    }, ]
+dac_mongodb_info:
+    [{
+    name: mongodb_small ,
+    instance: mongodb4dac,
+    }, ]
+services_to_be_deployed:
+    [{
+    name: RabbitMQ,
+    instance: svc_RabbitMQ,
+    }, ]
+deployed_services:
+    []
+deployed_tools:
+    []
+deployed_datasets:
+    []
+collaborators_to_be_added:
+    [{username: chenyang.yang@emc.com,
+    password: password,
+    role: developer,
+    },]
+added_collaborators:
+    []
+registered_tools:
+    []
+registered_datasets:
+    []
+dac_service:
+    restservice-auto.apps.pcf.bdl-auto.local
+dac_cli_address:
+    172.50.2.56
+dac_cli_username:
+    fbdl
+dac_cli_password:
+    'heac|Twak3'
+pcf_info:
+    {
+    'organization': 'bdl-auto',
+    'api_url': 'https://api.system.pcf.bdl-auto.local',
+    'uaa_url': 'https://uaa.system.pcf.bdl-auto.local'
+    }
+vSphere_info:
+    {
+    'host_address': '10.110.107.60',
+    'username': 'cni',
+    'password': 'Password123',
+    'port': 443
+    }
+deployed_apps_guid:
+    [
+    ]

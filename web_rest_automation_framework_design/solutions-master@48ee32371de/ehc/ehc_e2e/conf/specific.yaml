@@ -1,0 +1,17 @@
+shared:
+    current_browser:
+        type:
+        instance:
+        launched: False
+launch_browser:
+    browserType: Chrome
+    baseUrl: http://www.bing.com
+login:
+    primary:
+        username:
+        password:
+        role:
+    secondary:
+        username:
+        password:
+        role:

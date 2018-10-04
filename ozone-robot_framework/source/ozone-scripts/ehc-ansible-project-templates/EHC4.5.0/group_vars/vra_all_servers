@@ -1,0 +1,451 @@
+# ------------------------------------------------------------------------------
+# Copyright (C) 2016-2017 DELL EMC Corporation. All Rights Reserved.
+
+# This software contains the intellectual property of DELL EMC Corporation
+# or is licensed to DELL EMC Corporation from third parties.  Use of this
+# software and the intellectual property contained therein is expressly
+# limited to the terms and conditions of the License Agreement under which
+# it is provided by or on behalf of DELL  EMC.
+
+# ------------------------------------------------------------------------------
+
+#
+# vRA IaaS Server Properties
+#
+
+
+maxTokenSize: '{{ vrealize_automation.max_token_size }}'
+maxFieldLength: '{{ vrealize_automation.max_field_length }}'
+maxRequestBytes: '{{ vrealize_automation.max_request_bytes }}'
+
+domainLocalGroups: '{{ vrealize_automation.domain_local_groups }}'
+securityGlobalGroups: '{{ vrealize_automation.security_global_groups }}'
+
+iaasCredentials:
+    vmusername: '{{ ad_user.svc_iaas.username }}'
+    vmpassword: '{{ ad_user.svc_iaas.password }}'
+    username: '{{ ad_user.svc_iaas.username }}'
+    password: '{{ ad_user.svc_iaas.password }}'
+
+iaaSWebServerFeatures:
+    -   'DP'
+    -   'SRMDR'
+    -   'ENCRYPT'
+    -   'SA'
+    -   'RP4VM'
+
+iaaSManagerServerFeatures:
+    -   'DP'
+    -   'SRMDR'
+    -   'ENCRYPT'
+    -   'SA'
+    -   'RP4VM'
+
+# Datacenter Locations are not required as part of this release
+# datacenterLocations: '{{ vrealize_automation.datacenter_locations }}'
+
+iaasPackagePath: '{{ sw_repository_manifest.base_path }}/{{ sw_repository_manifest.content.ehc_foundation_iaas_customization_package.relative_path }}/{{ sw_repository_manifest.content.ehc_foundation_iaas_customization_package.file_name }}'
+
+
+# ------------------------------
+# VRA Installation Information
+# ------------------------------
+
+installationInfo:
+    vRA_PRIMARY_VA_HOSTNAME: '{{ host_address.vra_primary.fqdn }}'
+    TENANT_USER: '{{ vrealize_automation.default_tenant.username }}'
+    TENANT_USER_PASSWORD: "{{ vrealize_automation.default_tenant.password }}"
+    TENANT_ID: '{{ vrealize_automation.default_tenant.id }}'
+    vRA_SECONDARY_VA_HOSTNAMES:
+        -   '{{host_address.vra_secondary.fqdn}}'
+    vRA_SECONDARY_VA_USERS: 'root'
+    vRA_SECONDARY_VA_USER_PASSWORDS: '{{ vrealize_automation.vra_root_password }}'
+    USE_SINGLE_IAAS_CREDENTIALS: true
+    SINGLE_IAAS_USER: '{{ svc_iaas_username_with_domain }}'
+    SINGLE_IAAS_PASSWORD: '{{ ad_user.svc_iaas.password }}'
+    vRA_WEB_HOSTNAMES:
+        -   '{{ host_address.vra_web_primary.fqdn }}'
+        -   '{{ host_address.vra_web_secondary.fqdn }}'
+    vRA_WEB_USERNAMES: '{{ svc_iaas_username_with_domain }} {{ svc_iaas_username_with_domain }}'
+    vRA_WEB_PASSWORDS: '{{ ad_user.svc_iaas.password }} {{ ad_user.svc_iaas.password }}'
+    vRA_MS_HOSTNAMES:
+        -   '{{ host_address.vra_manager_primary.fqdn }}'
+        -   '{{ host_address.vra_manager_secondary.fqdn }}'
+    vRA_MS_USERNAMES: '{{ svc_iaas_username_with_domain }} {{ svc_iaas_username_with_domain }}'
+    vRA_MS_PASSWORDS: '{{ ad_user.svc_iaas.password }} {{ ad_user.svc_iaas.password }}'
+    vRA_MS_ROLES:
+        - 'active'
+        - 'passive'
+    vRA_DEM_HOSTNAMES:
+        -   '{{ host_address.vra_worker_primary.fqdn }}'
+        -   '{{ host_address.vra_worker_secondary.fqdn }}'
+    vRA_DEM_USERNAMES: '{{ svc_iaas_username_with_domain }} {{ svc_iaas_username_with_domain }}'
+    vRA_DEM_PASSWORDS: '{{ ad_user.svc_iaas.password }} {{ ad_user.svc_iaas.password }}'
+
+    MSSQL_SERVER: '{{ host_address.sql_server.fqdn }}'
+    MSSQL_USER: '{{ svc_iaas_username_with_domain }}'
+    MSSQL_PASS: '{{ ad_user.svc_iaas.password }}'
+    MSSQL_INSTANCE: ''
+
+    IAAS_DB_NAME: '{{  databases.vra_database  }}'
+    IAASPASSPHRASE: '{{ vrealize_automation.iaas_sql_db_passphrase }}'
+    IAAS_DB_WINDOWS_AUTH: True
+
+    WEB_SITE_NAME: Default Web Site
+    HTTPS_PORT: '443'
+    vRA_LB_FQDN: '{{ host_address.vra_load_balancer.fqdn }}'
+    vRA_WEB_FQDN: '{{ host_address.vra_web_load_balancer.fqdn }}'
+    vRA_MS_FQDN: '{{ host_address.vra_manager_load_balancer.fqdn }}'
+    vRA_AGENT_HOSTNAMES:
+        -   '{{ host_address.vra_proxy_agent_primary.fqdn }}'
+        -   '{{ host_address.vra_proxy_agent_secondary.fqdn }}'
+    vRA_AGENT_USERNAMES: '{{ svc_iaas_username_with_domain }} {{ svc_iaas_username_with_domain }}'
+    vRA_AGENT_PASSWORDS: '{{ ad_user.svc_iaas.password }} {{ ad_user.svc_iaas.password }}'
+    vSPHERE_AGENT_NAMES: '{{ vrealize_automation.vcenter_endpoint_name }}'
+    vSPHERE_AGENT_ENDPOINTS: '{{ vrealize_automation.vcenter_endpoint_name }}'
+    # Not sure if these are required anymore
+    HORIZONUSER: administrator
+    # TODO: Horizon is required. vRA Installation Wizard seems to be setting up Horizon. Horizon is the default user and administrator password for default tenant
+    HORIZONPASS: "{{ vrealize_automation.default_tenant.password }}"
+    SSO_TENANT: 'vsphere.local'
+
+    vRA_LICENSE: '{{ license_key.vrealize_automation }}'
+
+    USE_CERTIFICATE_PATH: True
+    IAAS_MS_CERTIFICATE_PATH: '{{ service_cert_file_path.vra_iaasmgr_svc }}'
+    IAAS_MS_CERTIFICATE_PK_PATH: '{{ repository.certs.vra_iaas_manager_key_path }}'
+    IAAS_WEB_CERTIFICATE_PATH: '{{ service_cert_file_path.vra_iaasweb_svc }}'
+    IAAS_WEB_CERTIFICATE_PK_PATH: '{{ repository.certs.vra_iaas_web_key_path }}'
+    VRA_WEB_CERTIFICATE_PATH: '{{ service_cert_file_path.vra_svc }}'
+    VRA_WEB_CERTIFICATE_PK_PATH: '{{ repository.certs.vra_svc_key_path }}'
+
+    IAAS_WEB_CERTIFICATE: ''
+    IAAS_WEB_CERTIFICATE_PK: ''
+    VRA_WEB_CERTIFICATE: ''
+    VRA_WEB_CERTIFICATE_PK: ''
+    IAAS_MS_CERTIFICATE_PK: ''
+    IAAS_MS_CERTIFICATE: ''
+    VRA_WEB_PK_PASSWORD: ''
+    IAAS_MS_PK_PASSWORD: ''
+
+machinePrefixDetails:
+    machinePrefix:  '{{ vrealize_automation.initial_machine_prefix_name }}'
+    digitsNumber:   '{{ vrealize_automation.initial_machine_prefix_number_of_digits }}'
+    nextNumber: '{{ vrealize_automation.initial_machine_prefix_next_number }}'
+
+
+# ------------------------------------------
+# vRA Post Installation Configuration
+# ------------------------------------------
+
+firstTenant:
+    tenantname: '{{ vrealize_automation.tenants[0].name }}'
+    tenantID: '{{ vrealize_automation.tenants[0].id }}'
+    tenantURL: '{{ vrealize_automation.tenants[0].url }}'
+    description: '{{ vrealize_automation.tenants[0].description }}'
+
+# Used for running ehcBranding Workflow and vRA Configure Workflow
+# Used for Adding vRO to vRealize Automation
+vroWorkflowInfo:
+    name: vRO
+    description: vRealize Orchestrator
+    host: '{{ host_address.vro_primary.fqdn }}'
+    port: 8281
+    username: '{{ ad_user.app_vro_sso.username }}@{{ ad_domain }}'
+    password: '{{ ad_user.app_vro_sso.password }}'
+
+vraCred:
+    vra: '{{ host_address.vra_primary.fqdn }}'
+    vraUsername: '{{ vrealize_automation.default_tenant.username }}'
+    vraPassword: '{{ vrealize_automation.default_tenant.password }}'
+    tenantname: '{{ vrealize_automation.default_tenant.id }}'
+
+# Used for validating vRA Configurations after workflow execution
+vraTenantLocalCred:
+    vra: '{{ host_address.vra_primary.fqdn }}'
+    host: '{{ host_address.vra_primary.fqdn }}'
+    username: '{{ vrealize_automation.local_admin_username }}'
+    userName: '{{ vrealize_automation.local_admin_username }}'
+    emailAddress: '{{ vrealize_automation.local_admin_username }}@{{ ad_domain }}'
+    password: "{{ vrealize_automation.local_admin_password }}"
+    tenantname: '{{ firstTenant.tenantname }}'
+    tenantID: '{{ firstTenant.tenantID }}'
+
+# Used for adding vRO to vRealize Automation
+vraTenantSysAdminCred:
+    vra: '{{ ansible_host }}'
+    username: '{{ ad_user.ehc_sysadmin.username }}@{{ ad_domain }}'
+    userName: '{{ ad_user.ehc_sysadmin.username }}@{{ ad_domain }}'
+    password: '{{ ad_user.ehc_sysadmin.password }}'
+    tenantname: '{{ firstTenant.tenantname }}'
+
+groupBaseSearchDns: '{{ active_directory.group_base_dn }}'
+
+tenantDict:
+    iaasAdmins:
+      - "{{ ad_user_group.ehc_iaas_admins.groupname }}@{{ ad_domain }}"
+    tenantAdmins:
+      - "{{ ad_user_group.ehc_tenant_admins.groupname }}@{{ ad_domain }}"
+    tenantBody:
+        contactEmail: "{{ smtp.sender_address }}"
+        defaultTenant: False
+        description: '{{ firstTenant.description }}'
+        id: '{{ firstTenant.tenantID }}'
+        name: '{{ firstTenant.tenantname }}'
+        urlName: '{{ firstTenant.tenantURL }}'
+    userBody:
+        tenantName: '{{ firstTenant.tenantname }}'
+        locked: False
+        disabled: False
+        firstName: "Local"
+        lastName: "Admin"
+        emailAddress: '{{ vraTenantLocalCred.emailAddress }}'
+        description: '{{ vraTenantLocalCred.username }}'
+        name: "{{ vraTenantLocalCred.username }}"
+        # TODO: Setting to generic password for now. Change later
+        password: "{{ vraTenantLocalCred.password }}"
+        principalId:
+            domain: "Local Users"
+            name: "{{ vraTenantLocalCred.username }}"
+    directoryBody:
+        name: "adDir"
+        type: "AD"
+        userNameDn: "CN={{ ad_user.adbind_vra.username }},{{ groupBaseSearchDns }}"
+        groupBaseSearchDn: "{{ groupBaseSearchDns }}"
+        password: "{{ ad_user.adbind_vra.password }}"
+        url: "ldap://{{ common.domain_controller_ip }}"
+        userBaseSearchDn: "{{ active_directory.user_base_dn }}"
+        domain: "{{ ad_domain }}"
+        groupBaseSearchDns:
+            -   "{{ groupBaseSearchDns }}"
+        userBaseSearchDns:
+            -   "{{ active_directory.user_base_dn }}"
+        trustAll: True
+        useGlobalCatalog: False
+
+SMTPServerDict:
+    "@type": "EmailNotificationProvider"
+    name: "outbound SMTP server"
+    type: "EMAIL_PROVIDER"
+    providerDirection: "OUTBOUND"
+    providerMode:
+        role: "CUSTOM"
+    serverName: "{{ smtp.server }}"
+    protocol: "SMTP"
+    port: '{{ smtp.port | int}}'
+    sslEnabled: '{{ smtp.ssl | bool}}'
+    emailAddress: "{{ smtp.sender_address }}"
+    selfSignedCertificateAccepted: '{{ smtp.self_signed_certificate_accepted | bool }}'
+    authenticationRequired: '{{ smtp.auth_required | bool }}'
+    username: '{{ smtp.username }}'
+    password: '{{ smtp.password }}'
+
+
+
+svc_iaas_username_with_domain: '{{ ad_domain_name }}\{{ ad_user.svc_iaas.username }}'
+
+
+# ------------------------------------------
+# vRA Configuration Workflow
+# ------------------------------------------
+vraConfigWorkflowID: '60f3aff7-af9c-4c10-adcf-535007d00347'
+
+businessGroupDetails:
+    EHCSystem:
+        name: EHCSystem
+        description: ''
+        emailManagerNotificationsTo: '{{ vrealize_automation.system_business_group_notifications_email_address }}'
+        adContainer: 'adDir'
+        bgAdministrators:
+            -   '{{ ad_user_group.tenant_bg_managers.groupname }}@{{ ad_domain }}'
+        bgAdministratorEmail: "{{ vrealize_automation.system_business_group_admin_email_address }}"
+        # TODO: Check if this is array
+        bgSupport: '{{ vrealize_automation.ehcsystem_support_groups.split(",") }}'
+        bgUsers: '{{ vrealize_automation.ehcsystem_user_groups.split(",") }}'
+    EHCOperations:
+        name: EHCOperations
+        description: ''
+        emailManagerNotificationsTo: '{{ vrealize_automation.operation_business_group_notifications_email_address }}'
+        adContainer: 'adDir'
+        bgAdministrators:
+            -   '{{ ad_user_group.tenant_bg_managers.groupname }}@{{ ad_domain }}'
+        bgAdministratorEmail: "{{ vrealize_automation.operation_business_group_admin_email_address }}"
+        # TODO: Check if this is array
+        bgSupport: '{{ vrealize_automation.ehcoperations_support_groups.split(",") }}'
+        bgUsers: '{{ vrealize_automation.ehcoperations_user_groups.split(",") }}'
+
+endPointDetails:
+    vCenterEndpoint:
+        name:  "{{ vrealize_automation.vcenter_endpoint_name }}"
+        description: "vCenter Endpoint"
+        fqdn:  "{{ vcenter.fqdn }}"
+        managementUrl: "{{ vcenter.fqdn }}"
+        username: "{{ ad_user.app_vra_vcenter.username }}@{{ ad_domain }}"
+        password: "{{ ad_user.app_vra_vcenter.password }}"
+
+    vROEndpoint:
+        name:  vRO
+        description: 'vRO Endpoint'
+        fqdn:  "{{ host_address.vro_load_balancer.fqdn }}"
+        # TODO: Should this be vro management URL or ip?
+        managementUrl: "{{ host_address.vro_load_balancer.fqdn }}"
+        username: "{{ ad_user.app_vra_vro.username }}@{{ ad_domain }}"
+        password: "{{ ad_user.app_vra_vro.password }}"
+
+vraConfigWorkflowData:
+    vRAurl: "{{ host_address.vra_primary.fqdn }}"
+    # TODO Confirm if this is tenant id or name
+    vRAtenant: "{{ firstTenant.tenantID }}"
+    vRAauthUsername: "{{ ad_user.ehc_sysadmin.username }}@{{ ad_domain }}"
+    vRAauthPassword: "{{ ad_user.ehc_sysadmin.password }}"
+
+    IAAShostAddress: "{{ host_address.vra_web_primary.fqdn }}"
+    IAASauthUserName: "{{ ad_user.ehc_sysadmin.username }}"
+    IAASauthPassword: "{{ ad_user.ehc_sysadmin.password }}"
+    IAASdomain: "{{ ad_domain }}"
+
+    machinePrefix: '{{ machinePrefixDetails.machinePrefix }}'
+    numberOfDigits: '{{ machinePrefixDetails.digitsNumber }}'
+    nextNumber: '{{ machinePrefixDetails.nextNumber }}'
+    groupName: "{{ vrealize_automation.initial_fabric_group_name }}"
+    groupDescription: ""
+    FabricAdministrator: "{{ ad_user_group.ehc_fabric_admins.groupname }}@{{ ad_domain }}"
+
+    VROendpointName: "{{ endPointDetails.vROEndpoint.name }}"
+    vROendpointDescription: "{{ endPointDetails.vROEndpoint.description }}"
+    vroManagementUrl: "{{ endPointDetails.vROEndpoint.managementUrl }}"
+    vroCredUsername: "{{ endPointDetails.vROEndpoint.username }}"
+    vroCredDescription: ""
+    vroCredPassword: "{{ endPointDetails.vROEndpoint.password }}"
+
+    VCendpointName: "{{ endPointDetails.vCenterEndpoint.name }}"
+    VCendpointDescription: "{{ endPointDetails.vCenterEndpoint.description }}"
+    VCmanagementUrl: "{{ endPointDetails.vCenterEndpoint.managementUrl }}"
+    vcCredusername: "{{ endPointDetails.vCenterEndpoint.username }}"
+    vcCredDescription: ""
+    vcCredpassword: "{{ endPointDetails.vCenterEndpoint.password }}"
+
+    bgName: "{{ businessGroupDetails.EHCSystem.name }}"
+    bgDescription: "{{ businessGroupDetails.EHCSystem.description }}"
+    activeDirectoryContainer: "{{ businessGroupDetails.EHCSystem.adContainer }}"
+    bgadministrators: "{{ businessGroupDetails.EHCSystem.bgAdministrators }}"
+    bgAdministratorEmail: "{{ businessGroupDetails.EHCSystem.bgAdministratorEmail }}"
+    bgSupport: "{{ businessGroupDetails.EHCSystem.bgSupport }}"
+    bgUsers:  "{{ businessGroupDetails.EHCSystem.bgUsers }}"
+
+    bgName2: "{{ businessGroupDetails.EHCOperations.name }}"
+    bgDescription2: "{{ businessGroupDetails.EHCOperations.description }}"
+    activeDirectoryContainer2: "{{ businessGroupDetails.EHCOperations.adContainer }}"
+    bgAdministrators2: "{{ businessGroupDetails.EHCOperations.bgAdministrators }}"
+    bgAdministratorEmail2: "{{ businessGroupDetails.EHCOperations.bgAdministratorEmail }}"
+    bgSupport2: "{{ businessGroupDetails.EHCOperations.bgSupport }}"
+    bgUsers2:  "{{ businessGroupDetails.EHCOperations.bgUsers }}"
+
+
+# --------------------------------
+# vRA User and Group Role Map
+# --------------------------------
+
+
+# Group Role Map
+groupNameRoleMap:
+    -   name: ehc_xaas_architects
+        roles:
+          -   'COMPOSITION_SERVICE_INFRASTRUCTURE_ARCHITECT'
+          -   'DESIGNER_SERVICE_ARCHITECT'
+
+    -   name: ehc_app_admins
+        roles:
+          -   'COMPOSITION_SERVICE_INFRASTRUCTURE_ARCHITECT'
+          -   'COMPOSITION_SERVICE_APPLICATION_ARCHITECT'
+
+# User Role Map
+userNameRoleMap:
+    -   name: app_vrops_vra
+        roles:
+          -   'SOFTWARE_SERVICE_SOFTWARE_ARCHITECT'
+
+# ------------------------------------------
+# EHC Foundation Workflow
+# ------------------------------------------
+initializeEHCFoundationWorkflowID: '11cbd08d-e42c-4fdb-8a39-886989ee224a'
+initializeEHCFoundationWorkflowName: 'Initialize EHC Foundation'
+
+ehcFoundationWorkflowData:
+    vROFqdn: '{{ host_address.vro_primary.fqdn }}'
+    vROUsername: '{{ ad_user.app_vro_rest.username }}@{{ ad_domain }}'
+    vROUsernamePassword: '{{ ad_user.app_vro_rest.password }}'
+
+    # TODO: Check this user and password
+    vRATenantUrl: '{{ firstTenant.tenantURL }}'
+    vRAUsername: '{{ ad_user.ehc_sysadmin.username }}@{{ ad_domain }}'
+    vRAUsernamePassword: '{{ ad_user.ehc_sysadmin.password }}'
+    vRAEHCSystemBusinessGroup: '{{ businessGroupDetails.EHCSystem.name }}'
+    vRAFqdn: '{{ host_address.vra_load_balancer.fqdn }}'
+
+    ADDnsName: '{{ ad_domain }}'
+    ADPort: '{{ ad_domain_port }}'
+    ADLDAPRoot: '{{ active_directory.user_base_dn }}'
+    ADUsername: '{{ ad_user.adbind_vro.username }}@{{ ad_domain }}'
+    ADUsernamePassword: '{{ ad_user.adbind_vro.password }}'
+    ADUseSSL: '{{ active_directory.use_ssl }}'
+
+    IAASFqdn: '{{ host_address.vra_web_load_balancer.fqdn }}'
+    IAASUsername: '{{ ad_user.app_vro_iaas.username }}'
+    IAASUsernamePassword: '{{ ad_user.app_vro_iaas.password }}'
+    # TODO: Check if this should be in CAPS? Or get from input file.
+    IAASDomain: '{{ ad_domain_name }}'
+    isViprPresent: False
+
+    SMTPServer: '{{ smtp.server }}'
+    SMTPPort: '{{ smtp.port }}'
+    SMTPSenderName: '{{ smtp.sender_name }}'
+    SMTPSenderEmail: '{{ smtp.sender_address }}'
+    SMTPUsername: '{{ smtp.username }}'
+    SMTPUsernamePassword: '{{ smtp.password }}'
+    SQLFqdn: '{{ host_address.sql_server.fqdn }}'
+    SQLPort: '{{ sql_server_port }}'
+    SQLUsername: '{{ ad_user.app_vro_sql.username }}'
+    SQLUserDomain: '{{ ad_domain }}'
+    SQLPassword: '{{ ad_user.app_vro_sql.password }}'
+    SQLDatabaseName: '{{  databases.ehc_om_database  }}'
+    SQLDBAuthType: 'windows'
+    # TODO Check this value
+    SQLDatabaseConnPoolSize: '5'
+    # TODO Check this value
+    CAEnabled: False
+    skipASDMainPost: False
+
+
+# --------------------------------
+# EHC Branding Workflow
+# --------------------------------
+
+ehc_branding_workflow_id: 23c2502b-d9a3-4c96-becb-cc80e71b15e2
+ehc_branding_workflow_name: IconAutomation_v2
+
+ehcBranding:
+    workflowID: '{{ ehc_branding_workflow_id }}'
+    workflowName:  '{{ ehc_branding_workflow_name }}'
+    workflowData:
+        companyNmae: 'Enterprise Hybrid Cloud'
+        prodName: ''
+        vraUrl: '{{ host_address.vra_load_balancer.fqdn }}'
+        vraTenant: '{{ firstTenant.tenantID }}'
+        mergerRestrictions: '{{ vrealize_automation.merger_restriction|default(False) }}'
+
+#entitlementDict:
+#    description: ''
+#    entitledCatalogItems: []
+#    entitledResourceOperations: []
+#    expiryDate:
+#    lastUpdatedBy:
+#    name: "EHC Configuration 2"
+#    status: ACTIVE
+#    BussinessGroup: EHCOperations
+#    usersAndGroups:
+#      -   '{{ ad_user_group.ehc_storage_services.groupname }}'
+#    entitledServices:
+#    # TODO: Check if this should be both or just one?
+#      -   "EHC Configuration"
+#    localScopeForActions: True

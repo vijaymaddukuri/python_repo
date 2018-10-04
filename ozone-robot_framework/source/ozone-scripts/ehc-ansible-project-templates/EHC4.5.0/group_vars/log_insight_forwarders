@@ -1,0 +1,93 @@
+# ------------------------------------------------------------------------------
+# Copyright (C) 2016-2017 DELL EMC Corporation. All Rights Reserved.
+
+# This software contains the intellectual property of DELL EMC Corporation
+# or is licensed to DELL EMC Corporation from third parties.  Use of this
+# software and the intellectual property contained therein is expressly
+# limited to the terms and conditions of the License Agreement under which
+# it is provided by or on behalf of DELL  EMC.
+
+# ------------------------------------------------------------------------------
+
+vmname: '{{ inventory_hostname in host_address and host_address[inventory_hostname].vmname or "localhost" }}'
+ansible_host: '{{ inventory_hostname in host_address and host_address[inventory_hostname].fqdn or "localhost" }}'
+ansible_host_ip: '{{ inventory_hostname in host_address and host_address[inventory_hostname].ip or "127.0.0.1" }}'
+
+ansible_connection: ssh
+
+
+ovaType: 'vRealize Log Insight'
+ovaVersion: '3.6'
+
+ova_manifest_lookup: '{{ sw_repository_manifest.content.log_insight_ova }}'
+ovaSource: '{{ sw_repository_manifest.base_path }}/{{ ova_manifest_lookup.relative_path }}/{{ ova_manifest_lookup.file_name }}'
+
+override_resource_pool: '{{ resource_pools.core }}'
+
+ovaConfigDict:
+    size: '{{ vrealize_log_insight.ova_size }}'
+    network: '{{ vcenter_network }}'
+    hostname: '{{ ansible_host }}'
+    ip: '{{ ansible_host_ip }}'
+    gateway: '{{ common.management_network_gateway }}'
+    netmask: '{{ common.management_network_netmask }}'
+    dns: '{{ common.dns_server_ip }}'
+    root_password: '{{ vrealize_log_insight.root_password }}'
+    # TODO Check this certificate path. Should this be the generated certificate? Or Key file?
+    ssh_pub_key: '{{ service_cert_file_path.vrli_svc }}'
+
+loginsight_port: 9543
+
+vmDict:
+    host: '{{ ansible_host }}'
+    vmName: '{{ vmname }}'
+    vmname: '{{ vmname }}'
+    username: root
+    password: '{{ vrealize_log_insight.root_password }}'
+    vmusername: root
+    vmpassword: '{{ vrealize_log_insight.root_password }}'
+    port: '{{ loginsight_port }}'
+
+logInsightCred:
+    host: '{{ ansible_host }}'
+    username: admin
+    password: '{{ vrealize_log_insight.admin_password }}'
+    port: '{{ loginsight_port }}'
+
+loginsightConfig:
+    adminPassword: '{{ vrealize_log_insight.admin_password }}'
+    adminEmail: '{{ vrealize_log_insight.admin_email }}'
+    smtp:
+        username: '{{ smtp.username }}'
+        password: '{{ smtp.password }}'
+        host: '{{ smtp.server }}'
+        port: '{{ smtp.port }}'
+        sslAuth: '{{ smtp.ssl }}'
+        tls: '{{ smtp.enable_starttls }}'
+        defaultSender: '{{ smtp.sender_address }}'
+    license: '{{  license_key.vrealize_log_insight }}'
+    notificationEmails: '{{ vrealize_log_insight.notification_emails_csv.split(",") }}'
+    ntpList:  '{{ common.ntp_servers_comma_separated.split(",") }}'
+
+# Used for Loginsight Forwarder configuration
+logInsightMaster:
+    host: '{{ host_address.log_insight.fqdn }}'
+    # TODO Check this port
+    port: 9000
+
+protocol: cfapi
+
+forwarderConfiguration:
+    logInsightCred: '{{ logInsightCred }}'
+    # TODO: Check these settings. Setting ID to fqdn for now
+    id: '{{ ansible_host }}'
+    host: '{{ logInsightMaster.host }}'
+    port: '{{ logInsightMaster.port }}'
+    sslEnabled: False
+    workerCount: 8
+    diskCacheSize: 209715200
+    tags:
+    filter:
+    transportProtocol:
+    forwardcomplementaryfields:
+
