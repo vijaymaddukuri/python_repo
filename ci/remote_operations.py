@@ -27,23 +27,19 @@ def upload_code(ci_dir_path, source_path, des_path):
                       password=server_pwd, timeout=10)
 
     # Make the directory in remote machine
-	command = """
-        mkdir -p /home/install
-        """.format(file)
-	return_data = ssh_obj.execute_command(command)
+    command = "mkdir -p /home/install"
+    return_data = ssh_obj.execute_command(command)
     
 	# Upload code to remote machine
     upload_data = ssh_obj.upload_file(source_path, des_path)
 	
-	# Upload tas_svc shell script into remote machine
-	tas_svc_file_path = os.path.join(ci_dir_path,'install_tas_svc.sh')
-	upload_data = ssh_obj.upload_file(tas_svc_file_path, '/home/install/install_tas_svc.sh')
+    # Upload tas_svc shell script into remote machine
+    tas_svc_file_path = os.path.join(ci_dir_path,'install_tas_svc.sh')
+    upload_data = ssh_obj.upload_file(tas_svc_file_path, '/home/install/install_tas_svc.sh')
 	
-	# Execute tas_svc file in remote machine
-	command = """
-        cd /home/install && chmod -R 777 install_tas_svc.sh && ./install_tas_svc.sh
-        """.format(file)
-	return_data = ssh_obj.execute_command(command)
+    # Execute tas_svc file in remote machine
+    command = "cd /home/install && chmod -R 777 install_tas_svc.sh && ./install_tas_svc.sh"
+    return_data = ssh_obj.execute_command(command)
 
 
 if __name__ == '__main__':

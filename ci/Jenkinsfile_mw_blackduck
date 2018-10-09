@@ -8,12 +8,9 @@ void runStages(String tag) {
                           dir=$(pwd)
                           mkdir middleware
                           cd middleware
-                          git clone https://madduv:487367d96125a05c961180a4d9ca530f012481c1@github.emcrubicon.com/AAI/middlewareservice.git
                           virtualenv venv -p python3
                           source venv/bin/activate
                           cd middlewareservice
-
-					      ls
 					      python3 setup.py install
                           chmod +x $dir/middleware
                           rm -rf ci
@@ -44,7 +41,7 @@ void runStages(String tag) {
 }
 
 
-def vs = new devops.VariousStuff1().configure([notifyRecipients : 'sylus.anuranjan@virtustream.com'])
+def vs = new devops.VariousStuff1().configure([notifyRecipients : 'vijaymaddukuri@yahoo.com'])
 
 vs.try_node('docker_engine') {
 

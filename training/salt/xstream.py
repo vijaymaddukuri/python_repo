@@ -6,7 +6,7 @@ import json
 import pprint
 import logging
 import decimal
-from training import yaml_script
+from practice import yaml_script
 # Import Salt Libs
 import salt.utils.cloud
 import salt.config as config

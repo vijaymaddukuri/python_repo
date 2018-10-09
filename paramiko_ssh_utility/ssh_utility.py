@@ -162,3 +162,35 @@ class SSHUtil(object):
             self.client.close()
         if self.ftp_client is not None:
             self.ftp_client.close()
+
+
+import os
+import paramiko
+
+
+
+def send_ssh_command(host='not_passed', port=22, username='not_passed', password='not_passed', command='not_passed', return_output=False):
+    """
+    Function designed to send a command line over ssh.
+    Example: my_return_value = send_ssh_command(host='mymachine.mpe.lab.vce.com', username='root', password='my_super_password', command='ls -l', return_output=False)
+    """
+    try:
+        port = int(port)
+
+        my_return_value = ''
+        ssh = paramiko.SSHClient()
+        ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+        ssh.connect(host, port=port, username=username, password=password)
+        stdin,stdout,stderr = ssh.exec_command(command)
+        if return_output == True:
+            for line in stdout.readlines():
+                my_return_value = my_return_value + line
+        else:
+            my_return_value = stdout.channel.recv_exit_status()
+        ssh.close()
+        return my_return_value
+    except Exception as e:
+        print(e)
+        print('Connection Failed')
+        return "Connection Failed: " + str(e)
+

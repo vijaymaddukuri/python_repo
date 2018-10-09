@@ -4,7 +4,7 @@ import sys
 import os
 import glob
 import datetime
-from training import yaml_script
+from practice import yaml_script
 import time
 from src.testsetup.utsetup import UTSetup
 from src.utils.common_utils import *

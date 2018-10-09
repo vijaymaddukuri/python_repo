@@ -1,7 +1,7 @@
 import io
 import unittest
 
-from training.unit_testing.fake_object_example import FileOpen
+from practice.unit_testing.fake_object_example import FileOpen
 
 
 class FileTest(unittest.TestCase):

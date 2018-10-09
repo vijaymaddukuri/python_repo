@@ -86,7 +86,7 @@ void runStages(String tag) {
 }
 
 
-def vs = new devops.VariousStuff1().configure([notifyRecipients : 'sylus.anuranjan@virtustream.com'])
+def vs = new devops.VariousStuff1().configure([notifyRecipients : 'vijaymaddukuri@yahoo.com'])
 
 vs.try_node('docker_engine') {
 

@@ -1,8 +1,8 @@
 import unittest
 from unittest.mock import Mock
 
-from training.unit_testing.stub_example import Alarm
-from training.unit_testing.stub_example import Sensor
+from practice.unit_testing.stub_example import Alarm
+from practice.unit_testing.stub_example import Sensor
 
 class AlarmTest(unittest.TestCase):
 
