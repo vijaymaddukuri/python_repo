@@ -63,13 +63,8 @@ Training:
 * Install python project dependencies for dev environment
    
         $ pip3 install -r requirements/local.txt
+
     
-* Install python project dependencies for production environment
-
-        $ pip3 install -r requirements/production.txt
-    
-
-
 
 ### Run Flake8 before commit (run on the root of the project)
 
