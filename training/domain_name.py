@@ -12,4 +12,4 @@ def domain_name(url):
 url="https://www.cnet.com"
 
 u =domain_name(url)
-print u
+print(u)

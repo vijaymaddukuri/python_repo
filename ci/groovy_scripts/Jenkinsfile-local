@@ -1,6 +1,23 @@
 void runStages(String tag) {
     
     docker.image(tag).inside("--privileged=true --user root") {
+
+                def taglist = sh script: 'git tag', returnStdout: true
+
+                String[] splitData = taglist.split("\n");
+                for (String eachSplit : splitData) {
+                    if (eachSplit.startsWith("v")) {
+                            lasttag = eachSplit.substring(1);
+                        }
+                }
+
+                def lastbuild = Jenkins.instance.getItemByFullName("${env.JOB_BASE_NAME}").getLastSuccessfulBuild().toString()
+
+                def lastbuildnumber = lastbuild.substring(lastbuild.indexOf('#') + 1)
+
+                int newbuildnumber = lastbuildnumber.toInteger() + 1
+
+                def ver = lasttag + "." + newbuildnumber
 	
 
 				stage('Git Clone') {

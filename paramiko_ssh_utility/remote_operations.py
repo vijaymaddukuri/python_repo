@@ -2,7 +2,7 @@ import logging
 import os
 import sys
 
-from ci.ssh_utility import SSHUtil
+from paramiko_ssh_utility.ssh_utility import SSHUtil
 from common.functions import (get_config)
 
 

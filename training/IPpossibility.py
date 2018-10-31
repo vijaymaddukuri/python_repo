@@ -25,6 +25,6 @@ for i in range(1, sz -2):
                 if validateIP(temp):
                     IPlist.append(temp)
             temp=A
-print IPlist
+print(IPlist)
 
 

@@ -1,3 +1,18 @@
+# Deque:
+#
+# A deque also known as double ended queue, is an ordered collection of items similar to the queue.
+#
+# It has two ends front and rear and the items remain positioned in the collection.
+#
+# Unrestricitve nature of adding and removing items makes deque different.
+#
+# New items can be added at either the front or the rear.
+#
+# Likewise, existing items can be removed from either end.
+#
+# This hybrid linear structure provides all the capabilities of stacks and queues in a single data structure.
+
+
 class Deque(object):
 
     def __init__(self):
