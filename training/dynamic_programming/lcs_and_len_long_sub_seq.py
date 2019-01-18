@@ -41,15 +41,17 @@ def lcs(arr1, arr2):
     ans = 0
     for i in range(1, m):
         ans = max(ans, L[i][n])
+    print("length of longest subsequence of one string which is substring of another string")
     print(ans)
 
     # Longest Common Subsequence and sub array
+    print('Longest Common Subsequence and sub array')
     print(L[m][n], sub_seq_arr)
 
     # L[m][n] contains the length of LCS of arr1[0..n-1] & arr2[0..m-1],  sub_seq_arr will contain the LCS
     return L[m][n], sub_seq_arr
 
 a2 = "ABCD"
-a1 = "BACDBDCD"
+a1 = "BACDBDCDDD"
 
 print("Length of LCS is ", lcs(a1, a2))

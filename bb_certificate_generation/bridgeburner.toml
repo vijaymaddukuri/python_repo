@@ -1,0 +1,17 @@
+mode="client"
+
+certFile="/etc/bridgeburner/certs/Virtustream/clients/VIJGF-backup-automation.crt"
+keyFile="/etc/bridgeburner/certs/Virtustream/clients/VIJGF-backup-automation.key"
+caFile="/etc/bridgeburner/certs/Virtustream/CA.crt"
+
+[client]
+    serverAddress="10.100.249.49:7000"
+
+    [[client.services]]
+    Name="3512ea87-4116-4e83-b8cc-8687cf129972"
+    Address="10.100.249.47"
+    Port=8000
+    Protocol="http"
+
+[logging]
+level="info"

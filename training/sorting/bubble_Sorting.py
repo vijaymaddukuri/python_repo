@@ -19,5 +19,5 @@ def sort(itemList):
 newList=sort(['is2', 'Thi1s', 'T4est', '3a'])
 # newList=sort(['b1',2,5,3,'a1'])
 newList=sort([2,5,3,'a1'])
-print newList
+print(newList)
 

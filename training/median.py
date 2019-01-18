@@ -8,5 +8,5 @@ def median(itemList):
         return float(sum(itemList[(length/2)-1:(length/2)+1]))/2.0
 
 result=median([1,2,3,1])
-print result
+print(result)
 
