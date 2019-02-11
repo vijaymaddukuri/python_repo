@@ -10,4 +10,4 @@ def pascal(p):
     return tri
 
 p=pascal(7)
-print p
+print(p)

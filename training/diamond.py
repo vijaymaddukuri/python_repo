@@ -12,5 +12,5 @@ def diamond(n):
     return diamond
 
 diamond=diamond(5)
-print diamond
+print(diamond)
 

@@ -11,7 +11,7 @@ class SSHUtil(object):
     executing the command and uploading the files
     """
 
-    def __init__(self, host, username, password, keyfilepath=None, keyfiletype=None, port=22, timeout=10):
+    def __init__(self, host, username, password, keyfilepath=None, keyfiletype=None, port=22, timeout=50):
         """
         :param host: Hostname/Ip to connect and upload
         :param username: username to connect the machine
@@ -36,7 +36,7 @@ class SSHUtil(object):
         self.ftp_client = None
         try:
             # Paramiko.SSHClient can be used to make connections to the remote server and transfer files
-            logger.debug('Establishing SSH connection to:', self.host, self.port)
+            print('Establishing SSH connection to:', self.host, self.port)
             if self.keyfilepath is not None:
                 # Get the private key used to authenticate user.
                 if self.keyfiletype == 'DSA':
@@ -63,14 +63,14 @@ class SSHUtil(object):
             else:
                 # Authenticate with a username and a password.
                 self.client.connect(self.host, self.port, self.username, self.password)
-            logger.debug("Connected to the server", self.host)
+            print("Connected to the server", self.host)
         except paramiko.AuthenticationException:
             message = "Authentication failed, please verify your credentials"
             logger.debug(message)
             raise Exception(message)
         except ConnectionError as ce:
             message = "Unable to connect to the remote machine {}".format(ce)
-            logger.info(message)
+            logger.debug(message)
             raise Exception(message)
         except socket.timeout as e:
             message = "Connection timeout: {}".format(e)
@@ -81,7 +81,7 @@ class SSHUtil(object):
             logger.debug(message)
             raise Exception(message)
 
-    def execute_command(self, command, get_pty=True, allowed_return_codes=[0,1], with_output=False):
+    def execute_command(self, command, get_pty=True, allowed_return_codes=[0,1], with_output=False, prompt=False,prompt_value=''):
         """Execute a command on the remote host.Return a tuple containing
         an integer status and a two strings, the first containing stdout
         and the second containing stderr from the command.
@@ -95,8 +95,10 @@ class SSHUtil(object):
         return_data = {}
         try:
             if command is not None:
-                logger.info("Executing command --> {}".format(command))
-                stdin, stdout, stderr = self.client.exec_command(command, timeout=10, get_pty=get_pty)
+
+                stdin, stdout, stderr = self.client.exec_command(command, timeout=50, get_pty=get_pty)
+                if prompt == True:
+                    stdin.write(prompt_value + '\n')
                 if with_output and not stdout:
                     message = "Problem occurred while running command: {} The error is {}"\
                         .format(command, stderr)
@@ -105,13 +107,13 @@ class SSHUtil(object):
                     return_data['comment'] = message
                     return return_data
                 else:
-                    logger.info("Command execution completed successfully {}".format(command))
+                    logger.debug("Command execution completed successfully {}".format(command))
                     return_data['output'] = stdout
                     return_data['error'] = stderr
                     return_data['status'] = True
                 result_flag = stdout.channel.recv_exit_status()
                 if result_flag in allowed_return_codes:
-                    logger.info('Swallowed acceptable return code of {}'.format(result_flag))
+                    logger.debug('Swallowed acceptable return code of {}'.format(result_flag))
                     return_data['flag'] = result_flag
                 else:
                     message = ('unacceptable return code: {}'.format(result_flag))
@@ -156,7 +158,7 @@ class SSHUtil(object):
             raise Exception(message)
         return return_data
 
-    def get_remote_files(self, files, remote_file_path, local_path):
+    def get_remote_files(self, files, remote_file_path, local_path, multiple_files=True):
         """
         Get the files from remote machine to local machine
         :param files: list of files which needs to exported
@@ -167,14 +169,20 @@ class SSHUtil(object):
         return_data = {}
         try:
             ftp_client = self.client.open_sftp()
+
             if ftp_client is not None:
                 # Upload file to the remote machine
-                for file in files:
-                    file_remote = remote_file_path + file
-                    file_local = local_path + file
-                    print(file_remote + '>>>' + file_local)
-                    ftp_client.get(file_remote, file_local)
+                if not multiple_files:
+                    ftp_client.get(remote_file_path, local_path)
                     return_data['status'] = True
+                else:
+                    # Upload file to the remote machine
+                    for file in files:
+                        file_remote = remote_file_path + file
+                        file_local = local_path + file
+                        print(file_remote + '>>>' + file_local)
+                        ftp_client.get(file_remote, file_local)
+                        return_data['status'] = True
             else:
                 message = "Unable to establish the FTP connection"
                 return_data['status'] = False

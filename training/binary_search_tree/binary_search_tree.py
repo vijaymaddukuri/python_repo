@@ -14,7 +14,7 @@ class Node:
 
 def insert(root, node):
     if root is None:
-        root = Node
+        root = node
     if root.val == node.val:
         return root
     else:

@@ -26,7 +26,7 @@ def f():
     print(s)
 
 
-# Global scope
+# # Global scope
 s = "I love Geeksforgeeks"
 f()
 print(s)
@@ -42,20 +42,20 @@ Will it affect the global s as well? We test it in the following piece of code:
 """
 
 
-# def f():
-#     print(s)
-#
-#     # This program will NOT show error
-#     # if we comment below line.
-#     s = "Me too."
-#
-#     print(s)
-#
-#
-# # Global scope
-# s = "I love Geeksforgeeks"
-# f()
-# print(s)
+def f():
+    # print(s)
+
+    # This program will NOT show error
+    # if we comment below line.
+    s = "Me too."
+
+    print(s)
+
+
+# Global scope
+s = "I love Geeksforgeeks"
+f()
+print(s)
 
 """
 To make the above program work, we need to use “global” keyword.
@@ -109,3 +109,31 @@ g()
 print('global : ',a)
 h()
 print('global : ',a)
+
+
+a_var = 'global value'
+def outer():
+       a_var = 'local value'
+       print('outer before:', a_var)
+       def inner():
+           #a_var = 'inner value'
+           nonlocal a_var
+           print('in inner():', a_var)
+       inner()
+       print("outer after:", a_var)
+outer()
+def outer_2():
+       a_var = 'local value'
+       print('outer_2 before:', a_var)
+       def inner():
+           nonlocal a_var
+           a_var = 'inner value'
+           print('in inner():', a_var)
+       inner()
+       print("outer_2 after:", a_var)
+outer_2()
+print(a_var)
+
+
+
+

@@ -1,7 +1,4 @@
-import os
 import yaml
-
-COMMON_BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
 def get_config(appliance, param, yaml_file_path):
@@ -27,3 +24,20 @@ def get_config(appliance, param, yaml_file_path):
     except Exception as ex:
         message = "Exception: An exception occured: {}".format(ex)
         raise Exception(message)
+
+def print_results(result_dict):
+    print('\nResult Summary:')
+    print("----------------------------------------------")
+    print("Component" + 20 * " " + "Status")
+    print("----------------------------------------------")
+    for result in result_dict:
+        gap = 29 - len(result)
+        space = ' ' * gap
+        print(result + space + result_dict[result])
+        print("\n")
+    count = 0
+    passed = [i for i in result_dict.values() if i == "PASS"]
+    print("----------------------------------------------")
+    print("Total Testcases: {}  PASSED:  {}  FAILED: {}".format(len(result_dict), len(passed),
+                                                                len(result_dict) - len(passed)))
+    print('\n')

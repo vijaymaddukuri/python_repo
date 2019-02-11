@@ -1,0 +1,27 @@
+BB_SERVER:
+      SERVER_IP: "" #Mandatory - BB Server IP
+      SERVER_USERNAME: "" #Mandatory - BB Server Username
+      SERVER_PASSWORD: "" #Mandatory - BB Server Password
+      TENANT_ID: "" #Mandatory
+      SITE_ID: ""  # USDC1 Site ID
+      DNS_NAME: "" #Mandatory - FQDN
+      HOSTNAME: ""
+      RID: "" #Mandatory
+      CLIENT_CERTIFICATES_PATH: "/etc/bridgeburner/certs/Virtustream/clients/"
+      CA_CERTIFICATES_PATH: "/etc/bridgeburner/certs/Virtustream/"
+      CA_CERTIFICATES: ['CA.crt']
+      LOCAL_FILE_LOCATION:  "" # Mandatory - Local path to save the certiificates
+
+BB_CLIENT:
+      CLIENT_IP: "" #Mandatory - BB Cleint IP
+      CLIENT_USERNAME: "tas" #Mandatory - BB Client Username
+      CLIENT_PASSWORD: "xStream2015!" #Mandatory - BB Client IP
+      REMOTE_CLIENT_CERTIFICATE_LOCATION: "/etc/bridgeburner/certs/Virtustream/clients/"
+      REMOTE_CA_CERTIFICATE_LOCATION: "/etc/bridgeburner/certs/Virtustream/"
+      OS_VERSION: "centos6" #centos6 or centos7 or suse12 or rhel7
+
+NAT_VM:
+      SERVER_IP:  "" #Mandatory -  NAT Server IP
+      SERVER_USERNAME: "" #Mandatory - NAT machine Username
+      SERVER_PASSWORD: "" #Mandatory - NAT machine Password
+      CERTIFICATE_COPY_LOCATION: "/tmp/"

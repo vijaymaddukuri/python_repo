@@ -1,0 +1,14 @@
+deadbolt:
+  DEADBOLT_CLIENT_ID: ''
+  DEADBOLT_CLIENT_SECRET: ''
+  DEADBOLT_IP: ''
+  DEADBOLT_PORT: 8080
+middleware_service_details:
+  password: Password1
+  username: middleware
+rabbitmq:
+  RABBIT_MQ_IP: localhost
+  RABBIT_MQ_PASSWORD: Password1
+  RABBIT_MQ_USERNAME: admin
+workers:
+  no_of_proc: 3

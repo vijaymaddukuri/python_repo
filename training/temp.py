@@ -1,27 +1,19 @@
-import re
+class Node:
+    def __init__(self, key, left=None, right=None):
+        self.left = left
+        self.right = right
+        self.val = key
 
+class Tree:
+    def __init__(self, root):
+        self.root = root
 
-output = """
-{"links":[{"href":"https://100.66.113.102:9090/nwrestapi/v1",
-"title":"NetWorker REST API v1"},{"href":"https://100.66.113.102:9090/nwrestapi/v2","title":"NetWorker REST API v2"}]
-,"version":"9.1.1.5.Build.
-"""
+    def levelOrder(self):
+        list = [self.root]
+        while len(list) > 0:
+            print([n.val for n in list])
+            list = [n.left for n in list if n.left] + [n.right for n in list if n.right]
 
-nw_exp_version='9.0'
+bst = Tree(Node(1, Node(2, Node(4), Node(5)), Node(3, Node(6), Node(7))))
 
-matchObj = re.search("\"version\":\S+", output)
-
-if matchObj:
-    print('Networker Version -', matchObj.group())
-    # Validate the version
-    if nw_exp_version in matchObj.group():
-        print('Expected Networker version is installed')
-    else:
-        message = ('Networker version mismatch, expected version {}'
-                   'found version {}').format(nw_exp_version, matchObj.group())
-        print(message)
-        raise Exception(message)
-else:
-    message = 'Unable to fetch the Networker version'
-    print(message)
-    raise Exception(message)
+bst.levelOrder()
