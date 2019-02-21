@@ -48,4 +48,4 @@ def longest_repetition(chars):
         else: count = 1
     return (char, fCount)
 
-print longest_repetition('')
+print(longest_repetition('beabeefeab'))

@@ -1,7 +1,32 @@
-from bb_certificate_generation.functions import (get_config)
-import os
-current_dir = os.getcwd()
-yaml_file_path = '{}\{}'.format(current_dir, 'config_new.yaml')
+# Function to print words which can be created 
+# using given set of characters 
 
-server_ip = get_config('networker_server_details', 'NETWORKER_SERVER_COUNT', yaml_file_path)
-print(server_ip)
+from collections import Counter
+
+
+def possibleWords(input, charSet):
+    # traverse words in list one by one
+    for word in input:
+
+        # convert word into dictionary 
+        dict = Counter(word)
+
+        # now check if all keys of current word  
+        # are present in given character set 
+        flag = 1
+        for key in dict.keys():
+            if key not in charSet:
+                flag = 0
+
+        # if all keys are present ( flag=1 )  
+        # then print the word 
+        if flag == 1:
+            print(word)
+
+            # Driver program
+
+
+if __name__ == "__main__":
+    input = ['go', 'bat', 'me', 'eat', 'goal', 'boy', 'run']
+    charSet = ['e', 'o', 'b', 'a', 'm', 'g', 'l']
+    possibleWords(input, charSet)

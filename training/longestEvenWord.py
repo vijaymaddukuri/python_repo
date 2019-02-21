@@ -8,5 +8,5 @@ def longestEvenWord(arr):
     return result
 
 a = ['is', 'a', 'vija', 'vijaya']
-a=['hey']
+# a=['hey']
 print(longestEvenWord(a))

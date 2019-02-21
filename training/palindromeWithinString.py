@@ -12,6 +12,11 @@ def palindromes(text):
 
     return text.index(max(results, key=len)), results
 
-bigstrng='lirilisdkoddsiodjisodjisodjsoidjsiodjosdjsdJjjssjasjjsunssnnxndsnandjsdjnjnsjsainaisundaidniasaddsdsdsdsdadcxcssdsdadddddADSADSWADZXADWEEDWFRDSADFDDDDDDDDDDDDDDFSDAAAAAAAAAAAAAAADAQDSDDDDDDDDDDDDDDDFFFFFFFFFFFFFFFFSADXCXCXCXCXCXCXCXCXCXCXC'
+def palindromes1(text):
+    if text == text[::-1]:
+        return len(text)
+    return max(palindromes(text[:-1]), palindromes(text[1:]))
+
+bigstrng='attract'
 result=palindromes(bigstrng)
 print(result)

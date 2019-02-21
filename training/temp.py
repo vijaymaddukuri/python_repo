@@ -1,19 +1,32 @@
-class Node:
-    def __init__(self, key, left=None, right=None):
-        self.left = left
-        self.right = right
-        self.val = key
+def getScore(s):
+    dp = [[0 for i in range(len(s))] for i in range(len(s))]
 
-class Tree:
-    def __init__(self, root):
-        self.root = root
+    def LPS(s):
+        for i in range(len(s)):
+            dp[i][i] = 1
 
-    def levelOrder(self):
-        list = [self.root]
-        while len(list) > 0:
-            print([n.val for n in list])
-            list = [n.left for n in list if n.left] + [n.right for n in list if n.right]
+        for sl in range(2, len(s) + 1):
+            for i in range(0, len(s) - sl + 1):
+                j = i + sl - 1
+                if s[i] == s[j] and sl == 2:
+                    dp[i][j] = 2
+                elif s[i] == s[j]:
+                    dp[i][j] = dp[i + 1][j - 1] + 2
+                else:
+                    dp[i][j] = max(dp[i + 1][j], dp[i][j - 1])
 
-bst = Tree(Node(1, Node(2, Node(4), Node(5)), Node(3, Node(6), Node(7))))
+        return dp[0][len(s) - 1]
 
-bst.levelOrder()
+    LPS(s)
+    maximum_product = 0
+
+    for i in range(len(dp) - 1):
+        value = dp[0][i] * dp[i + 1][len(dp) - 1]
+        maximum_product = max(maximum_product, value)
+
+    return maximum_product
+
+
+# Driver program to test above functions
+seq = "acdapmpomp"
+print(getScore(seq))
