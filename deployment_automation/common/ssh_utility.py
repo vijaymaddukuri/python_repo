@@ -59,10 +59,12 @@ class SSHUtil(object):
             # Connect to the host.
             if self.key is not None:
                 # Authenticate with a username and a private key located in a file.
-                self.client.connect(self.host, self.port, self.username, self.key)
+                self.client.connect(self.host, self.port,
+                                    self.username, self.key)
             else:
                 # Authenticate with a username and a password.
-                self.client.connect(self.host, self.port, self.username, self.password)
+                self.client.connect(self.host, self.port,
+                                    self.username, self.password)
             print("Connected to the server", self.host)
         except paramiko.AuthenticationException:
             message = "Authentication failed, please verify your credentials"
@@ -81,7 +83,8 @@ class SSHUtil(object):
             logger.debug(message)
             raise Exception(message)
 
-    def execute_command(self, command, get_pty=True, allowed_return_codes=[0,1], with_output=False, prompt=False,prompt_value=''):
+    def execute_command(self, command, get_pty=True, allowed_return_codes=[0,1],
+                        with_output=False, prompt=False, prompt_value=''):
         """Execute a command on the remote host.Return a tuple containing
         an integer status and a two strings, the first containing stdout
         and the second containing stderr from the command.
@@ -96,8 +99,10 @@ class SSHUtil(object):
         try:
             if command is not None:
 
-                stdin, stdout, stderr = self.client.exec_command(command, timeout=50, get_pty=get_pty)
-                if prompt == True:
+                stdin, stdout, stderr = self.client.exec_command(command,
+                                                                 timeout=50,
+                                                                 get_pty=get_pty)
+                if prompt:
                     stdin.write(prompt_value + '\n')
                 if with_output and not stdout:
                     message = "Problem occurred while running command: {} The error is {}"\
@@ -117,10 +122,13 @@ class SSHUtil(object):
                     return_data['flag'] = result_flag
                 else:
                     message = ('unacceptable return code: {}'.format(result_flag))
-                    logger.warning(message)
+                    # logger.warning(message)
                     return_data['status'] = False
                     return_data['comment'] = message
-                    return return_data
+                output = ''
+                for line in return_data['output'].readlines():
+                    output = output + line
+                return_data['output'] = output
                 return return_data
         except socket.timeout as e:
             message = "Command timed out.", e

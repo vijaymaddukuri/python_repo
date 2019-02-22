@@ -13,7 +13,7 @@ class getIPrange(object):
             maskValidation=validate.search(self.netMask)
         else:
             self.netMask = get.subNetToNetMask()
-            print 'netMsk: %s' % (self.netMask )
+            print('netMsk: %s' % (self.netMask ))
             maskValidation = validate.search(self.netMask)
         if ipValidation and maskValidation:
             return True
@@ -121,8 +121,8 @@ if result:
     ip=get.findRange()
     hosts=get.numberOfHosts()
     nextIP=get.findnextIP()
-    print "Current IP: %s and NextIP: %s" %(midIP,nextIP)
+    print("Current IP: %s and NextIP: %s" %(midIP,nextIP))
 else:
     ip = 'IP or Netmask are not in correct format'
-print ip
+print(ip)
 
