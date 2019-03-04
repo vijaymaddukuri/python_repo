@@ -5,7 +5,7 @@ from robot.api import logger
 
 class WorkerLogValidation:
     """
-    Fetch the MW API response log and validate the output
+    Fetch the MW API response worker log and validate the output
     """
     def __init__(self, sshObject):
         """
@@ -16,7 +16,7 @@ class WorkerLogValidation:
 
     def get_worker_log_line_count(self):
         """
-        Get the worker log lines count, before executing the API
+        B efore executing the MW API, get the worker log lines count.
         :return: Integer - Line count
         """
         extract_log = 'wc -l {}|cut -d " " -f1'.format(self.worker_log)
@@ -25,6 +25,7 @@ class WorkerLogValidation:
 
     def validate_worker_log(self, line_count, service_name, search_string, wait_time=20):
         """
+        Validate the worker log
         :param line_count: Output of get_worker_log_count() function
         :param service_name: Service name (backup or security or monitoring)
         :param search_string: Search string or regular expression
@@ -59,11 +60,12 @@ class WorkerLogValidation:
 
         # After wait time, If the log file is not updated, return False
         if not search:
-            logger.info('Unable to fetch the log in the give time duration')
-            return False
+            logger.error('Unable to fetch the log in the give time duration')
+            return Faalse
 
 
 from deployment_automation.common.ssh_utility import SSHUtil
+
 ssh_obj = SSHUtil(host='10.100.26.124', username='root',
                   password='Password1', timeout=10)
 

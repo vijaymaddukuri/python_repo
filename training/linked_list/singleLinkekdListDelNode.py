@@ -7,6 +7,12 @@ class LinkedList:
     def __init__(self):
         self.head = None
 
+    def isListEmpty(self):
+        if self.head is None:
+            return True
+        else:
+            return False
+
     def lenOfList(self):
         currentNode = self.head
         count = 0
@@ -66,19 +72,32 @@ class LinkedList:
             lastNode = lastNode.next
         prevNode.next = None
 
+    def deleteHead(self):
+        if not self.isListEmpty():
+            prevHead = self.head
+            self.head = self.head.next
+            prevHead.next = None
+        else:
+            print("Linked list is empty Deletion failed")
+
     def deleteAt(self, position):
-        if position < 0 or position > self.lenOfList():
+        if position < 0 or position >= self.lenOfList():
             print("Out of range position")
             return
-        currentNode = self.head
-        count = 0
-        prevNode = None
-        while True:
-            if position == count:
-                prevNode.next = currentNode.next
-                currentNode.next = None
-            prevNode = currentNode
-            currentNode= currentNode.next
+        if self.isListEmpty() is False:
+            currentNode = self.head
+            count = 0
+            prevNode = None
+            while True:
+                if position == count:
+                    prevNode.next = currentNode.next
+                    currentNode.next = None
+                    break
+                prevNode = currentNode
+                currentNode = currentNode.next
+                count+=1
+        else:
+            print("List is empty del failed")
 
 
     def printLinkedList(self):
@@ -103,4 +122,6 @@ linkedList.insertHead(node3)
 node4 = Node('Kumar')
 linkedList.insertAt(node4, 2)
 linkedList.deleteEnd()
+linkedList.deleteAt(2)
+linkedList.deleteHead()
 linkedList.printLinkedList()

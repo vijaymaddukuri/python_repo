@@ -21,7 +21,7 @@ class LinkedList:
     def printLinkedList(self):
         if self.head is None:
             print("List is empty")
-            return 
+            return
         currentNode = self.head
         while True:
             if currentNode is None:

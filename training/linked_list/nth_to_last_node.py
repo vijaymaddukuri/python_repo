@@ -1,3 +1,10 @@
+"""
+Intialize two pointers left node and right node
+Move forward right node by n-1 positions
+Move forward both Left and righr by 1 post till (f.next == null)
+Return left.val
+"""
+
 class Node(object):
     def __init__(self, val):
         self.val = val

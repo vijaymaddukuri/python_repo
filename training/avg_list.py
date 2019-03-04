@@ -3,5 +3,5 @@ n=3
 sum=0
 for i in range(n):
     sum=(sum+a[i])
-print sum/n
+print(sum/n)
 

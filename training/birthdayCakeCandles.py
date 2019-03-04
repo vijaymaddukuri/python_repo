@@ -4,4 +4,4 @@ def birthdayCakeCandles(ar):
     return count
 
 
-birthdayCakeCandles([1,4,4,1,4])
+print(birthdayCakeCandles([1,4,4,1,4]))

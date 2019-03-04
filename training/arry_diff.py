@@ -5,5 +5,5 @@ def array_diff(a, b):
             newList.append(i)
     return newList
 
-newList=array_diff([], [1,2])
+newList=array_diff([1,2,3], [1,2])
 print(newList)

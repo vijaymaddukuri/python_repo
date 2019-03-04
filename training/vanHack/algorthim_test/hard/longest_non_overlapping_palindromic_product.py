@@ -43,12 +43,16 @@ def getScore(s):
                     dp[i][j] = 2
                 elif s[i] == s[j]:
                     dp[i][j] = dp[i + 1][j - 1] + 2
+                    print(i, j)
+                    print(dp[i][j])
                 else:
                     dp[i][j] = max(dp[i + 1][j], dp[i][j - 1])
 
         return dp[0][len(s) - 1]
 
-    LPS(s)
+    longest_subsequence_pal = LPS(s)
+    print('Longest Palindromic Subsequence -', longest_subsequence_pal)
+
     maximum_product = 0
 
     for i in range(len(dp) - 1):
@@ -56,3 +60,5 @@ def getScore(s):
         maximum_product = max(maximum_product, value)
 
     return maximum_product
+
+print(getScore('acdapmpomp'))

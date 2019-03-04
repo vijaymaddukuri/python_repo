@@ -1,40 +1,41 @@
 items = [1, 2, 3, 4, 5]
 def sqr(x): return x**2
 
-square=list(map(sqr,items))
-square = list(map((lambda x: x **2), items))
+square1 =list(map(sqr,items))
+square2 = list(map((lambda x: x **2), items))
 power=list(map(pow,[2, 3, 4], [10, 11, 12]))
+print(power)
 fil=list( filter((lambda x: x < 0), range(-5,5)))
-reduceItem=reduce( (lambda x, y: x * y), [1, 2, 3, 4] )
-print reduceItem
+# reduceItem=reduce( (lambda x, y: x * y), [1, 2, 3, 4] )
+# print(reduceItem)
 a=[[1,2,3,4],[4,5,6,7]]
 b=[4,5,6,7]
-print zip(*a)
-print zip(a,b)
+print(zip(*a))
+print(zip(a,b))
 
-print all(['a','','c']) #Return True if all elements of the iterable are true (or if the iterable is empty).
-print any(['a','','c']) #Return True if any element of the iterable is true. If the iterable is empty, return False.
-print bin(128)[2:].zfill(8) #Decimal to binary
-print "{0:08b}".format(128)
-print int('10000000',2) #Binary to decimal
-print chr(97)  #Return a string of one character whose ASCII code is the integer
-print ord('a') #Return a ASCII code of a string
-#print cmp(x, y) #The return value is -1 if x < y, zero if x == y and strictly 1 if x > y.
-print dir([object]) #Without arguments, return the list of names in the current local scope. With an argument, attempt to return a list of valid attributes for that object.
-print divmod(1,2) #(a // b, a % b)
+print(all(['a','','c'])) #Return True if all elements of the iterable are true (or if the iterable is empty).
+print(any(['a','','c'])) #Return True if any element of the iterable is true. If the iterable is empty, return False.
+print(bin(128)[2:].zfill(8)) #Decimal to binary
+print("{0:08b}".format(128))
+print(int('10000000',2)) #Binary to decimal
+print(chr(97))  #Return a string of one character whose ASCII code is the integer
+print(ord('a')) #Return a ASCII code of a string
+#print(cmp(x, y) #The return value is -1 if x < y, zero if x == y and strictly 1 if x > y.
+print(dir([object])) #Without arguments, return the list of names in the current local scope. With an argument, attempt to return a list of valid attributes for that object.
+print(divmod(1,2)) #(a // b, a % b)
 seasons = ['Spring', 'Summer', 'Fall', 'Winter']
-print list(enumerate(seasons, start=1)) #output: [(1, 'Spring'), (2, 'Summer'), (3, 'Fall'), (4, 'Winter')]
-print eval('1+1') #returns 2
-print hex(255) #'0xff'
-print min([1,2,3])
-print max([1,2,3])
+print(list(enumerate(seasons, start=1))) #output: [(1, 'Spring'), (2, 'Summer'), (3, 'Fall'), (4, 'Winter')]
+print(eval('1+1')) #returns 2
+print(hex(255)) #'0xff'
+print(min([1,2,3]))
+print(max([1,2,3]))
 # prints the official format of date-time object
-print repr(1)
+print(repr(1))
 # Prints readable format for date-time object
-print str(1)
+print(str(1))
 s='a'
-print '---------------------'
-print s.extend('1')
+print('---------------------')
+print(s.extend('1'))
 s=[1,2,3,4]
 
 
@@ -75,7 +76,7 @@ Object:
 A unique instance of a data structure that's defined by its class.
 An object comprises both data members (class variables and instance variables) and methods.
 
-Object is simply a collection of data (variables) and methods (functions) that act on those data. And, class is a blueprint for the object.
+Object is simply a collection of data (variables) and methods (functions) that act on those data. And, class is a blueprint(for the object.
 
 A class creates a new local namespace where all its attributes are defined. Attributes may be data or functions.
 
