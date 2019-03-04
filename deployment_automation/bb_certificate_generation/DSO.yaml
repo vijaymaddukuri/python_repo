@@ -1,8 +1,0 @@
-providers:
-  ServiceProvider:
-    driver: networker
-    location: 69d29e4b-ce66-66b9-a07d-c4612616bb0f
-    ratelimit: 3
-    ssl_insecure: true
-    type: backup
-    url: https://10.100.249.47

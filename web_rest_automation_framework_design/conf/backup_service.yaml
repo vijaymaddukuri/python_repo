@@ -1,4 +1,0 @@
-backup_service:
-    backup_service_host: "backupservice.com"
-networker_server:
-    networker_server_host: "10.100.249.48:9090"

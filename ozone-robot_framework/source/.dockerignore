@@ -1,8 +1,0 @@
-web/client/bower_components
-web/node_modules
-web/logs
-web/dist
-web/doc
-web/doc/.tmp
-.idea
-!Dockerfile
