@@ -6,7 +6,6 @@ class Node(object):
 def reverse(head):
 
     current = head
-    nextnode = None
     prev = None
 
     while current:

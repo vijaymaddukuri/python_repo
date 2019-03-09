@@ -7,16 +7,7 @@ class LinkedList:
     def __init__(self):
         self.head = None
 
-    def insertHead(self, newNode):
-        if self.head is None:
-            self.head = newNode
-            return
-        tempNode = self.head
-        self.head = newNode
-        self.head.next = tempNode
-        del tempNode
-
-    def insertEnd(self, newNode):
+    def insert(self, newNode):
         if self.head is None:
             self.head = newNode
         else:
@@ -38,11 +29,20 @@ class LinkedList:
             print(currentNode.data)
             currentNode = currentNode.next
 
+
+def insertNodeAtTail(head, data):
+    if head == None:
+        return Node(data)
+    curr_node = head
+    while curr_node.next != None:
+        curr_node = curr_node.next
+    curr_node.next = Node(data)
+    return head
+
 node1 = Node('vijay')
 node2 = Node('vicky')
-node3 = Node("Maddukuri")
+
 linkedList = LinkedList()
-linkedList.insertEnd(node1)
-linkedList.insertEnd(node2)
-linkedList.insertHead(node3)
+linkedList.insert(node1)
+linkedList.insert(node2)
 linkedList.printLinkedList()

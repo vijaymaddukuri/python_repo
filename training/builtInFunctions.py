@@ -17,6 +17,7 @@ print(all(['a','','c'])) #Return True if all elements of the iterable are true (
 print(any(['a','','c'])) #Return True if any element of the iterable is true. If the iterable is empty, return False.
 print(bin(128)[2:].zfill(8)) #Decimal to binary
 print("{0:08b}".format(128))
+arr = ("{0:b}".format(5))
 print(int('10000000',2)) #Binary to decimal
 print(chr(97))  #Return a string of one character whose ASCII code is the integer
 print(ord('a')) #Return a ASCII code of a string
