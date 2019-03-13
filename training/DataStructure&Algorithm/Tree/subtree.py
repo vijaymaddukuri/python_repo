@@ -7,7 +7,7 @@ class Node:
 
 
 # A utility function to check whether trees with roots
-# as root 1 and root2 are indetical or not
+# as root 1 and root2 are identical or not
 def areIdentical(root1, root2):
     # Base Case
     if root1 is None and root2 is None:
