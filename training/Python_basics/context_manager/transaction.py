@@ -22,7 +22,7 @@ def start_transaction(connection):
         raise
     tx.commit()
 
-from training.context_manager.connection import Connection
+from training.Python_basics.context_manager import Connection
 
 conn = Connection()
 try:

@@ -1,5 +1,7 @@
 import unittest
-from training.Collections_10.implementing_collections.sorted_set import SortedSet
+
+from training.Python_basics.Collections_10.implementing_collections.sorted_set import SortedSet
+
 
 class TestContainerProtocol(unittest.TestCase):
     def setUp(self):
