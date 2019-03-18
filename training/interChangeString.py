@@ -6,4 +6,4 @@ def change(word):
 
 word='vijay'
 new=change(word)
-print new
+print(new)

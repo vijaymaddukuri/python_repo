@@ -1,6 +1,4 @@
 import threading
-from sshclient import CustomSSHClient
-from csv import reader
 import logging
 from time import sleep
 from random import random
@@ -11,7 +9,7 @@ logging.basicConfig(level=logging.DEBUG, format=fmt)
 def consumer(cond, data):
     logging.debug('created')
     if not data:
-        logging.debug('Content is unavilable & gets wait')
+        logging.debug('Content is unavailable & gets wait')
     with cond:
         cond.wait()
         logging.debug('recv notify, consumes : {}'.format(data.pop(0)))

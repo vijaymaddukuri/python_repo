@@ -8,8 +8,15 @@ def reverse_fun(s):
             lst1 = revStr[index:]
             lst2 = revStr[:index]
             final = lst1 + lst2
-            print final
-            # revStr = revStr[:index+1]+(revStr[index+1:])[::-1]
+            print(final)
+            revStr = revStr[:index+1]+(revStr[index+1:])[::-1]
         return revStr
 
-reverse_fun("string")
+print(reverse_fun("string"))
+
+
+revStr = "string"
+index = 3
+
+revStr = revStr[:index+1]+(revStr[index+1:])[::-1]
+print(revStr)

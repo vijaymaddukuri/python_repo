@@ -7,5 +7,4 @@ if re.search(r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[^\W_]{6,}$', pwd):
 else:
     a=False
 
-print a
-?!
+print(a)

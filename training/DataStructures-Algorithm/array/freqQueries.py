@@ -1,6 +1,6 @@
 # You are given  queries. Each query is of the form two integers described below:
 # 1, x -  : Insert x in your data structure.
-# 2, y  : Delete one occurence of y from your data structure, if present.
+# 2, y  : Delete one occurrence of y from your data structure, if present.
 # 3, z  : Check if any integer is present whose frequency is exactly . If yes, print 1 else 0.
 # Logic:
 # In dict1 place the item as key and count as value
@@ -47,9 +47,9 @@ def solve(queries):
                 result.append(0)
     return result
 
-print solve([(1,89),
+print(solve([(1,89),
 (3,15),
 (1,12),
 (1,47),
 (1,23),
-(1,66)])
+(1,66)]))

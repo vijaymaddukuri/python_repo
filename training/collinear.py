@@ -10,9 +10,6 @@ You can drag the points above to create this condition.
 Refer: https://www.mathopenref.com/coordtrianglearea.html
 
        https://stackoverflow.com/questions/3813681/checking-to-see-if-3-points-are-on-the-same-line
-
-
-
 """
 
 class Point():

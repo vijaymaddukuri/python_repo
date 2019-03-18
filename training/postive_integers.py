@@ -9,4 +9,4 @@ def itemList(n):
     return [i+1 for i in range(n) if i>=0]
 
 new = itemList(3)
-print new
+print(new)

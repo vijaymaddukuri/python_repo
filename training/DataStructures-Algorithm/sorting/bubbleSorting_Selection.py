@@ -10,6 +10,6 @@ def sort(itemList):
     return itemList
 
 newList=sort([1,3,2,4,5,1])
-print newList
+print(newList)
 
 

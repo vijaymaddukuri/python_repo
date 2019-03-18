@@ -21,12 +21,10 @@ def permutations1(string):
         string=new
     return final
 
-
-
     return loop
 
 def permutations(string):
-    result = set([string])
+    result = set(string)
     if len(string) == 2:
         result.add(string[1] + string[0])
 
@@ -36,7 +34,7 @@ def permutations(string):
                 result.add(c + s)
     return list(result)
 a='abc'
-per=permutations1(a)
-print per
+per=permutations(a)
+print(per)
 
 

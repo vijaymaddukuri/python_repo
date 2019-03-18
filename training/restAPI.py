@@ -27,10 +27,10 @@ task=   {
 add=requests.post('https://jsonplaceholder.typicode.com/users',json=task)
 
 edit=requests.put('https://jsonplaceholder.typicode.com/users',json=task)
-print edit
+print(edit)
 
-print edit.status_code
+print(edit.status_code)
 resp=edit.get('https://jsonplaceholder.typicode.com/users')
-print edit.json()
-print edit.json()['phone']
+print(edit.json())
+print(edit.json()['phone'])
 

@@ -29,4 +29,4 @@ array = [[1,2,3],
          [7,8,9]]
 
 a=snail(array)
-print a
+print(a)

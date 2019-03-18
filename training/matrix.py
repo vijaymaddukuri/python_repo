@@ -1,4 +1,37 @@
-# 3x3 matrix
+def subtraction(A, B):
+    fRes={}
+    for i in range(len(A)):
+        res=[]
+        for j in range(len(A[0])):
+            sub=A[i][j]-B[i][j]
+            res.append(sub)
+        fRes[i] = res
+    return fRes.values()
+
+def trasnpose(A):
+    res = [[A[j][i] for j in range(len(A))]for i in range(len(A[0]))]
+    return res
+
+def multiple(A, B):
+    C = [[0 for j in range(len(B[0]))]for i in range(len(A))]
+
+    for i in range(len(A)):
+        for j in range(len(B[0])):
+            for k in range(len(B)):
+                C[i][j]+=A[i][k]*B[k][j]
+    return C
+
+def addition(A, B):
+    result=[]
+    for i in range(len(A)):
+        res=[]
+        for j in range(len(A[0])):
+            add = A[i][j]+B[i][j]
+            res.append(add)
+        result.append(res)
+    return result
+
+
 X = [[12,7,3],
     [4 ,5,6],
     [7 ,8,9]]
@@ -6,29 +39,8 @@ X = [[12,7,3],
 Y = [[5,8,1,2],
     [6,7,3,0],
     [4,5,9,1]]
-# result is 3x4
-def transpose(X):
-    result = [[X[j][i] for j in range(len(X))] for i in range(len(X[0]))]
-    return result
 
-def subtract(a,b):
-    result={}
-    for i in range(len(a)):
-        res=[]
-        for j in range(len(a[0])):
-            sub=a[i][j]-b[i][j]
-            res.append(sub)
-        result[i]=res
-    return result.values()
-
-
-def multiple(A,B):
-    C = [[0 for col in range(len(B[0]))] for row in range(len(A))]
-    for i in range(len(A)):
-        for j in range(len(B[0])):
-            for k in range(len(B)):
-                C[i][j]+=A[i][k]*B[k][j]
-    return C
-
-c=multiple(X,Y)
-print c
+print(subtraction(X, Y))
+print(trasnpose(X))
+print(multiple(X,Y))
+print(addition(X, Y))

@@ -9,6 +9,6 @@ def count(itemsList):
 
 def unique1(itemsList):
     return [i for i in list(set(itemsList)) if itemsList.count(i)==1]
-a=''
+a='a'
 n=count(a)
-print n
+print(n)

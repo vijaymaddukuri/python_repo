@@ -1,5 +1,5 @@
 import threading
-from sshclient import CustomSSHClient
+from paramiko_ssh_utility.ssh_utility import SSHUtil
 from csv import reader
 import logging
 from time import sleep
@@ -13,7 +13,7 @@ class RemoteLogin:
         self.cmd = cmd
         self.lock=lock
         self.log_file = target_file
-        self.ssh=CustomSSHClient(host, user=user, password=passwd)
+        self.ssh=SSHUtil(host, username=user, password=passwd)
         self.__run_cmd()
 
     def __run_cmd(self):

@@ -8,4 +8,4 @@ def stringCount(strList):
 
 strList=['vijay','121','141']
 new=stringCount(strList)
-print new
+print(new)

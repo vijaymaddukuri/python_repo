@@ -32,4 +32,4 @@ def zeros_in_factorial(n):
         i *= 5
     return count
 f=zeros_in_factorial(100000000000)
-print f
+print(f)

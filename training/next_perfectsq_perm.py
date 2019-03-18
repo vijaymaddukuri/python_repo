@@ -6,12 +6,13 @@ def next_perfectsq_perm(lower_limit, k):
     lst=[]
     fList=[]
     temp=lower_limit
+    next=''
     for i in range(k):
         temp=int(temp**0.5)
         next=(temp+1)**2
         temp=next
     new=str(next)
-    print new
+    print(new)
     new1=str(new[::-1])
     for i in range(len(new)):
         index=len(new)-i
@@ -25,10 +26,10 @@ def next_perfectsq_perm(lower_limit, k):
         lst2 = new1[:index]
         final = lst1 + lst2
         lst.append(int(final))
-    print lst
+    print(lst)
     for item in lst:
         if int(item**0.5)*int(item**0.5) == item:
             fList.append(item)
     return sorted(fList)[-1]
 
-print(next_perfectsq_perm(100,5))
+print(next_perfectsq_perm(255,5))

@@ -12,16 +12,16 @@ def index(name,val):
         else:
             start+=1
             end+=1
-    print tup
+    print(tup)
 
 def findIndex(name,val):
     import re
     compilerStart=re.compile(val[0])
     compilerEnd = re.compile(val[-1])
     for m in compilerStart.finditer(name):
-        print m.start(), m.group()
+        print(m.start(), m.group())
     for n in compilerEnd.finditer(name):
-        print n.start(), n.group()
+        print(n.start(), n.group())
 
 
 a=findIndex('aaabcaab','ab')

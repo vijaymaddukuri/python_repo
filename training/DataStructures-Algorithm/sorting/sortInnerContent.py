@@ -16,4 +16,4 @@ def sort_the_inner_content(words):
     return " ".join(finalWord)
 
 a=sort_the_inner_content('sort the inner content in descending order')
-print a
+print(a)

@@ -29,8 +29,12 @@ def myCompare(mycmp):
     class K(object):
         def __init__(self, obj, *args):
             self.obj = obj
+            print(self.obj)
+
 
         def __lt__(self, other):
+            print('**')
+            print(other.obj)
             return mycmp(self.obj, other.obj) < 0
 
         def __gt__(self, other):
@@ -52,7 +56,7 @@ def myCompare(mycmp):
     # driver code
 
 if __name__ == "__main__":
-    a = [54, 546, 548, 60, ]
+    a = [7, 78, 79, 72, 709, 7, 94 ]
     sorted_array = sorted(a, key=myCompare(comparator))
     number = "".join([str(i) for i in sorted_array])
     print(number)

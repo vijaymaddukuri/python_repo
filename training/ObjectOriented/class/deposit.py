@@ -25,7 +25,7 @@ class Car(object):
         return 'pipee'
 
 car1=Car()
-print car1.carSound()
+print(car1.carSound())
 acc1 = Customer('vijay')
 acc1Balance=acc1.withdraw(501)
-print '%s' %(acc1Balance)
+print('%s' %(acc1Balance))

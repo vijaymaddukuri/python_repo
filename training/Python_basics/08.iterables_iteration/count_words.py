@@ -11,6 +11,7 @@ documents = ['Hi my name is vijay', 'hi my name is vicky', 'I am VJ', "my place 
 
 counts = map(count_words, documents)
 
+
 def combine_counts(d1, d2):
     d = d1.copy()
     for word, count in d2.items():
@@ -22,3 +23,5 @@ from functools import reduce
 total_count = reduce(combine_counts, counts)
 
 print(total_count)
+
+print(list(counts))

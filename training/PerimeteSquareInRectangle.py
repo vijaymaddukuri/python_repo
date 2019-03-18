@@ -10,4 +10,4 @@ def perimeter(n):
         sum=sum+i
     return 4*sum
 p=perimeter(5)
-print p
+print(p)

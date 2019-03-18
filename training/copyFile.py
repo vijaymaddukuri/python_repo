@@ -24,7 +24,7 @@ def fileCreate():
     WriteToFile.close()
     ReadNewFile = open(dstfile, 'r+')
     lines = ReadNewFile.read()
-    print lines
+    print(lines)
 
 
 fileCreate()

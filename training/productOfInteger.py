@@ -12,4 +12,4 @@ def productArr(arr):
     return newArr
 
 out=  productArr([0,1,2,3,4])
-print out
+print(out)

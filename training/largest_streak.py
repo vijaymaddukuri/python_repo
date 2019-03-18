@@ -11,7 +11,7 @@ def largest_streak(arr):
             maxCount=count
     return maxCount
 
-l=[1,3,4,5,8]
+l=[1,3,4,5,8, 15]
 print(largest_streak(l))
 
 

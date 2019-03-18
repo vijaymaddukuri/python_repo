@@ -1,14 +1,18 @@
 """
 We define the following:
 
-A palindrome is a sequence of characters which reads the same forward and backwards. For example: madam and dad are palindromes, but eva and sam are not.
-A subsequence is a group of characters chosen from a list while maintaining their order. For instance, the subsequences of abc are [a,b,c,ab,ac,bc,abc]
-The score of string s is the maximum product of two non-overlapping palindromic subsequences of s that we_ll refer to as a and b. In other words, score(s) = max(length(a) x length(b)).
+A palindrome is a sequence of characters which reads the same forward and backwards.
+For example: madam and dad are palindromes, but eva and sam are not.
+A subsequence is a group of characters chosen from a list while maintaining their order.
+For instance, the subsequences of abc are [a,b,c,ab,ac,bc,abc]
+The score of string s is the maximum product of two non-overlapping palindromic subsequences of s that we_ll
+refer to as a and b. In other words, score(s) = max(length(a) x length(b)).
 There may be multiple ways to choose a and b, but there can't be any overlap between the two subsequences. For example:
 
 Index 0123456
     s attract
-Palindromic subsequences are [a,t,r,c,t,aa,tt,ata,ara,ttt,trt,tat,tct,atta]. Many of these subsequences overlap, however (e.g. atta and tct) The maximum score is obtained using the subsequence atta, |atta| = 4 and |c| or |t| = 1, 4 x 1 = 4.
+Palindromic subsequences are [a,t,r,c,t,aa,tt,ata,ara,ttt,trt,tat,tct,atta]. Many of these subsequences overlap,
+however (e.g. atta and tct) The maximum score is obtained using the subsequence atta, |atta| = 4 and |c| or |t| = 1, 4 x 1 = 4.
 
 Function Description
 

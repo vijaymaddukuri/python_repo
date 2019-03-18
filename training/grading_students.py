@@ -15,28 +15,6 @@ Output:
 33
 """
 
-def gradingStudents(grades):
-    newGrades = []
-    for grade in grades:
-        if grade%5 == 0:
-            newGrades.append(grade)
-        elif grade < 38:
-            newGrades.append(grade)
-        else:
-            temp = grade
-            count=0
-            while True:
-                temp+=1
-                count += 1
-                if temp%5==0:
-                    if count<3:
-                        newGrades.append(temp)
-                        break
-                    else:
-                        newGrades.append(grade)
-                        break
-    return newGrades
-
 def solve(grades):
     result = []
     for i in grades:

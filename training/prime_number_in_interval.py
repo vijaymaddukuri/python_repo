@@ -1,10 +1,5 @@
 lower = 900
 upper = 1000
-
-# uncomment the following lines to take input from the user
-#lower = int(input("Enter lower range: "))
-#upper = int(input("Enter upper range: "))
-
 print("Prime numbers between",lower,"and",upper,"are:")
 
 for num in range(lower,upper + 1):

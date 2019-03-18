@@ -13,17 +13,3 @@ def diamond(n):
 
 diamond=diamond(3)
 print(diamond)
-
-def positive_integers_generator():
-    n = 1
-    while True:
-        x = yield n
-        if x is not None:
-            n = x
-        else:
-            n += 1
-a = positive_integers_generator()
-for i in range(1, 3):
-    print(next(a))
-
-print(next(a))

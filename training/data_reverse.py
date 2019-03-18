@@ -20,6 +20,7 @@ def data_reverse(data):
             lst.append(temp)
         s=i
     finalList = []
+    print(lst)
     for item in range(len(lst)):
         temp = lst.pop(-1)
         finalList.extend(temp)

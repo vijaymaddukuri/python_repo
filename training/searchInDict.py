@@ -14,4 +14,4 @@ def searchInDict(wordsList,word):
 wList=["I","am","vijay","from",'yanam','software','job']
 word='vijayIamYanam'
 new=searchInDict(wList,word)
-print new
+print(new)

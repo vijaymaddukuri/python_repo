@@ -6,7 +6,6 @@ def triple_double(song):
     return ' '.join(a)
 
 a=triple_double('AWUBWUBWUBBWUBWUBWUBC')
-print a
-
+print(a)
 
 

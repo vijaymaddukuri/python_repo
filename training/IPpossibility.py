@@ -8,12 +8,12 @@ def validateIP(ip):
             return False
         if len(octate)>1 and int(octate)==0:
             return False
-        if len(octate)>1 and int(octate)!=0 and int(octate[0])==0:
+        if len(octate)>1 and int(octate)==0 and int(octate[0])==0:
             return False
     return True
 
-sz=len(B)
-temp=B
+sz=len(A)
+temp=A
 IPlist=[]
 for i in range(1, sz -2):
     for j in range(i+1, sz-1):

@@ -1,5 +1,5 @@
 """
-Extended iter() is ofen used for creating infinite sequences from existing functions
+Extended iter() is often used for creating infinite sequences from existing functions
 """
 import datetime
 i = iter(datetime.datetime.now, None)

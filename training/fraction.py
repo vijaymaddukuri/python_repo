@@ -20,13 +20,13 @@ def fraction(arr):
             splitFnum= str(upper) + "/" + lower
     temp  = str(splitFnum).split("/")
     mod = int(temp[0])%int(temp[1])
-    print mod
+    print(mod)
     div = int(temp[0])/int(temp[1])
     if mod==0:
         return str(div)
     else:
         return splitFnum
 
-print fraction(['-2/3', '5/3', '-4/6'])
+print(fraction(['-2/3', '5/3', '-4/6']))
 
 

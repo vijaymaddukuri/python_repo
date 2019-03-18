@@ -1,7 +1,7 @@
 import unittest
 from unittest.mock import *
 
-from practice.unit_testing.stub_example import Alarm
+from training.Python_basics.unit_testing.stub_example import Alarm
 
 
 class AlarmTest(unittest.TestCase):

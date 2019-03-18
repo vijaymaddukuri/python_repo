@@ -26,4 +26,4 @@ count1= bus('volvo').tyres()
 
 count2= bus('').tyres()
 
-print count
+print(count)

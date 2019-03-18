@@ -1,3 +1,4 @@
+
 def createdb(server='dbServerIP',uName='user',pwd='password',dbNmae='MyDataBase'):
     db=MySQLdb.connect(server,uName,pwd)
     cursor=db.cursor()

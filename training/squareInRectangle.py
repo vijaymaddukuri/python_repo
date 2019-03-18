@@ -3,7 +3,6 @@ def sqInRect(lng, wdth):
         return None
     else:
         total=lng*wdth
-        print total
         squares=[]
         for i in range(total,0,-1):
             for j in range(i+1):
@@ -22,6 +21,4 @@ def sqInRect(lng, wdth):
 
 
 s=sqInRect(5,4)
-print s
-
-16+9+4+1
+print(s)

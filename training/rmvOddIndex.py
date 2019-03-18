@@ -9,4 +9,4 @@ def oddIndex(name):
 
 name='vijay'
 new=oddIndex(name)
-print new
+print(new)

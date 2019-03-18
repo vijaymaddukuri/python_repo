@@ -1,14 +1,19 @@
-def isAnagaram(arr):
-    anagram_list=[]
-    for i in range(len(arr)):
-        sort_arr1 = sorted(arr[i])
-        for j in range(len(arr)):
-            if arr[i]!=arr[j]:
-                sort_arr2=sorted(arr[j])
-                if sort_arr1 == sort_arr2:
-                    anagram_list.append(arr[i])
-    return anagram_list
+def allAnagram(arr):
+    dict = {}
+    for word in arr:
+        key = ''.join(sorted(word))
+        if key in dict:
+            dict[key].append(word)
+        else:
+            dict[key] = []
+            dict[key].append(word)
+    newLst = ""
+    for item in dict.values():
+        if len(item) >= 2:
+            newLst = newLst + (" ".join(item)) + " "
+    print(newLst)
 
-print(isAnagaram(["car", "tree", "boy", "girl", "arc"]))
+arr = ['cat', 'dog', 'tac', 'god', 'act', 'get']
+allAnagram(arr)
 
 

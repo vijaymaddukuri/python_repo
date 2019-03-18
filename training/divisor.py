@@ -1,7 +1,7 @@
 def divisors(integer):
     divisor = []
     count=0
-    for i in range(2, integer, 1):
+    for i in range(2, integer):
         if integer % i == 0:
             divisor.append(i)
             count = 1
@@ -10,4 +10,4 @@ def divisors(integer):
     return divisor
 
 a=divisors(13)
-print a
+print(a)

@@ -15,6 +15,7 @@ Use super() to call base class __init__()
 class Base:
     def __init__(self):
         print('Base initializer')
+        self.val = 'Vijay'
 
     def f(self):
          print('Base f()')
@@ -22,6 +23,7 @@ class Base:
 class SubClass(Base):
     def __init__(self):
         super().__init__()
+        print(self.val)
         print('Subclass initializer')
     
     def f(self):

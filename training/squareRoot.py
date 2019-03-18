@@ -14,7 +14,7 @@ def isSquare(itemList):
 itemList=[1,2,3,4,9,10]
 
 newList=isSquare(itemList)
-print newList
+print(newList)
 
 def sqrt(x):
     guess=x

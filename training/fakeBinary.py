@@ -1,7 +1,7 @@
 def fake_bin(x):
     temp=[]
     for i in str(x):
-        print int(i)
+        print(int(i))
         if int(i)<5:
             value=0
             temp.append(value)
@@ -23,5 +23,5 @@ def fake_bin3(x):
     return ''.join('0' if c < '5' else '1' for c in x)
 
 bin=fake_bin1("5432345718192")
-print bin
+print(bin)
 

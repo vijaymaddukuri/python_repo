@@ -5,4 +5,4 @@ def rotateArray(n, k):
     new=n[k:]+n[:k]
     return new
 newArray=rotateArray(n,k)
-print newArray
+print(newArray)

@@ -17,4 +17,4 @@ def solution(digits):
 a='1234567898765'
 
 sol=solution(a)
-print sol
+print(sol)

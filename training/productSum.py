@@ -17,14 +17,14 @@ def prod2sum(a, b, c, d):
 
 def prod2sum1(a, b, c, d):
     product = (a * a + b * b) * (c * c + d * d)
-    print product
+    print(product)
     l1 = sorted([abs(a*c+b*d),abs(a*d-b*c)])
-    print l1
+    print(l1)
     l2 = sorted([abs(a*c-b*d),abs(a*d+b*c)])
-    print l2
+    print(l2)
     if l1==l2:
         return [l1]
     else:
         return sorted([l1,l2])
 s=prod2sum1(1,2,3,4)
-print s
+print(s)

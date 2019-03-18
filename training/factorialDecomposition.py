@@ -28,4 +28,4 @@ def decomp2(n):
     order = lambda n, k: n and n // k + order(n // k, k)
     decomp = lambda n: ' * '.join(
         str(p) if n < 2 * p else '%d^%d' % (p, order(n, p)) for p in range(2, n + 1) if is_prime(p))
-print(decomp(5))
+print(decomp2(5))

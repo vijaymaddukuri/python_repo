@@ -20,4 +20,4 @@ def unique_in_order1(iterable):
     return result
 
 item=unique_in_order('AABBCCcXX')
-print item
+print(item)

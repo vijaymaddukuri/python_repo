@@ -19,9 +19,11 @@ def possible_words(lwords, charSet):
         for key in chars:
             if key not in charSet:
                 flag = 0
+                break
             else:
                 if charSet.count(key) != chars[key]:
                     flag = 0
+                    break
         if flag == 1:
             print(word)
 

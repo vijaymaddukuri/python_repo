@@ -15,4 +15,4 @@ def order(sentence):
     return " ".join(sentence)
 
 newSen=order('is21 Thi1s2 T4est 2a')
-print newSen
+print(newSen)

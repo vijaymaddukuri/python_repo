@@ -8,4 +8,4 @@ def filterList(nList):
 unfilterdList=['vijay','vijay','vicky','vj','vj']
 
 newList = filterList(unfilterdList)
-print newList
+print(newList)

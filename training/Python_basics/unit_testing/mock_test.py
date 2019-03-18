@@ -1,8 +1,8 @@
 import unittest
 
-from unit_testing.mock_example import MyService
+from training.Python_basics.unit_testing.mock_example import MyService
 
-from practice.unit_testing.single_sign_on import *
+from training.Python_basics.unit_testing.single_sign_on import *
 
 class MyServiceTest(unittest.TestCase):
     def test_invalid_token(self):

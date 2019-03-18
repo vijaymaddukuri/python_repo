@@ -24,7 +24,22 @@ def degree2(arr):
     maxDeg = max([degr for degr, _ ,_ in dict.values()])
     return min([endindex-startindex+1 for degr, startindex, endindex in dict.values() if degr==maxDeg])
 
+def degree3(arr):
+    fcount = 1
+    count = 1
+    first = arr[0]
+    fNum = first
+
+    for i, c in enumerate(arr[1:]):
+        if c == arr[i]:
+            count+=1
+            if count>fcount:
+                fcount=count
+                fNum=c
+        else:
+            count=1
+    print(fNum, fcount)
 
 lst=[1, 1, 2, 1, 2, 2]
-print(degree2(lst))
-print(degree(lst))
+# print(degree2(lst))
+print(degree3(lst))

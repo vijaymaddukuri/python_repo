@@ -21,5 +21,5 @@ def unique_in_order1(iterable):
 name="vviijjaaaayydddddaadddddddddddddddddddddddddddddd"
 
 result=unique_in_order1(name)
-print result+result[0]
+print(result+result[0])
 

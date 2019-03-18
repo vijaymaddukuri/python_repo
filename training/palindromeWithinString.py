@@ -15,8 +15,9 @@ def palindromes(text):
 def palindromes1(text):
     if text == text[::-1]:
         return len(text)
-    return max(palindromes(text[:-1]), palindromes(text[1:]))
+    print(text[:-1])
+    print(text[1:])
+    return max((palindromes1(text[:-1]), palindromes1(text[1:])))
 
-bigstrng='attract'
-result=palindromes(bigstrng)
-print(result)
+bigstrng='attttt'
+print(palindromes(bigstrng))

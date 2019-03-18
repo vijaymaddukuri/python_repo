@@ -51,8 +51,8 @@ import json
 import os
 
 with open(r'C:\Users\madduv\Desktop\profile.conf', 'r') as yml:
-    print type(yml)
+    print(type(yml))
     output = yaml.load(yml)
-    print output
+    print(output)
     new = json.dumps(output['xstream-centos']['vm_template'])
-print new
+print(new)

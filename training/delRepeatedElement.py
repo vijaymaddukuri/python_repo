@@ -3,4 +3,4 @@
 def delete_nth(order,max_e):
     return [item for index, item in enumerate(order) if order[:index].count(item)< max_e]
 
-print(delete_nth([20,37,20,21,20], 2))
+print(delete_nth([20, 20,37,20,21,20], 2))

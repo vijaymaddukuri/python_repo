@@ -49,3 +49,4 @@ def longest_repetition(chars):
     return (char, fCount)
 
 print(longest_repetition('beabbeefeab'))
+print(longest_repetition([1, 1, 2, 1, 2, 2]))

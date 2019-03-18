@@ -1,7 +1,6 @@
 def move_zeros(array):
-    import re
     z = ans = []
-    print array
+    print(array)
     for i in range(len(array)):
         if array[i] == 0 and (type(array[i]) == int or type(array[i]) == float):
             z = z + [0]
@@ -11,7 +10,7 @@ def move_zeros(array):
     return ans +z
 
 l=move_zeros([9,0.0,0,9,1,2,0,1,False,1,0.0,3,0,1,9,0,0,0,0,9])
-print l
+print(l)
 
 '''
 ["a",0,0,"b",None,"c","d",0,1,False,0,1,0,3,[],0,1,9,0,0,{},0,0,9])

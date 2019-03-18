@@ -23,5 +23,5 @@ def basic_op3(o, a, b):
 
 value = basic_op3('+', 4, 7)
 
-print value
+print(value)
 

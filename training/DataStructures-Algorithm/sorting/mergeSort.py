@@ -25,4 +25,4 @@ def merge_sort(arr):
 
 arr = [11,2,5,4,7,6,8,1,23]
 merge_sort(arr)
-print arr
+print(arr)

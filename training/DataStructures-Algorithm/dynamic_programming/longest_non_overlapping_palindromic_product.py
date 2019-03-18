@@ -56,3 +56,5 @@ def getScore(s):
         maximum_product = max(maximum_product, value)
 
     return maximum_product
+
+print(getScore('acdapmpomp'))

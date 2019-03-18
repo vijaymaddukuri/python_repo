@@ -1,15 +1,15 @@
 """
 Process: Running a program 
 Data segment (CPU)
-Code Area  (INstruction to execute code)
+Code Area  (Instruction to execute code)
 Stack (manage function variables, calls)
 Heap (Dynamic memory allocation)
 
 Threading: An effective way of concurrency, bcoz it defined as light weight process. 
-Thread share the code area, data segemnt of parent process
+Thread share the code area, data segment of parent process
 Threading is cost effective and uses lesser CPU power
 
-Threading contains thrad local storage, stack
+Threading contains thread local storage, stack
 """
 import threading
 import time

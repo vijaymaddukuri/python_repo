@@ -3,15 +3,15 @@ def sqr(x): return x**2
 
 square1 =list(map(sqr,items))
 square2 = list(map((lambda x: x **2), items))
-power=list(map(pow,[2, 3, 4], [10, 11, 12]))
+power=list(map(pow,[2, 3, 4], [2, 2, 2]))
 print(power)
 fil=list( filter((lambda x: x < 0), range(-5,5)))
 # reduceItem=reduce( (lambda x, y: x * y), [1, 2, 3, 4] )
 # print(reduceItem)
 a=[[1,2,3,4],[4,5,6,7]]
 b=[4,5,6,7]
-print(zip(*a))
-print(zip(a,b))
+print(list(zip(*a)))
+print(list(zip(a,b)))
 
 print(all(['a','','c'])) #Return True if all elements of the iterable are true (or if the iterable is empty).
 print(any(['a','','c'])) #Return True if any element of the iterable is true. If the iterable is empty, return False.
@@ -36,7 +36,7 @@ print(repr(1))
 print(str(1))
 s='a'
 print('---------------------')
-print(s.extend('1'))
+# print(s.extend('1'))
 s=[1,2,3,4]
 
 
@@ -47,7 +47,9 @@ Generators are iterators,but you can only iterate over them once.
 
 It's because they do not store all the values in memory,they generate the values on the fly:
 
-Generators simplifies creation of iterators. A generator is a function that produces a sequence of results instead of a single value.
+Generators simplifies creation of iterators.
+
+A generator is a function that produces a sequence of results instead of a single value.
 
 When a generator function is called, it returns a generator object without even beginning execution of the function.
 
@@ -62,7 +64,8 @@ Yield is a keyword that is used like return, except the function will return a g
 Range and Xrange:
 
 Using xrange is safe when dealing with larger numbers,.
-The range python function create a list with elements equal to number we given to that range where as xrange create one element at any given time.
+The range python function create a list with elements equal to number
+we given to that range where as xrange create one element at any given time.
 This saves use to reduce the usage of RAM.
 
 '''
@@ -77,7 +80,8 @@ Object:
 A unique instance of a data structure that's defined by its class.
 An object comprises both data members (class variables and instance variables) and methods.
 
-Object is simply a collection of data (variables) and methods (functions) that act on those data. And, class is a blueprint(for the object.
+Object is simply a collection of data (variables) and methods (functions) that act on those data.
+And, class is a blueprint(for the object.
 
 A class creates a new local namespace where all its attributes are defined. Attributes may be data or functions.
 
@@ -99,9 +103,11 @@ In Python, you can imagine a namespace as a mapping of every name, you have defi
 
 Different namespaces can co-exist at a given time but are completely isolated.
 
-A namespace containing all the built-in names is created when we start the Python interpreter and exists as long we don't exit.
+A namespace containing all the built-in names is created when we start the Python interpreter and
+exists as long we don't exit.
 
-This is the reason that built-in functions like id(), print() etc. are always available to us from any part of the program. Each module creates its own global namespace.
+This is the reason that built-in functions like id(), print() etc. are always available to us
+from any part of the program. Each module creates its own global namespace.
 
 These different namespaces are isolated. Hence, the same name that may exist in different modules do not collide.
 '''

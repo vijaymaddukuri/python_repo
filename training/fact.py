@@ -4,4 +4,4 @@ def fact(n):
         fac=i*fac
     return fac
 f=fact(5)
-print f
+print(f)

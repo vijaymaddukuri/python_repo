@@ -16,7 +16,7 @@ b=re.subn(",","-",a)
 #com=re.compile("vijay")
 #b=com.findall(a)
 #b=re.finditer("\\bkumar\\b",a)
-print b[0][-1]
+print(b[0][-1])
 
 tup=(0,1)
-print tup[0]
+print(tup[0])
