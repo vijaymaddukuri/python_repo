@@ -1,4 +1,5 @@
-# Problems solved:
+# Problems solved
+
 Tree:
 	Create Binary Tree - insert, inorder, preorder, postorder
 	BST in sorted order
@@ -42,6 +43,7 @@ Stacks and Queues:
 	- For given lists (h1,h2,h3), find the maximum possible height of the stacks such that all of the stacks are exactly the same height.
 	- Maximum number of integers that can be removed from the two stacks without the sum of elements in A and B not exceeding x.
 	- Queue using two stacks
+	- Rearrange array such that even index elements are smaller and odd index elements are greater
 
 Array:
 
@@ -55,6 +57,7 @@ DP:
 	- Longest common substring
 	- Longest planidromic sequence.
 	- Reverse fibnocci
+	- longest increasing suquence
 
 Sorting:
 
@@ -64,6 +67,8 @@ Sorting:
 	- Odd even string sort
 	- Sort by digit
 	- Sort the inner content of sentance.
+	- Merge two sorted arrays
+	- Merge Sort
 
 General:
 
@@ -114,6 +119,7 @@ such that arr[i] = arr[j] and i != j)
 43. Inheritance
 44. Find the smallest positive integer value that cannot be represented as sum of any subset of a given array
 45. Check if a string has all characters with same frequency with one variation allowed
+
 
 
 
