@@ -22,7 +22,7 @@ def optimalSearchTree(keys, freq):
                 if (c < cost[i][j]):
                     cost[i][j] = c
                     storeRoot[i][j] = r
-    return cost[0][n-1], storeRoot
+    return cost[0][n-1], storeRoot, keys[storeRoot[0][n-1]]
 
 if __name__ == "__main__" :
 

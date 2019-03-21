@@ -20,5 +20,5 @@ def sortByHeight(itemList):
             temp += 1
     return sortedList
 
-new=sortByHeight([-1,-1,-1])
+new=sortByHeight([-1,-1,-1, 1,2,0])
 print(new)

@@ -40,9 +40,9 @@ class LinkedList:
 
 def insertNodeAtHead(llist, data):
     if llist is None:
-        return SinglyLinkedListNode(data)
+        return Node(data)
     tempNode = llist
-    head = SinglyLinkedListNode(data)
+    head = Node(data)
     head.next = tempNode
     del tempNode
     return head

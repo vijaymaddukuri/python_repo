@@ -21,7 +21,7 @@ def findLCA(root, n1, n2):
     if root.key == n1 or root.key == n2:
         return root
 
-        # Look for keys in left and right subtrees
+    # Look for keys in left and right subtrees
     left_lca = findLCA(root.left, n1, n2)
     right_lca = findLCA(root.right, n1, n2)
 
@@ -31,7 +31,7 @@ def findLCA(root, n1, n2):
     if left_lca and right_lca:
         return root
 
-        # Otherwise check if left subtree or right subtree is LCA
+    # Otherwise check if left subtree or right subtree is LCA
     return left_lca if left_lca is not None else right_lca
 
 
@@ -48,4 +48,4 @@ root.right.right = Node(7)
 print("LCA(4,5) = ", findLCA(root, 4, 5).key)
 print("LCA(4,6) = ", findLCA(root, 4, 6).key)
 print("LCA(3,4) = ", findLCA(root, 3, 4).key)
-print("LCA(2,4) = ", findLCA(root, 2, 4).key )
+print("LCA(2,4) = ", findLCA(root, 2, 4).key)
