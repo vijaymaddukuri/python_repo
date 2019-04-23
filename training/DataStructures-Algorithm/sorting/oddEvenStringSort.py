@@ -13,4 +13,4 @@ def sort_my_string1(S):
 def sort_my_string(s):
     return s[::2] + ' ' + s[1::2]
 
-print(sort_my_string('vijaykumar'))
+print(sort_my_string1('vijaykumar'))

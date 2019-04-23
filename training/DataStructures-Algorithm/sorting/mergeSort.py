@@ -23,6 +23,6 @@ def merge_sort(arr):
             j += 1
             k +=1
 
-arr = [11,2,5,4,7,6,8,1,23]
+arr = [1,2,4,3,5]
 merge_sort(arr)
 print(arr)

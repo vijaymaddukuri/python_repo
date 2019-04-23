@@ -51,7 +51,7 @@ def lcs(arr1, arr2):
     # L[m][n] contains the length of LCS of arr1[0..n-1] & arr2[0..m-1],  sub_seq_arr will contain the LCS
     return L[m][n], sub_seq_arr
 
-a2 = "ABCD"
-a1 = "BACDBDCDDD"
+a2 = "ABCDEA"
+a1 = "BACDBDCDDDEA"
 
 print("Length of LCS is ", lcs(a1, a2))

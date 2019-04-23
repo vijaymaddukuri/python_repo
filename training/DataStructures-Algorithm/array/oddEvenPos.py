@@ -14,4 +14,4 @@ def rearrange(arr, n):
             arr[i + 1] = temp
     return arr
 
-print(rearrange([1,2,3,4], 4))
+print(rearrange([1,3,4,2], 4))
