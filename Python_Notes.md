@@ -22,7 +22,8 @@ Python Method vs Function
 		print( "Ceiling value of 15.25 is : ", ceil_val)
 
   - Function is block of code that is also called by its name. (independent)
-  - The function can have different parameters or may not have any at all. If any parameters are passed, they are passed explicitly.
+  - The function can have different parameters or may not have any at all. If any parameters are passed,
+  they are passed explicitly.
   - Function does not deal with Class and its instance concept.
 		# User-Defined Function :
 
@@ -120,7 +121,7 @@ Generator in python:
 - Specify iterable sequences
   - All generators are iterators
 
-- Are lazily evauated
+- Are lazily evaluated
  - the next value in the sequence is computed on demand
 
 - Can model infinite sequences
@@ -355,8 +356,17 @@ Polymorphism
 Message parsing
 Inheritnace
 
+
+Shallow copy: A reference of object is copied in other object. It means any change made to a copy of object do reflect
+in the original object
+
 Shallow copy: i=10 and j=10 will have the same id, because value is same,
- within the same scope. The id will exist if it have some references.
+ within the same scope. The id will exist if it have same references.
+
+Deep copy: A copy of object is copied into another object. It means changes made to a copy of object
+do not reflect in the original object
+
+Creates a copy of the object and the elements of the object.
 
 Remove id from garbage - del(i)
 
@@ -537,3 +547,165 @@ from any part of the program. Each module creates its own global namespace.
 
 These different namespaces are isolated. Hence, the same name that may exist in different modules do not collide.
 '''
+
+List vs Tuple:
+
+List:
+
+The important characteristics of Python lists are as follows:
+
+    Lists are ordered.
+    Lists can contain any arbitrary objects.
+    List elements can be accessed by index.
+    Lists can be nested to arbitrary depth.
+    Lists are mutable.
+    Lists are dynamic.
+
+If s is a string, s[:] returns a reference to the same object
+
+Conversely, if a is a list, a[:] returns a new object that is a copy of a
+
+Tuple:
+
+Tuples are an ordered sequences of items, just like lists.
+The main difference between tuples and lists is that tuples cannot be changed (immutable)
+unlike lists which can (mutable).
+
+It is important to keep in mind that if you want to create a tuple containing only one value, you need a trailing comma after your item.
+
+# tuple with one value
+tup1 = ('Vijay',)
+
+Even though tuples are immutable, it is possible to take portions of existing tuples to create new tuples as the following example demonstrates.
+
+# Initialize tuple
+tup1 = ('Python', 'SQL')
+# Initialize another Tuple
+tup2 = ('R',)
+# Create new tuple based on existing tuples
+new_tuple = tup1 + tup2;
+print(new_tuple)
+
+Lists and tuples are standard Python data types that store values in a sequence.
+A tuple is immutable whereas a list is mutable.
+
+Tuples are faster than lists. If you're defining a constant set of values and all you're ever going
+to do with it is iterate through it, use a tuple instead of a list.
+
+It makes your code safer if you “write-protect” data that does not need to be changed.
+Using a tuple instead of a list is like having an implied assert statement that this data is constant,
+and that special thought (and a specific function) is required to override that.
+
+Some tuples can be used as dictionary keys (specifically, tuples that contain immutable values like strings,
+numbers, and other tuples). Lists can never be used as dictionary keys, because lists are not immutable.
+
+Tuples can be used as values in sets whereas lists can not
+
+
+Example:
+
+a = ["apples", "bananas", "oranges"]
+
+When you do this, a python object of type list is created in the memory and the variable
+
+Now if you modify the first index of the list, and check the id() again, you will get the same exact value because
+a is still referring to the same object.
+
+Now, let’s see what happens if we perform the same thing on tuples.
+
+>>> a = ("apples", "bananas", "oranges")
+>>> id(a)
+4340765824
+>>> a = ("berries", "bananas", "oranges")
+>>> id(a)
+4340765464
+
+This means that after the second assignment, a is referring to an entirely new object.
+
+Moreover, if no other variables in your program is referring to the older tuple then python’s garbage collector
+will delete the older tuple from the memory completely.
+
+So there you have it, this concept of mutability is the key difference between lists and tuples.
+
+Mutability is more efficient when you know you will be frequently modifying an object.
+
+For example, assume you have some iterable object (say x), and you want to append each element of x to a list.
+
+L  = []
+for item in x:
+    L.append(item)
+
+But can you even imagine what would happen if we had used a tuple instead?
+
+T  = ()
+for item in x:
+    T = T + (item,)
+
+Since tuples are immutable, you are basically copying the contents of the tuple T to a new tuple object
+at EACH iteration.
+
+
+
+Easiness of debugging: Immutability Wins!:
+
+Let’s take a look at this very simple example.
+
+>>> a = [1, 3, 5, 7]
+>>> b = a
+>>> b[0] = -10
+>>> a
+[-10, 3, 5, 7]
+
+Notice that when we do b = a, we are not copying the list object from b to a.
+
+We are actually telling python that the two variables a and b should reference the same list object.
+
+Because a effectively holds the location of the python object in memory, when you say b = a you copy that address location (not the actual object) to b.
+
+This results in having two references (a and b) to the same list object.
+
+In other words when we do b[0] = -10, it has the same effect as a[0] = -10.
+
+Of course you can look at the code and rightfully think that it is easy to debug.
+
+Well you are right for small snippets of code like this, but imagine if you have a big project with many references to the same mutable object.
+
+It will be very challenging to track all the changes to this object because any modification by any of those references will modify the object.
+
+This is not the case with immutable objects even if you have multiple references to them.
+
+Once an immutable object is created, its content will never change.
+
+Easiness of debugging: Immutability Wins!
+
+
+Memory Efficiency:
+
+Memory efficiency: Immutability Wins
+
+if you create immutable objects that hold the same value, python (under certain conditions) might bundle
+these different objects into one.
+
+>>> a = "Karim"
+>>> b = "Karim"
+>>> id(a)
+4364823608
+>>> id(b)
+4364823608
+
+As you can see, even though in our python program we explicitly created two different string objects,
+python internally bundled them into one.
+
+Python was able to do that because the immutability of strings makes it safe to perform this bundling.
+
+Not only that this will save us some memory (by not storing the string multiple times in memory),
+but also every time you want to create a new object with the same value,
+python will just create a reference to the object that already exists in memory which is definitely more efficient.
+
+Ref: https://www.afternerd.com/blog/difference-between-list-tuple/
+
+
+
+
+
+
