@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Environment
+     xmlns="http://schemas.dmtf.org/ovf/environment/1"
+     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+     xmlns:oe="http://schemas.dmtf.org/ovf/environment/1"
+     xmlns:ve="http://www.vmware.com/schema/ovfenv"
+     oe:id=""
+     ve:vCenterId="vm-2287">
+   <PlatformSection>
+      <Kind>VMware ESXi</Kind>
+      <Version>6.0.0</Version>
+      <Vendor>VMware, Inc.</Vendor>
+      <Locale>en</Locale>
+   </PlatformSection>
+   <PropertySection>
+         <Property oe:key="Default_Gateway" oe:value="10.100.249.1"/>
+         <Property oe:key="Hostname" oe:value="backupservice"/>
+         <Property oe:key="Http_Proxy" oe:value="10.131.236.9"/>
+         <Property oe:key="Http_Proxy_Port" oe:value="3128"/>
+         <Property oe:key="IP_Address" oe:value="10.100.249.113"/>
+         <Property oe:key="MASTER_API_PASSWORD" oe:value="apipassword"/>
+         <Property oe:key="MASTER_API_PORT" oe:value="1111"/>
+         <Property oe:key="MASTER_API_USERNAME" oe:value="apiuser"/>
+         <Property oe:key="MASTER_IP" oe:value="1.1.1.1"/>
+         <Property oe:key="MASTER_SALT_BASE_LOCATION" oe:value="/srv/salt/base/grain"/>
+         <Property oe:key="NETWORKER_PASSWORD" oe:value="secret"/>
+         <Property oe:key="NETWORKER_URL" oe:value="https://ip:port"/>
+         <Property oe:key="NETWORKER_USERNAME" oe:value="user"/>
+         <Property oe:key="Primary_DNS" oe:value="10.100.26.177"/>
+         <Property oe:key="SSH_PORT_NUMBER" oe:value="1111"/>
+         <Property oe:key="Subnet_Mask" oe:value="255.255.255.0"/>
+   </PropertySection>
+   <ve:EthernetAdapterSection>
+      <ve:Adapter ve:mac="00:50:56:84:2e:3b" ve:network="VLAN_358" ve:unitNumber="7"/>
+   </ve:EthernetAdapterSection>
+</Environment>

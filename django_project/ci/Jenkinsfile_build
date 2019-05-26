@@ -1,0 +1,122 @@
+void runStages(String tag, String versiontag) {
+
+    docker.image(tag).inside("--privileged=true") {
+	
+		stage('Generate the build'){
+		
+				withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'VIJAY_VIJAYRUBICOIN',
+							  usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']]) {
+			
+					sh '''
+					git clone https://madduv:487367d96125a05c961180a4d9ca530f012481c1@github.com/AAI/TAveche.git
+					'''
+					}
+
+				sh '''				
+				    dir=$(pwd)
+					mkdir $dir/ci/onb
+					cp $dir/TAveche/config.yaml $dir/ci/onb/
+				    virtualenv venv -p python3
+					source venv/bin/activate
+					python3 setup.py install
+					pip install paramiko
+					chmod -R 777 build.sh
+					./build.sh
+					cd $dir/dist
+					file=`ls | grep ".gz"`
+					cd $dir/ci
+					python3 remote_operations.py $dir/ci $dir/dist/$file /tmp/$file
+					
+				'''
+			    archiveArtifacts artifacts: 'dist/*.gz', allowEmptyArchive: true
+		}
+		
+		stage('Run end to end testautomation'){
+						
+				sh '''
+					dir=$(pwd)
+					chmod -R 777 $dir/ci/test_automation.sh
+					cd $dir/ci
+					./test_automation.sh
+					cd $dir
+					'''
+		        archiveArtifacts artifacts: 'TAveche/robot_tests/backup_service_automation/logs/*.txt', allowEmptyArchive: true
+				archiveArtifacts artifacts: 'TAveche/robot_tests/backup_service_automation/logs/*.html', allowEmptyArchive: true
+				archiveArtifacts artifacts: 'TAveche/robot_tests/backup_service_automation/logs/*.xml', allowEmptyArchive: true
+
+		}
+		
+		stage('Archive regression test Results'){
+			step([$class: 'JUnitResultArchiver', testResults: 'TAveche/robot_tests/backup_service_automation/logs/junit*.xml'])
+			if (currentBuild.result == "UNSTABLE") {
+				// input "Unit tests are failing, proceed?"
+				sh "exit 1"
+				}
+		}
+		
+						
+		stage('Generate Artifactory') {
+	
+			withCredentials([usernamePassword(credentialsId: 'Jenkins Artifactory', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
+			
+				def dir = sh script: 'pwd', returnStdout: true
+				def ws = dir.trim();
+
+				def lastbuild = Jenkins.instance.getItemByFullName("${env.JOB_BASE_NAME}").getLastSuccessfulBuild().toString()
+				
+			        def lastbuildnumber = lastbuild.substring(lastbuild.indexOf('#') + 1)
+				
+				int newbuildnumber = lastbuildnumber.toInteger() + 1
+								   
+				//def ver = versiontag + "." + newbuildnumber
+				
+				sh """
+				curl -u $USERNAME:$PASSWORD -T '${ws}/dist/tenant_automation_service-0.0.1.tar.gz' 'https://artifactory.core.rcsops.com/artifactory/core-generic-local/tenant_automation_service-0.0.1_${newbuildnumber}.tar.gz'
+				"""
+			}
+		}
+    }
+}
+
+@Library('xsPipelineLibs')
+def vs = new devops.VariousStuff1().configure([notifyRecipients : 'sylus.anuranjan@VIJAY.com'])
+
+vs.try_node('docker_engine') {
+
+    try {
+        jdk = tool name: 'OpenJDK 1.8.0', type: 'hudson.model.JDK'
+		deleteDir()
+	
+		withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'VIJAY_VIJAYRUBICOIN',
+							  usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']]) {
+			
+			sh '''git clone http://$USERNAME:$PASSWORD@github.com/AAI/ONBFactory.git'''
+	}
+
+        def taglist = sh script: 'cd ONBFactory && git tag', returnStdout: true
+        def build_tag = ""
+ 
+        //String[] splitData = taglist.split("\n");
+        //for (String eachSplit : splitData) {
+        //    if (eachSplit.startsWith("v")) {
+        //        build_tag = eachSplit.substring(1);
+        //    }
+        //}
+
+        checkout scm
+
+        String imageTag
+
+        imageTag = vs.ensureDockerImage('devops/build-image')
+
+        runStages(imageTag, build_tag)
+
+
+    } catch(e) {
+
+        def color = 'danger'
+        def err_message = "Job: ${JOB_NAME}:${BUILD_NUMBER} got an exception during Build stage: " + e.toString()
+        def info_message = "Job URL: ${BUILD_URL}"
+        throw (e)
+    }
+}

@@ -1,0 +1,152 @@
+void runStages(String tag) {
+
+    docker.image(tag).inside("--privileged=true") {
+
+        def tas_lastbuild = Jenkins.instance.getItemByFullName('tsa-onbfactory-tas-tar-generation-master').getLastSuccessfulBuild().toString()
+        def tas_last_temp = tas_lastbuild.substring(tas_lastbuild.indexOf('#') + 1)
+        int tas_lastbuildnumber = tas_last_temp.toInteger()
+
+        build("tsa-onbfactory-tas-tar-generation-master")
+
+        def tas_newbuild = Jenkins.instance.getItemByFullName('tsa-onbfactory-tas-tar-generation-master').getLastSuccessfulBuild().toString()
+        def tas_new_temp = tas_newbuild.substring(tas_newbuild.indexOf('#') + 1)
+        int tas_newbuildnumber = tas_new_temp.toInteger()
+
+        if (tas_lastbuildnumber == tas_newbuildnumber){
+                println('TAS tar generation failed')
+                sh "exit 1"
+            }
+
+
+        def taglist = sh script: 'git tag', returnStdout: true
+
+        String[] splitData = taglist.split("\n");
+        for (String eachSplit : splitData) {
+            if (eachSplit.startsWith("v")) {
+            lasttag = eachSplit.substring(1);
+            }
+        }
+        int newbuildnumber = tas_lastbuildnumber + 1
+
+        def ver = lasttag + "." + newbuildnumber
+
+        stage('Generate the build'){
+
+            withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'VIJAY_VIJAYRUBICOIN',
+                              usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']]) {
+
+                sh  '''
+                    version='''+ver+'''
+                    dir=$(pwd)
+                    mkdir $dir/ci/ova_automation
+                    git clone http://$USERNAME:$PASSWORD@github.com/AAI/ova_scripts.git
+                    cd $dir
+                    wget https://artifactory.core.rcsops.com/artifactory/core-generic-local/tenant_automation_service-$version.tar.gz
+                    wget https://artifactory.core.rcsops.com/artifactory/core-generic-local/tsa_tams_packages.tar
+
+                    '''
+            }
+
+            sh '''
+                version='''+ver+'''
+                dir=$(pwd)
+                tas_tar=$version.tar.gz
+
+                cd $dir
+                cd ova_scripts
+                cp install_tas_svc.sh $dir/ci/ova_automation
+                cp ova_startup_script.py $dir/ci/ova_automation
+                cp bridgeburner.toml $dir/ci/ova_automation
+                cp clean_up_app_logs.sh $dir/ci/ova_automation
+                cp clear_ovaconfig.sh $dir/ci/ova_automation
+                cp check_bbc_svc.sh $dir/ci/ova_automation
+                cp ova_automation/common/* $dir/ci/ova_automation
+                cp ova_automation/pyvmomi_scripts/* $dir/ci/ova_automation
+                cp $dir/tsa_tams_packages.tar $dir/ci/ova_automation
+                ls $dir/ci/ova_automation
+                cd $dir
+                wget https://artifactory.core.rcsops.com/artifactory/core-generic-local/tas_release/tas_base.ova
+                virtualenv venv -p python3.6
+                source venv/bin/activate
+                pip3.6 install paramiko
+                pip3.6 install pyVim
+                pip3.6 install pyVmomi
+                pip3.6 install simple-yaml
+                pip3.6 install pyyaml
+                cd $dir/ci
+                export PYTHONPATH=$PYTHONPATH:$dir/
+                cd $dir/ci/ova_automation
+
+                python3 power_cycles.py -s '10.100.28.108' -o 443 -u 'madduv@vsint.local' -p 'Password123!' --vmname 'backupservice_vm' --powercycle 'power_off'
+
+                python3 delete_vm.py -s '10.100.28.108' -o 443 -u 'madduv@vsint.local' -p 'Password123!' --vmname 'backupservice_vm'
+
+                python3 deploy_ova.py -s '10.100.28.108' -o 443 -u 'madduv@vsint.local' -p 'Password123!' --ova-path $dir/tas_base.ova --configpath $dir/ci/ova_automation/config.yaml --service 'backupservice'
+
+                python3 power_cycles.py -s '10.100.28.108' -o 443 -u 'madduv@vsint.local' -p 'Password123!' --vmname 'backupservice_vm'  --powercycle 'power_on'
+
+                python3 remote_operations.py $dir/ci/ova_automation $dir/tenant_automation_service-$tas_tar /home/tas/tenant_automation_service-$tas_tar 'backupservice' True
+
+                mkdir ovf
+
+                python3 power_cycles.py -s '10.100.28.108' -o 443 -u 'madduv@vsint.local' -p 'Password123!' --vmname 'backupservice_vm' --powercycle 'shutdown'
+
+                python3 export_vm.py -s '10.100.28.108' -o 443 -u 'madduv@vsint.local' -p 'Password123!' --vmname 'backupservice_vm' -w $dir/ci/ova_automation/ovf
+
+                cd $dir/ci/ova_automation/ovf/*
+
+                ovftool backupservice_vm.ovf backupservice_vm.ova
+
+                cd $dir
+
+                '''
+                withCredentials([usernamePassword(credentialsId: 'Jenkins Artifactory', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
+
+                    sh """
+                        dir=\$(pwd)
+                        cd \$dir/ci/ova_automation/ovf/*
+                        curl -u $USERNAME:$PASSWORD -T 'backupservice_vm.ova' 'https://artifactory.core.rcsops.com/artifactory/core-generic-local/tas_backup_daily.ova'
+
+                       """
+                }
+        }
+
+        stage('Deploy the OVA'){
+
+            sh '''
+                dir=$(pwd)
+                wget https://artifactory.core.rcsops.com:443/artifactory/core-generic-local/tas_backup_daily.ova
+                source venv/bin/activate
+                cd $dir/ci/ova_automation
+                export PYTHONPATH=$PYTHONPATH:$dir/
+
+                python3 power_cycles.py -s '10.100.28.108' -o 443 -u 'madduv@vsint.local' -p 'Password123!' --vmname 'backup-nightly-vm' --powercycle 'power_off'
+
+                python3 delete_vm.py -s '10.100.28.108' -o 443 -u 'madduv@vsint.local' -p 'Password123!' --vmname 'backup-nightly-vm'
+
+                python3 deploy_ova.py -s '10.100.28.108' -o 443 -u 'madduv@vsint.local' -p 'Password123!' --ova-path $dir/tas_backup_daily.ova --configpath $dir/ci/config.yaml --service 'backupservice'
+
+                python3 power_cycles.py -s '10.100.28.108' -o 443 -u 'madduv@vsint.local' -p 'Password123!' --vmname 'backup-nightly-vm'  --powercycle 'power_on'
+              '''
+        }
+
+    }
+}
+@Library('xsPipelineLibs')
+def vs = new devops.VariousStuff1().configure([notifyRecipients : 'sylus.anuranjan@VIJAY.com'])
+
+vs.try_node('docker_engine') {
+
+    try {
+        jdk = tool name: 'OpenJDK 1.8.0', type: 'hudson.model.JDK'
+        deleteDir()
+        checkout scm
+        imageTag = vs.ensureDockerImage('devops/build-image', 'tasvmcontainer')
+        runStages(imageTag)
+    } catch(e) {
+        def color = 'danger'
+        def err_message = "Job: ${JOB_NAME}:${BUILD_NUMBER} got an exception during Build stage: " + e.toString()
+        def info_message = "Job URL: ${BUILD_URL}"
+        throw (e)
+    }
+}

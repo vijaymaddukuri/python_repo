@@ -1,0 +1,17 @@
+mode="client"
+
+certFile="/etc/bridgeburner/certs/VIJAY/clients/BACK-UP.crt"
+keyFile="/etc/bridgeburner/certs/VIJAY/clients/BACK-UP.key"
+caFile="/etc/bridgeburner/certs/VIJAY/CA.crt"
+
+[client]
+    serverAddress="$1:$2"
+
+    [[client.services]]
+    Name="$3"
+    Address="$4"
+    Port=8000
+    Protocol="http"
+
+[logging]
+level="info"

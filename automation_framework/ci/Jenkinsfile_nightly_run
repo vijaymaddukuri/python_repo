@@ -1,0 +1,104 @@
+void runStages(String tag) {
+
+    docker.image(tag).inside("--privileged=true") {
+
+        stage('Generate and upgrade Salt artifacts') {
+           def SaltUpgradeJob = build(job: "tsa-salt-CherryPy-tar-generation-daily-artifact-master", propagate: false).result
+           if(SaltUpgradeJob == "FAILURE" || SaltUpgradeJob == "UNSTABLE") {
+                currentBuild.result = 'FAILURE'
+                sh """
+                echo "Salt tar generation job  is failed"
+                """
+           }else{
+               sh '''
+                  dir=$(pwd)
+                  export PYTHONPATH=$PYTHONPATH:$dir/
+                  cd utils
+                  wget https://artifactory.core.rcsops.com:443/artifactory/core-generic-local/tenant_automation_service-cherrypy_nightly.tar
+                  python UpdateSaltRepo.py --salt_tar_path $dir/utils/tenant_automation_service-cherrypy_nightly.tar
+                 '''
+           }
+        }
+
+       stage('Deploy TAS and Middleware OVA'){
+
+        parallel (
+            "TAS OVA" : {
+                build("tsa-onbactory-tas-ova-deployment-fixedConfig-master")
+                },
+            "Middleware OVA" : {
+                    build("tsa-middlewareservice-ova-deployment-fixedConfig-master")
+                }
+            )
+       }
+
+       stage('Generate and Upload BB certs')
+       {
+         sh '''
+            dir=$(pwd)
+            export PYTHONPATH=$PYTHONPATH:$dir/
+            cd utils
+            python UpdateBridgeBurnerCerts.py
+            '''
+       }
+
+
+       stage('Run Automation Test Suites') {
+           def BackupjobStatus = build(job: "tsa-taveche-backupservice-regression-tests-master", propagate: false).result
+           def VscanjobStatus = build(job: "tsa-taveche-vulnerabilityservice-regression-tests-master", propagate: false).result
+           def MonitoringjobStatus = build(job: "tsa-taveche-monitoringservice-regression-tests-master", propagate: false).result
+           def SplunkjobStatus = build(job: "tsa-taveche-logforwader-regression-tests-master", propagate: false).result
+
+
+           if(BackupjobStatus == "FAILURE" || BackupjobStatus == "UNSTABLE") {
+                currentBuild.result = 'FAILURE'
+                sh """
+                echo "Backup job  is failed"
+                """
+           }
+
+           if(MonitoringjobStatus == "FAILURE" || MonitoringjobStatus == "UNSTABLE") {
+                currentBuild.result = 'FAILURE'
+                sh """
+                echo "Monitoring job  is failed"
+                """
+           }
+
+           if(VscanjobStatus == "FAILURE" || VscanjobStatus == "UNSTABLE") {
+                currentBuild.result = 'FAILURE'
+                sh """
+                echo "Vulnerability job  is failed"
+                """
+           }
+
+           if(SplunkjobStatus == "FAILURE" || SplunkjobStatus == "UNSTABLE") {
+                currentBuild.result = 'FAILURE'
+                sh """
+                echo "Splunk  job  is failed"
+                """
+           }
+
+       }
+
+
+    }
+}
+
+@Library('xsPipelineLibs')
+def vs = new devops.VariousStuff1().configure([notifyRecipients : 'sylus.anuranjan@VIJAY.com'])
+
+vs.try_node('docker_engine') {
+
+    try {
+        jdk = tool name: 'OpenJDK 1.8.0', type: 'hudson.model.JDK'
+        deleteDir()
+        checkout scm
+        imageTag = vs.ensureDockerImage('devops/build-image')
+        runStages(imageTag)
+    } catch(e) {
+        def color = 'danger'
+        def err_message = "Job: ${JOB_NAME}:${BUILD_NUMBER} got an exception during Build stage: " + e.toString()
+        def info_message = "Job URL: ${BUILD_URL}"
+        throw (e)
+    }
+}

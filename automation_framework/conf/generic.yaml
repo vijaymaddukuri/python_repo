@@ -1,0 +1,54 @@
+MW_DETAILS:
+  MW_IP: '10.100.249.88'
+  MW_USER:  'tas'
+  MW_PWD:  'xStream2015!'
+  SWAGGER_USER: 'middleware'
+  SWAGGER_PWD: 'Password1'
+  PORT: 8000
+  TENANT_ID: '9bdcead0-e40c-11e8-9f32-f2801f1b9fd1'
+  MW_CONFIG_YAML_PATH:  '/opt/middleware/middleware_service/config.yaml'
+  WORKER_CONFIG_YAML_PATH:  '/opt/middleware/worker/config.yaml'
+
+
+NAT_VM:
+  SERVER_IP: 100.65.108.56
+  SERVER_PASSWORD: xStream2017!
+  SERVER_USERNAME: amso
+
+TAS_DETAILS:
+  TAS_IP: 10.100.249.44
+  TAS_USER: tas
+  TAS_PWD: xStream2015!
+  PORT: 8000
+  REMOTE_CLIENT_CERTIFICATE_LOCATION: "/etc/bridgeburner/certs/VIJAY/clients/"
+  REMOTE_CA_CERTIFICATE_LOCATION: "/etc/bridgeburner/certs/VIJAY/"
+  OS_VERSION: "centos6" #centos6 or centos7 or suse12 or rhel7
+  CONFIG_YAML_PATH:  '/opt/tas/tenant_automation_service/config.yaml'
+
+SALT_MASTER_DETAILS:
+   SM_IP: 10.100.249.87
+   SM_SSH_USER: root
+   SM_SSH_PWD: Password1
+
+LOG:
+  TAS_SVC:  "/var/log/tas/tas_svc.log"
+  MW_SERVICE_LOG: "/var/log/middleware/middleware_svc.log"
+  WORKER_LOG: "/var/log/middleware/worker.log"
+
+CONFIG:
+  TAS_CONFIG:  "/opt/tas/tenant_automation_service/config.yaml"
+  MWS_CONFIG: "/opt/middleware/middleware_service/config.yaml"
+  BWS_CONFIG: "/opt/middleware/worker/config.yaml"
+
+BB_SERVER:
+      SERVER_IP: "10.100.249.62" #Mandatory - BB Server IP
+      SERVER_USERNAME: "root" #Mandatory - BB Server Username
+      SERVER_PASSWORD: "Password1" #Mandatory - BB Server Password
+      TENANT_ID: "9bdcead0-e40c-11e8-9f32-f2801f1b9fd1" #Mandatory
+      DNS_NAME: "rk-consul.xstest.local" #Mandatory - FQDN
+      HOSTNAME: "rk-consul.xstest.local"
+      RID: "BACK-UP" #Mandatory
+      CLIENT_CERTIFICATES_PATH: "/etc/bridgeburner/certs/VIJAY/clients/"
+      CA_CERTIFICATES_PATH: "/etc/bridgeburner/certs/VIJAY/"
+      CA_CERTIFICATES: 'CA.crt'
+      LOCAL_FILE_LOCATION:  "/tmp/" # Mandatory - Local path to save the certiificates

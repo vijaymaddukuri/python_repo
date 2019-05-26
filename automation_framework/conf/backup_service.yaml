@@ -1,0 +1,12 @@
+backup_service:
+    backup_service_host: "10.100.249.44:8000"
+middleware:
+    mw_host: "10.100.249.88"
+    mw_port: "8000"
+    mw_ssh_user: "tas"
+    mw_ssh_pwd: "xStream2015!"
+    mw_user: "middleware"
+    mw_pwd: "Password1"
+networker_server:
+    networker_server_host: "10.100.249.48:9090"
+

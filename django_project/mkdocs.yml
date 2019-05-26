@@ -1,0 +1,9 @@
+site_name: ONBFactory
+site_description: Onboarding Factory
+repo_url: https://github.com/AAI/ONBFactory
+site_dir: site
+copyright: Copyright &copy; 2018.
+dev_addr: 0.0.0.0:8001
+
+pages:
+  - Home: 'README.md'

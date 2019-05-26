@@ -1,0 +1,80 @@
+void runStages(String tag) {
+
+    docker.image(tag).inside("--privileged=true") {
+
+              stage('Execute OSS'){
+
+                    def taglist = sh script: 'git tag', returnStdout: true
+
+                    String[] splitData = taglist.split("\n");
+                    for (String eachSplit : splitData) {
+                        if (eachSplit.startsWith("v")) {
+                        lasttag = eachSplit.substring(1);
+                        }
+                    }
+
+                        sh '''
+                          version='''+lasttag+'''
+                          dir=$(pwd)
+                          mkdir onbfactory
+                          cd onbfactory
+                          virtualenv venv -p python3.6
+                          source venv/bin/activate
+					      ls
+					      python3.6 setup.py install
+                          chmod +x $dir/onbfactory
+                          rm -rf gradle-3.4.1-bin.zip
+                          rm -rf ci
+                          rm -rf gradle
+                          rm -rf devops
+
+                          ls
+                          export DETECT_LATEST_RELEASE_VERSION=4.2.1
+                          curl -O https://artifactory.core.rcsops.com/artifactory/hub-detect/hub-detect-VIJAY.sh
+                          chmod +x hub-detect-VIJAY.sh
+                            ./hub-detect-VIJAY.sh \
+                            --blackduck.hub.url='https://bduck01.core.rcsops.com' \
+                            --blackduck.hub.proxy.host=10.131.146.14 \
+                            --blackduck.hub.proxy.port=3128 \
+                            --blackduck.hub.api.token=N2E2MDkyODktNGZlNi00ZmNiLThhNDUtM2I5M2NmNjhiNTkwOmE3ZTBlYzAwLTRjOWEtNDhlNS1hNDkxLWE1ZjcwOWE3YzU1NA== \
+                            --detect.project.name=ONBFactory \
+                            --detect.project.version.name=$version \
+                            --detect.project.codelocation.delete.old.names=true \
+                            --detect.npm.include.dev.dependencies=false \
+                            --detect.excluded.bom.tool.types=npm \
+                            --detect.excluded.bom.tool.types=gradle \
+                            --detect.source.path=$dir/onbfactory/ONBFactory \
+                            --detect.code.location.name="jenkins_project_onb" \
+                            --detect.python.python3=true \
+                            --detect.pip.requirements.path=$dir/onbfactory/ONBFactory/requirements/production.txt
+
+                            '''
+                }
+
+    }
+}
+
+@Library('xsPipelineLibs')
+def vs = new devops.VariousStuff1().configure([notifyRecipients : 'sylus.anuranjan@VIJAY.com'])
+
+vs.try_node('docker_engine') {
+
+    try {
+        deleteDir()
+        checkout scm
+
+        String imageTag
+
+        imageTag = vs.ensureDockerImage('devops/build-image', 'tasvmcontainer')
+
+        runStages(imageTag)
+
+
+    } catch(e) {
+
+        def color = 'danger'
+        def err_message = "Job: ${JOB_NAME}:${BUILD_NUMBER} got an exception during Build stage: " + e.toString()
+        def info_message = "Job URL: ${BUILD_URL}"
+        throw (e)
+    }
+}

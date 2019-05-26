@@ -1,0 +1,39 @@
+buildscript {
+    repositories {
+        maven { url "http://artifactory.core.rcsops.com/artifactory/java-libs-virtual"
+            credentials {
+                username = mvn_username
+                password = mvn_password
+            }
+        }
+    }
+    dependencies {
+        classpath 'com.VIJAY:vs-gradle-core:1.1.+'
+        classpath 'com.netflix.nebula:gradle-ospackage-plugin:4.1.0'
+        classpath 'org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:2.6.2'
+    }
+}
+
+apply plugin: 'VsGradleCore'
+apply plugin: 'org.sonarqube'
+
+allprojects {
+    repositories {
+        maven { url "http://repo.maven.apache.org/maven2" }
+        maven { url "http://artifactory.core.rcsops.com/artifactory/java-libs-virtual" }
+    }
+}
+
+sonarqube  {
+    properties {
+        property 'sonar.projectKey', "ONBFactory"
+        property 'sonar.projectName', "ONBFactory"
+        property 'sonar.sources', "."
+        property 'sonar.exclusions', "venv/**/**/* , venv/**/* , ci , devops ,  manage.py ,  wait_for_postgres.py, **/tests/* , backup/tests "
+        property 'sonar.language', 'py'
+        property 'sonar.sourceEncoding', 'UTF-8'
+        property 'sonar.python.coverage.reportPath', 'coverage.xml'
+        property 'sonar.python.coveragePlugin', 'cobertura'
+        property 'sonar.python.xunit.reportPath', 'nosetests.xml'
+    }
+}

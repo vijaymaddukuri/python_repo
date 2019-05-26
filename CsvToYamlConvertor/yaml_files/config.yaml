@@ -1,0 +1,66 @@
+chpapi:
+  chpapibrickhousetier: Diamond
+  chpapicluster: ''
+  chpapicorrugateclient: ''
+  chpapicorrugateclientcolonsecret: ''                                                                            dqnw0bfpg
+  chpapicorrugatesecret: ''
+  chpapigatewayip: ''
+  chpapihypervisorid: ''
+  chpapinetcidr: ''
+  chpapiresourceserverclientid: ''
+  chpapiresourceserversecret: ''
+  chpapitenantrid: ''
+  chpapiurl: ''
+deadbolt:
+  password: ''
+  username: ''
+networker_client_details:
+  DISABLE_BACKUP_SCRIPT_PATH: networker/disable_backup
+  ENABLE_BACKUP_SCRIPT_PATH: networker/enable_backup
+  INSTALLER_AGENT_SCRIPT_PATH: networker/unix_client
+networker_server_details:
+  ADD_HOSTNAME_SCRIPT_PATH: networker/add_hosts
+  NETWORKER_MAX_CLIENTS: '1000'
+  NETWORKER_MAX_JOBS: '1000'
+  NETWORKER_SERVERS:
+  - minionid: NONE
+    password: ''
+    pg15: Bronze-Filesystem15
+    pg30: Bronze-Filesystem30
+    url: ''
+    username: tsabackup
+  NETWORKER_SERVER_COUNT: '1'
+nimsoft_client_details:
+  INSTALLER_AGENT_SCRIPT_PATH: nimsoft/nimldr
+nimsoft_server_details:
+  NIMSOFT_DOMAIN: VIJAY
+  NIMSOFT_HUB_IP: ''
+  NIMSOFT_HUB_NAME: ''
+  NIMSOFT_HUB_PASSWORD: ''
+  NIMSOFT_HUB_ROBOT_NAME: ''
+  NIMSOFT_HUB_USERNAME: ''
+salt_master_details:
+  MASTER_API_PASSWORD: ''
+  MASTER_API_PORT: '8087'
+  MASTER_API_USERNAME: ''
+  MASTER_IP: ''
+  MASTER_SALT_BASE_LOCATION: /etc/salt
+  SSH_PORT_NUMBER: 22
+salt_minion_details:
+  MINION_CONF_FILE: ''
+  MINION_VM_PASSWORD: ''
+  MINION_VM_USERNAME: ''
+  SSH_PORT_NUMBER: 22
+trendmicro_client_details:
+  INSTALLER_AGENT_SCRIPT_PATH: trend/latest
+trendmicro_server_details:
+  DSM_IP: ''
+  DSM_TENANT_ID: ''
+  DSM_TENANT_PWD: ''
+workers:
+  no_of_proc: 3
+xstream:
+  api_version: v1.3
+  host: ''
+  password: ''
+  username: ''

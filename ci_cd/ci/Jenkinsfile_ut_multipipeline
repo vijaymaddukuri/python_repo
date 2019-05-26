@@ -1,0 +1,106 @@
+def notifyBuild(String buildStatus = 'STARTED', String message, String branchName, String testcase) {
+  // build status of null means successful
+  buildStatus =  buildStatus ?: 'SUCCESSFUL'
+
+  def subject = "${message} For the git branch: ${branchName}, ${testcase} execution status: ${buildStatus}"
+  def summary = "${subject}, here is the Job url (${env.BUILD_URL})"
+
+  // Send notifications
+
+    withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'veche-slack-token',
+                              usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']]) {
+        slackSend baseUrl : "https://hooks.slack.com/services",
+        channel: "#jenkins-job-results",
+        message: "${summary}",
+        token: "${PASSWORD}"
+    }
+
+  if (buildStatus != "SUCCESSFUL") {
+
+      mail	subject: "${env.JOB_NAME} (${env.BUILD_NUMBER}) failed",
+            body: "${summary}",
+            to: 'vijay.maddukuri@VIJAY.com',
+            replyTo: ''
+            from: 'vijay.maddukuri@VIJAY.com'
+  }
+
+}
+
+void runStages(String tag) {
+
+    docker.image(tag).inside("--privileged=true") {
+
+           stage('Execute the unit testcases'){
+
+                    sh '''
+                        pwd
+                        ls -l /var/log/
+                        virtualenv venv -p python3.6
+                        source venv/bin/activate
+                        pip3.6 install -r requirements/local.txt
+                        mkdir cover
+                        chmod -R 777 cover
+                        rm -rf ci
+                        python3.6 manage.py test --cover-html --cover-xml --with-xunit
+                        cat coverage.xml
+                    '''
+
+                    archiveArtifacts artifacts: '*.xml', allowEmptyArchive: true
+                    archiveArtifacts artifacts: 'cover/*.html', allowEmptyArchive: true
+                }
+
+
+           stage('Archive Unit test Results'){
+                    step([$class: 'JUnitResultArchiver', testResults: 'nosetests.xml'])
+
+		   }
+
+		   def scmVars = checkout scm
+           def branchName = scmVars.GIT_BRANCH
+
+           notifyBuild(currentBuild.result, "TAS repo -", "${branchName}", "Unit tests")
+
+           def flake8_response = sh script: 'virtualenv venv -p python3 && source venv/bin/activate && pip3.6 install flake8 && flake8 --exclude=venv || true', returnStdout: true
+
+            if (flake8_response != null){
+                currentBuild.result = 'FAILURE'
+                sh """
+                echo "Flake8  is failed"
+                """
+            }
+
+           notifyBuild(currentBuild.result, "TAS repo:", "${branchName}", "Flake8")
+    }
+}
+
+
+@Library('xsPipelineLibs')
+def vs = new devops.VariousStuff1().configure([notifyRecipients : 'vijay.maddukuri@VIJAY.com'])
+
+vs.try_node('docker_engine') {
+
+    try {
+        jdk = tool name: 'OpenJDK 1.8.0', type: 'hudson.model.JDK'
+        deleteDir()
+        checkout scm
+
+        String imageTag
+
+        imageTag = vs.ensureDockerImage('devops/build-image', 'tasvmcontainer')
+
+        runStages(imageTag)
+
+    } catch(e) {
+
+        def color = 'danger'
+        def err_message = "Job: ${JOB_NAME}:${BUILD_NUMBER} got an exception during Build stage: " + e.toString()
+        def info_message = "Job URL: ${BUILD_URL}"
+        def scmVars = checkout scm
+        def branchName = scmVars.GIT_BRANCH
+        currentBuild.result = 'FAILURE'
+
+        notifyBuild(currentBuild.result, "TAS REPO - Jenkins job is aborted", "${branchName}", "Unittest or Flake8")
+
+        throw (e)
+    }
+}

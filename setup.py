@@ -11,7 +11,7 @@ with open('requirements/production.txt', 'r') as f:
 setuptools.setup(
     name="middleware_service",  # Required
     version="0.0.1",  # Required
-    author="Virtustream",  # Optional
+    author="VIJAY",  # Optional
     description="Middleware Service",  # Required
     packages=setuptools.find_packages(exclude=['contrib', 'docs', 'tests']),  # Required
     include_package_data=True,  # Optional

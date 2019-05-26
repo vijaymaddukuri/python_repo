@@ -1,0 +1,72 @@
+void runStages(String tag) {
+
+    docker.image(tag).inside("--privileged=true") {
+
+              stage('Execute the unit testcases'){
+
+                        sh '''
+                            pwd
+                           
+                            ls -l /var/log/
+                            virtualenv venv -p python3.6
+                            source venv/bin/activate
+                            pip3.6 install -r requirements/local.txt
+                            mkdir cover
+                            chmod -R 777 cover
+                            rm -rf ci
+                            python manage.py test --with-coverage --cover-package=. --cover-html --cover-xml --with-xunit   --cover-inclusive              
+                            cat coverage.xml 
+                        '''
+                archiveArtifacts artifacts: '*.xml', allowEmptyArchive: true
+                archiveArtifacts artifacts: 'cover/*.*', allowEmptyArchive: true
+                }
+
+             
+                stage('Archive Unit test Results'){
+			step([$class: 'JUnitResultArchiver', testResults: 'nosetests.xml'])
+			if (currentBuild.result == "UNSTABLE") {
+				// input "Unit tests are failing, proceed?"
+				sh "exit 1"
+			}
+			
+		}
+	    
+
+                stage('SonarQube analysis') {
+
+                        withSonarQubeEnv('RCSNet SQ') {
+                        sh "ls"
+                        sh "chmod +x gradlew && ./gradlew sonarqube"
+                        }
+                  }
+
+
+
+        }
+}
+
+@Library('xsPipelineLibs')
+def vs = new devops.VariousStuff1().configure([notifyRecipients : 'sylus.anuranjan@VIJAY.com'])
+
+vs.try_node('docker_engine') {
+
+    try {
+        jdk = tool name: 'OpenJDK 1.8.0', type: 'hudson.model.JDK'
+        deleteDir()
+        checkout scm
+
+        String imageTag
+
+        imageTag = vs.ensureDockerImage('devops/build-image', 'codeupdate')
+
+        runStages(imageTag)
+
+
+    } catch(e) {
+
+        def color = 'danger'
+        def err_message = "Job: ${JOB_NAME}:${BUILD_NUMBER} got an exception during Build stage: " + e.toString()
+        def info_message = "Job URL: ${BUILD_URL}"
+        throw (e)
+    }
+}

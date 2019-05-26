@@ -1,0 +1,16 @@
+version: '3'
+
+services:
+
+  backup-service:
+    restart: always
+    build: .
+    command: gunicorn --bind 0.0.0.0:8000 --access-logfile - ONBFactory.wsgi:application
+    volumes:
+      - backup-service:/backup-service
+    ports:
+      - "8000:8000"
+
+volumes:
+  backup-service:
+    driver: "local"

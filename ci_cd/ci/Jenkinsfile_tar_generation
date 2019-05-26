@@ -1,0 +1,116 @@
+void runStages(String tag) {
+    docker.image(tag).inside("--privileged=true") {
+
+    
+        stage('Generate the build in tar format'){
+
+            def taglist = sh script: 'git tag', returnStdout: true
+
+            String[] splitData = taglist.split("\n");
+            for (String eachSplit : splitData) {
+                if (eachSplit.startsWith("v")) {
+                lasttag = eachSplit.substring(1);
+                }
+            }
+
+            def lastbuild = Jenkins.instance.getItemByFullName("${env.JOB_BASE_NAME}").getLastSuccessfulBuild().toString()
+
+            def lastbuildnumber = lastbuild.substring(lastbuild.indexOf('#') + 1)
+
+            int newbuildnumber = lastbuildnumber.toInteger() + 1
+
+            def ver = lasttag + "." + newbuildnumber
+
+            withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'VIJAY_VIJAYRUBICOIN',
+                              usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']]) {
+
+                sh  '''
+
+                    dir=$(pwd)
+                    git config --global user.email "vijay.maddukuri@VIJAY.com"
+                    git config --global user.name "madduv"
+                    git checkout 820b6f92b3daa10cddb37347b36986b5f4047aca
+                    mkdir $dir/demo
+                    cd demo
+                    git clone http://$USERNAME:$PASSWORD@github.com/AAI/ONBFactory.git
+                    cd ONBFactory/ONBFactory
+
+                    version='''+ver+'''
+                    git config --global user.email "vijay.maddukuri@VIJAY.com"
+                    git config --global user.name "madduv"
+                    git_ver=$( cat __init__.py | grep "'" | awk '{print $3}' |  tr -d "'")
+                    if [ "$git_ver" != "$version" ]
+                    then
+                        sed -i "s/__version__ = '.*'/__version__ = '$version'/g" __init__.py
+                        git add __init__.py
+                        git commit -m "Added version $version"
+                        git push origin master
+                    fi
+
+                    '''
+            }
+            sh '''
+                version='''+ver+'''
+                echo $version
+                dir=$(pwd)
+
+                cd ONBFactory
+
+                sed -i "s/__version__ = '.*'/__version__ = '$version'/g" __init__.py
+
+                cd $dir
+                virtualenv venv -p python3.6
+                source venv/bin/activate
+                python3.6 setup.py install
+                pip3.6 install -r requirements/local.txt
+                chmod -R 777 build.sh
+                ./build.sh
+                cd $dir/dist
+                cd $dir
+                mkdir python_packages
+                cp requirements/production.txt python_packages/production.txt
+                cd python_packages
+                pip3.6 download -r production.txt
+                rm -rf production.txt
+                tar -cvf tsa_tams_packages.tar *
+                ls
+                cd $dir
+                '''
+            withCredentials([usernamePassword(credentialsId: 'Jenkins Artifactory', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
+
+                sh """
+                    dir=\$(pwd)
+                    cd \$dir/dist
+                    curl -u $USERNAME:$PASSWORD -T 'tenant_automation_service-${ver}.tar.gz' 'https://artifactory.core.rcsops.com/artifactory/core-generic-local/tenant_automation_service-${ver}.tar.gz'
+                    cd \$dir/python_packages
+                    curl -u $USERNAME:$PASSWORD -T 'tsa_tams_packages.tar' 'https://artifactory.core.rcsops.com/artifactory/core-generic-local/tsa_tams_packages.tar'
+                    """
+                }
+        }
+
+    }
+}
+
+@Library('xsPipelineLibs')
+def vs = new devops.VariousStuff1().configure([notifyRecipients : 'sylus.anuranjan@VIJAY.com'])
+
+vs.try_node('docker_engine') {
+
+    try {
+        jdk = tool name: 'OpenJDK 1.8.0', type: 'hudson.model.JDK'
+        deleteDir()
+    
+        checkout scm
+
+        imageTag = vs.ensureDockerImage('devops/build-image', 'tasvmcontainer')
+
+        runStages(imageTag)
+
+    } catch(e) {
+
+        def color = 'danger'
+        def err_message = "Job: ${JOB_NAME}:${BUILD_NUMBER} got an exception during Build stage: " + e.toString()
+        def info_message = "Job URL: ${BUILD_URL}"
+        throw (e)
+    }
+}

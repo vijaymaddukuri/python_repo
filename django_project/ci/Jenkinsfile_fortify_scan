@@ -1,0 +1,103 @@
+//////////////////////////////////////////////////////////////////////////////////////////////////
+// This example pipeline will use our Fortify Static Code Analyser server to scan code and upload to Fortify Software Security Center
+// For more details see this confluence page https://docs.VIJAYrubicon.com/display/RE/Fortify+General+Use+Guide
+//////////////////////////////////////////////////////////////////////////////////////////////////
+node ('fortifysca01'){
+    // Clean working directory
+    deleteDir()
+        
+    // Check out this example project
+    stage ('Checkout SCM') {
+        checkout scm
+    }
+        
+    // Move into this example sub-directory and run all the following stages in that directory.
+    dir ('onb') {
+        // Environment variables (need to be set in Jenkins job)
+        checkout scm
+        def project_name = 'TSA_onb' // This is the unique name for your project please no spaces
+        def project_version = 'v1.2' // This is the unique name for your project version please no spaces
+        def lowThreshold = 100      // Number of low vulnerabilities before failure
+        def mediumThreshold = 100   // Number of medium vulnerabilities before failure
+        def highThreshold = 100          // Number of high vulnerabilities before failure
+        def criticalThreshold = 100  // Number of critical vulnerabilities before failure
+
+        //Remove files for which we need to remove scan
+        exception_file_list = ['ONBFactory/static', 'ONBFactory/tests' , 'backup/tests', 'ci', 'common/tests', 'devops/build-image', 'docs', 'gradle/wrapper' , 'monitoring/tests', 'requirements', 'saltmanager/tests', 'security/tests']
+        
+        for (i in exception_file_list) {
+            println(i)
+             sh (
+                script: 'rm -rf ${i}',
+                returnStdout: true
+            ).trim()
+        }
+        
+        
+        files_to_scan = sh (
+            script: 'find . -name \'*.py\'  -printf \'%p \'',
+            returnStdout: true
+        ).trim()
+        
+        echo "${files_to_scan}"
+        // Checks Software Security Center for project and version. If they do not exist the project and version will be created.
+        stage('Create Fortify Project') {
+            sh "vsFortifyUtil --createproject --name ${project_name} --version ${project_version}"
+        }
+        
+        // Deletes all intermediate files and build records.
+        stage ('Fortify Clean') {
+            sh "sourceanalyzer -b ${project_name}_${project_version} -clean"
+        }
+        
+        // Specifies a unique name that identifies the Fortify analysis model to be built.
+        // Files can be specified in many ways. Example  "src/**/*.java" or "webapp/*.jsp" or "sample.js"
+        stage ('Fortify Translation') {
+            sh '''ls /home/jenkins/workspace/veche-fortify-scan/ '''
+            sh '''ls /home/jenkins/workspace/veche-onb-fortify-scan/onb/ '''
+            sh '''pwd'''
+            sh "sourceanalyzer -b ${project_name}_${project_version} ${files_to_scan} "
+            //This line is informative only to show files that are scanned.
+            sh "sourceanalyzer -b ${project_name}_${project_version} -show-files"
+        }
+        
+        // Causes Fortify SCA to perform analysis against a specified model.
+        stage ('Fortify Scan') {
+            sh "sourceanalyzer -b ${project_name}_${project_version} -scan -f ${project_name}_${project_version}.fpr"
+        }
+        
+        // Output and save .pdf in jenkins 
+        stage ('Output PDF') {
+            sh "BIRTReportGenerator -template 'Developer Workbook' -format 'PDF' -output ${project_name}_${project_version}.pdf -source ${project_name}_${project_version}.fpr"
+            archiveArtifacts "${project_name}_${project_version}.pdf"
+        }    
+        
+        // Uploads scan results to the Software Security Center.
+        stage ('Upload to Client'){
+            sh "vsFortifyUtil --uploadproject --file ${project_name}_${project_version}.fpr --name ${project_name} --version ${project_version}"
+        }
+        
+        // Now that the job is complete, clean out our working directory
+        stage ('Clean Working Directory') {
+            deleteDir()
+        } 
+
+        // Get low, medium, high and critical issue counts
+        stage ('Check against thresholds') {
+            
+            def projectIssues = sh([script: "vsFortifyUtil --getIssueCounts --name ${project_name} --version ${project_version}", returnStdout: true ]).trim()
+                        
+            echo projectIssues
+            def issueResults = readJSON text: projectIssues
+                  
+            if (lowThreshold < issueResults.Low || mediumThreshold < issueResults.Medium || highThreshold < issueResults.High || criticalThreshold < issueResults.Critical) {
+                // Fails the build
+                error "Too many vulnerabilities have been detected. Found ${issueResults.Low}/${lowThreshold} Low, ${issueResults.Medium}/${mediumThreshold} Medium, ${issueResults.High}/${highThreshold} High, ${issueResults.Critical}/${criticalThreshold} Critical. See ${project_name}_${project_version}.pdf"
+                currentBuild.result = 'FAILURE'
+            } else {
+                // Succeeds the build (no threshold exceeded)
+                currentBuild.result = 'SUCCESS'
+            }
+        }
+    }
+}

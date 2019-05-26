@@ -12,7 +12,7 @@ def decompose(x):
                 c.append(a[i])
     return c
 
-n=5
+n=4
 l=decompose(n)
 print(l)
 

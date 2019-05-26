@@ -1,0 +1,49 @@
+void runStages(String tag) {
+
+    docker.image(tag).inside("--privileged=true") {
+
+        stage('Run Backup Automation Test Suite'){
+
+            sh '''
+                dir=$(pwd)
+                export PYTHONPATH=$PYTHONPATH:$dir/
+                http_proxy="http://10.131.236.9:3128"
+                https_proxy="https://10.131.236.9:3128"
+
+                no_proxy="10.100.249.38, 10.100.249.44, 10.100.249.48, 10.100.249.87, 10.100.249.88"
+                cd $dir/robot_tests/backup_service_automation
+                robot -b debuglogs.txt -L DEBUG:INFO -x junit.xml -d logs --timestampoutputs backup_automation_positive_cases.robot || true
+               '''
+            archiveArtifacts artifacts: 'robot_tests/backup_service_automation/logs/*.txt', allowEmptyArchive: true
+            archiveArtifacts artifacts: 'robot_tests/backup_service_automation/logs/*.html', allowEmptyArchive: true
+            archiveArtifacts artifacts: 'robot_tests/backup_service_automation/logs/*.xml', allowEmptyArchive: true
+        }
+
+        stage('Validate test Results'){
+            step([$class: 'JUnitResultArchiver', testResults: 'robot_tests/backup_service_automation/logs/junit*.xml'])
+                if (currentBuild.result == "UNSTABLE") {
+                    currentBuild.result = 'FAILURE'
+                }
+        }
+        
+    }
+}
+
+@Library('xsPipelineLibs')
+def vs = new devops.VariousStuff1().configure([notifyRecipients : 'sylus.anuranjan@VIJAY.com'])
+
+vs.try_node('docker_engine') {
+
+    try {
+        jdk = tool name: 'OpenJDK 1.8.0', type: 'hudson.model.JDK'
+        deleteDir()
+        checkout scm
+        imageTag = vs.ensureDockerImage('devops/build-image')
+        runStages(imageTag)
+    } catch(e) {
+        def color = 'danger'
+        def err_message = "Job: ${JOB_NAME}:${BUILD_NUMBER} got an exception during Build stage: " + e.toString()
+        def info_message = "Job URL: ${BUILD_URL}"
+        throw (e)
+    }
+}

@@ -1,0 +1,23 @@
+{
+    "entities": {
+        "volumes": {
+            "items": [
+                {
+                    "properties": {
+                        "licenceType": "OTHER", 
+                        "type": "HDD", 
+                        "name": "HDD Volume01", 
+                        "size": 25
+                    }
+                }
+            ]
+        }
+    }, 
+    "properties": {
+        "cores": 1, 
+        "cpuFamily": "INTEL_XEON", 
+        "ram": 1024, 
+        "name": "test backend server", 
+        "availabilityZone": "AUTO"
+    }
+}

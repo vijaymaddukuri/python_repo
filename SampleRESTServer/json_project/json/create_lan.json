@@ -1,0 +1,6 @@
+{
+    "properties": {
+        "name": "test public lan", 
+        "public": "true"
+    }
+}

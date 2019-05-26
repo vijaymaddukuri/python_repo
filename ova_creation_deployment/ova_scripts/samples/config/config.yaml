@@ -1,0 +1,47 @@
+xstream:
+    host: "" #10.100.26.90
+    username: "" #1a@vsfl.lab
+    password: "" #Password1
+    api_version: v1.3
+
+chpapi:
+    chpapiurl: coreservices.svc.tss.mnss01.vs.management
+    chpapiresourceserverclientid: 717b9c59-a373-4c3b-87c8-b55af4d5c085
+    chpapiresourceserversecret: c4eizw70b00lalaj
+    chpapicorrugateclientcolonsecret: 533c0b74-eb0b-4fa9-bdf3-83d6e370abce:trjlpytdqnw0bfpg
+    chpapicorrugatesecret: trjlpytdqnw0bfpg
+    chpapicorrugateclient: 533c0b74-eb0b-4fa9-bdf3-83d6e370abce
+    chpapihypervisorid: 1a3e62ad-4f19-4dd1-b28b-e6fa72d11353
+    chpapicluster: p200001_enterprise01
+    chpapibrickhousetier: Diamond
+    chpapinetcidr: 100.80.6.0/26
+    chpapigatewayip: 100.80.6.1
+    chpapitenantrid: SHWETAGARG071018E
+
+deadbolt:
+    username: deadbolt/deadbolt.admin@VIJAY.com
+    password: Password1
+
+salt_master_details:
+    MASTER_IP: "" #"10.100.249.73"
+    MASTER_API_PORT: "" #"8087"
+    MASTER_API_USERNAME: "" #"karishma"
+    MASTER_API_PASSWORD: "" #"Password1"
+    MASTER_SALT_BASE_LOCATION: "" #"/srv/salt/base/grain"
+    SSH_PORT_NUMBER: 22
+
+salt_minion_details:
+    MINION_VM_USERNAME: "" #"root"
+    MINION_VM_PASSWORD: "" #"Password1"
+    SSH_PORT_NUMBER: 22
+    MINION_CONF_FILE: "" #"/etc/salt/minion"
+
+networker_server_details:
+    NETWORKER_URL: "" #"https://10.100.249.48:9090"
+    NETWORKER_USERNAME: "" #"administrator"
+    NETWORKER_PASSWORD: "" #"Password1!"
+
+networker_client_details:
+    INSTALLER_AGENT_SCRIPT_PATH: "networker/unix_client"
+    ENABLE_BACKUP_SCRIPT_PATH: "networker/enable_backup"
+    DISABLE_BACKUP_SCRIPT_PATH: "networker/disable_backup"

@@ -1,0 +1,34 @@
+MW_DETAILS:
+  MW_CONFIG_YAML_PATH: /opt/middleware/middleware_service/config.yaml
+  MW_IP: 10.100.249.88
+  MW_PWD: xStream2015!
+  MW_USER: tas
+  SWAGGER_PWD: Password1
+  SWAGGER_USER: middleware
+  TAS_IP: ''
+  TENANT_ID: ''
+  WORKER_CONFIG_YAML_PATH: /opt/middleware/worker/config.yaml
+NAT_VM:
+  CERTIFICATE_COPY_LOCATION: /tmp/
+  SERVER_IP: 10.100.26.124
+  SERVER_PASSWORD: Password1
+  SERVER_USERNAME: root
+TAS_DETAILS:
+  CONFIG_YAML_PATH: /opt/tas/tenant_automation_service/config.yaml
+  EXPECTED_NW_VERSION:
+  - '9.1'
+  - '9.2'
+  TAS_IP: 10.100.249.44
+  TAS_PWD: xStream2015!
+  TAS_USER: tas
+TENANT_ID: 9bdcead0-e40c-11e8-9f32-f2801f1b9fd1
+VM_DETAILS:
+  CALLBACKURL: http://dummy_callback.com
+  LINUX_POLICY_ID: '19'
+  RETENTION_DAYS: '15'
+  RETENTION_TYPE: Days
+  TASKID: dummy001
+  VMHOSTNAME: rhel6.dummy.local
+  VMID: 11deef11-a111-1ae1-1fed-b1c1011111aa
+  VM_IP: 1.1.1.1
+  WIN_POLICY_ID: '6'

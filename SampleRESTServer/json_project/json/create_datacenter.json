@@ -1,0 +1,7 @@
+{
+    "properties": {
+        "description": "this is a datacenter created by test automation", 
+        "name": "test data center", 
+        "location": "de/fra"
+    }
+}

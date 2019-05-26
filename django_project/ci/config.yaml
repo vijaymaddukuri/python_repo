@@ -1,0 +1,26 @@
+backupservice:
+      SERVER_IP: "10.100.249.44"
+      SERVER_USERNAME: "tas"
+      SERVER_PASSWORD: "xStream2015!"
+      SSH_PORT_NUMaBER: 22
+      INSTALLATION_SCRIPT: ['install_tas_svc.sh']
+      STOP_SERVICES: ['tas.service']
+      CLEANUP_SCRIPTS: ['clean_up_app_logs.sh', 'clear_ovaconfig.sh']
+      properties: {'Hostname': 'backup-nightly-vm','IP_Address': '10.100.249.44', 'Subnet_Mask': '255.255.255.128',
+                           'Default_Gateway': '10.100.249.1', 'Primary_DNS': '10.100.26.177',
+                           'MASTER_IP': '10.100.249.87', 'MASTER_API_PORT': '8087', 'MASTER_API_USERNAME': 'netapiusr',
+                           'MASTER_API_PASSWORD': 'Password1',
+                           'MASTER_SALT_BASE_LOCATION': '/etc/salt', 'SSH_PORT_NUMBER': '22',
+                           'DSM_IP': '10.100.249.93', 'DSM_TENANT_ID': 'abcde', 'DSM_TENANT_PWD': 'Password',
+                           'DSM_PORT': '4119', 'DSM_API_SECRET_KEY': 'dummy_key',
+                           'NIMSOFT_HUB_IP': '10.100.249.110', 'NIMSOFT_HUB_NAME': 'win-31u751di7n1',
+                           'NIMSOFT_HUB_USERNAME': 'administrator', 'NIMSOFT_HUB_PASSWORD': 'Password1',
+                           'NIMSOFT_DOMAIN': 'VIJAY', 'NIMSOFT_HUB_ROBOT_NAME': 'win-31u751di7n1',
+                           'NETWORKER_SERVER_COUNT': '1', 'NETWORKER1_MINION_ID': 'NVE-1.7.xstest.local',
+                           'NETWORKER1_URL': 'https://10.100.249.48:9090',
+                           'NETWORKER1_USERNAME': 'administrator', 'NETWORKER1_PASSWORD': 'Password2!',
+                           'NETWORKER1_PG_15': 'Bronze_Filesystem15', 'NETWORKER1_PG_30': 'Bronze_Filesystem30',
+                           'NETWORKER1_HOSTNAME': 'NVE-1.7', 'DOMAIN_NAME': 'xstest.local',
+                           'DATADOMAIN1_IP': '1.1.1.4', 'DATADOMAIN1_HOSTNAME': 'dd.hostname',
+                           'bbserver_ip': '10.100.249.62', 'bbserver_port': '7000', 'tenant_id': '9bdcead0-e40c-11e8-9f32-f2801f1b9fd1'}
+

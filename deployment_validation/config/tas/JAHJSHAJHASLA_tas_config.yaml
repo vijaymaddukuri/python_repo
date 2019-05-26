@@ -1,0 +1,70 @@
+networker_client_details:
+  CLEANUP_BACKUP_SCRIPT_PATH: networker/remove_nw_dd_host_entry
+  COMMENT_BACKUP_SCRIPT_PATH: networker/comment_host_entry
+  ENABLE_BACKUP_SCRIPT_PATH: networker/enable_backup
+  HOST_ENTRY_SCRIPT_PATH: networker/etchosts
+  INSTALLER_AGENT_SCRIPT_PATH: networker
+networker_server_details:
+  ADD_HOSTNAME_SCRIPT_PATH: networker/add_hosts
+  DATADOMAIN_SERVERS:
+    - hostname: dsjkj
+      ip: ksjd
+    - hostname: jkdjs
+      ip: kdsj
+  DOMAIN_NAME: ewkj
+  NETWORKER_MAX_CLIENTS: kjkj
+  NETWORKER_MAX_JOBS: jkjsd
+  NETWORKER_SERVERS:
+    - hostname: jdskj
+      minionid: dskj
+      password: ejwk
+      pg15: dk
+      pg30: kwjk
+      url: l,dsjk
+      username: djskj
+  NETWORKER_SERVER_COUNT: jksjd
+nimsoft_client_details:
+  CLEANUP_SCRIPT_PATH: nimsoft/nimldr/cleanup
+  INSTALLER_AGENT_SCRIPT_PATH: nimsoft/nimldr
+  UNINSTALLER_AGENT_SCRIPT_PATH: nimsoft/nimldr/uninstall
+nimsoft_server_details:
+  NIMSOFT_DOMAIN: jkdsj
+  NIMSOFT_HUB_IP: jkjkds
+  NIMSOFT_HUB_NAME: kjds
+  NIMSOFT_HUB_PASSWORD: jkjds
+  NIMSOFT_HUB_ROBOT_NAME: win-31u751di7n1
+  NIMSOFT_HUB_ROBOT_NAME_: jkjds
+  NIMSOFT_HUB_USERNAME: dsj
+request_timeout_details:
+  timeout: jkjds
+salt_master_details:
+  MASTER_API_PASSWORD: wkjkew
+  MASTER_API_PORT: '211'
+  MASTER_API_USERNAME: sdakj
+  MASTER_IP: 1.2.34.
+  MASTER_SALT_BASE_LOCATION: ewkj
+  SSH_PORT_NUMBER: ekwj
+salt_retries_config_values:
+  SALT_JOB_RETRIES_TIMEOUT: jkjsd
+  SALT_JOB_RUNNING_RETRIES: jkjds
+  SALT_PING_NO_OF_RETRIES: sdjskj
+  SALT_PING_RETRIES_TIMEOUT: jkjds
+splunk_client_details:
+  CLEANUP_SCRIPT_PATH: splunkuf/cleanup
+  INSTALLER_AGENT_SCRIPT_PATH: splunkuf
+  SPLUNK_FORWARDER_ADMIN_PASSWORD: jkjkds
+  UNINSTALLER_AGENT_SCRIPT_PATH: splunkuf/uninstall
+splunk_server_details:
+  SPLUNK_DEPLOYMENT_SERVER_IP: jkjds
+  SPLUNK_DEPLOYMENT_SERVER_PORT: jkdjsk
+tenant_id: JAHJSHAJHASLA
+trendmicro_client_details:
+  INSTALLER_AGENT_SCRIPT_PATH: trend/latest
+trendmicro_server_details:
+  DSM_API_SECRET_KEY: jkj
+  DSM_IP: jkj
+  DSM_PORT: jkjsd
+  DSM_TENANT_ID: dkj
+  DSM_TENANT_PWD: jkj
+workers:
+  no_of_proc: jkjds

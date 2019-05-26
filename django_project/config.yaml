@@ -1,0 +1,79 @@
+salt_master_details:
+    MASTER_IP: ""
+    MASTER_API_PORT: ""
+    MASTER_API_USERNAME: ""
+    MASTER_API_PASSWORD: ""
+    MASTER_SALT_BASE_LOCATION: ""
+    SSH_PORT_NUMBER: 22
+
+networker_server_details:
+    DOMAIN_NAME: "example.com"
+    NETWORKER_SERVERS:
+    - password: ""
+      pg15: ""
+      pg30: ""
+      url: ""
+      username: ""
+      hostname: ""
+      minionid: ""
+    DATADOMAIN_SERVERS:
+    - hostname: ""
+      ip: ""
+    - hostname: ""
+      ip: ""
+    NETWORKER_SERVER_COUNT: ""
+    NETWORKER_MAX_CLIENTS: "400"
+    NETWORKER_MAX_JOBS: "40000"
+    ADD_HOSTNAME_SCRIPT_PATH: "networker/add_hosts"
+
+networker_client_details:
+    INSTALLER_AGENT_SCRIPT_PATH: "networker"
+    HOST_ENTRY_SCRIPT_PATH: "networker/etchosts"
+    ENABLE_BACKUP_SCRIPT_PATH: "networker/enable_backup"
+    CLEANUP_BACKUP_SCRIPT_PATH: "networker/cleanup"
+    COMMENT_BACKUP_SCRIPT_PATH: "networker/comment_host_entry"
+
+
+trendmicro_client_details:
+    INSTALLER_AGENT_SCRIPT_PATH: "trend/latest"
+
+trendmicro_server_details:
+    DSM_IP: ""
+    DSM_TENANT_ID: ""
+    DSM_TENANT_PWD: ""
+    DSM_PORT: ""
+    DSM_API_SECRET_KEY: ""
+
+nimsoft_client_details:
+    INSTALLER_AGENT_SCRIPT_PATH: "nimsoft/nimldr"
+    UNINSTALLER_AGENT_SCRIPT_PATH: "nimsoft/nimldr/uninstall"
+    CLEANUP_SCRIPT_PATH: "nimsoft/nimldr/cleanup"
+
+nimsoft_server_details:
+    NIMSOFT_HUB_USERNAME: ""
+    NIMSOFT_HUB_PASSWORD: ""
+    NIMSOFT_HUB_IP: ""
+    NIMSOFT_HUB_NAME: ""
+    NIMSOFT_DOMAIN: ""
+    NIMSOFT_HUB_ROBOT_NAME : ""
+
+splunk_client_details:
+    INSTALLER_AGENT_SCRIPT_PATH: "splunkuf"
+    SPLUNK_FORWARDER_ADMIN_PASSWORD: ""
+
+splunk_server_details:
+    SPLUNK_DEPLOYMENT_SERVER_IP: ""
+    SPLUNK_DEPLOYMENT_SERVER_PORT: ""
+
+salt_retries_config_values:
+    SALT_JOB_RUNNING_RETRIES: 3
+    SALT_JOB_RETRIES_TIMEOUT: 60
+    SALT_PING_NO_OF_RETRIES: 4
+    SALT_PING_RETRIES_TIMEOUT: 60
+
+workers:
+    no_of_proc: 3
+
+request_timeout_details:
+    timeout: 30
+

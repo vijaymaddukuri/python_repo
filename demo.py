@@ -1,127 +1,172 @@
-import re
-
-result = """
-[21/Feb/2019 13:51:31] DEBUG [urllib3.connectionpool:396] http://100.64.51.150:36792 "POST /api/v1/security/enable HTTP/1.1" 200 0
-[21/Feb/2019 13:51:31] DEBUG [common.utils:88] received status : 200
-[21/Feb/2019 13:51:31] DEBUG [common.utils:89] received text   :
-[21/Feb/2019 13:51:31] DEBUG [common.utils:90] received resp   : <Response [200]>
-[21/Feb/2019 13:51:31] INFO [common.utils:91] Exit: make_post_request
-
-TEST AUTOMATION LOG2019-02-21 16:14:58.655493
-
-[21/Feb/2019 13:51:31] DEBUG [__main__:253] |*SECURITY*| service_now_call_back_data : {'TaskID': '79385', 'status': 'success', 'status_message': ''}
-[21/Feb/2019 13:51:31] INFO [callbacks:51] |*SECURITY*| Inside: invoke_service_now_callback
-[21/Feb/2019 13:51:31] DEBUG [callbacks:52] |*SECURITY*| invoke_service_now_callback: parameters -
-[21/Feb/2019 13:51:31] DEBUG [callbacks:53] |*SECURITY*| url    : https://rubicondev.service-now.com/api/79385/middleware
-[21/Feb/2019 13:51:31] DEBUG [callbacks:54] |*SECURITY*| data   : {'TaskID': '79385', 'status': 'success', 'status_message': ''}
-[21/Feb/2019 13:51:31] INFO [common.functions:93] Inside: get_config
-[21/Feb/2019 13:51:31] DEBUG [common.functions:94] get_config: parameters - servicenow, SERVICENOW_USERNAME
-[21/Feb/2019 13:51:31] INFO [common.functions:99] Exit: get_config
-[21/Feb/2019 13:51:31] INFO [common.functions:93] Inside: get_config
-[21/Feb/2019 13:51:31] DEBUG [common.functions:94] get_config: parameters - servicenow, SERVICENOW_PASSWORD
-[21/Feb/2019 13:51:31] INFO [common.functions:99] Exit: get_config
-[21/Feb/2019 13:51:31] DEBUG [urllib3.connectionpool:824] Starting new HTTPS connection (1): rubicondev.service-now.com
-[21/Feb/2019 13:51:39] DEBUG [urllib3.connectionpool:396] https://rubicondev.service-now.com:443 "POST /api/79385/middleware HTTP/1.1" 200 None
-[21/Feb/2019 13:51:39] DEBUG [callbacks:69] |*SECURITY*| received status : 200
-[21/Feb/2019 13:51:39] DEBUG [callbacks:70] |*SECURITY*| received text   :
-[21/Feb/2019 13:51:39] DEBUG [callbacks:71] |*SECURITY*| received resp   : <Response [200]>
-[21/Feb/2019 13:51:39] INFO [callbacks:72] |*SECURITY*| Exit: invoke_service_now_callback
-[21/Feb/2019 13:51:39] DEBUG [pika.heartbeat:130] Received 30 heartbeat frames, sent 62, idle intervals 0
-[21/Feb/2019 13:51:39] DEBUG [pika.adapters.select_connection:203] call_later: added timeout <pika.adapters.select_connection._Timeout object at 0x7f23185684a8> with deadline=1550757684.2845461 and callback=<bound method HeartbeatChecker._check_heartbeat of <pika.heartbeat.HeartbeatChecker object at 0x7f2318823fd0>>; now=1550757099.2845461; delay=585
-[21/Feb/2019 13:51:39] INFO [__main__:303] |*SECURITY*| Exit: process_security_message
-"""
-
-automation_tag = "TEST AUTOMATION LOG2019-02-21 16:14:58.655493"
-service_name = 'security'
-
-data = result.split(automation_tag)
-
-print("\|\*%s\*\|\s+ Exit: process_%s_message" % (service_name.upper(), service_name))
-
-matchObj = re.findall("\|\*%s\*\|\s+ Exit: process_%s_message"
-                      % (service_name.upper(), service_name),
-                      str(data))
-
-print(matchObj)
-
-
-import datetime
-import time
-import re
+from os.path import dirname, abspath
 from robot.api import logger
+from shutil import copyfile
 
-from deployment_automation.common.ssh_utility import SSHUtil
+import csv
+import re
+import sys
+import yaml
 
-class WorkerLogValidation:
-    def __init__(self, sshObject):
+
+current_dir = dirname(dirname(abspath(__file__)))
+
+
+class CsvToYamlConvertor:
+    """
+    Take the CSV input and covert it into yaml format.
+    """
+    def __init__(self, service, yaml_file_path, csv_file_path):
         """
-        :param  sshObject: SSH Object to connect to the remote machine and fetch the log
+        :param service: TAS or Middlewware or worker or deployment
+        :param yaml_file_path: Base YAML file name along with the location
+        :param csv_file_path:  CSV file name  with the location
         """
-        ctime = (datetime.datetime.now())
-        # self.automation_tag = 'TEST AUTOMATION LOG ' + str(ctime)
-        self.automation_tag = 'TEST AUTOMATION LOG2019-02-21 16:14:58.655493'
-        self.sshObject = sshObject
 
-    def add_automation_tag_in_log(self):
-        # Update the worker log with the automation tag
-        update_worker_log  = "echo \"{}\" >> /var/log/middleware/worker.log".format(self.automation_tag)
-        self.sshObject.execute_command(update_worker_log)
-        logger.info("Added the automation tag in worker log")
+        self.yaml_file_path = yaml_file_path
 
-    def validate_worker_log(self, vm_ip, service_name):
+        # Open our data file in read-mode.
+        self.csvfile = open(csv_file_path, 'r')
+
+        # Save a CSV Reader object.
+        self.datareader = csv.reader(self.csvfile, delimiter=',', quotechar='"')
+
+        # Service name
+        self.service = service
+
+        # Empty array for data headings, which we will fill with the first row from our CSV.
+        self.data_headings = []
+
+    def load_yaml_file(self, filename):
         """
-        vm_ip: IP of the VM where service is installed/uninstalled
-        service_name: Service name (backup or security or monitoring)
+        load YAML file
 
-        :return: True or False
+        In case of any error, this function calls sys.exit(1)
+        :param filename: YAML filename along with the location
+        :return: YAML as dict
         """
-        extract_log = 'tail -n 300 /var/log/middleware/worker.log'
-        search = False
-        logger.info('Waiting for enable {} API to process the request'.format(service_name))
+        try:
+            with open(filename, 'r') as stream:
+                try:
+                    return yaml.safe_load(stream)
+                except yaml.YAMLError as exc:
+                    logger.error(exc)
+                    sys.exit(1)
+        except IOError as e:
+            logger.error(e)
+            sys.exit(1)
 
-        # Try to fetch the log in the time period of 120 secs
-        for i in range(4):
-            time.sleep(3)
-            result = self.sshObject.execute_command(extract_log)
-            if not result['status']:
-                logger.error('Unable to extract the worker log')
-                return False
+    def update_yaml_data(self, myYaml, key, value, append_mode=False):
+        """
+        Set or add a key to given YAML data. Call itself recursively.
+        :param myYaml: YAML data to be modified
+        :param key: key as array of key tokens
+        :param value: value of any data type
+        :param append_mode default is False
+        :return: modified YAML data
+        """
+        if len(key) == 1:
+            if not append_mode or not key[0] in myYaml:
+                myYaml[key[0]] = value
+            else:
+                if type(myYaml[key[0]]) is not list:
+                    myYaml[key[0]] = [myYaml[key[0]]]
+                print([myYaml[key[0]]])
+                if value not in [myYaml[key[0]]]:
+                    myYaml[key[0]].append(value)
+        else:
+            if not key[0] in myYaml or type(myYaml[key[0]]) is not dict:
+                myYaml[key[0]] = {}
+            myYaml[key[0]] = self.update_yaml_data(myYaml[key[0]], key[1:], value, append_mode)
+        return myYaml
 
-            # Split the log with tag name and fetch the information
-            data = result['output'].split(self.automation_tag)
-            matchObj = re.findall("\|\*%s\*\|\s+ Exit: process_%s_message"
-                                 % (service_name.upper(), service_name),
-                                 str(data))
-            print(matchObj)
+    def rm_yaml_data(self, myYaml, key):
+        """
+        Remove a key and it's value from given YAML data structure.
+        No error or such thrown if the key doesn't exist.
+        :param myYaml: YAML data to be modified
+        :param key: key as array of key tokens
+        :return: modified YAML data
+        """
+        if len(key) == 1 and key[0] in myYaml:
+            del myYaml[key[0]]
+        elif key[0] in myYaml:
+            myYaml[key[0]] = self.rm_yaml_data(myYaml[key[0]], key[1:])
+        return myYaml
 
-            # If log is updated start performing the validation
-            if matchObj is not None:
-                cdate = datetime.datetime.now().strftime("%d/%b/%Y")
+    def save_yaml(self, data, yaml_file):
+        """
+        Saves given YAML data to file and upload yaml file to remote machine
+        :param data: YAML data
+        :param yaml_file: Location to save the yaml file
+        """
+        try:
+            with open(yaml_file, 'w') as outfile:
+                yaml.dump(data, outfile, default_flow_style=False)
+        except IOError as e:
+            logger.error(e)
+            sys.exit(1)
 
-                # Check for errors
-                error_check = re.findall("%s\s\d+\:\d+\:\d+\]\s+ERROR \[\S+\:\d+\] \|\*%s\*\|"
-                                      % (cdate, service_name.upper()), str(data))
+    def convert_csv_to_yaml(self):
+        """
+        Update the yaml file and save it
+        """
+        # Loop through each row...
+        for row_index, row in enumerate(self.datareader):
+            # If this is the first row, populate our data_headings variable.
+            if row_index == 0:
+                data_headings = row
 
-                # If errors are not there in the code, check for status code of the VM
-                if not error_check:
-                    status = re.findall("\s\d+\:\d+\:\d+\]\s+DEBUG \[\S+\:\d+\] http://%s:\d+ "
-                                        "\"POST /api/v1/%s/enable HTTP/1.1\" 200"
-                                        % (vm_ip, service_name), str(data))
-                    if status:
-                        return True
+            # Othrwise, create a YAML file from the data in this row...
+            else:
+                # Create a new config.yaml with filename based on index number (Tenant ID) of our current row
+                # and service
+                filename = str(row[0]) + '_' + self.service.lower() + '_config' + '.yaml'
+                print(filename)
+                # copyfile(self.yaml_file_path, filename)
+                readyamldata = self.load_yaml_file(filename)
+
+                # Empty string that we will fill with YAML formatted text based on data extracted from our CSV.
+                yaml_text = ""
+
+                # Loop through each cell in this row...
+                for cell_index, cell in enumerate(row):
+
+                    # Compile a line of YAML text from our headings list and the text of the current cell,
+                    # followed by a linebreak.
+                    # Heading text is converted to lowercase. Spaces are converted to underscores and hyphens
+                    # are removed.
+                    # In the cell text, line endings are replaced with commas.
+                    cell_heading = data_headings[cell_index].replace(" ", "_").replace("-", "")
+
+                    # Create the list of keys
+                    cell_items = cell_heading.split('.')
+
+                    if len(cell_items) == 1:
+                        cell_keys = [cell_heading]
                     else:
-                        return False
-                else:
-                    return False
+                        cell_keys = cell_items
 
-            if not search:
-                return False
+                    # Get the cell value
+                    cell_value = cell.replace("\n", ", ")
 
-ssh_obj = SSHUtil(host='10.100.26.124', username='root',
-                               password='Password1', timeout=10)
+                    # Update the data in yaml format
+                    set_value = self.update_yaml_data(readyamldata, cell_keys, cell_value)
+                    # Save the yaml data into a file
+                    self.save_yaml(set_value, filename)
 
-logObj = WorkerLogValidation(ssh_obj)
+                    # Open the above yaml file to update the list formatted data
+                    f = open(filename, 'r')
+                    f = f.read()
 
-# logObj.add_automation_tag_in_log()
+                    # Convert the data into list format using regex
+                    final = (re.sub(r'(\'[0-9]\'\:\s+)', '- ', str(f)))
 
-logObj.validate_worker_log('100.64.51.150', 'security')
+                    # Save the file
+                    with open(filename, 'w') as f:
+                        f.write(final)
+        # Close the CSV
+        self.csvfile.close()
+
+# Sample Execution
+yamlObj = CsvToYamlConvertor('tas', r'C:\Users\madduv\ONBFactory\config.yaml', r'C:\Users\madduv\Downloads\inputfile.csv')
+yamlObj.convert_csv_to_yaml()

@@ -1,0 +1,7 @@
+# Developer Tools
+flake8==3.5.0
+
+# Testing
+mock==2.0.0
+nose-progressive==1.5.1
+coverage==4.5.1

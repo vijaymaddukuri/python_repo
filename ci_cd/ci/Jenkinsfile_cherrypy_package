@@ -1,0 +1,103 @@
+void runStages(String tag) {
+
+    docker.image(tag).inside("--privileged=true") {
+
+        def taglist = sh script: 'git tag', returnStdout: true
+        String[] splitData = taglist.split("\n");
+        for (String eachSplit : splitData) {
+            if (eachSplit.startsWith("v")) {
+            lasttag = eachSplit.substring(1);
+            }
+        }
+
+        def lastbuild = Jenkins.instance.getItemByFullName("${env.JOB_BASE_NAME}").getLastSuccessfulBuild().toString()
+
+        def lastbuildnumber = lastbuild.substring(lastbuild.indexOf('#') + 1)
+
+        int newbuildnumber = lastbuildnumber.toInteger() + 1
+
+        def ver = lasttag + "." + newbuildnumber
+
+		stage('Clone cherry py git repos') {
+		    withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'VIJAY_VIJAYRUBICOIN',
+							  usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']]) {
+                sh '''
+                    git clone http://$USERNAME:$PASSWORD@github.com/AAI/salt.git
+                    git clone http://$USERNAME:$PASSWORD@github.com/AAI/pillar.git
+                    git clone http://$USERNAME:$PASSWORD@github.com/AAI/salt_artifacts.git
+                   '''
+            }
+	    }
+
+		stage('Generate cherrypy tar file') {
+		        sh '''
+			    version='''+ver+'''
+			    dir=$(pwd)
+
+			    wget -r -l1 --no-parent -A "lgtoclnt-*"  https://artifactory.core.rcsops.com:443/artifactory/core-generic-local/tsa/agents/
+
+			    wget -r -l1 --no-parent -A "nimsoft-robot*"  https://artifactory.core.rcsops.com:443/artifactory/core-generic-local/tsa/agents/
+
+			    wget -r -l1 --no-parent -A "nimldr*"  https://artifactory.core.rcsops.com:443/artifactory/core-generic-local/tsa/agents/
+
+			    mkdir -p configure_tsa_salt_$version
+
+			    cp -R salt/  $dir/configure_tsa_salt_$version
+			    cp -R pillar/ $dir/configure_tsa_salt_$version
+			    cp -R salt_artifacts/ $dir/configure_tsa_salt_$version
+
+			    mv $dir/artifactory.core.rcsops.com/artifactory/core-generic-local/tsa/agents/lgtoclnt-* $dir/configure_tsa_salt_$version/salt_artifacts/networker/agent/
+
+			    mv $dir/artifactory.core.rcsops.com/artifactory/core-generic-local/tsa/agents/nimsoft-robot* $dir/configure_tsa_salt_$version/salt_artifacts/nimsoft/agent/
+			    mv $dir/artifactory.core.rcsops.com/artifactory/core-generic-local/tsa/agents/nimldr* $dir/configure_tsa_salt_$version/salt_artifacts/nimsoft/agent/
+
+			    cp ci/configure_tsa_salt.sh $dir/configure_tsa_salt_$version
+			    cp ci/upgrade_salt_dir.sh $dir/configure_tsa_salt_$version
+			    cp ci/README.md $dir/configure_tsa_salt_$version
+			    cd $dir/configure_tsa_salt_$version
+			    ls
+			    cd $dir
+			    tar -zcvf configure_tsa_salt_$version.tar configure_tsa_salt_$version
+			    '''
+	    }
+
+	    stage('Publish cherrypy tar file to aritfactory') {
+
+		    withCredentials([usernamePassword(credentialsId: 'Jenkins Artifactory', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
+
+			    def dir = sh script: 'pwd', returnStdout: true
+			    def ws = dir.trim();
+
+			    sh """
+			    curl -u $USERNAME:$PASSWORD -T '${ws}/configure_tsa_salt_${ver}.tar' 'https://artifactory.core.rcsops.com/artifactory/core-generic-local/tenant_automation_service-cherrypy_v${ver}.tar'
+			    """
+		    }
+	    }
+    }
+}
+
+@Library('xsPipelineLibs')
+def vs = new devops.VariousStuff1().configure([notifyRecipients : 'sylus.anuranjan@VIJAY.com'])
+
+vs.try_node('docker_engine') {
+
+    try {
+        jdk = tool name: 'OpenJDK 1.8.0', type: 'hudson.model.JDK'
+	    deleteDir()
+
+        checkout scm
+
+        String imageTag
+
+        imageTag = vs.ensureDockerImage('devops/build-image')
+
+        runStages(imageTag)
+
+    } catch(e) {
+
+        def color = 'danger'
+        def err_message = "Job: ${JOB_NAME}:${BUILD_NUMBER} got an exception during Build stage: " + e.toString()
+        def info_message = "Job URL: ${BUILD_URL}"
+        throw (e)
+    }
+}

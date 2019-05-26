@@ -1,0 +1,66 @@
+networker_client_details:
+  CLEANUP_BACKUP_SCRIPT_PATH: networker/remove_nw_dd_host_entry
+  COMMENT_BACKUP_SCRIPT_PATH: networker/comment_host_entry
+  ENABLE_BACKUP_SCRIPT_PATH: networker/enable_backup
+  HOST_ENTRY_SCRIPT_PATH: networker/etchosts
+  INSTALLER_AGENT_SCRIPT_PATH: networker
+networker_server_details:
+  ADD_HOSTNAME_SCRIPT_PATH: networker/add_hosts
+  DATADOMAIN_SERVERS:
+  - hostname: dd.hostname
+    ip: 1.1.1.4
+  DOMAIN_NAME: xstest.local
+  NETWORKER_MAX_CLIENTS: '400'
+  NETWORKER_MAX_JOBS: '40000'
+  NETWORKER_SERVERS:
+  - hostname: NVE-1.7
+    minionid: NVE-1.7.xstest.local
+    password: Password3!
+    pg15: Bronze_Filesystem15
+    pg30: Bronze_Filesystem30
+    url: https://10.100.249.48:9090
+    username: administrator
+  NETWORKER_SERVER_COUNT: '1'
+nimsoft_client_details:
+  CLEANUP_SCRIPT_PATH: nimsoft/nimldr/cleanup
+  INSTALLER_AGENT_SCRIPT_PATH: nimsoft/nimldr
+  UNINSTALLER_AGENT_SCRIPT_PATH: nimsoft/nimldr/uninstall
+nimsoft_server_details:
+  NIMSOFT_DOMAIN: VIJAY
+  NIMSOFT_HUB_IP: 10.100.249.110
+  NIMSOFT_HUB_NAME: win-31u751di7n1
+  NIMSOFT_HUB_PASSWORD: xStream2018!
+  NIMSOFT_HUB_ROBOT_NAME: win-31u751di7n1
+  NIMSOFT_HUB_USERNAME: administrator
+request_timeout_details:
+  timeout: 30
+salt_master_details:
+  MASTER_API_PASSWORD: Password1
+  MASTER_API_PORT: '8087'
+  MASTER_API_USERNAME: netapiusr
+  MASTER_IP: 10.100.249.87
+  MASTER_SALT_BASE_LOCATION: /etc/salt
+  SSH_PORT_NUMBER: '22'
+salt_retries_config_values:
+  SALT_JOB_RETRIES_TIMEOUT: 60
+  SALT_JOB_RUNNING_RETRIES: 3
+  SALT_PING_NO_OF_RETRIES: 4
+  SALT_PING_RETRIES_TIMEOUT: 60
+splunk_client_details:
+  CLEANUP_SCRIPT_PATH: splunkuf/cleanup
+  INSTALLER_AGENT_SCRIPT_PATH: splunkuf
+  SPLUNK_FORWARDER_ADMIN_PASSWORD: 'xStream2015!'
+  UNINSTALLER_AGENT_SCRIPT_PATH: splunkuf/uninstall
+splunk_server_details:
+  SPLUNK_DEPLOYMENT_SERVER_IP: '10.100.249.18'
+  SPLUNK_DEPLOYMENT_SERVER_PORT: '8089'
+trendmicro_client_details:
+  INSTALLER_AGENT_SCRIPT_PATH: trend/latest
+trendmicro_server_details:
+  DSM_API_SECRET_KEY: dummy_key
+  DSM_IP: 10.100.249.93
+  DSM_PORT: '4119'
+  DSM_TENANT_ID: abcde
+  DSM_TENANT_PWD: Password
+workers:
+  no_of_proc: 1

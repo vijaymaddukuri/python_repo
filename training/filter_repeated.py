@@ -3,8 +3,8 @@ def count(itemsList):
     itemsList=list(itemsList)
     uniqueList=list(set(itemsList))
     for i in uniqueList:
-        itemCount = itemsList.count(i)
-        newList[i]=itemCount
+        itVIJAYount = itemsList.count(i)
+        newList[i]=itVIJAYount
     return newList
 
 def unique1(itemsList):

@@ -1,0 +1,1940 @@
+DEBUG:root:************************************************************
+DEBUG:root:Execution starts at 2018-08-04 17:47:32.217000
+DEBUG:root:TypeError: Please pass the integer input
+INFO:root:Executing the Testme Application with the command testme vijay
+DEBUG:root:Successfully executed the command testme vijay
+DEBUG:root:Execution log: 
+input: vijay
+output: 38295488452598849639207068994825907092422283969214
+
+DEBUG:root:************************************************************
+DEBUG:root:Execution starts at 2018-08-04 17:47:50.813000
+DEBUG:root:TypeError: Please pass the integer input
+INFO:root:Executing the Testme Application with the command testme vijay
+DEBUG:root:Successfully executed the command testme vijay
+DEBUG:root:Execution log: 
+input: vijay
+output: 38295488452598849639207068994825907092422283969214
+
+DEBUG:root:************************************************************
+DEBUG:root:Execution starts at 2018-08-04 17:48:06.895000
+INFO:root:Executing the Testme Application with the command testme 10
+DEBUG:root:Successfully executed the command testme 10
+DEBUG:root:Execution log: 
+input: 10
+output: 2983557137299388795107192986413907782003447359461
+
+DEBUG:root:************************************************************
+DEBUG:root:Execution starts at 2018-08-04 17:53:02.011000
+INFO:root:Executing the Testme Application with the command testme 10
+INFO:root:Successfully executed the command testme 10
+INFO:root:Execution log: 
+input: 10
+output: 2983557137299388795107192986413907782003447359461
+
+DEBUG:root:************************************************************
+DEBUG:root:Execution starts at 2018-08-04 18:10:01.118000
+DEBUG:root:Test case 1 execution
+INFO:root:Executing the Testme Application with the command testme 10
+INFO:root:Successfully executed the command testme 10
+INFO:root:Execution log: 
+input: 10
+output: 2983557137299388795107192986413907782003447359461
+
+DEBUG:root:************************************************************
+DEBUG:root:Execution starts at 2018-08-04 18:10:19.429000
+DEBUG:root:Test case 1 execution
+INFO:root:Executing the Testme Application with the command testme 10
+INFO:root:Successfully executed the command testme 10
+INFO:root:Execution log: 
+input: 10
+output: 2983557137299388795107192986413907782003447359461
+
+DEBUG:root:************************************************************
+DEBUG:root:Execution starts at 2018-08-04 18:10:33.396000
+DEBUG:root:Test case 1 execution
+INFO:root:Executing the Testme Application with the command testme 10
+INFO:root:Successfully executed the command testme 10
+INFO:root:Execution log: 
+input: 10
+output: 2983557137299388795107192986413907782003447359461
+
+DEBUG:root:************************************************************
+DEBUG:root:Execution starts at 2018-08-04 18:10:42.754000
+DEBUG:root:Test case 1 execution
+INFO:root:Executing the Testme Application with the command testme 10
+INFO:root:Successfully executed the command testme 10
+INFO:root:Execution log: 
+input: 10
+output: 2983557137299388795107192986413907782003447359461
+
+DEBUG:root:************************************************************
+DEBUG:root:Execution starts at 2018-08-04 18:10:56.094000
+DEBUG:root:Test case 1 execution
+INFO:root:Executing the Testme Application with the command testme 10
+INFO:root:Successfully executed the command testme 10
+INFO:root:Execution log: 
+input: 10
+output: 2983557137299388795107192986413907782003447359461
+
+DEBUG:root:************************************************************
+DEBUG:root:Execution starts at 2018-08-04 18:11:09.846000
+DEBUG:root:Test case 1 execution
+INFO:root:Executing the Testme Application with the command testme 10
+INFO:root:Successfully executed the command testme 10
+INFO:root:Execution log: 
+input: 10
+output: 2983557137299388795107192986413907782003447359461
+
+DEBUG:root:************************************************************
+DEBUG:root:Execution starts at 2018-08-04 18:11:17.910000
+DEBUG:root:Test case 1 execution
+INFO:root:Executing the Testme Application with the command testme 10
+INFO:root:Successfully executed the command testme 10
+INFO:root:Execution log: 
+input: 10
+output: 2983557137299388795107192986413907782003447359461
+
+DEBUG:root:************************************************************
+DEBUG:root:Execution starts at 2018-08-04 18:11:23.934000
+DEBUG:root:Test case 1 execution
+INFO:root:Executing the Testme Application with the command testme 10
+INFO:root:Successfully executed the command testme 10
+INFO:root:Execution log: 
+input: 10
+output: 2983557137299388795107192986413907782003447359461
+
+DEBUG:root:************************************************************
+DEBUG:root:Execution starts at 2018-08-04 18:15:13.043000
+DEBUG:root:Test case 1 execution
+INFO:root:Executing the Testme Application with the command testme 10
+INFO:root:Successfully executed the command testme 10
+INFO:root:Execution log: 
+input: 10
+output: 2983557137299388795107192986413907782003447359461
+
+INFO:root:Test case 1 executed successfully
+DEBUG:root:************************************************************
+DEBUG:root:Execution starts at 2018-08-04 18:17:26.039000
+DEBUG:root:************************************************************
+DEBUG:root:Execution starts at 2018-08-04 18:19:27.752000
+DEBUG:root:************************************************************
+DEBUG:root:Execution starts at 2018-08-04 18:19:41.927000
+DEBUG:root:************************************************************
+DEBUG:root:Execution starts at 2018-08-04 18:19:52.594000
+DEBUG:root:************************************************************
+DEBUG:root:Execution starts at 2018-08-04 18:24:01.696000
+DEBUG:root:************************************************************
+DEBUG:root:Execution starts at 2018-08-04 18:43:07.268000
+DEBUG:root:Test case 2 execution started
+INFO:root:Executing the Testme Application with the command testme 1
+INFO:root:Successfully executed the command testme 1
+INFO:root:Execution log: 
+input: 1
+output: 249162835566461901824116
+
+INFO:root:Executing the Testme Application with the command testme 1
+INFO:root:Successfully executed the command testme 1
+INFO:root:Execution log: 
+input: 1
+output: 24922170839607160811977
+
+INFO:root:Test case 2 executed successfully
+DEBUG:root:************************************************************
+DEBUG:root:Execution starts at 2018-08-04 18:43:40.497000
+DEBUG:root:Test case 2 execution started
+INFO:root:Executing the Testme Application with the command testme 1
+INFO:root:Successfully executed the command testme 1
+INFO:root:Execution log: 
+input: 1
+output: 25027584242041797014363
+
+INFO:root:Executing the Testme Application with the command testme 2
+INFO:root:Successfully executed the command testme 2
+INFO:root:Execution log: 
+input: 2
+output: 3662385719313398424126177292263081684136898633904
+
+DEBUG:root:Test case 2 failed due to diffrent outputs = output1:25027584242041797014363 output2:3662385719313398424126177292263081684136898633904
+DEBUG:root:************************************************************
+DEBUG:root:Execution starts at 2018-08-04 18:44:05.921000
+DEBUG:root:Test case 2 execution started
+INFO:root:Executing the Testme Application with the command testme 1
+INFO:root:Successfully executed the command testme 1
+INFO:root:Execution log: 
+input: 1
+output: 251087151120572972910084
+
+INFO:root:Executing the Testme Application with the command testme 1
+INFO:root:Successfully executed the command testme 1
+INFO:root:Execution log: 
+input: 1
+output: 2511217899299212102420398
+
+INFO:root:Test case 2 executed successfully
+DEBUG:root:************************************************************
+DEBUG:root:Execution starts at 2018-08-04 18:45:34.545000
+DEBUG:root:Test case 2 execution started
+INFO:root:Executing the Testme Application with the command testme 1
+INFO:root:Successfully executed the command testme 1
+INFO:root:Execution log: 
+input: 1
+output: 253991348729104867610577
+
+INFO:root:Executing the Testme Application with the command testme 1
+INFO:root:Successfully executed the command testme 1
+INFO:root:Execution log: 
+input: 1
+output: 2540224235142003273920891
+
+INFO:root:Test case 2 executed successfully
+DEBUG:root:************************************************************
+DEBUG:root:Execution starts at 2018-08-04 18:46:18.835000
+DEBUG:root:Test case 2 execution started
+INFO:root:Executing the Testme Application with the command testme 1
+INFO:root:Successfully executed the command testme 1
+INFO:root:Execution log: 
+input: 1
+output: 255432766528695188865666
+
+INFO:root:Executing the Testme Application with the command testme 1
+INFO:root:Successfully executed the command testme 1
+INFO:root:Execution log: 
+input: 1
+output: 255465645137921018115981
+
+DEBUG:root:************************************************************
+DEBUG:root:Execution starts at 2018-08-04 18:46:50.292000
+DEBUG:root:Test case 2 execution started
+INFO:root:Executing the Testme Application with the command testme 1
+INFO:root:Successfully executed the command testme 1
+INFO:root:Execution log: 
+input: 1
+output: 25644417254291118430506
+
+INFO:root:Executing the Testme Application with the command testme 1
+INFO:root:Successfully executed the command testme 1
+INFO:root:Execution log: 
+input: 1
+output: 2565021914283892654318367
+
+DEBUG:root:************************************************************
+DEBUG:root:Execution starts at 2018-08-04 18:47:02.312000
+DEBUG:root:Test case 2 execution started
+INFO:root:Executing the Testme Application with the command testme 1
+INFO:root:Successfully executed the command testme 1
+INFO:root:Execution log: 
+input: 1
+output: 256833109410423503223209
+
+INFO:root:Executing the Testme Application with the command testme 1
+INFO:root:Successfully executed the command testme 1
+INFO:root:Execution log: 
+input: 1
+output: 2569019823133832039111070
+
+INFO:root:Test case 2 executed successfully
+DEBUG:root:************************************************************
+DEBUG:root:Execution starts at 2018-08-04 18:47:17.094000
+DEBUG:root:Test case 2 execution started
+INFO:root:Executing the Testme Application with the command testme 1
+INFO:root:Successfully executed the command testme 1
+INFO:root:Execution log: 
+input: 1
+output: 257322848016241553414087
+
+INFO:root:Executing the Testme Application with the command testme 1
+INFO:root:Successfully executed the command testme 1
+INFO:root:Execution log: 
+input: 1
+output: 257391720919202208931948
+
+DEBUG:root:************************************************************
+DEBUG:root:Execution starts at 2018-08-04 18:47:53.621000
+DEBUG:root:Test case 2 execution started
+INFO:root:Executing the Testme Application with the command testme 1
+INFO:root:Successfully executed the command testme 1
+INFO:root:Execution log: 
+input: 1
+output: 2585318721856111412511
+
+INFO:root:Executing the Testme Application with the command testme 1
+INFO:root:Successfully executed the command testme 1
+INFO:root:Execution log: 
+input: 1
+output: 25856109366952243612825
+
+DEBUG:root:************************************************************
+DEBUG:root:Execution starts at 2018-08-04 18:48:22.739000
+DEBUG:root:Test case 2 execution started
+INFO:root:Executing the Testme Application with the command testme 1
+INFO:root:Successfully executed the command testme 1
+INFO:root:Execution log: 
+input: 1
+output: 259481697915629208496721
+
+INFO:root:Executing the Testme Application with the command testme 1
+INFO:root:Successfully executed the command testme 1
+INFO:root:Execution log: 
+input: 1
+output: 25951277277251214417036
+
+DEBUG:root:************************************************************
+DEBUG:root:Execution starts at 2018-08-04 18:49:17.932000
+DEBUG:root:Test case 2 execution started
+INFO:root:Executing the Testme Application with the command testme 1
+INFO:root:Successfully executed the command testme 1
+INFO:root:Execution log: 
+input: 1
+output: 26127183171511884316967
+
+INFO:root:Executing the Testme Application with the command testme 1
+INFO:root:Successfully executed the command testme 1
+INFO:root:Execution log: 
+input: 1
+output: 26134704618078162024828
+
+DEBUG:root:Test case 2 failed due to diffrent outputs = output1:26127183171511884316967 output2:26134704618078162024828
+DEBUG:root:************************************************************
+DEBUG:root:Execution starts at 2018-08-04 18:52:37.556000
+DEBUG:root:Test case 3 execution started
+DEBUG:root:TypeError: Please pass the integer input
+INFO:root:Executing the Testme Application with the command testme 
+INFO:root:Successfully executed the command testme 
+INFO:root:Execution log: 
+input: 
+output: 3661210606158408986984448049525061029282950170377
+
+DEBUG:root:************************************************************
+DEBUG:root:Execution starts at 2018-08-04 18:53:33.223000
+DEBUG:root:Test case 3 execution started
+DEBUG:root:TypeError: Please pass the integer input
+INFO:root:Executing the Testme Application with the command testme 
+INFO:root:Successfully executed the command testme 
+INFO:root:Execution log: 
+input: 
+output: 3661210606158408986984448049525061029282950170377
+
+DEBUG:root:Test case 3 failed due to invalid output
+DEBUG:root:************************************************************
+DEBUG:root:Execution starts at 2018-08-04 18:53:49.661000
+DEBUG:root:Test case 3 execution started
+DEBUG:root:TypeError: Please pass the integer input
+INFO:root:Executing the Testme Application with the command testme 
+INFO:root:Successfully executed the command testme 
+INFO:root:Execution log: 
+input: 
+output: 3661210606158408986984448049525061029282950170377
+
+INFO:root:Test case 3 executed successfully
+DEBUG:root:************************************************************
+DEBUG:root:Execution starts at 2018-08-04 19:13:32.007000
+DEBUG:root:Test case 1 execution started
+INFO:root:Executing the Testme Application with the command testme 10
+INFO:root:Successfully executed the command testme 10
+INFO:root:Execution log: 
+input: 10
+output: 2983557137299388795107192986413907782003447359461
+
+INFO:root:Test case 1 executed successfully
+DEBUG:root:Test case 1 execution started
+INFO:root:Executing the Testme Application with the command testme -1
+INFO:root:Successfully executed the command testme -1
+INFO:root:Execution log: 
+input: -1
+output: 2038739104377866105036801731751456763899886192153
+
+DEBUG:root:************************************************************
+DEBUG:root:Execution starts at 2018-08-04 19:14:44.904000
+DEBUG:root:Test case 1 execution started
+INFO:root:Executing the Testme Application with the command testme 10
+INFO:root:Successfully executed the command testme 10
+INFO:root:Execution log: 
+input: 10
+output: 2983557137299388795107192986413907782003447359461
+
+INFO:root:Test case 1 executed successfully
+DEBUG:root:Test case 1 execution started
+INFO:root:Executing the Testme Application with the command testme -1
+INFO:root:Successfully executed the command testme -1
+INFO:root:Execution log: 
+input: -1
+output: 2038739104377866105036801731751456763899886192153
+
+DEBUG:root:************************************************************
+DEBUG:root:Execution starts at 2018-08-04 19:15:26.671000
+DEBUG:root:Test case 1 execution started
+INFO:root:Executing the Testme Application with the command testme 10
+INFO:root:Successfully executed the command testme 10
+INFO:root:Execution log: 
+input: 10
+output: 2983557137299388795107192986413907782003447359461
+
+INFO:root:Test case 1 executed successfully
+DEBUG:root:Test case 1 execution started
+INFO:root:Executing the Testme Application with the command testme -1
+INFO:root:Successfully executed the command testme -1
+INFO:root:Execution log: 
+input: -1
+output: 2038739104377866105036801731751456763899886192153
+
+DEBUG:root:************************************************************
+DEBUG:root:Execution starts at 2018-08-04 19:16:54.155000
+DEBUG:root:Test case 1 execution started
+INFO:root:Executing the Testme Application with the command testme -1
+INFO:root:Successfully executed the command testme -1
+INFO:root:Execution log: 
+input: -1
+output: 2038739104377866105036801731751456763899886192153
+
+DEBUG:root:************************************************************
+DEBUG:root:Execution starts at 2018-08-04 19:17:01.938000
+DEBUG:root:Test case 1 execution started
+INFO:root:Executing the Testme Application with the command testme 10
+INFO:root:Successfully executed the command testme 10
+INFO:root:Execution log: 
+input: 10
+output: 2983557137299388795107192986413907782003447359461
+
+INFO:root:Test case 1 executed successfully
+DEBUG:root:************************************************************
+DEBUG:root:Execution starts at 2018-08-04 19:17:08.928000
+DEBUG:root:Test case 1 execution started
+INFO:root:Executing the Testme Application with the command testme 0.5
+INFO:root:Successfully executed the command testme 0.5
+INFO:root:Execution log: 
+input: 0.5
+output: 4567236691242303823670726879602129493921301884
+
+INFO:root:Test case 1 executed successfully
+DEBUG:root:************************************************************
+DEBUG:root:Execution starts at 2018-08-04 19:17:14.811000
+DEBUG:root:Test case 1 execution started
+INFO:root:Executing the Testme Application with the command testme -1
+INFO:root:Successfully executed the command testme -1
+INFO:root:Execution log: 
+input: -1
+output: 2038739104377866105036801731751456763899886192153
+
+DEBUG:root:************************************************************
+DEBUG:root:Execution starts at 2018-08-04 19:21:27.011000
+DEBUG:root:Test case 1 execution started
+INFO:root:Executing the Testme Application with the command testme -1
+INFO:root:Successfully executed the command testme -1
+INFO:root:Execution log: 
+input: -1
+output: 2038739104377866105036801731751456763899886192153
+
+DEBUG:root:************************************************************
+DEBUG:root:Execution starts at 2018-08-04 19:22:18.074000
+DEBUG:root:Test case 1 execution started
+INFO:root:Executing the Testme Application with the command testme -1
+INFO:root:Successfully executed the command testme -1
+INFO:root:Execution log: 
+input: -1
+output: 2038739104377866105036801731751456763899886192153
+
+DEBUG:root:************************************************************
+DEBUG:root:Execution starts at 2018-08-04 19:23:23.698000
+DEBUG:root:Test case 1 execution started
+INFO:root:Executing the Testme Application with the command testme -1
+INFO:root:Successfully executed the command testme -1
+INFO:root:Execution log: 
+input: -1
+output: 2038739104377866105036801731751456763899886192153
+
+DEBUG:root:Using regular expression getting the output value
+DEBUG:root:************************************************************
+DEBUG:root:Execution starts at 2018-08-04 19:24:00.924000
+DEBUG:root:Test case 1 execution started
+INFO:root:Executing the Testme Application with the command testme -1
+INFO:root:Successfully executed the command testme -1
+INFO:root:Execution log: 
+input: -1
+output: 2038739104377866105036801731751456763899886192153
+
+DEBUG:root:Using regular expression getting the output value
+DEBUG:root:Unexpected error: <type 'exceptions.AttributeError'>
+DEBUG:root:************************************************************
+DEBUG:root:Execution starts at 2018-08-04 19:24:40.606000
+DEBUG:root:Test case 1 execution started
+INFO:root:Executing the Testme Application with the command testme -1
+INFO:root:Successfully executed the command testme -1
+INFO:root:Execution log: 
+input: -1
+output: 2038739104377866105036801731751456763899886192153
+
+DEBUG:root:Using regular expression getting the output value
+DEBUG:root:Unexpected error: <type 'exceptions.AttributeError'>
+DEBUG:root:************************************************************
+DEBUG:root:Execution starts at 2018-08-04 19:24:48.562000
+DEBUG:root:Test case 1 execution started
+INFO:root:Executing the Testme Application with the command testme -1
+INFO:root:Successfully executed the command testme -1
+INFO:root:Execution log: 
+input: -1
+output: 2038739104377866105036801731751456763899886192153
+
+DEBUG:root:Using regular expression getting the output value
+DEBUG:root:Unexpected error: <type 'exceptions.AttributeError'>
+DEBUG:root:************************************************************
+DEBUG:root:Execution starts at 2018-08-04 19:25:39.217000
+DEBUG:root:Test case 1 execution started
+INFO:root:Executing the Testme Application with the command testme 2
+INFO:root:Successfully executed the command testme 2
+INFO:root:Execution log: 
+input: 2
+output: 3662385719313398424126177292263081684136898633904
+
+DEBUG:root:Using regular expression getting the output value
+INFO:root:Test case 1 executed successfully
+DEBUG:root:************************************************************
+DEBUG:root:Execution starts at 2018-08-04 19:25:47.219000
+DEBUG:root:Test case 1 execution started
+INFO:root:Executing the Testme Application with the command testme -1
+INFO:root:Successfully executed the command testme -1
+INFO:root:Execution log: 
+input: -1
+output: 2038739104377866105036801731751456763899886192153
+
+DEBUG:root:Using regular expression getting the output value
+DEBUG:root:Unexpected error: <type 'exceptions.AttributeError'>
+DEBUG:root:************************************************************
+DEBUG:root:Execution starts at 2018-08-04 19:26:08.857000
+DEBUG:root:Test case 1 execution started
+INFO:root:Executing the Testme Application with the command testme 2
+INFO:root:Successfully executed the command testme 2
+INFO:root:Execution log: 
+input: 2
+output: 3662385719313398424126177292263081684136898633904
+
+DEBUG:root:Using regular expression getting the output value
+INFO:root:Test case 1 executed successfully
+DEBUG:root:************************************************************
+DEBUG:root:Execution starts at 2018-08-04 19:26:40.991000
+DEBUG:root:Test case 1 execution started
+INFO:root:Executing the Testme Application with the command testme 2
+INFO:root:Successfully executed the command testme 2
+INFO:root:Execution log: 
+input: 2
+output: 3662385719313398424126177292263081684136898633904
+
+DEBUG:root:Using regular expression getting the output value
+INFO:root:Test case 1 executed successfully
+DEBUG:root:************************************************************
+DEBUG:root:Execution starts at 2018-08-04 19:27:29.237000
+DEBUG:root:Test case 1 execution started
+INFO:root:Executing the Testme Application with the command testme 2
+INFO:root:Successfully executed the command testme 2
+INFO:root:Execution log: 
+input: 2
+output: 3662385719313398424126177292263081684136898633904
+
+DEBUG:root:Using regular expression getting the output value
+INFO:root:Test case 1 executed successfully
+DEBUG:root:************************************************************
+DEBUG:root:Execution starts at 2018-08-04 19:27:40.360000
+DEBUG:root:Test case 1 execution started
+INFO:root:Executing the Testme Application with the command testme -1
+INFO:root:Successfully executed the command testme -1
+INFO:root:Execution log: 
+input: -1
+output: 2038739104377866105036801731751456763899886192153
+
+DEBUG:root:Using regular expression getting the output value
+DEBUG:root:Unexpected error: <type 'exceptions.AttributeError'>
+DEBUG:root:************************************************************
+DEBUG:root:Execution starts at 2018-08-04 19:28:36.233000
+DEBUG:root:Test case 1 execution started
+INFO:root:Executing the Testme Application with the command testme -1
+INFO:root:Successfully executed the command testme -1
+INFO:root:Execution log: 
+input: -1
+output: 2038739104377866105036801731751456763899886192153
+
+DEBUG:root:Using regular expression getting the output value
+DEBUG:root:Unexpected error: <type 'exceptions.AttributeError'>
+DEBUG:root:************************************************************
+DEBUG:root:Execution starts at 2018-08-04 19:31:52.125000
+DEBUG:root:Test case 1 execution started
+INFO:root:Executing the Testme Application with the command testme -1
+INFO:root:Successfully executed the command testme -1
+INFO:root:Execution log: 
+input: -1
+output: 2038739104377866105036801731751456763899886192153
+
+DEBUG:root:Using regular expression getting the output value
+DEBUG:root:Unexpected error: <type 'exceptions.AttributeError'>
+DEBUG:root:************************************************************
+DEBUG:root:Execution starts at 2018-08-04 19:32:51.255000
+DEBUG:root:Test case 1 execution started
+INFO:root:Executing the Testme Application with the command testme -1
+INFO:root:Successfully executed the command testme -1
+INFO:root:Execution log: 
+input: -1
+output: 2038739104377866105036801731751456763899886192153
+
+DEBUG:root:Using regular expression getting the output value
+INFO:root:Test case 1 executed successfully
+DEBUG:root:************************************************************
+DEBUG:root:Execution starts at 2018-08-04 19:33:02.515000
+DEBUG:root:Test case 1 execution started
+INFO:root:Executing the Testme Application with the command testme -1
+INFO:root:Successfully executed the command testme -1
+INFO:root:Execution log: 
+input: -1
+output: 2038739104377866105036801731751456763899886192153
+
+DEBUG:root:Using regular expression getting the output value
+DEBUG:root:Unexpected error: <type 'exceptions.AttributeError'>
+DEBUG:root:************************************************************
+DEBUG:root:Execution starts at 2018-08-04 19:33:18.124000
+DEBUG:root:Test case 1 execution started
+INFO:root:Executing the Testme Application with the command testme -1
+INFO:root:Successfully executed the command testme -1
+INFO:root:Execution log: 
+input: -1
+output: 2038739104377866105036801731751456763899886192153
+
+DEBUG:root:Using regular expression getting the output value
+INFO:root:Test case 1 executed successfully
+DEBUG:root:************************************************************
+DEBUG:root:Execution starts at 2018-08-04 19:34:09.110000
+DEBUG:root:Test case 1 execution started
+INFO:root:Executing the Testme Application with the command testme -1
+INFO:root:Successfully executed the command testme -1
+INFO:root:Execution log: 
+input: -1
+output: 2038739104377866105036801731751456763899886192153
+
+DEBUG:root:Using regular expression getting the output value
+INFO:root:Test case 1 executed successfully
+DEBUG:root:************************************************************
+DEBUG:root:Execution starts at 2018-08-04 19:34:23.903000
+DEBUG:root:Test case 1 execution started
+INFO:root:Executing the Testme Application with the command testme -1
+INFO:root:Successfully executed the command testme -1
+INFO:root:Execution log: 
+input: -1
+output: 2038739104377866105036801731751456763899886192153
+
+DEBUG:root:Using regular expression getting the output value
+INFO:root:Test case 1 executed successfully
+DEBUG:root:************************************************************
+DEBUG:root:Execution starts at 2018-08-04 19:36:06.358000
+DEBUG:root:Test case 1 execution started
+INFO:root:Executing the Testme Application with the command testme 10
+INFO:root:Successfully executed the command testme 10
+INFO:root:Execution log: 
+input: 10
+output: 2983557137299388795107192986413907782003447359461
+
+DEBUG:root:Using regular expression getting the output value
+INFO:root:Test case 1 executed successfully
+DEBUG:root:Test case 1 execution started
+INFO:root:Executing the Testme Application with the command testme -1
+INFO:root:Successfully executed the command testme -1
+INFO:root:Execution log: 
+input: -1
+output: 2038739104377866105036801731751456763899886192153
+
+DEBUG:root:Using regular expression getting the output value
+INFO:root:Test case 1 executed successfully
+DEBUG:root:Test case 1 execution started
+INFO:root:Executing the Testme Application with the command testme 0.5
+INFO:root:Successfully executed the command testme 0.5
+INFO:root:Execution log: 
+input: 0.5
+output: 4567236691242303823670726879602129493921301884
+
+DEBUG:root:Using regular expression getting the output value
+INFO:root:Test case 1 executed successfully
+DEBUG:root:Test case 2 execution started
+INFO:root:Executing the Testme Application with the command testme 1
+INFO:root:Successfully executed the command testme 1
+INFO:root:Execution log: 
+input: 1
+output: 2529205149904301213380
+
+DEBUG:root:Using regular expression getting the output value
+INFO:root:Executing the Testme Application with the command testme 1
+INFO:root:Successfully executed the command testme 1
+INFO:root:Execution log: 
+input: 1
+output: 2536924312864183711241
+
+DEBUG:root:Using regular expression getting the output value
+DEBUG:root:Test case 2 failed due to different outputs = output1:2529205149904301213380 output2:2536924312864183711241
+DEBUG:root:************************************************************
+DEBUG:root:Execution starts at 2018-08-04 19:37:16.749000
+DEBUG:root:Test case 1 execution started
+INFO:root:Executing the Testme Application with the command testme 10
+INFO:root:Successfully executed the command testme 10
+INFO:root:Execution log: 
+input: 10
+output: 2983557137299388795107192986413907782003447359461
+
+DEBUG:root:Using regular expression getting the output value
+INFO:root:Test case 1 executed successfully
+DEBUG:root:Test case 1 execution started
+INFO:root:Executing the Testme Application with the command testme -1
+INFO:root:Successfully executed the command testme -1
+INFO:root:Execution log: 
+input: -1
+output: 2038739104377866105036801731751456763899886192153
+
+DEBUG:root:Using regular expression getting the output value
+INFO:root:Test case 1 executed successfully
+DEBUG:root:Test case 1 execution started
+INFO:root:Executing the Testme Application with the command testme 0.5
+INFO:root:Successfully executed the command testme 0.5
+INFO:root:Execution log: 
+input: 0.5
+output: 4567236691242303823670726879602129493921301884
+
+DEBUG:root:Using regular expression getting the output value
+INFO:root:Test case 1 executed successfully
+DEBUG:root:Test case 2 execution started
+INFO:root:Executing the Testme Application with the command testme 1
+INFO:root:Successfully executed the command testme 1
+INFO:root:Execution log: 
+input: 1
+output: 276129987308757124819
+
+DEBUG:root:Using regular expression getting the output value
+INFO:root:Executing the Testme Application with the command testme 2
+INFO:root:Successfully executed the command testme 2
+INFO:root:Execution log: 
+input: 2
+output: 3662385719313398424126177292263081684136898633904
+
+DEBUG:root:Using regular expression getting the output value
+DEBUG:root:Test case 2 failed due to different outputs = output1:276129987308757124819 output2:3662385719313398424126177292263081684136898633904
+DEBUG:root:Test case 2 execution started
+INFO:root:Executing the Testme Application with the command testme 1
+INFO:root:Successfully executed the command testme 1
+INFO:root:Execution log: 
+input: 1
+output: 2764796818172316342365
+
+DEBUG:root:Using regular expression getting the output value
+INFO:root:Executing the Testme Application with the command testme 2
+INFO:root:Successfully executed the command testme 2
+INFO:root:Execution log: 
+input: 2
+output: 3662385719313398424126177292263081684136898633904
+
+DEBUG:root:Using regular expression getting the output value
+DEBUG:root:Test case 2 failed due to different outputs = output1:2764796818172316342365 output2:3662385719313398424126177292263081684136898633904
+DEBUG:root:************************************************************
+DEBUG:root:Execution starts at 2018-08-04 19:38:32.687000
+DEBUG:root:Test case 1 execution started
+INFO:root:Executing the Testme Application with the command testme 10
+INFO:root:Successfully executed the command testme 10
+INFO:root:Execution log: 
+input: 10
+output: 2983557137299388795107192986413907782003447359461
+
+DEBUG:root:Using regular expression getting the output value
+INFO:root:Test case 1 executed successfully
+DEBUG:root:Test case 1 execution started
+INFO:root:Executing the Testme Application with the command testme -1
+INFO:root:Successfully executed the command testme -1
+INFO:root:Execution log: 
+input: -1
+output: 2038739104377866105036801731751456763899886192153
+
+DEBUG:root:Using regular expression getting the output value
+INFO:root:Test case 1 executed successfully
+DEBUG:root:Test case 1 execution started
+INFO:root:Executing the Testme Application with the command testme 0.5
+INFO:root:Successfully executed the command testme 0.5
+INFO:root:Execution log: 
+input: 0.5
+output: 4567236691242303823670726879602129493921301884
+
+DEBUG:root:Using regular expression getting the output value
+INFO:root:Test case 1 executed successfully
+DEBUG:root:Test case 2 execution started
+INFO:root:Executing the Testme Application with the command testme 1
+INFO:root:Successfully executed the command testme 1
+INFO:root:Execution log: 
+input: 1
+output: 30092766614497137522294
+
+DEBUG:root:Using regular expression getting the output value
+INFO:root:Executing the Testme Application with the command testme 2
+INFO:root:Successfully executed the command testme 2
+INFO:root:Execution log: 
+input: 2
+output: 3662385719313398424126177292263081684136898633904
+
+DEBUG:root:Using regular expression getting the output value
+DEBUG:root:Test case 2 failed due to different outputs = output1:30092766614497137522294 output2:3662385719313398424126177292263081684136898633904
+DEBUG:root:Test case 2 execution started
+INFO:root:Executing the Testme Application with the command testme 1
+INFO:root:Successfully executed the command testme 1
+INFO:root:Execution log: 
+input: 1
+output: 30125647323612543832609
+
+DEBUG:root:Using regular expression getting the output value
+INFO:root:Executing the Testme Application with the command testme 2
+INFO:root:Successfully executed the command testme 2
+INFO:root:Execution log: 
+input: 2
+output: 3662385719313398424126177292263081684136898633904
+
+DEBUG:root:Using regular expression getting the output value
+DEBUG:root:Test case 2 failed due to different outputs = output1:30125647323612543832609 output2:3662385719313398424126177292263081684136898633904
+DEBUG:root:Test case 2 execution started
+INFO:root:Executing the Testme Application with the command testme 2
+INFO:root:Successfully executed the command testme 2
+INFO:root:Execution log: 
+input: 2
+output: 3662385719313398424126177292263081684136898633904
+
+DEBUG:root:Using regular expression getting the output value
+INFO:root:Executing the Testme Application with the command testme 2
+INFO:root:Successfully executed the command testme 2
+INFO:root:Execution log: 
+input: 2
+output: 3662385719313398424126177292263081684136898633904
+
+DEBUG:root:Using regular expression getting the output value
+INFO:root:Test case 2 executed successfully
+DEBUG:root:************************************************************
+DEBUG:root:Execution starts at 2018-08-04 19:39:45.077000
+DEBUG:root:Test case 1 execution started
+INFO:root:Executing the Testme Application with the command testme 10
+INFO:root:Successfully executed the command testme 10
+INFO:root:Execution log: 
+input: 10
+output: 2983557137299388795107192986413907782003447359461
+
+DEBUG:root:Using regular expression getting the output value
+INFO:root:Test case 1 executed successfully
+DEBUG:root:Test case 1 execution started
+INFO:root:Executing the Testme Application with the command testme -1
+INFO:root:Successfully executed the command testme -1
+INFO:root:Execution log: 
+input: -1
+output: 2038739104377866105036801731751456763899886192153
+
+DEBUG:root:Using regular expression getting the output value
+INFO:root:Test case 1 executed successfully
+DEBUG:root:Test case 1 execution started
+INFO:root:Executing the Testme Application with the command testme 0.5
+INFO:root:Successfully executed the command testme 0.5
+INFO:root:Execution log: 
+input: 0.5
+output: 4567236691242303823670726879602129493921301884
+
+DEBUG:root:Using regular expression getting the output value
+INFO:root:Test case 1 executed successfully
+DEBUG:root:Test case 2 execution started
+INFO:root:Executing the Testme Application with the command testme 1
+INFO:root:Successfully executed the command testme 1
+INFO:root:Execution log: 
+input: 1
+output: 324415119227652999811280
+
+DEBUG:root:Using regular expression getting the output value
+INFO:root:Executing the Testme Application with the command testme 2
+INFO:root:Successfully executed the command testme 2
+INFO:root:Execution log: 
+input: 2
+output: 3662385719313398424126177292263081684136898633904
+
+DEBUG:root:Using regular expression getting the output value
+DEBUG:root:Test case 2 failed due to different outputs = output1:324415119227652999811280 output2:3662385719313398424126177292263081684136898633904
+DEBUG:root:Test case 2 execution started
+INFO:root:Executing the Testme Application with the command testme 1
+INFO:root:Successfully executed the command testme 1
+INFO:root:Execution log: 
+input: 1
+output: 32513848257251258831909
+
+DEBUG:root:Using regular expression getting the output value
+INFO:root:Executing the Testme Application with the command testme 2
+INFO:root:Successfully executed the command testme 2
+INFO:root:Execution log: 
+input: 2
+output: 3662385719313398424126177292263081684136898633904
+
+DEBUG:root:Using regular expression getting the output value
+DEBUG:root:Test case 2 failed due to different outputs = output1:32513848257251258831909 output2:3662385719313398424126177292263081684136898633904
+DEBUG:root:Test case 2 execution started
+INFO:root:Executing the Testme Application with the command testme 2
+INFO:root:Successfully executed the command testme 2
+INFO:root:Execution log: 
+input: 2
+output: 3662385719313398424126177292263081684136898633904
+
+DEBUG:root:Using regular expression getting the output value
+INFO:root:Executing the Testme Application with the command testme 2
+INFO:root:Successfully executed the command testme 2
+INFO:root:Execution log: 
+input: 2
+output: 3662385719313398424126177292263081684136898633904
+
+DEBUG:root:Using regular expression getting the output value
+INFO:root:Test case 2 executed successfully
+DEBUG:root:Test case 3 execution started
+DEBUG:root:TypeError: Please pass the integer input
+INFO:root:Executing the Testme Application with the command testme 
+INFO:root:Successfully executed the command testme 
+INFO:root:Execution log: 
+input: 
+output: 3661210606158408986984448049525061029282950170377
+
+DEBUG:root:Using regular expression getting the output value
+DEBUG:root:Test case 3 failed due to invalid output
+DEBUG:root:************************************************************
+DEBUG:root:Execution starts at 2018-08-04 19:40:28.110000
+DEBUG:root:Test case 1 execution started
+INFO:root:Executing the Testme Application with the command testme 10
+INFO:root:Successfully executed the command testme 10
+INFO:root:Execution log: 
+input: 10
+output: 2983557137299388795107192986413907782003447359461
+
+DEBUG:root:Using regular expression getting the output value
+INFO:root:Test case 1 executed successfully
+DEBUG:root:Test case 1 execution started
+INFO:root:Executing the Testme Application with the command testme -1
+INFO:root:Successfully executed the command testme -1
+INFO:root:Execution log: 
+input: -1
+output: 2038739104377866105036801731751456763899886192153
+
+DEBUG:root:Using regular expression getting the output value
+INFO:root:Test case 1 executed successfully
+DEBUG:root:Test case 1 execution started
+INFO:root:Executing the Testme Application with the command testme 0.5
+INFO:root:Successfully executed the command testme 0.5
+INFO:root:Execution log: 
+input: 0.5
+output: 4567236691242303823670726879602129493921301884
+
+DEBUG:root:Using regular expression getting the output value
+INFO:root:Test case 1 executed successfully
+DEBUG:root:Test case 2 execution started
+INFO:root:Executing the Testme Application with the command testme 1
+INFO:root:Successfully executed the command testme 1
+INFO:root:Execution log: 
+input: 1
+output: 33851854944921614428822
+
+DEBUG:root:Using regular expression getting the output value
+INFO:root:Executing the Testme Application with the command testme 2
+INFO:root:Successfully executed the command testme 2
+INFO:root:Execution log: 
+input: 2
+output: 3662385719313398424126177292263081684136898633904
+
+DEBUG:root:Using regular expression getting the output value
+DEBUG:root:Test case 2 failed due to different outputs = output1:33851854944921614428822 output2:3662385719313398424126177292263081684136898633904
+DEBUG:root:Test case 2 execution started
+INFO:root:Executing the Testme Application with the command testme 1
+INFO:root:Successfully executed the command testme 1
+INFO:root:Execution log: 
+input: 1
+output: 3391727874533150316683
+
+DEBUG:root:Using regular expression getting the output value
+INFO:root:Executing the Testme Application with the command testme 2
+INFO:root:Successfully executed the command testme 2
+INFO:root:Execution log: 
+input: 2
+output: 3662385719313398424126177292263081684136898633904
+
+DEBUG:root:Using regular expression getting the output value
+DEBUG:root:Test case 2 failed due to different outputs = output1:3391727874533150316683 output2:3662385719313398424126177292263081684136898633904
+DEBUG:root:Test case 2 execution started
+INFO:root:Executing the Testme Application with the command testme 2
+INFO:root:Successfully executed the command testme 2
+INFO:root:Execution log: 
+input: 2
+output: 3662385719313398424126177292263081684136898633904
+
+DEBUG:root:Using regular expression getting the output value
+INFO:root:Executing the Testme Application with the command testme 2
+INFO:root:Successfully executed the command testme 2
+INFO:root:Execution log: 
+input: 2
+output: 3662385719313398424126177292263081684136898633904
+
+DEBUG:root:Using regular expression getting the output value
+INFO:root:Test case 2 executed successfully
+DEBUG:root:************************************************************
+DEBUG:root:Execution starts at 2018-08-04 19:43:07.608000
+DEBUG:root:Test case 1 execution started
+INFO:root:Executing the Testme Application with the command testme 10
+INFO:root:Successfully executed the command testme 10
+INFO:root:Execution log: 
+input: 10
+output: 2983557137299388795107192986413907782003447359461
+
+DEBUG:root:Using regular expression getting the output value
+INFO:root:Test case 1 executed successfully
+DEBUG:root:Test case 1 execution started
+INFO:root:Executing the Testme Application with the command testme -1
+INFO:root:Successfully executed the command testme -1
+INFO:root:Execution log: 
+input: -1
+output: 2038739104377866105036801731751456763899886192153
+
+DEBUG:root:Using regular expression getting the output value
+INFO:root:Test case 1 executed successfully
+DEBUG:root:Test case 1 execution started
+INFO:root:Executing the Testme Application with the command testme 0.5
+INFO:root:Successfully executed the command testme 0.5
+INFO:root:Execution log: 
+input: 0.5
+output: 4567236691242303823670726879602129493921301884
+
+DEBUG:root:Using regular expression getting the output value
+INFO:root:Test case 1 executed successfully
+DEBUG:root:Test case 2 execution started
+INFO:root:Executing the Testme Application with the command testme 1
+INFO:root:Successfully executed the command testme 1
+INFO:root:Execution log: 
+input: 1
+output: 3907159011944324187986
+
+DEBUG:root:Using regular expression getting the output value
+INFO:root:Executing the Testme Application with the command testme 2
+INFO:root:Successfully executed the command testme 2
+INFO:root:Execution log: 
+input: 2
+output: 3662385719313398424126177292263081684136898633904
+
+DEBUG:root:Using regular expression getting the output value
+DEBUG:root:Test case 2 failed due to different outputs = output1:3907159011944324187986 output2:3662385719313398424126177292263081684136898633904
+DEBUG:root:Test case 2 execution started
+INFO:root:Executing the Testme Application with the command testme 1
+INFO:root:Successfully executed the command testme 1
+INFO:root:Execution log: 
+input: 1
+output: 391012338298082371418301
+
+DEBUG:root:Using regular expression getting the output value
+INFO:root:Executing the Testme Application with the command testme 2
+INFO:root:Successfully executed the command testme 2
+INFO:root:Execution log: 
+input: 2
+output: 3662385719313398424126177292263081684136898633904
+
+DEBUG:root:Using regular expression getting the output value
+DEBUG:root:Test case 2 failed due to different outputs = output1:391012338298082371418301 output2:3662385719313398424126177292263081684136898633904
+DEBUG:root:Test case 2 execution started
+INFO:root:Executing the Testme Application with the command testme 2
+INFO:root:Successfully executed the command testme 2
+INFO:root:Execution log: 
+input: 2
+output: 3662385719313398424126177292263081684136898633904
+
+DEBUG:root:Using regular expression getting the output value
+INFO:root:Executing the Testme Application with the command testme 2
+INFO:root:Successfully executed the command testme 2
+INFO:root:Execution log: 
+input: 2
+output: 3662385719313398424126177292263081684136898633904
+
+DEBUG:root:Using regular expression getting the output value
+INFO:root:Test case 2 executed successfully
+DEBUG:root:************************************************************
+DEBUG:root:Execution starts at 2018-08-04 19:43:19.514000
+DEBUG:root:Test case 1 execution started
+INFO:root:Executing the Testme Application with the command testme 10
+INFO:root:Successfully executed the command testme 10
+INFO:root:Execution log: 
+input: 10
+output: 2983557137299388795107192986413907782003447359461
+
+DEBUG:root:Using regular expression getting the output value
+INFO:root:Test case 1 executed successfully
+DEBUG:root:Test case 1 execution started
+INFO:root:Executing the Testme Application with the command testme -1
+INFO:root:Successfully executed the command testme -1
+INFO:root:Execution log: 
+input: -1
+output: 2038739104377866105036801731751456763899886192153
+
+DEBUG:root:Using regular expression getting the output value
+INFO:root:Test case 1 executed successfully
+DEBUG:root:Test case 1 execution started
+INFO:root:Executing the Testme Application with the command testme 0.5
+INFO:root:Successfully executed the command testme 0.5
+INFO:root:Execution log: 
+input: 0.5
+output: 4567236691242303823670726879602129493921301884
+
+DEBUG:root:Using regular expression getting the output value
+INFO:root:Test case 1 executed successfully
+DEBUG:root:Test case 2 execution started
+INFO:root:Executing the Testme Application with the command testme 1
+INFO:root:Successfully executed the command testme 1
+INFO:root:Execution log: 
+input: 1
+output: 3946322672970626266689
+
+DEBUG:root:Using regular expression getting the output value
+INFO:root:Executing the Testme Application with the command testme 2
+INFO:root:Successfully executed the command testme 2
+INFO:root:Execution log: 
+input: 2
+output: 3662385719313398424126177292263081684136898633904
+
+DEBUG:root:Using regular expression getting the output value
+DEBUG:root:Test case 2 failed due to different outputs = output1:3946322672970626266689 output2:3662385719313398424126177292263081684136898633904
+DEBUG:root:Test case 2 execution started
+INFO:root:Executing the Testme Application with the command testme 1
+INFO:root:Successfully executed the command testme 1
+INFO:root:Execution log: 
+input: 1
+output: 395010247148021756111004
+
+DEBUG:root:Using regular expression getting the output value
+INFO:root:Executing the Testme Application with the command testme 2
+INFO:root:Successfully executed the command testme 2
+INFO:root:Execution log: 
+input: 2
+output: 3662385719313398424126177292263081684136898633904
+
+DEBUG:root:Using regular expression getting the output value
+DEBUG:root:Test case 2 failed due to different outputs = output1:395010247148021756111004 output2:3662385719313398424126177292263081684136898633904
+DEBUG:root:Test case 2 execution started
+INFO:root:Executing the Testme Application with the command testme 2
+INFO:root:Successfully executed the command testme 2
+INFO:root:Execution log: 
+input: 2
+output: 3662385719313398424126177292263081684136898633904
+
+DEBUG:root:Using regular expression getting the output value
+INFO:root:Executing the Testme Application with the command testme 2
+INFO:root:Successfully executed the command testme 2
+INFO:root:Execution log: 
+input: 2
+output: 3662385719313398424126177292263081684136898633904
+
+DEBUG:root:Using regular expression getting the output value
+INFO:root:Test case 2 executed successfully
+DEBUG:root:Test case 3 execution started
+DEBUG:root:TypeError: Please pass the integer input
+INFO:root:Executing the Testme Application with the command testme 
+INFO:root:Successfully executed the command testme 
+INFO:root:Execution log: 
+input: 
+output: 3661210606158408986984448049525061029282950170377
+
+DEBUG:root:Using regular expression getting the output value
+DEBUG:root:Test case 3 failed due to invalid output
+DEBUG:root:************************************************************
+DEBUG:root:Execution starts at 2018-08-04 19:43:52.139000
+DEBUG:root:Test case 1 execution started
+INFO:root:Executing the Testme Application with the command testme 10
+INFO:root:Successfully executed the command testme 10
+INFO:root:Execution log: 
+input: 10
+output: 2983557137299388795107192986413907782003447359461
+
+DEBUG:root:Using regular expression getting the output value
+INFO:root:Test case 1 executed successfully
+DEBUG:root:Test case 1 execution started
+INFO:root:Executing the Testme Application with the command testme -1
+INFO:root:Successfully executed the command testme -1
+INFO:root:Execution log: 
+input: -1
+output: 2038739104377866105036801731751456763899886192153
+
+DEBUG:root:Using regular expression getting the output value
+INFO:root:Test case 1 executed successfully
+DEBUG:root:Test case 1 execution started
+INFO:root:Executing the Testme Application with the command testme 0.5
+INFO:root:Successfully executed the command testme 0.5
+INFO:root:Execution log: 
+input: 0.5
+output: 4567236691242303823670726879602129493921301884
+
+DEBUG:root:Using regular expression getting the output value
+INFO:root:Test case 1 executed successfully
+DEBUG:root:Test case 2 execution started
+INFO:root:Executing the Testme Application with the command testme 1
+INFO:root:Successfully executed the command testme 1
+INFO:root:Execution log: 
+input: 1
+output: 4051157681153598603075
+
+DEBUG:root:Using regular expression getting the output value
+INFO:root:Executing the Testme Application with the command testme 2
+INFO:root:Successfully executed the command testme 2
+INFO:root:Execution log: 
+input: 2
+output: 3662385719313398424126177292263081684136898633904
+
+DEBUG:root:Using regular expression getting the output value
+DEBUG:root:Test case 2 failed due to different outputs = output1:4051157681153598603075 output2:3662385719313398424126177292263081684136898633904
+DEBUG:root:Test case 2 execution started
+INFO:root:Executing the Testme Application with the command testme 1
+INFO:root:Successfully executed the command testme 1
+INFO:root:Execution log: 
+input: 1
+output: 40574497144962521923705
+
+DEBUG:root:Using regular expression getting the output value
+INFO:root:Executing the Testme Application with the command testme 2
+INFO:root:Successfully executed the command testme 2
+INFO:root:Execution log: 
+input: 2
+output: 3662385719313398424126177292263081684136898633904
+
+DEBUG:root:Using regular expression getting the output value
+DEBUG:root:Test case 2 failed due to different outputs = output1:40574497144962521923705 output2:3662385719313398424126177292263081684136898633904
+DEBUG:root:Test case 2 execution started
+INFO:root:Executing the Testme Application with the command testme 2
+INFO:root:Successfully executed the command testme 2
+INFO:root:Execution log: 
+input: 2
+output: 3662385719313398424126177292263081684136898633904
+
+DEBUG:root:Using regular expression getting the output value
+INFO:root:Executing the Testme Application with the command testme 2
+INFO:root:Successfully executed the command testme 2
+INFO:root:Execution log: 
+input: 2
+output: 3662385719313398424126177292263081684136898633904
+
+DEBUG:root:Using regular expression getting the output value
+INFO:root:Test case 2 executed successfully
+DEBUG:root:************************************************************
+DEBUG:root:Execution starts at 2018-08-04 19:43:59.641000
+DEBUG:root:Test case 1 execution started
+INFO:root:Executing the Testme Application with the command testme 10
+INFO:root:Successfully executed the command testme 10
+INFO:root:Execution log: 
+input: 10
+output: 2983557137299388795107192986413907782003447359461
+
+DEBUG:root:Using regular expression getting the output value
+INFO:root:Test case 1 executed successfully
+DEBUG:root:Test case 1 execution started
+INFO:root:Executing the Testme Application with the command testme -1
+INFO:root:Successfully executed the command testme -1
+INFO:root:Execution log: 
+input: -1
+output: 2038739104377866105036801731751456763899886192153
+
+DEBUG:root:Using regular expression getting the output value
+INFO:root:Test case 1 executed successfully
+DEBUG:root:Test case 1 execution started
+INFO:root:Executing the Testme Application with the command testme 0.5
+INFO:root:Successfully executed the command testme 0.5
+INFO:root:Execution log: 
+input: 0.5
+output: 4567236691242303823670726879602129493921301884
+
+DEBUG:root:Using regular expression getting the output value
+INFO:root:Test case 1 executed successfully
+DEBUG:root:Test case 2 execution started
+INFO:root:Executing the Testme Application with the command testme 1
+INFO:root:Successfully executed the command testme 1
+INFO:root:Execution log: 
+input: 1
+output: 4077345123377575920056
+
+DEBUG:root:Using regular expression getting the output value
+INFO:root:Executing the Testme Application with the command testme 2
+INFO:root:Successfully executed the command testme 2
+INFO:root:Execution log: 
+input: 2
+output: 3662385719313398424126177292263081684136898633904
+
+DEBUG:root:Using regular expression getting the output value
+DEBUG:root:Test case 2 failed due to different outputs = output1:4077345123377575920056 output2:3662385719313398424126177292263081684136898633904
+DEBUG:root:Test case 2 execution started
+INFO:root:Executing the Testme Application with the command testme 1
+INFO:root:Successfully executed the command testme 1
+INFO:root:Execution log: 
+input: 1
+output: 40801419984732982230371
+
+DEBUG:root:Using regular expression getting the output value
+INFO:root:Executing the Testme Application with the command testme 2
+INFO:root:Successfully executed the command testme 2
+INFO:root:Execution log: 
+input: 2
+output: 3662385719313398424126177292263081684136898633904
+
+DEBUG:root:Using regular expression getting the output value
+DEBUG:root:Test case 2 failed due to different outputs = output1:40801419984732982230371 output2:3662385719313398424126177292263081684136898633904
+DEBUG:root:Test case 2 execution started
+INFO:root:Executing the Testme Application with the command testme 2
+INFO:root:Successfully executed the command testme 2
+INFO:root:Execution log: 
+input: 2
+output: 3662385719313398424126177292263081684136898633904
+
+DEBUG:root:Using regular expression getting the output value
+INFO:root:Executing the Testme Application with the command testme 2
+INFO:root:Successfully executed the command testme 2
+INFO:root:Execution log: 
+input: 2
+output: 3662385719313398424126177292263081684136898633904
+
+DEBUG:root:Using regular expression getting the output value
+INFO:root:Test case 2 executed successfully
+DEBUG:root:Test case 3 execution started
+DEBUG:root:TypeError: Please pass the integer input
+INFO:root:Executing the Testme Application with the command testme 
+INFO:root:Successfully executed the command testme 
+INFO:root:Execution log: 
+input: 
+output: 3661210606158408986984448049525061029282950170377
+
+DEBUG:root:Using regular expression getting the output value
+DEBUG:root:Test case 3 failed due to invalid output
+DEBUG:root:************************************************************
+DEBUG:root:Execution starts at 2018-08-04 19:51:45.171000
+DEBUG:root:Test case 1 execution started
+INFO:root:Executing the Testme Application with the command testme 10
+INFO:root:Successfully executed the command testme 10
+INFO:root:Execution log: 
+input: 10
+output: 2983557137299388795107192986413907782003447359461
+
+DEBUG:root:Using regular expression getting the output value
+INFO:root:Test case 1 executed successfully
+DEBUG:root:Test case 1 execution started
+INFO:root:Executing the Testme Application with the command testme -1
+INFO:root:Successfully executed the command testme -1
+INFO:root:Execution log: 
+input: -1
+output: 2038739104377866105036801731751456763899886192153
+
+DEBUG:root:Using regular expression getting the output value
+INFO:root:Test case 1 executed successfully
+DEBUG:root:Test case 1 execution started
+INFO:root:Executing the Testme Application with the command testme 0.5
+INFO:root:Successfully executed the command testme 0.5
+INFO:root:Execution log: 
+input: 0.5
+output: 4567236691242303823670726879602129493921301884
+
+DEBUG:root:Using regular expression getting the output value
+INFO:root:Test case 1 executed successfully
+DEBUG:root:Test case 2 execution started
+INFO:root:Executing the Testme Application with the command testme 1
+INFO:root:Successfully executed the command testme 1
+INFO:root:Execution log: 
+input: 1
+output: 55952072471452131132205
+
+DEBUG:root:Using regular expression getting the output value
+INFO:root:Executing the Testme Application with the command testme 2
+INFO:root:Successfully executed the command testme 2
+INFO:root:Execution log: 
+input: 2
+output: 3662385719313398424126177292263081684136898633904
+
+DEBUG:root:Using regular expression getting the output value
+DEBUG:root:Test case 2 failed due to different outputs = output1:55952072471452131132205 output2:3662385719313398424126177292263081684136898633904
+DEBUG:root:Test case 2 execution started
+INFO:root:Executing the Testme Application with the command testme 1
+INFO:root:Successfully executed the command testme 1
+INFO:root:Execution log: 
+input: 1
+output: 5602945310105390220066
+
+DEBUG:root:Using regular expression getting the output value
+INFO:root:Executing the Testme Application with the command testme 2
+INFO:root:Successfully executed the command testme 2
+INFO:root:Execution log: 
+input: 2
+output: 3662385719313398424126177292263081684136898633904
+
+DEBUG:root:Using regular expression getting the output value
+DEBUG:root:Test case 2 failed due to different outputs = output1:5602945310105390220066 output2:3662385719313398424126177292263081684136898633904
+DEBUG:root:Test case 2 execution started
+INFO:root:Executing the Testme Application with the command testme 2
+INFO:root:Successfully executed the command testme 2
+INFO:root:Execution log: 
+input: 2
+output: 3662385719313398424126177292263081684136898633904
+
+DEBUG:root:Using regular expression getting the output value
+INFO:root:Executing the Testme Application with the command testme 2
+INFO:root:Successfully executed the command testme 2
+INFO:root:Execution log: 
+input: 2
+output: 3662385719313398424126177292263081684136898633904
+
+DEBUG:root:Using regular expression getting the output value
+INFO:root:Test case 2 executed successfully
+DEBUG:root:************************************************************
+DEBUG:root:Execution starts at 2018-08-04 19:52:09.652000
+DEBUG:root:Test case 1 execution started
+INFO:root:Executing the Testme Application with the command testme 10
+INFO:root:Successfully executed the command testme 10
+INFO:root:Execution log: 
+input: 10
+output: 2983557137299388795107192986413907782003447359461
+
+DEBUG:root:Using regular expression getting the output value
+INFO:root:Test case 1 executed successfully
+DEBUG:root:Test case 1 execution started
+INFO:root:Executing the Testme Application with the command testme -1
+INFO:root:Successfully executed the command testme -1
+INFO:root:Execution log: 
+input: -1
+output: 2038739104377866105036801731751456763899886192153
+
+DEBUG:root:Using regular expression getting the output value
+INFO:root:Test case 1 executed successfully
+DEBUG:root:Test case 1 execution started
+INFO:root:Executing the Testme Application with the command testme 0.5
+INFO:root:Successfully executed the command testme 0.5
+INFO:root:Execution log: 
+input: 0.5
+output: 4567236691242303823670726879602129493921301884
+
+DEBUG:root:Using regular expression getting the output value
+INFO:root:Test case 1 executed successfully
+DEBUG:root:Test case 2 execution started
+INFO:root:Executing the Testme Application with the command testme 1
+INFO:root:Successfully executed the command testme 1
+INFO:root:Execution log: 
+input: 1
+output: 5677272902776530227925
+
+DEBUG:root:Using regular expression getting the output value
+INFO:root:Executing the Testme Application with the command testme 2
+INFO:root:Successfully executed the command testme 2
+INFO:root:Execution log: 
+input: 2
+output: 3662385719313398424126177292263081684136898633904
+
+DEBUG:root:Using regular expression getting the output value
+DEBUG:root:Test case 2 failed due to different outputs = output1:5677272902776530227925 output2:3662385719313398424126177292263081684136898633904
+DEBUG:root:Test case 2 execution started
+INFO:root:Executing the Testme Application with the command testme 1
+INFO:root:Successfully executed the command testme 1
+INFO:root:Execution log: 
+input: 1
+output: 5680527112861243665472
+
+DEBUG:root:Using regular expression getting the output value
+INFO:root:Executing the Testme Application with the command testme 2
+INFO:root:Successfully executed the command testme 2
+INFO:root:Execution log: 
+input: 2
+output: 3662385719313398424126177292263081684136898633904
+
+DEBUG:root:Using regular expression getting the output value
+DEBUG:root:Test case 2 failed due to different outputs = output1:5680527112861243665472 output2:3662385719313398424126177292263081684136898633904
+DEBUG:root:Test case 2 execution started
+INFO:root:Executing the Testme Application with the command testme 2
+INFO:root:Successfully executed the command testme 2
+INFO:root:Execution log: 
+input: 2
+output: 3662385719313398424126177292263081684136898633904
+
+DEBUG:root:Using regular expression getting the output value
+INFO:root:Executing the Testme Application with the command testme 2
+INFO:root:Successfully executed the command testme 2
+INFO:root:Execution log: 
+input: 2
+output: 3662385719313398424126177292263081684136898633904
+
+DEBUG:root:Using regular expression getting the output value
+INFO:root:Test case 2 executed successfully
+DEBUG:root:Test case 3 execution started
+DEBUG:root:Test case 3 execution failed due to invalid input
+DEBUG:root:************************************************************
+DEBUG:root:Execution starts at 2018-08-04 19:52:42.692000
+DEBUG:root:Test case 1 execution started
+INFO:root:Executing the Testme Application with the command testme 10
+INFO:root:Successfully executed the command testme 10
+INFO:root:Execution log: 
+input: 10
+output: 2983557137299388795107192986413907782003447359461
+
+DEBUG:root:Using regular expression getting the output value
+INFO:root:Test case 1 executed successfully
+DEBUG:root:Test case 1 execution started
+INFO:root:Executing the Testme Application with the command testme -1
+INFO:root:Successfully executed the command testme -1
+INFO:root:Execution log: 
+input: -1
+output: 2038739104377866105036801731751456763899886192153
+
+DEBUG:root:Using regular expression getting the output value
+INFO:root:Test case 1 executed successfully
+DEBUG:root:Test case 1 execution started
+INFO:root:Executing the Testme Application with the command testme 0.5
+INFO:root:Successfully executed the command testme 0.5
+INFO:root:Execution log: 
+input: 0.5
+output: 4567236691242303823670726879602129493921301884
+
+DEBUG:root:Using regular expression getting the output value
+INFO:root:Test case 1 executed successfully
+DEBUG:root:Test case 2 execution started
+INFO:root:Executing the Testme Application with the command testme 1
+INFO:root:Successfully executed the command testme 1
+INFO:root:Execution log: 
+input: 1
+output: 5785215402745979607858
+
+DEBUG:root:Using regular expression getting the output value
+INFO:root:Executing the Testme Application with the command testme 2
+INFO:root:Successfully executed the command testme 2
+INFO:root:Execution log: 
+input: 2
+output: 3662385719313398424126177292263081684136898633904
+
+DEBUG:root:Using regular expression getting the output value
+DEBUG:root:Test case 2 failed due to different outputs = output1:5785215402745979607858 output2:3662385719313398424126177292263081684136898633904
+DEBUG:root:Test case 2 execution started
+INFO:root:Executing the Testme Application with the command testme 1
+INFO:root:Successfully executed the command testme 1
+INFO:root:Execution log: 
+input: 1
+output: 578832288125553202318173
+
+DEBUG:root:Using regular expression getting the output value
+INFO:root:Executing the Testme Application with the command testme 2
+INFO:root:Successfully executed the command testme 2
+INFO:root:Execution log: 
+input: 2
+output: 3662385719313398424126177292263081684136898633904
+
+DEBUG:root:Using regular expression getting the output value
+DEBUG:root:Test case 2 failed due to different outputs = output1:578832288125553202318173 output2:3662385719313398424126177292263081684136898633904
+DEBUG:root:Test case 2 execution started
+INFO:root:Executing the Testme Application with the command testme 2
+INFO:root:Successfully executed the command testme 2
+INFO:root:Execution log: 
+input: 2
+output: 3662385719313398424126177292263081684136898633904
+
+DEBUG:root:Using regular expression getting the output value
+INFO:root:Executing the Testme Application with the command testme 2
+INFO:root:Successfully executed the command testme 2
+INFO:root:Execution log: 
+input: 2
+output: 3662385719313398424126177292263081684136898633904
+
+DEBUG:root:Using regular expression getting the output value
+INFO:root:Test case 2 executed successfully
+DEBUG:root:Test case 3 execution started
+DEBUG:root:Test case 3 execution failed due to invalid input vijay
+DEBUG:root:************************************************************
+DEBUG:root:Execution starts at 2018-08-04 19:53:22.905000
+DEBUG:root:Test case 1 execution started
+INFO:root:Executing the Testme Application with the command testme 10
+INFO:root:Successfully executed the command testme 10
+INFO:root:Execution log: 
+input: 10
+output: 2983557137299388795107192986413907782003447359461
+
+DEBUG:root:Using regular expression getting the output value
+INFO:root:Test case 1 executed successfully
+DEBUG:root:Test case 1 execution started
+INFO:root:Executing the Testme Application with the command testme -1
+INFO:root:Successfully executed the command testme -1
+INFO:root:Execution log: 
+input: -1
+output: 2038739104377866105036801731751456763899886192153
+
+DEBUG:root:Using regular expression getting the output value
+INFO:root:Test case 1 executed successfully
+DEBUG:root:Test case 1 execution started
+INFO:root:Executing the Testme Application with the command testme 0.5
+INFO:root:Successfully executed the command testme 0.5
+INFO:root:Execution log: 
+input: 0.5
+output: 4567236691242303823670726879602129493921301884
+
+DEBUG:root:Using regular expression getting the output value
+INFO:root:Test case 1 executed successfully
+DEBUG:root:Test case 2 execution started
+INFO:root:Executing the Testme Application with the command testme 1
+INFO:root:Successfully executed the command testme 1
+INFO:root:Execution log: 
+input: 1
+output: 591525492211292022027225
+
+DEBUG:root:Using regular expression getting the output value
+INFO:root:Executing the Testme Application with the command testme 2
+INFO:root:Successfully executed the command testme 2
+INFO:root:Execution log: 
+input: 2
+output: 3662385719313398424126177292263081684136898633904
+
+DEBUG:root:Using regular expression getting the output value
+DEBUG:root:Test case 2 failed due to different outputs = output1:591525492211292022027225 output2:3662385719313398424126177292263081684136898633904
+DEBUG:root:Test case 2 execution started
+INFO:root:Executing the Testme Application with the command testme 1
+INFO:root:Successfully executed the command testme 1
+INFO:root:Execution log: 
+input: 1
+output: 59221422124090281115087
+
+DEBUG:root:Using regular expression getting the output value
+INFO:root:Executing the Testme Application with the command testme 2
+INFO:root:Successfully executed the command testme 2
+INFO:root:Execution log: 
+input: 2
+output: 3662385719313398424126177292263081684136898633904
+
+DEBUG:root:Using regular expression getting the output value
+DEBUG:root:Test case 2 failed due to different outputs = output1:59221422124090281115087 output2:3662385719313398424126177292263081684136898633904
+DEBUG:root:Test case 2 execution started
+INFO:root:Executing the Testme Application with the command testme 2
+INFO:root:Successfully executed the command testme 2
+INFO:root:Execution log: 
+input: 2
+output: 3662385719313398424126177292263081684136898633904
+
+DEBUG:root:Using regular expression getting the output value
+INFO:root:Executing the Testme Application with the command testme 2
+INFO:root:Successfully executed the command testme 2
+INFO:root:Execution log: 
+input: 2
+output: 3662385719313398424126177292263081684136898633904
+
+DEBUG:root:Using regular expression getting the output value
+INFO:root:Test case 2 executed successfully
+DEBUG:root:Test case 3 execution started
+DEBUG:root:Test case 3 execution failed due to invalid input string vijay, please pass integer as input
+DEBUG:root:************************************************************
+DEBUG:root:Execution starts at 2018-08-04 20:04:11.149000
+DEBUG:root:Test case 1 execution started
+INFO:root:Executing the Testme Application with the command testme 10
+INFO:root:Successfully executed the command testme 10
+INFO:root:Execution log: 
+input: 10
+output: 2983557137299388795107192986413907782003447359461
+
+DEBUG:root:Using regular expression getting the output value
+DEBUG:root:Test case 1 executed successfully
+DEBUG:root:************************************************************
+DEBUG:root:Execution starts at 2018-08-04 20:18:20.343000
+DEBUG:root:Test case 1 execution started
+INFO:root:Executing the Testme Application with the command testme 10
+INFO:root:Successfully executed the command testme 10
+INFO:root:Execution log: 
+input: 10
+output: 2983557137299388795107192986413907782003447359461
+
+DEBUG:root:Using regular expression getting the output value
+DEBUG:root:Test case 1 executed successfully
+DEBUG:root:Test case 1 execution started
+INFO:root:Executing the Testme Application with the command testme -1
+INFO:root:Successfully executed the command testme -1
+INFO:root:Execution log: 
+input: -1
+output: 2038739104377866105036801731751456763899886192153
+
+DEBUG:root:Using regular expression getting the output value
+DEBUG:root:Test case 1 executed successfully
+DEBUG:root:Test case 1 execution started
+INFO:root:Executing the Testme Application with the command testme 0.5
+INFO:root:Successfully executed the command testme 0.5
+INFO:root:Execution log: 
+input: 0.5
+output: 4567236691242303823670726879602129493921301884
+
+DEBUG:root:Using regular expression getting the output value
+DEBUG:root:Test case 1 executed successfully
+DEBUG:root:Test case 2 execution started
+INFO:root:Executing the Testme Application with the command testme 1
+INFO:root:Successfully executed the command testme 1
+INFO:root:Execution log: 
+input: 1
+output: 108042676825106309691647
+
+DEBUG:root:Using regular expression getting the output value
+INFO:root:Executing the Testme Application with the command testme 2
+INFO:root:Successfully executed the command testme 2
+INFO:root:Execution log: 
+input: 2
+output: 3662385719313398424126177292263081684136898633904
+
+DEBUG:root:Using regular expression getting the output value
+DEBUG:root:Test case 2 failed due to different outputs = output1:108042676825106309691647 output2:3662385719313398424126177292263081684136898633904
+DEBUG:root:Test case 2 execution started
+INFO:root:Executing the Testme Application with the command testme 1
+INFO:root:Successfully executed the command testme 1
+INFO:root:Execution log: 
+input: 1
+output: 1081115497280661356022276
+
+DEBUG:root:Using regular expression getting the output value
+INFO:root:Executing the Testme Application with the command testme 2
+INFO:root:Successfully executed the command testme 2
+INFO:root:Execution log: 
+input: 2
+output: 3662385719313398424126177292263081684136898633904
+
+DEBUG:root:Using regular expression getting the output value
+DEBUG:root:Test case 2 failed due to different outputs = output1:1081115497280661356022276 output2:3662385719313398424126177292263081684136898633904
+DEBUG:root:Test case 2 execution started
+INFO:root:Executing the Testme Application with the command testme 2
+INFO:root:Successfully executed the command testme 2
+INFO:root:Execution log: 
+input: 2
+output: 3662385719313398424126177292263081684136898633904
+
+DEBUG:root:Using regular expression getting the output value
+INFO:root:Executing the Testme Application with the command testme 2
+INFO:root:Successfully executed the command testme 2
+INFO:root:Execution log: 
+input: 2
+output: 3662385719313398424126177292263081684136898633904
+
+DEBUG:root:Using regular expression getting the output value
+DEBUG:root:Test case 2 executed successfully
+DEBUG:root:Test case 3 execution started
+DEBUG:root:Test case 3 execution failed due to invalid input string vijay, please pass integer as input
+DEBUG:root:Test case 3 execution started
+DEBUG:root:Test case 3 execution failed due to invalid input string @, please pass integer as input
+DEBUG:root:Test case 3 execution started
+DEBUG:root:Test case 3 execution failed due to invalid input string v 1, please pass integer as input
+DEBUG:root:************************************************************
+DEBUG:root:Execution starts at 2018-08-04 20:30:57.230000
+DEBUG:root:Test case 1 execution started
+INFO:root:Executing the Testme Application with the command testme 10
+INFO:root:Successfully executed the command testme 10
+INFO:root:Execution log: 
+input: 10
+output: 2983557137299388795107192986413907782003447359461
+
+DEBUG:root:Using regular expression getting the output value
+DEBUG:root:Test case 1 executed successfully
+DEBUG:root:Test case 1 execution started
+INFO:root:Executing the Testme Application with the command testme -1
+INFO:root:Successfully executed the command testme -1
+INFO:root:Execution log: 
+input: -1
+output: 2038739104377866105036801731751456763899886192153
+
+DEBUG:root:Using regular expression getting the output value
+DEBUG:root:Test case 1 executed successfully
+DEBUG:root:Test case 1 execution started
+INFO:root:Executing the Testme Application with the command testme 0.5
+INFO:root:Successfully executed the command testme 0.5
+INFO:root:Execution log: 
+input: 0.5
+output: 4567236691242303823670726879602129493921301884
+
+DEBUG:root:Using regular expression getting the output value
+DEBUG:root:Test case 1 executed successfully
+DEBUG:root:Test case 2 execution started
+INFO:root:Executing the Testme Application with the command testme 1
+INFO:root:Successfully executed the command testme 1
+INFO:root:Execution log: 
+input: 1
+output: 132764080151002788910996
+
+DEBUG:root:Using regular expression getting the output value
+INFO:root:Executing the Testme Application with the command testme 2
+INFO:root:Successfully executed the command testme 2
+INFO:root:Execution log: 
+input: 2
+output: 3662385719313398424126177292263081684136898633904
+
+DEBUG:root:Using regular expression getting the output value
+DEBUG:root:Test case 2 failed due to different outputs = output1:132764080151002788910996 output2:3662385719313398424126177292263081684136898633904
+DEBUG:root:Test case 2 execution started
+INFO:root:Executing the Testme Application with the command testme 1
+INFO:root:Successfully executed the command testme 1
+INFO:root:Execution log: 
+input: 1
+output: 1328325577180601048031625
+
+DEBUG:root:Using regular expression getting the output value
+INFO:root:Executing the Testme Application with the command testme 2
+INFO:root:Successfully executed the command testme 2
+INFO:root:Execution log: 
+input: 2
+output: 3662385719313398424126177292263081684136898633904
+
+DEBUG:root:Using regular expression getting the output value
+DEBUG:root:Test case 2 failed due to different outputs = output1:1328325577180601048031625 output2:3662385719313398424126177292263081684136898633904
+DEBUG:root:Test case 2 execution started
+INFO:root:Executing the Testme Application with the command testme 2
+INFO:root:Successfully executed the command testme 2
+INFO:root:Execution log: 
+input: 2
+output: 3662385719313398424126177292263081684136898633904
+
+DEBUG:root:Using regular expression getting the output value
+INFO:root:Executing the Testme Application with the command testme 2
+INFO:root:Successfully executed the command testme 2
+INFO:root:Execution log: 
+input: 2
+output: 3662385719313398424126177292263081684136898633904
+
+DEBUG:root:Using regular expression getting the output value
+DEBUG:root:Test case 2 executed successfully
+DEBUG:root:Test case 3 execution started
+DEBUG:root:Test case 3 execution failed due to invalid input string vijay, please pass integer as input
+DEBUG:root:Test case 3 execution started
+DEBUG:root:Test case 3 execution failed due to invalid input string @, please pass integer as input
+DEBUG:root:Test case 3 execution started
+DEBUG:root:Test case 3 execution failed due to invalid input string v 1, please pass integer as input
+DEBUG:root:************************************************************
+DEBUG:root:Execution starts at 2018-08-04 20:32:01.574322
+DEBUG:root:Test case 1 execution started
+INFO:root:Executing the Testme Application with the command testme 10
+INFO:root:Successfully executed the command testme 10
+INFO:root:Execution log: 
+b'input: 10\r\noutput: 2983557137299388795107192986413907782003447359461\r\n'
+DEBUG:root:Using regular expression getting the output value
+DEBUG:root:Test case 1 executed successfully
+DEBUG:root:Test case 1 execution started
+INFO:root:Executing the Testme Application with the command testme -1
+INFO:root:Successfully executed the command testme -1
+INFO:root:Execution log: 
+b'input: -1\r\noutput: 2038739104377866105036801731751456763899886192153\r\n'
+DEBUG:root:Using regular expression getting the output value
+DEBUG:root:Test case 1 executed successfully
+DEBUG:root:Test case 1 execution started
+INFO:root:Executing the Testme Application with the command testme 0.5
+INFO:root:Successfully executed the command testme 0.5
+INFO:root:Execution log: 
+b'input: 0.5\r\noutput: 4567236691242303823670726879602129493921301884\r\n'
+DEBUG:root:Using regular expression getting the output value
+DEBUG:root:Test case 1 executed successfully
+DEBUG:root:Test case 2 execution started
+INFO:root:Executing the Testme Application with the command testme 1
+INFO:root:Successfully executed the command testme 1
+INFO:root:Execution log: 
+b'input: 1\r\noutput: 1348814598293911914126083\r\n'
+DEBUG:root:Using regular expression getting the output value
+INFO:root:Executing the Testme Application with the command testme 2
+INFO:root:Successfully executed the command testme 2
+INFO:root:Execution log: 
+b'input: 2\r\noutput: 3662385719313398424126177292263081684136898633904\r\n'
+DEBUG:root:Using regular expression getting the output value
+DEBUG:root:Test case 2 failed due to different outputs = output1:1348814598293911914126083 output2:3662385719313398424126177292263081684136898633904
+DEBUG:root:Test case 2 execution started
+INFO:root:Executing the Testme Application with the command testme 1
+INFO:root:Successfully executed the command testme 1
+INFO:root:Execution log: 
+b'input: 1\r\noutput: 134922534714487104363630\r\n'
+DEBUG:root:Using regular expression getting the output value
+INFO:root:Executing the Testme Application with the command testme 2
+INFO:root:Successfully executed the command testme 2
+INFO:root:Execution log: 
+b'input: 2\r\noutput: 3662385719313398424126177292263081684136898633904\r\n'
+DEBUG:root:Using regular expression getting the output value
+DEBUG:root:Test case 2 failed due to different outputs = output1:134922534714487104363630 output2:3662385719313398424126177292263081684136898633904
+DEBUG:root:Test case 2 execution started
+INFO:root:Executing the Testme Application with the command testme 2
+INFO:root:Successfully executed the command testme 2
+INFO:root:Execution log: 
+b'input: 2\r\noutput: 3662385719313398424126177292263081684136898633904\r\n'
+DEBUG:root:Using regular expression getting the output value
+INFO:root:Executing the Testme Application with the command testme 2
+INFO:root:Successfully executed the command testme 2
+INFO:root:Execution log: 
+b'input: 2\r\noutput: 3662385719313398424126177292263081684136898633904\r\n'
+DEBUG:root:Using regular expression getting the output value
+DEBUG:root:Test case 2 executed successfully
+DEBUG:root:Test case 3 execution started
+DEBUG:root:Test case 3 execution failed due to invalid input string vijay, please pass integer as input
+DEBUG:root:Test case 3 execution started
+DEBUG:root:Test case 3 execution failed due to invalid input string @, please pass integer as input
+DEBUG:root:Test case 3 execution started
+DEBUG:root:Test case 3 execution failed due to invalid input string v 1, please pass integer as input
+DEBUG:root:************************************************************
+DEBUG:root:Execution starts at 2018-08-04 20:32:32.878103
+DEBUG:root:Test case 1 execution started
+INFO:root:Executing the Testme Application with the command testme 10
+INFO:root:Successfully executed the command testme 10
+INFO:root:Execution log: 
+b'input: 10\r\noutput: 2983557137299388795107192986413907782003447359461\r\n'
+DEBUG:root:Using regular expression getting the output value
+DEBUG:root:Test case 1 executed successfully
+DEBUG:root:Test case 1 execution started
+INFO:root:Executing the Testme Application with the command testme -1
+INFO:root:Successfully executed the command testme -1
+INFO:root:Execution log: 
+b'input: -1\r\noutput: 2038739104377866105036801731751456763899886192153\r\n'
+DEBUG:root:Using regular expression getting the output value
+DEBUG:root:Test case 1 executed successfully
+DEBUG:root:Test case 1 execution started
+INFO:root:Executing the Testme Application with the command testme 0.5
+INFO:root:Successfully executed the command testme 0.5
+INFO:root:Execution log: 
+b'input: 0.5\r\noutput: 4567236691242303823670726879602129493921301884\r\n'
+DEBUG:root:Using regular expression getting the output value
+DEBUG:root:Test case 1 executed successfully
+DEBUG:root:Test case 2 execution started
+INFO:root:Executing the Testme Application with the command testme 1
+INFO:root:Successfully executed the command testme 1
+INFO:root:Execution log: 
+b'input: 1\r\noutput: 1359020119261241144018155\r\n'
+DEBUG:root:Using regular expression getting the output value
+INFO:root:Executing the Testme Application with the command testme 2
+INFO:root:Successfully executed the command testme 2
+INFO:root:Execution log: 
+b'input: 2\r\noutput: 3662385719313398424126177292263081684136898633904\r\n'
+DEBUG:root:Using regular expression getting the output value
+DEBUG:root:Test case 2 failed due to different outputs = output1:1359020119261241144018155 output2:3662385719313398424126177292263081684136898633904
+DEBUG:root:Test case 2 execution started
+INFO:root:Executing the Testme Application with the command testme 1
+INFO:root:Successfully executed the command testme 1
+INFO:root:Execution log: 
+b'input: 1\r\noutput: 13596884829085267986016\r\n'
+DEBUG:root:Using regular expression getting the output value
+INFO:root:Executing the Testme Application with the command testme 2
+INFO:root:Successfully executed the command testme 2
+INFO:root:Execution log: 
+b'input: 2\r\noutput: 3662385719313398424126177292263081684136898633904\r\n'
+DEBUG:root:Using regular expression getting the output value
+DEBUG:root:Test case 2 failed due to different outputs = output1:13596884829085267986016 output2:3662385719313398424126177292263081684136898633904
+DEBUG:root:Test case 2 execution started
+INFO:root:Executing the Testme Application with the command testme 2
+INFO:root:Successfully executed the command testme 2
+INFO:root:Execution log: 
+b'input: 2\r\noutput: 3662385719313398424126177292263081684136898633904\r\n'
+DEBUG:root:Using regular expression getting the output value
+INFO:root:Executing the Testme Application with the command testme 2
+INFO:root:Successfully executed the command testme 2
+INFO:root:Execution log: 
+b'input: 2\r\noutput: 3662385719313398424126177292263081684136898633904\r\n'
+DEBUG:root:Using regular expression getting the output value
+DEBUG:root:Test case 2 executed successfully
+DEBUG:root:Test case 3 execution started
+DEBUG:root:Test case 3 execution failed due to invalid input string vijay, please pass integer as input
+DEBUG:root:Test case 3 execution started
+DEBUG:root:Test case 3 execution failed due to invalid input string @, please pass integer as input
+DEBUG:root:Test case 3 execution started
+DEBUG:root:Test case 3 execution failed due to invalid input string v 1, please pass integer as input
+DEBUG:root:************************************************************
+DEBUG:root:Execution starts at 2018-08-04 21:24:05.283000
+DEBUG:root:Test case 1 execution started
+INFO:root:Executing the Testme Application with the command testme 10
+INFO:root:Successfully executed the command testme 10
+INFO:root:Execution log: 
+input: 10
+output: 2983557137299388795107192986413907782003447359461
+
+DEBUG:root:Using regular expression getting the output value
+DEBUG:root:Test case 1 executed successfully
+DEBUG:root:************************************************************
+DEBUG:root:Execution starts at 2018-08-04 21:24:33.278000
+DEBUG:root:Test case 1 execution started
+INFO:root:Executing the Testme Application with the command testme 10
+INFO:root:Successfully executed the command testme 10
+INFO:root:Execution log: 
+input: 10
+output: 2983557137299388795107192986413907782003447359461
+
+DEBUG:root:Using regular expression getting the output value
+DEBUG:root:Test case 1 executed successfully

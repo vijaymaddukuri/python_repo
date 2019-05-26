@@ -1,0 +1,39 @@
+consul:
+  CONSUL_IP: ''
+  CONSUL_PORT: '8500'
+deadbolt:
+  DEADBOLT_CLIENT_ID: ''
+  DEADBOLT_CLIENT_SECRET: ''
+  DEADBOLT_IP: ''
+  DEADBOLT_PORT: 8080
+log:
+  backupcount: '2'
+  filename: .var.log.middleware.worker.log
+  level: info
+  maxbytes: '5242880'
+middleware_service_details:
+  password: Password1
+  username: middleware
+nimsoft_server_details:
+  NIMSOFT_DOMAIN: ''
+  NIMSOFT_IM_API_PASSWORD: ''
+  NIMSOFT_IM_API_URL: ''
+  NIMSOFT_IM_API_USERNAME: ''
+rabbitmq:
+  RABBIT_MQ_IP: localhost
+  RABBIT_MQ_PASSWORD: Password1
+  RABBIT_MQ_USERNAME: admin
+request_timeout_details:
+  timeout: '30'
+servicenow:
+  SERVICENOW_PASSWORD: ''
+  SERVICENOW_USERNAME: ''
+vulnerability:
+  VSCAN_SERVER_PASSWORD: ''
+  VSCAN_SERVER_URL: ''
+  VSCAN_SERVER_USERNAME: ''
+workers:
+  no_of_proc: '1'
+xstream:
+  XSTREAM_KEY: ''
+  XSTREAM_SECRET: ''

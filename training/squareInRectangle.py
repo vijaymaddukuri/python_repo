@@ -1,3 +1,6 @@
+"""
+Perfect square
+"""
 def sqInRect(lng, wdth):
     if lng == wdth:
         return None
@@ -20,5 +23,5 @@ def sqInRect(lng, wdth):
         return square
 
 
-s=sqInRect(5,4)
+s=sqInRect(10, 20)
 print(s)
