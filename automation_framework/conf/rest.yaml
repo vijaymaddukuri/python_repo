@@ -1,7 +1,7 @@
 
 vm_details:
   hostname: localhost:8000
-  email: vijay.maddukuri@dell.com
+  email: vijay.maddukuri@my.com
   password: Password1!
 
 vm_template:

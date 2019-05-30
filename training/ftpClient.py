@@ -56,5 +56,5 @@ if __name__ == '__main__':
     smtp = SMTPClient('localhost')
     message = "{} file uploaded on {}".format(arch_name, ctime())
     subject= "upload status for the file : {}".format(arch_name)
-    smtp.do_send_email('vijay.maddukuri@VIJAY.com', 'vijay.maddukuri@dell.com', subject, message)
+    smtp.do_send_email('vijay.maddukuri@VIJAY.com', 'vijay.maddukuri@my.com', subject, message)
 
