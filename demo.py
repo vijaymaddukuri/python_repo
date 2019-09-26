@@ -1,172 +1,154 @@
-from os.path import dirname, abspath
-from robot.api import logger
-from shutil import copyfile
+"""
+S3 command to create bucket:
 
-import csv
-import re
-import sys
-import yaml
+s3cmd -c s3cmd.scaler-1.cfg mb s3://multi-part-test-bucket
 
 
-current_dir = dirname(dirname(abspath(__file__)))
+Uploading the file in to s3 bucket:
+
+s3cmd -c s3cmd.scaler-1.cfg put file60mb s3://multi-part-test-bucket
 
 
-class CsvToYamlConvertor:
-    """
-    Take the CSV input and covert it into yaml format.
-    """
-    def __init__(self, service, yaml_file_path, csv_file_path):
-        """
-        :param service: TAS or Middlewware or worker or deployment
-        :param yaml_file_path: Base YAML file name along with the location
-        :param csv_file_path:  CSV file name  with the location
-        """
+Remove object for bucket:
 
-        self.yaml_file_path = yaml_file_path
+s3cmd -c s3cmd.scaler-1.cfg del s3://multi-part-test-bucket/file60mb
 
-        # Open our data file in read-mode.
-        self.csvfile = open(csv_file_path, 'r')
 
-        # Save a CSV Reader object.
-        self.datareader = csv.reader(self.csvfile, delimiter=',', quotechar='"')
+Remove Bucket:
 
-        # Service name
-        self.service = service
+s3cmd -c s3cmd.scaler-1.cfg rb s3://multi-part-test-bucket
 
-        # Empty array for data headings, which we will fill with the first row from our CSV.
-        self.data_headings = []
+Remove flame reports:
+sudo rm -rf /opt/ampli/var/flame_reports/*.csv
 
-    def load_yaml_file(self, filename):
-        """
-        load YAML file
 
-        In case of any error, this function calls sys.exit(1)
-        :param filename: YAML filename along with the location
-        :return: YAML as dict
-        """
-        try:
-            with open(filename, 'r') as stream:
-                try:
-                    return yaml.safe_load(stream)
-                except yaml.YAMLError as exc:
-                    logger.error(exc)
-                    sys.exit(1)
-        except IOError as e:
-            logger.error(e)
-            sys.exit(1)
+Start Flame job:
 
-    def update_yaml_data(self, myYaml, key, value, append_mode=False):
-        """
-        Set or add a key to given YAML data. Call itself recursively.
-        :param myYaml: YAML data to be modified
-        :param key: key as array of key tokens
-        :param value: value of any data type
-        :param append_mode default is False
-        :return: modified YAML data
-        """
-        if len(key) == 1:
-            if not append_mode or not key[0] in myYaml:
-                myYaml[key[0]] = value
-            else:
-                if type(myYaml[key[0]]) is not list:
-                    myYaml[key[0]] = [myYaml[key[0]]]
-                print([myYaml[key[0]]])
-                if value not in [myYaml[key[0]]]:
-                    myYaml[key[0]].append(value)
-        else:
-            if not key[0] in myYaml or type(myYaml[key[0]]) is not dict:
-                myYaml[key[0]] = {}
-            myYaml[key[0]] = self.update_yaml_data(myYaml[key[0]], key[1:], value, append_mode)
-        return myYaml
+sudo /opt/ampli/bin/flame job start scalerdb_verify
 
-    def rm_yaml_data(self, myYaml, key):
-        """
-        Remove a key and it's value from given YAML data structure.
-        No error or such thrown if the key doesn't exist.
-        :param myYaml: YAML data to be modified
-        :param key: key as array of key tokens
-        :return: modified YAML data
-        """
-        if len(key) == 1 and key[0] in myYaml:
-            del myYaml[key[0]]
-        elif key[0] in myYaml:
-            myYaml[key[0]] = self.rm_yaml_data(myYaml[key[0]], key[1:])
-        return myYaml
+List the flame jobs:
 
-    def save_yaml(self, data, yaml_file):
-        """
-        Saves given YAML data to file and upload yaml file to remote machine
-        :param data: YAML data
-        :param yaml_file: Location to save the yaml file
-        """
-        try:
-            with open(yaml_file, 'w') as outfile:
-                yaml.dump(data, outfile, default_flow_style=False)
-        except IOError as e:
-            logger.error(e)
-            sys.exit(1)
+sudo /opt/ampli/bin/flame job list
 
-    def convert_csv_to_yaml(self):
-        """
-        Update the yaml file and save it
-        """
-        # Loop through each row...
-        for row_index, row in enumerate(self.datareader):
-            # If this is the first row, populate our data_headings variable.
-            if row_index == 0:
-                data_headings = row
 
-            # Othrwise, create a YAML file from the data in this row...
-            else:
-                # Create a new config.yaml with filename based on index number (Tenant ID) of our current row
-                # and service
-                filename = str(row[0]) + '_' + self.service.lower() + '_config' + '.yaml'
-                print(filename)
-                # copyfile(self.yaml_file_path, filename)
-                readyamldata = self.load_yaml_file(filename)
+----
+s3cmd -c s3cmd.scaler-1.cfg del s3://multi-part-test-bucket/file60mb
+s3cmd -c s3cmd.scaler-1.cfg rb s3://multi-part-test-bucket
+s3cmd -c s3cmd.scaler-1.cfg mb s3://multi-part-test-bucket
+s3cmd -c s3cmd.scaler-1.cfg put file60mb s3://multi-part-test-bucket
 
-                # Empty string that we will fill with YAML formatted text based on data extracted from our CSV.
-                yaml_text = ""
 
-                # Loop through each cell in this row...
-                for cell_index, cell in enumerate(row):
+"""
 
-                    # Compile a line of YAML text from our headings list and the text of the current cell,
-                    # followed by a linebreak.
-                    # Heading text is converted to lowercase. Spaces are converted to underscores and hyphens
-                    # are removed.
-                    # In the cell text, line endings are replaced with commas.
-                    cell_heading = data_headings[cell_index].replace(" ", "_").replace("-", "")
 
-                    # Create the list of keys
-                    cell_items = cell_heading.split('.')
 
-                    if len(cell_items) == 1:
-                        cell_keys = [cell_heading]
-                    else:
-                        cell_keys = cell_items
+import keyrouter_api.ttypes as kt
+from sherpa import cli_wrapper as cli
+from keyrouter_api.ttypes import SDB_SpaceEnum_t
+from thrift.transport import TTransport
+from scalerdb_api.common.ttypes import SDB_KeyOption
+from scalerdb_api.values.ttypes import SDB_BucketId, SDB_Object
+from scaler_python_utils.thrift.TCompatibleCompactProtocol import TCompatibleCompactProtocol
+from scaler_api import scalerdb as utils
 
-                    # Get the cell value
-                    cell_value = cell.replace("\n", ", ")
 
-                    # Update the data in yaml format
-                    set_value = self.update_yaml_data(readyamldata, cell_keys, cell_value)
-                    # Save the yaml data into a file
-                    self.save_yaml(set_value, filename)
 
-                    # Open the above yaml file to update the list formatted data
-                    f = open(filename, 'r')
-                    f = f.read()
 
-                    # Convert the data into list format using regex
-                    final = (re.sub(r'(\'[0-9]\'\:\s+)', '- ', str(f)))
+list_bucket_entries = cli.clients.keyrouter.listEntries("list_bucket", SDB_SpaceEnum_t.BUCKET_SPACE, SDB_KeyOption("Nmulti-part-test-bucket"), SDB_KeyOption("Nmulti-part-test-bucket"),1)
+t = TTransport.TMemoryBuffer(list_bucket_entries.entries[0].value.blob)
+p = TCompatibleCompactProtocol(t)
+sdb_bucket_id = SDB_BucketId()
+sdb_bucket_id.read(p)
+prefix = sdb_bucket_id.id
+list_result = cli.clients.keyrouter.listEntries3("flametest", "", None, SDB_SpaceEnum_t.OBJECT_SPACE, prefix, prefix, False, None, 1000)
 
-                    # Save the file
-                    with open(filename, 'w') as f:
-                        f.write(final)
-        # Close the CSV
-        self.csvfile.close()
+## TC1 Validate the multi part object by deleting one part of the object.
 
-# Sample Execution
-yamlObj = CsvToYamlConvertor('tas', r'C:\Users\madduv\ONBFactory\config.yaml', r'C:\Users\madduv\Downloads\inputfile.csv')
-yamlObj.convert_csv_to_yaml()
+original_bucket = cli.clients.keyrouter.remove("", kt.SDB_SpaceEnum_t.OBJECT_SPACE, list_result.entries[4].key)
+
+## TC2 Validate the multi part object by changing the size of the main object.
+
+prefix = list_result.entries[0].key
+p_key=prefix.split("file60mb")
+prefix=p_key[0]+"file60mb"
+entries = cli.clients.keyrouter.listEntries2a('', kt.SDB_SpaceEnum_t.OBJECT_SPACE, '', '', False, prefix, 10, None, False)
+okey = entries.entries[0].key
+oval = entries.entries[0].value
+obj = utils.deserialize_blob_of_sdb_value(oval)
+initial_size_of_obj = obj.multipartMetaData.size
+obj.multipartMetaData.size = initial_size_of_obj+1
+mobj_blob = utils.serialize(obj)
+modified_obj_sdb_val = oval
+modified_obj_sdb_val.blob = mobj_blob
+cli.clients.keyrouter.put('', kt.SDB_SpaceEnum_t.OBJECT_SPACE, okey, modified_obj_sdb_val)
+
+# TC3 Validate the multi part object by changing the size of one part object.
+
+prefix = list_result.entries[4].key
+entries = cli.clients.keyrouter.listEntries2a('', kt.SDB_SpaceEnum_t.OBJECT_SPACE, '', '', False, prefix, 10, None, False)
+okey = entries.entries[0].key
+oval = entries.entries[0].value
+obj = utils.deserialize_blob_of_sdb_value(oval)
+initial_size_of_obj = obj.singlePart.size
+obj.singlePart.size = initial_size_of_obj+1
+mobj_blob = utils.serialize(obj)
+modified_obj_sdb_val = oval
+modified_obj_sdb_val.blob = mobj_blob
+cli.clients.keyrouter.put('', kt.SDB_SpaceEnum_t.OBJECT_SPACE, okey, modified_obj_sdb_val)
+
+
+# TC4 Validate the multi part object by changing the etag of one part object
+pkey = list_result.entries[4].key
+value = cli.clients.keyrouter.get('', kt.SDB_SpaceEnum_t.OBJECT_SPACE, pkey)
+pobj = utils.deserialize_blob_of_sdb_value(value.value)
+checksum = list(pobj.singlePart.checksum)
+checksum[-2] = 1
+checksum=bytearray(checksum)
+pobj.singlePart.checksum=checksum
+mval = value.value
+modified_pblob = utils.serialize(pobj)
+mval.blob = modified_pblob
+cli.clients.keyrouter.put('', kt.SDB_SpaceEnum_t.OBJECT_SPACE, pkey, mval)
+
+# TC5 Validate the multi part object by changing dbkey type of one part object.
+pkey = list_result.entries[4].key
+pvalue = list_result.entries[4].value
+temp=list(pkey)
+temp[-4]=1
+mkey = bytearray(temp)
+cli.clients.keyrouter.put('', kt.SDB_SpaceEnum_t.OBJECT_SPACE, mkey, pvalue)
+cli.clients.keyrouter.remove('', kt.SDB_SpaceEnum_t.OBJECT_SPACE, pkey)
+
+# TC6 Validate the multi part object by byte filp for one key of MP object.
+pkey = list_result.entries[4].key
+pvalue = list_result.entries[4].value
+temp=list(pkey)
+temp[-28]="v"
+mkey = bytearray(temp)
+cli.clients.keyrouter.put('', kt.SDB_SpaceEnum_t.OBJECT_SPACE, mkey, pvalue)
+cli.clients.keyrouter.remove('', kt.SDB_SpaceEnum_t.OBJECT_SPACE, pkey)
+
+# TC7 Validate the multi part object by modifying upload id of one part key of MP object.
+pkey = list_result.entries[4].key
+pvalue = list_result.entries[4].value
+temp=list(pkey)
+temp[-30]=1
+mkey = bytearray(temp)
+cli.clients.keyrouter.put('', kt.SDB_SpaceEnum_t.OBJECT_SPACE, mkey, pvalue)
+cli.clients.keyrouter.remove('', kt.SDB_SpaceEnum_t.OBJECT_SPACE, pkey)
+
+
+# TC8 Validate the multiple versions of an MP object by changing the size of one part object.
+
+prefix = list_result.entries[0].key
+entries = cli.clients.keyrouter.listEntries2a('', kt.SDB_SpaceEnum_t.OBJECT_SPACE, '', '', False, prefix, 10, None, False)
+okey = entries.entries[0].key
+oval = entries.entries[0].value
+obj = utils.deserialize_blob_of_sdb_value(oval)
+initial_size_of_obj = obj.multipartMetaData.size
+obj.multipartMetaData.size = initial_size_of_obj+1
+mobj_blob = utils.serialize(obj)
+modified_obj_sdb_val = oval
+modified_obj_sdb_val.blob = mobj_blob
+cli.clients.keyrouter.put('', kt.SDB_SpaceEnum_t.OBJECT_SPACE, okey, modified_obj_sdb_val)
+print(prefix.encode('base64', 'strict'))

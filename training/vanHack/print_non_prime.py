@@ -12,5 +12,5 @@ def get_non_primes():
 
 a = (get_non_primes())
 
-for i in range(5):
+for i in range(12):
     print(next(a))

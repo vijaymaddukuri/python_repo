@@ -571,12 +571,14 @@ Tuples are an ordered sequences of items, just like lists.
 The main difference between tuples and lists is that tuples cannot be changed (immutable)
 unlike lists which can (mutable).
 
-It is important to keep in mind that if you want to create a tuple containing only one value, you need a trailing comma after your item.
+It is important to keep in mind that if you want to create a tuple containing only one value, 
+you need a trailing comma after your item.
 
 # tuple with one value
 tup1 = ('Vijay',)
 
-Even though tuples are immutable, it is possible to take portions of existing tuples to create new tuples as the following example demonstrates.
+Even though tuples are immutable, 
+it is possible to take portions of existing tuples to create new tuples as the following example demonstrates.
 
 # Initialize tuple
 tup1 = ('Python', 'SQL')

@@ -14,8 +14,9 @@ def sort(itemList):
             return itemList,swaps
     return itemList,swaps
 
-newList=sort(['is2', 'Thi1s', 'T4est', '3a'])
-# newList=sort(['b1',2,5,3,'a1'])
-l=sort([2,5,3,'a1'])
-print(newList)
+# newList=sort(['is2', 'Thi1s', 'T4est', '3a'])
+# # newList=sort(['b1',2,5,3,'a1'])
+# l=sort([2,5,3,'a1'])
+# print(newList)
+print(sort([4,3,1,2]))
 

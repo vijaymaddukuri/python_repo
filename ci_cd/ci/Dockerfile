@@ -2,7 +2,7 @@ FROM sylus2207/djangovh:latest
 
 ENV http_proxy=10.131.236.9:3128 https_proxy=10.131.236.9:3128 LANG=en_US.UTF-8
 
-MAINTAINER sylus.anuranjan@VIJAY.com
+MAINTAINER vicky@VIJAY.com
 
 RUN yum_install curl epel-release java-1.8.0-openjdk-devel libxslt tar rpm-build \
  git perl-Git  \

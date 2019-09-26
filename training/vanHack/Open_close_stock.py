@@ -130,4 +130,4 @@ def openAndClosePrices(firstDate, lastDate, weekDay):
                     return
 
 
-result = openAndClosePrices("26-March-2001", "15-August-2001", "Wednesday")
+result = openAndClosePrices("1-January-2000", "22-February-2000", "Monday")

@@ -2,80 +2,101 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d92bda21-bfd3-485e-a418-1e30463eaf62" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bb_certificate_generation/__init__.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bb_certificate_generation/bridgeburner.toml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bb_certificate_generation/config.yaml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bb_certificate_generation/functions.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bb_certificate_generation/regex_test.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bb_certificate_generation/ssh_utility.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bb_certificate_generation/update_bb_certificates.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/pexpect/__init__.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/pexpect/ssh_utility.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/training/Collections_10/implementing_collections/__init__.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/training/Collections_10/implementing_collections/container_protocol.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/training/Collections_10/implementing_collections/iter_protocol.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/training/Collections_10/implementing_collections/sequence_protocol.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/training/Collections_10/implementing_collections/sized_protocol.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/training/Collections_10/implementing_collections/sorted_set.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/training/Collections_10/implementing_collections/test_sorted_set.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/training/Inheritance_and_Subtype_Polymorphism/03isInstance_method.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/training/Inheritance_and_Subtype_Polymorphism/04issubclass_function.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/training/Inheritance_and_Subtype_Polymorphism/05multiple_inheritance.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/training/Inheritance_and_Subtype_Polymorphism/06details_multiple_inheritance.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/training/Inheritance_and_Subtype_Polymorphism/07method_resolution_order.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/training/Inheritance_and_Subtype_Polymorphism/08super_class_bound_proxy.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/training/Inheritance_and_Subtype_Polymorphism/09super_instance_bound_proxy.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/training/Inheritance_and_Subtype_Polymorphism/__init__.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/training/binary_search_tree/binary_search_tree.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/training/birthdayCakeCandles.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/training/closest_sum.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/training/context_manager/__init__.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/training/context_manager/connection.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/training/context_manager/context_manager_protocol.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/training/context_manager/contextlib_module.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/training/context_manager/multiple_context_managers.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/training/context_manager/transaction.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/training/data_reverse.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/training/diagonalDifference.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/training/dynamic_programming/reverse_fibonacci.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/training/exception_errors_11/__init__.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/training/exception_errors_11/assertions_internal_invariants.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/training/exception_errors_11/chain_exception.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/training/exception_errors_11/exception_handle.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/training/exception_errors_11/own_exception.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/training/exception_errors_11/payload_handling.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/training/exception_errors_11/trace_back.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/training/find_largest_rectangle.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/training/global_var.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/training/greedy_algorithm/__init__.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/training/greedy_algorithm/getMaxActivities.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/training/introspection/__init__.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/training/introspection/inspect_module.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/training/introspection/introspecting_scopes.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/training/largest_num_arrangement.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/training/largest_streak.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/training/maxIntofGivenInteger.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/training/miniMaxSum.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/training/posNeg_count.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/training/regex_div_by_4.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/training/reverse_every_other_word.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/training/shortPalindrome.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/training/staircase.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/training/time_conversion.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/training/09. Inheritance and Subtype Polymorphism/single_inheritance.py" afterPath="$PROJECT_DIR$/training/Inheritance_and_Subtype_Polymorphism/01single_inheritance.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/training/09. Inheritance and Subtype Polymorphism/sorted_list.py" afterPath="$PROJECT_DIR$/training/Inheritance_and_Subtype_Polymorphism/sorted_list.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/training/dynamic_programming/fibnoci_using_dp.py" afterPath="$PROJECT_DIR$/training/dynamic_programming/fibnoci_using_dp.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/training/dynamic_programming/lcs_and_len_long_sub_seq.py" afterPath="$PROJECT_DIR$/training/dynamic_programming/lcs_and_len_long_sub_seq.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/training/median.py" afterPath="$PROJECT_DIR$/training/median.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/training/palindromeWithinString.py" afterPath="$PROJECT_DIR$/training/palindromeWithinString.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/training/sorting/bubble_Sorting.py" afterPath="$PROJECT_DIR$/training/sorting/bubble_Sorting.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/training/temp.py" afterPath="$PROJECT_DIR$/training/temp.py" />
+      <change afterPath="$PROJECT_DIR$/hexa_conversion.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ov_sanity.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sample_web/website/companies/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sample_web/website/companies/urls.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sample_web/website/companies/views.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test1.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test2.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/training/DataStructures-Algorithm/array/minimum_swaps.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/training/DataStructures-Algorithm/linked_list/SingleLinkedList/16sorted_linked_list.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/training/ObjectOriented/abstract_class/01abstract_class.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/training/ObjectOriented/abstract_class/02abstract_properties.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/training/ObjectOriented/abstract_class/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/training/ObjectOriented/class_method_topic/01_class_method.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/training/ObjectOriented/class_method_topic/02_factory_method.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/training/ObjectOriented/class_method_topic/03_classmethod_with_inheritance.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/training/ObjectOriented/class_method_topic/04_class_method_example.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/training/ObjectOriented/class_method_topic/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/training/ObjectOriented/encapsulation_topics/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/training/ObjectOriented/encapsulation_topics/encapsulation_types.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/training/ObjectOriented/inherticance_types/01_single_inheritance.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/training/ObjectOriented/inherticance_types/02_multiple_inheritance.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/training/ObjectOriented/inherticance_types/03_multilevel_inheritance.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/training/ObjectOriented/inherticance_types/04_herarchical_inheritance.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/training/ObjectOriented/inherticance_types/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/training/ObjectOriented/polymorphism/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/training/ObjectOriented/polymorphism/inbuild_poly.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/training/ObjectOriented/polymorphism/poly_with_abstract_class.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/training/ObjectOriented/polymorphism/poly_with_class.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/training/ObjectOriented/polymorphism/poly_with_functions_objects.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/training/ObjectOriented/polymorphism/poly_with_inherticance.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/training/ObjectOriented/polymorphism/user_defined_poly.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/training/Python_basics/exception_errors_11/exception_example.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/training/Python_basics/exception_errors_11/exception_example2.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/training/regex/re_replace.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/training/regex/regex_all_number_in_str.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/training/regex/regex_email.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/training/regex/regex_ip.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/training/regex/regex_pwd.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/training/regex/regex_remove_leading_zero_in_ip.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/training/regex/regex_space_for_caps.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/training/regex/regex_starting_vowel.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/python_repo.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/python_repo.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Python_Notes.md" beforeDir="false" afterPath="$PROJECT_DIR$/Python_Notes.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/automation_framework/ci/Jenkinsfile_backup_automation" beforeDir="false" afterPath="$PROJECT_DIR$/automation_framework/ci/Jenkinsfile_backup_automation" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/automation_framework/ci/Jenkinsfile_logforwader_automation" beforeDir="false" afterPath="$PROJECT_DIR$/automation_framework/ci/Jenkinsfile_logforwader_automation" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/automation_framework/ci/Jenkinsfile_monitoring_automation" beforeDir="false" afterPath="$PROJECT_DIR$/automation_framework/ci/Jenkinsfile_monitoring_automation" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/automation_framework/ci/Jenkinsfile_nightly_run" beforeDir="false" afterPath="$PROJECT_DIR$/automation_framework/ci/Jenkinsfile_nightly_run" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/automation_framework/ci/Jenkinsfile_vulnerability_automation" beforeDir="false" afterPath="$PROJECT_DIR$/automation_framework/ci/Jenkinsfile_vulnerability_automation" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ci_cd/ci/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/ci_cd/ci/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ci_cd/ci/Jenkinsfile" beforeDir="false" afterPath="$PROJECT_DIR$/ci_cd/ci/Jenkinsfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ci_cd/ci/Jenkinsfile_blackduck" beforeDir="false" afterPath="$PROJECT_DIR$/ci_cd/ci/Jenkinsfile_blackduck" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ci_cd/ci/Jenkinsfile_build" beforeDir="false" afterPath="$PROJECT_DIR$/ci_cd/ci/Jenkinsfile_build" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ci_cd/ci/Jenkinsfile_cherrypy_package" beforeDir="false" afterPath="$PROJECT_DIR$/ci_cd/ci/Jenkinsfile_cherrypy_package" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ci_cd/ci/Jenkinsfile_cherrypy_package_nightly" beforeDir="false" afterPath="$PROJECT_DIR$/ci_cd/ci/Jenkinsfile_cherrypy_package_nightly" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ci_cd/ci/Jenkinsfile_nightly_run" beforeDir="false" afterPath="$PROJECT_DIR$/ci_cd/ci/Jenkinsfile_nightly_run" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ci_cd/ci/Jenkinsfile_ova_automation" beforeDir="false" afterPath="$PROJECT_DIR$/ci_cd/ci/Jenkinsfile_ova_automation" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ci_cd/ci/Jenkinsfile_tar_generation" beforeDir="false" afterPath="$PROJECT_DIR$/ci_cd/ci/Jenkinsfile_tar_generation" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo.py" beforeDir="false" afterPath="$PROJECT_DIR$/demo.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo2.py" beforeDir="false" afterPath="$PROJECT_DIR$/demo2.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/django_project/ci/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/django_project/ci/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/django_project/ci/Jenkinsfile" beforeDir="false" afterPath="$PROJECT_DIR$/django_project/ci/Jenkinsfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/django_project/ci/Jenkinsfile_blackduck" beforeDir="false" afterPath="$PROJECT_DIR$/django_project/ci/Jenkinsfile_blackduck" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/django_project/ci/Jenkinsfile_build" beforeDir="false" afterPath="$PROJECT_DIR$/django_project/ci/Jenkinsfile_build" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/django_project/ci/Jenkinsfile_cherrypy_package" beforeDir="false" afterPath="$PROJECT_DIR$/django_project/ci/Jenkinsfile_cherrypy_package" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/django_project/ci/Jenkinsfile_cherrypy_package_nightly" beforeDir="false" afterPath="$PROJECT_DIR$/django_project/ci/Jenkinsfile_cherrypy_package_nightly" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/django_project/ci/Jenkinsfile_nightly_run" beforeDir="false" afterPath="$PROJECT_DIR$/django_project/ci/Jenkinsfile_nightly_run" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/django_project/ci/Jenkinsfile_ova_automation" beforeDir="false" afterPath="$PROJECT_DIR$/django_project/ci/Jenkinsfile_ova_automation" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/django_project/ci/Jenkinsfile_tar_generation" beforeDir="false" afterPath="$PROJECT_DIR$/django_project/ci/Jenkinsfile_tar_generation" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements/local.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements/local.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/training/DataStructures-Algorithm/dynamic_programming/reverse_fibonacci.py" beforeDir="false" afterPath="$PROJECT_DIR$/training/DataStructures-Algorithm/dynamic_programming/reverse_fibonacci.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/training/DataStructures-Algorithm/sorting/bubble_Sorting.py" beforeDir="false" afterPath="$PROJECT_DIR$/training/DataStructures-Algorithm/sorting/bubble_Sorting.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/training/ObjectOriented/Inheritance_and_Subtype_Polymorphism/01single_inheritance.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/training/ObjectOriented/Inheritance_and_Subtype_Polymorphism/03isInstance_method.py" beforeDir="false" afterPath="$PROJECT_DIR$/training/ObjectOriented/inherticance_types/05_isInstance_method.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/training/ObjectOriented/Inheritance_and_Subtype_Polymorphism/04issubclass_function.py" beforeDir="false" afterPath="$PROJECT_DIR$/training/ObjectOriented/inherticance_types/06_issubclass_function.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/training/ObjectOriented/Inheritance_and_Subtype_Polymorphism/05multiple_inheritance.py" beforeDir="false" afterPath="$PROJECT_DIR$/training/ObjectOriented/inherticance_types/05multiple_inheritance.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/training/ObjectOriented/Inheritance_and_Subtype_Polymorphism/06details_multiple_inheritance.py" beforeDir="false" afterPath="$PROJECT_DIR$/training/ObjectOriented/inherticance_types/06details_multiple_inheritance.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/training/ObjectOriented/Inheritance_and_Subtype_Polymorphism/07method_resolution_order.py" beforeDir="false" afterPath="$PROJECT_DIR$/training/ObjectOriented/inherticance_types/07method_resolution_order.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/training/ObjectOriented/Inheritance_and_Subtype_Polymorphism/08super_class_bound_proxy.py" beforeDir="false" afterPath="$PROJECT_DIR$/training/ObjectOriented/inherticance_types/08super_class_bound_proxy.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/training/ObjectOriented/Inheritance_and_Subtype_Polymorphism/09super_instance_bound_proxy.py" beforeDir="false" afterPath="$PROJECT_DIR$/training/ObjectOriented/inherticance_types/09super_instance_bound_proxy.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/training/ObjectOriented/Inheritance_and_Subtype_Polymorphism/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/demo3.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/training/ObjectOriented/Inheritance_and_Subtype_Polymorphism/inherit2.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/training/ObjectOriented/Inheritance_and_Subtype_Polymorphism/inheritence.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/training/ObjectOriented/Inheritance_and_Subtype_Polymorphism/polymorphism.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/training/ObjectOriented/Inheritance_and_Subtype_Polymorphism/sorted_list.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/training/Python_basics/08.iterables_iteration/count_words.py" beforeDir="false" afterPath="$PROJECT_DIR$/training/Python_basics/08.iterables_iteration/count_words.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/training/vanHack/Open_close_stock.py" beforeDir="false" afterPath="$PROJECT_DIR$/training/vanHack/Open_close_stock.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/training/vanHack/alter_non_prime.py" beforeDir="false" afterPath="$PROJECT_DIR$/training/vanHack/alter_non_prime.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/training/vanHack/alter_open_close_stock.py" beforeDir="false" afterPath="$PROJECT_DIR$/training/vanHack/alter_open_close_stock.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/training/vanHack/print_non_prime.py" beforeDir="false" afterPath="$PROJECT_DIR$/training/vanHack/print_non_prime.py" afterDir="false" />
     </list>
     <ignored path="python_repo.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
-    <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -84,18 +105,64 @@
   <component name="CreatePatchCommitExecutor">
     <option name="PATCH_PATH" value="" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FavoritesManager">
     <favorites_list name="python_repo" />
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="450">
-      <file leaf-file-name="temp.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/training/temp.py">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/test1.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="225">
-              <caret line="9" column="19" selection-start-line="9" selection-start-column="19" selection-end-line="9" selection-end-column="19" />
-              <folding />
+            <state relative-caret-position="90">
+              <caret line="6" selection-start-line="6" selection-end-line="6" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/demo.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="554">
+              <caret line="113" selection-start-line="113" selection-end-line="119" selection-end-column="71" />
+              <folding>
+                <element signature="e#848#881#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/demo2.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="7215">
+              <caret line="484" column="38" selection-start-line="484" selection-start-column="38" selection-end-line="512" selection-end-column="129" />
+              <folding>
+                <element signature="e#20#124#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/demo3.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="2175">
+              <caret line="148" selection-end-line="194" />
+              <folding>
+                <element signature="e#20#124#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/ov_sanity.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1365">
+              <caret line="94" column="31" selection-start-line="94" selection-start-column="8" selection-end-line="94" selection-end-column="31" />
+              <folding>
+                <element signature="e#20#124#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -109,284 +176,198 @@
       </list>
     </option>
   </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>atexit</find>
+      <find>dell</find>
+      <find>@</find>
+      <find>sylus.anuranjan</find>
+      <find>requests</find>
+      <find>'</find>
+      <find />
+      <find>iterate_versioning_backend_bucket_objects_size</find>
+      <find>VERIFIER_CRITICAL_CSV_GZ_FILE_NAME</find>
+      <find>modify_one_object_size_in_multi_version</find>
+      <find>modify</find>
+    </findStrings>
+    <replaceStrings>
+      <replace>vicky</replace>
+      <replace />
+    </replaceStrings>
+    <dirStrings>
+      <dir>$PROJECT_DIR$</dir>
+    </dirStrings>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/training/data_reverse.py" />
-        <option value="$PROJECT_DIR$/training/largest_num_arrangement.py" />
-        <option value="$PROJECT_DIR$/training/Collections_10/implementing_collections/sequence_protocol.py" />
-        <option value="$PROJECT_DIR$/training/Collections_10/implementing_collections/sorted_set.py" />
-        <option value="$PROJECT_DIR$/training/exception_errors_11/exception_handle.py" />
-        <option value="$PROJECT_DIR$/training/exception_errors_11/payload_handling.py" />
-        <option value="$PROJECT_DIR$/training/median.py" />
-        <option value="$PROJECT_DIR$/training/exception_errors_11/own_exception.py" />
-        <option value="$PROJECT_DIR$/training/exception_errors_11/chain_exception.py" />
-        <option value="$PROJECT_DIR$/training/exception_errors_11/trace_back.py" />
-        <option value="$PROJECT_DIR$/training/exception_errors_11/assertions_internal_invariants.py" />
-        <option value="$PROJECT_DIR$/training/reverse_every_other_word.py" />
-        <option value="$PROJECT_DIR$/training/global_var.py" />
-        <option value="$PROJECT_DIR$/training/dynamic_programming/lcs_and_len_long_sub_seq.py" />
-        <option value="$PROJECT_DIR$/training/dynamic_programming/reverse_fibonacci.py" />
-        <option value="$PROJECT_DIR$/training/sorting/bubble_Sorting.py" />
-        <option value="$PROJECT_DIR$/training/greedy_algorithm/getMaxActivities.py" />
-        <option value="$PROJECT_DIR$/training/context_manager_12/context_manager_protocol.py" />
-        <option value="$PROJECT_DIR$/training/context_manager_12/contextlib_module.py" />
-        <option value="$PROJECT_DIR$/training/context_manager_12/multiple_context_managers.py" />
-        <option value="$PROJECT_DIR$/training/context_manager_12/connection.py" />
-        <option value="$PROJECT_DIR$/training/context_manager_12/transaction.py" />
-        <option value="$PROJECT_DIR$/training/context_manager/connection.py" />
-        <option value="$PROJECT_DIR$/training/context_manager/transaction.py" />
-        <option value="$PROJECT_DIR$/training/introspection/introspecting_scopes.py" />
-        <option value="$PROJECT_DIR$/training/introspection/inspect_module.py" />
-        <option value="$PROJECT_DIR$/training/regex_div_by_4.py" />
-        <option value="$PROJECT_DIR$/training/dynamic_programming/fibnoci_using_dp.py" />
-        <option value="$PROJECT_DIR$/training/diagonalDifference.py" />
-        <option value="$PROJECT_DIR$/training/posNeg_count.py" />
-        <option value="$PROJECT_DIR$/training/staircase.py" />
-        <option value="$PROJECT_DIR$/training/miniMaxSum.py" />
-        <option value="$PROJECT_DIR$/training/birthdayCakeCandles.py" />
-        <option value="$PROJECT_DIR$/training/time_conversion.py" />
-        <option value="$PROJECT_DIR$/training/palindromeWithinString.py" />
-        <option value="$PROJECT_DIR$/training/shortPalindrome.py" />
-        <option value="$PROJECT_DIR$/pexpect/ssh_utility.py" />
-        <option value="$PROJECT_DIR$/deployment_automation/__init__.py" />
-        <option value="$PROJECT_DIR$/deployment_automation/functions.py" />
-        <option value="$PROJECT_DIR$/deployment_automation/ssh_utility.py" />
-        <option value="$PROJECT_DIR$/deployment_automation/remote_operations.py" />
-        <option value="$PROJECT_DIR$/deployment_automation/config.yaml" />
-        <option value="$PROJECT_DIR$/deployment_automation/update_bb_certificates.py" />
-        <option value="$PROJECT_DIR$/bb_certificate_generation/update_bb_certificates.py" />
-        <option value="$PROJECT_DIR$/training/find_largest_rectangle.py" />
-        <option value="$PROJECT_DIR$/bb_certificate_generation/regex_test.py" />
-        <option value="$PROJECT_DIR$/training/largest_streak.py" />
-        <option value="$PROJECT_DIR$/training/maxSumofGivenInteger.py" />
-        <option value="$PROJECT_DIR$/training/maxIntofGivenInteger.py" />
-        <option value="$PROJECT_DIR$/training/binary_search_tree/binary_search_tree.py" />
-        <option value="$PROJECT_DIR$/training/temp.py" />
+        <option value="$PROJECT_DIR$/training/DataStructures-Algorithm/array/minimum_swaps.py" />
+        <option value="$PROJECT_DIR$/sample_web/website/companies/views.py" />
+        <option value="$PROJECT_DIR$/sample_web/website/companies/urls.py" />
+        <option value="$PROJECT_DIR$/training/advanced_python/inherticance_types/single_inheritance.py" />
+        <option value="$PROJECT_DIR$/training/advanced_python/inherticance_types/multilevel_inheritance.py" />
+        <option value="$PROJECT_DIR$/training/advanced_python/inherticance_types/iherarchical_inheritance.py" />
+        <option value="$PROJECT_DIR$/training/advanced_python/inherticance_types/multiple_inheritance.py" />
+        <option value="$PROJECT_DIR$/training/advanced_python/polymorphism/inbuild_poly.py" />
+        <option value="$PROJECT_DIR$/training/advanced_python/polymorphism/user_defined_poly.py" />
+        <option value="$PROJECT_DIR$/training/advanced_python/polymorphism/poly_with_class.py" />
+        <option value="$PROJECT_DIR$/training/advanced_python/polymorphism/poly_with_inherticance.py" />
+        <option value="$PROJECT_DIR$/training/advanced_python/polymorphism/poly_with_functions_objects.py" />
+        <option value="$PROJECT_DIR$/training/advanced_python/polymorphism/poly_with_abstract_class.py" />
+        <option value="$PROJECT_DIR$/training/ObjectOriented/abstract_class/abstract_class.py" />
+        <option value="$PROJECT_DIR$/training/ObjectOriented/abstract_class/abstract_using_sub_class.py" />
+        <option value="$PROJECT_DIR$/training/ObjectOriented/abstract_class/02abstract_properties.py" />
+        <option value="$PROJECT_DIR$/training/ObjectOriented/class_method_topic/01_class_method.py" />
+        <option value="$PROJECT_DIR$/training/ObjectOriented/class_method_topic/02_factory_method.py" />
+        <option value="$PROJECT_DIR$/training/ObjectOriented/class_method_topic/03_classmethod_with_inheritance.py" />
+        <option value="$PROJECT_DIR$/training/ObjectOriented/encapsulation_topics/encapsulation_types.py" />
+        <option value="$PROJECT_DIR$/Python_Notes.md" />
+        <option value="$PROJECT_DIR$/training/regex/regex_starting_vowel.py" />
+        <option value="$PROJECT_DIR$/training/regex/regex_email.py" />
+        <option value="$PROJECT_DIR$/training/regex/re_replace.py" />
+        <option value="$PROJECT_DIR$/training/regex/regex_ip.py" />
+        <option value="$PROJECT_DIR$/training/regex/regex_pwd.py" />
+        <option value="$PROJECT_DIR$/training/regex/regex_all_number_in_str.py" />
+        <option value="$PROJECT_DIR$/training/regex/regex_remove_leading_zero_in_ip.py" />
+        <option value="$PROJECT_DIR$/training/regex/regex_space_for_caps.py" />
+        <option value="$PROJECT_DIR$/training/Python_basics/08.iterables_iteration/count_words.py" />
+        <option value="$PROJECT_DIR$/training/vanHack/algorthim_test/easy/multiples_3_5.py" />
+        <option value="$PROJECT_DIR$/training/vanHack/reveresed_args.py" />
+        <option value="$PROJECT_DIR$/training/advanced_python/decoraters/decorator_class.py" />
+        <option value="$PROJECT_DIR$/training/consecutive_char_count.py" />
+        <option value="$PROJECT_DIR$/training/DataStructures-Algorithm/dynamic_programming/reverse_fibonacci.py" />
+        <option value="$PROJECT_DIR$/training/DataStructures-Algorithm/Tree/01BST_insertion.py" />
+        <option value="$PROJECT_DIR$/training/vanHack/print_non_prime.py" />
+        <option value="$PROJECT_DIR$/training/vanHack/alter_non_prime.py" />
+        <option value="$PROJECT_DIR$/training/vanHack/alter_open_close_stock.py" />
+        <option value="$PROJECT_DIR$/training/vanHack/Open_close_stock.py" />
+        <option value="$PROJECT_DIR$/training/DataStructures-Algorithm/linked_list/SingleLinkedList/16sorted_linked_list.py" />
+        <option value="$PROJECT_DIR$/test1.py" />
+        <option value="$PROJECT_DIR$/hexa_conversion.py" />
+        <option value="$PROJECT_DIR$/ov_sanity.py" />
+        <option value="$PROJECT_DIR$/demo.py" />
+        <option value="$PROJECT_DIR$/test2.py" />
+        <option value="$PROJECT_DIR$/training/ObjectOriented/class_method_topic/04_class_method_example.py" />
+        <option value="$PROJECT_DIR$/training/Python_basics/exception_errors_11/exception_example.py" />
+        <option value="$PROJECT_DIR$/training/Python_basics/exception_errors_11/exception_example2.py" />
+        <option value="$PROJECT_DIR$/demo2.py" />
+        <option value="$PROJECT_DIR$/demo3.py" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds">
-    <option name="width" value="1916" />
-    <option name="height" value="1020" />
+  <component name="ProjectFrameBounds" extendedState="1">
+    <option name="x" value="292" />
+    <option name="y" value="23" />
+    <option name="width" value="1680" />
+    <option name="height" value="947" />
   </component>
-  <component name="ProjectLevelVcsManager" settingsEditedManually="false">
-    <OptionsSetting value="true" id="Add" />
-    <OptionsSetting value="true" id="Remove" />
-    <OptionsSetting value="true" id="Checkout" />
-    <OptionsSetting value="true" id="Update" />
-    <OptionsSetting value="true" id="Status" />
-    <OptionsSetting value="true" id="Edit" />
+  <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="2" id="Add" />
-    <ConfirmationsSetting value="0" id="Remove" />
   </component>
   <component name="ProjectView">
-    <navigator currentView="ProjectPane" proportions="" version="1">
-      <flattenPackages />
-      <showMembers />
-      <showModules />
-      <showLibraryContents />
-      <hideEmptyPackages />
-      <abbreviatePackageNames />
-      <autoscrollToSource />
-      <autoscrollFromSource />
-      <sortByType />
-      <manualOrder />
+    <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="python_repo" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="python_repo" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="python_repo" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="python_repo" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="python_repo" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="training" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="python_repo" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="python_repo" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="training" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="binary_search_tree" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
+          <expand>
+            <path>
+              <item name="python_repo" type="b2602c69:ProjectViewProjectNode" />
+              <item name="python_repo" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="python_repo" type="b2602c69:ProjectViewProjectNode" />
+              <item name="python_repo" type="462c0819:PsiDirectoryNode" />
+              <item name="pexpect" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="python_repo" type="b2602c69:ProjectViewProjectNode" />
+              <item name="python_repo" type="462c0819:PsiDirectoryNode" />
+              <item name="training" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="python_repo" type="b2602c69:ProjectViewProjectNode" />
+              <item name="python_repo" type="462c0819:PsiDirectoryNode" />
+              <item name="training" type="462c0819:PsiDirectoryNode" />
+              <item name="advanced_python" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="python_repo" type="b2602c69:ProjectViewProjectNode" />
+              <item name="python_repo" type="462c0819:PsiDirectoryNode" />
+              <item name="training" type="462c0819:PsiDirectoryNode" />
+              <item name="DataStructures-Algorithm" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="python_repo" type="b2602c69:ProjectViewProjectNode" />
+              <item name="python_repo" type="462c0819:PsiDirectoryNode" />
+              <item name="training" type="462c0819:PsiDirectoryNode" />
+              <item name="ObjectOriented" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="python_repo" type="b2602c69:ProjectViewProjectNode" />
+              <item name="python_repo" type="462c0819:PsiDirectoryNode" />
+              <item name="training" type="462c0819:PsiDirectoryNode" />
+              <item name="ObjectOriented" type="462c0819:PsiDirectoryNode" />
+              <item name="abstract_class" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="python_repo" type="b2602c69:ProjectViewProjectNode" />
+              <item name="python_repo" type="462c0819:PsiDirectoryNode" />
+              <item name="training" type="462c0819:PsiDirectoryNode" />
+              <item name="Python_basics" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="python_repo" type="b2602c69:ProjectViewProjectNode" />
+              <item name="python_repo" type="462c0819:PsiDirectoryNode" />
+              <item name="training" type="462c0819:PsiDirectoryNode" />
+              <item name="Python_basics" type="462c0819:PsiDirectoryNode" />
+              <item name="exceptions" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
-    <property name="settings.editor.splitter.proportion" value="0.2" />
-    <property name="last_opened_file_path" value="$USER_HOME$/deployment_automation" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/training/ObjectOriented" />
+      <recent name="$PROJECT_DIR$/training/advanced_python/" />
+      <recent name="C:\Users\madduv\my_workspace\python_repo\training" />
+      <recent name="C:\Users\madduv\my_workspace\python_repo\training\func_tools" />
+      <recent name="C:\Users\madduv\my_workspace\python_repo\training\sorting" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/training/ObjectOriented/inherticance_types" />
       <recent name="C:\Users\madduv\my_workspace\python_repo\bb_certificate_generation" />
       <recent name="C:\Users\madduv\my_workspace\python_repo" />
       <recent name="C:\Users\madduv\my_workspace\python_repo\training\stack_queue_deques" />
     </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\madduv\my_workspace\python_repo\training" />
-      <recent name="C:\Users\madduv\my_workspace\python_repo\training\func_tools" />
-      <recent name="C:\Users\madduv\my_workspace\python_repo\training\sorting" />
-      <recent name="C:\Users\madduv\my_workspace\python_repo\training\dynamic_programming" />
-    </key>
   </component>
-  <component name="RunManager" selected="Python.temp">
-    <configuration default="false" name="largest_streak" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/training" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="python_repo" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/training/largest_streak.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <method />
-    </configuration>
-    <configuration default="false" name="maxIntofGivenInteger" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/training" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="python_repo" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/training/maxIntofGivenInteger.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <method />
-    </configuration>
-    <configuration default="false" name="degreeOfArray" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/training" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="python_repo" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/training/degreeOfArray.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <method />
-    </configuration>
-    <configuration default="false" name="binary_search_tree" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/training/binary_search_tree" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="python_repo" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/training/binary_search_tree/binary_search_tree.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <method />
-    </configuration>
-    <configuration default="false" name="temp" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/training" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="python_repo" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/training/temp.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <method />
-    </configuration>
-    <configuration default="true" type="PythonConfigurationType" factoryName="Python">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="python_repo" />
-      <option name="SCRIPT_NAME" value="" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <method />
-    </configuration>
-    <configuration default="true" type="Tox" factoryName="Tox">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="python_repo" />
-      <method />
-    </configuration>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager" selected="Python.exception_example2">
     <configuration default="true" type="tests" factoryName="Attests">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -406,111 +387,152 @@
       <option name="USE_PATTERN" value="false" />
       <method />
     </configuration>
-    <configuration default="true" type="tests" factoryName="Doctests">
+    <configuration name="04_class_method_example" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="python_repo" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
-      <envs />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="" />
-      <option name="IS_MODULE_SDK" value="false" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/training/ObjectOriented/class_method_topic" />
+      <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="python_repo" />
-      <option name="SCRIPT_NAME" value="" />
-      <option name="CLASS_NAME" value="" />
-      <option name="METHOD_NAME" value="" />
-      <option name="FOLDER_NAME" value="" />
-      <option name="TEST_TYPE" value="TEST_SCRIPT" />
-      <option name="PATTERN" value="" />
-      <option name="USE_PATTERN" value="false" />
-      <method />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/training/ObjectOriented/class_method_topic/04_class_method_example.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
     </configuration>
-    <configuration default="true" type="tests" factoryName="Nosetests">
+    <configuration name="16sorted_linked_list" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="python_repo" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
-      <envs />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="" />
-      <option name="IS_MODULE_SDK" value="false" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/training/DataStructures-Algorithm/linked_list/SingleLinkedList" />
+      <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="python_repo" />
-      <option name="SCRIPT_NAME" value="" />
-      <option name="CLASS_NAME" value="" />
-      <option name="METHOD_NAME" value="" />
-      <option name="FOLDER_NAME" value="" />
-      <option name="TEST_TYPE" value="TEST_SCRIPT" />
-      <option name="PATTERN" value="" />
-      <option name="USE_PATTERN" value="false" />
-      <option name="PARAMS" value="" />
-      <option name="USE_PARAM" value="false" />
-      <method />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/training/DataStructures-Algorithm/linked_list/SingleLinkedList/16sorted_linked_list.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
     </configuration>
-    <configuration default="true" type="tests" factoryName="Unittests">
+    <configuration name="demo2" type="PythonConfigurationType" factoryName="Python">
+      <module name="python_repo" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
-      <envs />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="" />
-      <option name="IS_MODULE_SDK" value="false" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="python_repo" />
-      <option name="SCRIPT_NAME" value="" />
-      <option name="CLASS_NAME" value="" />
-      <option name="METHOD_NAME" value="" />
-      <option name="FOLDER_NAME" value="" />
-      <option name="TEST_TYPE" value="TEST_SCRIPT" />
-      <option name="PATTERN" value="" />
-      <option name="USE_PATTERN" value="false" />
-      <option name="PUREUNITTEST" value="true" />
-      <option name="PARAMS" value="" />
-      <option name="USE_PARAM" value="false" />
-      <method />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/demo2.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
     </configuration>
-    <configuration default="true" type="tests" factoryName="py.test">
+    <configuration name="exception_example" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="python_repo" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
-      <envs />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="" />
-      <option name="IS_MODULE_SDK" value="false" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/training/Python_basics/exception_errors_11" />
+      <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="python_repo" />
-      <option name="SCRIPT_NAME" value="" />
-      <option name="CLASS_NAME" value="" />
-      <option name="METHOD_NAME" value="" />
-      <option name="FOLDER_NAME" value="" />
-      <option name="TEST_TYPE" value="TEST_SCRIPT" />
-      <option name="PATTERN" value="" />
-      <option name="USE_PATTERN" value="false" />
-      <option name="testToRun" value="" />
-      <option name="keywords" value="" />
-      <option name="params" value="" />
-      <option name="USE_PARAM" value="false" />
-      <option name="USE_KEYWORD" value="false" />
-      <method />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/training/Python_basics/exception_errors_11/exception_example.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
     </configuration>
-    <list size="5">
-      <item index="0" class="java.lang.String" itemvalue="Python.largest_streak" />
-      <item index="1" class="java.lang.String" itemvalue="Python.maxIntofGivenInteger" />
-      <item index="2" class="java.lang.String" itemvalue="Python.degreeOfArray" />
-      <item index="3" class="java.lang.String" itemvalue="Python.binary_search_tree" />
-      <item index="4" class="java.lang.String" itemvalue="Python.temp" />
+    <configuration name="exception_example2" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="python_repo" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/training/Python_basics/exception_errors_11" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/training/Python_basics/exception_errors_11/exception_example2.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="hexa_conversion" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="python_repo" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/hexa_conversion.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Python.04_class_method_example" />
+      <item itemvalue="Python.16sorted_linked_list" />
+      <item itemvalue="Python.demo2" />
+      <item itemvalue="Python.exception_example2" />
+      <item itemvalue="Python.exception_example" />
+      <item itemvalue="Python.hexa_conversion" />
     </list>
     <recent_temporary>
-      <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Python.temp" />
-        <item index="1" class="java.lang.String" itemvalue="Python.binary_search_tree" />
-        <item index="2" class="java.lang.String" itemvalue="Python.degreeOfArray" />
-        <item index="3" class="java.lang.String" itemvalue="Python.maxIntofGivenInteger" />
-        <item index="4" class="java.lang.String" itemvalue="Python.largest_streak" />
+      <list>
+        <item itemvalue="Python.exception_example2" />
+        <item itemvalue="Python.exception_example" />
+        <item itemvalue="Python.04_class_method_example" />
+        <item itemvalue="Python.hexa_conversion" />
+        <item itemvalue="Python.16sorted_linked_list" />
       </list>
     </recent_temporary>
   </component>
-  <component name="ShelveChangesManager" show_recycled="false">
-    <option name="remove_strategy" value="false" />
+  <component name="SvnConfiguration">
+    <configuration />
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -555,26 +577,26 @@
     </history-entry>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="0" width="1916" height="1020" extended-state="0" />
-    <editor active="false" />
+    <frame x="292" y="23" width="1680" height="947" extended-state="1" />
     <layout>
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2506724" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32844934" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2771673" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3943834" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.5848596" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.20735383" />
+      <window_info id="Structure" order="1" weight="0.25" />
+      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.16842106" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.4502924" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
+      <window_info anchor="bottom" id="Python Console" order="8" weight="0.2877193" />
+      <window_info anchor="bottom" id="Terminal" order="9" weight="0.31632653" />
+      <window_info anchor="bottom" id="Version Control" order="10" />
+      <window_info anchor="bottom" id="Messages" order="11" />
+      <window_info anchor="right" id="Commander" order="0" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -585,341 +607,297 @@
       <collection />
     </option>
   </component>
-  <component name="VcsContentAnnotationSettings">
-    <option name="myLimit" value="2678400000" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <option name="time" value="1" />
-    </breakpoint-manager>
-    <watches-manager />
-  </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/training/context_manager/context_manager_protocol.py">
+    <entry file="file://$PROJECT_DIR$/training/DataStructures-Algorithm/Tree/02binary_search_tree.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="189">
-          <caret line="32" column="0" selection-start-line="32" selection-start-column="0" selection-end-line="33" selection-end-column="43" />
+        <state relative-caret-position="-271" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/training/DataStructures-Algorithm/Tree/03height_of_tree.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-218" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/training/DataStructures-Algorithm/Tree/04distance.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-587" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/training/DataStructures-Algorithm/Tree/05binary_tree_level_sorted.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/training/DataStructures-Algorithm/Tree/06level_order.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="330">
+          <caret line="22" column="16" lean-forward="true" selection-start-line="22" selection-start-column="16" selection-end-line="22" selection-end-column="16" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/training/context_manager/contextlib_module.py">
+    <entry file="file://$PROJECT_DIR$/training/DataStructures-Algorithm/Tree/07level_order_optimized.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/training/DataStructures-Algorithm/Tree/08level_order_using_deque.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="25">
-          <caret line="24" column="13" selection-start-line="24" selection-start-column="13" selection-end-line="24" selection-end-column="13" />
+        <state relative-caret-position="-300" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/training/DataStructures-Algorithm/Tree/09balanced_tree.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-60" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/training/DataStructures-Algorithm/Tree/10check_binary_tree.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/training/DataStructures-Algorithm/Tree/11optimal_search_tree.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-23" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/training/DataStructures-Algorithm/Tree/12print_root_to_leaf_paths.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-446" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/training/DataStructures-Algorithm/Tree/13root_to_leaf_sum_equal.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-290" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/training/DataStructures-Algorithm/Tree/14printAncestors.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-139" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/training/DataStructures-Algorithm/Tree/15lowest_common_ancestor.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-177" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/training/DataStructures-Algorithm/Tree/16same_tree.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/training/DataStructures-Algorithm/Tree/17search_bst.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-298" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/training/DataStructures-Algorithm/Tree/18subtree.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-402" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/training/DataStructures-Algorithm/Tree/19tree_node.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-9" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/training/DataStructures-Algorithm/Tree/20vertical_order_traversal.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/training/DataStructures-Algorithm/dynamic_programming/lcs_and_len_long_sub_seq.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="795">
+          <caret line="53" column="13" selection-start-line="53" selection-start-column="13" selection-end-line="53" selection-end-column="13" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/training/context_manager/multiple_context_managers.py">
+    <entry file="file://$PROJECT_DIR$/training/DataStructures-Algorithm/dynamic_programming/lonest_increasing_subsequence.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="9" column="31" selection-start-line="9" selection-start-column="31" selection-end-line="9" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/training/DataStructures-Algorithm/dynamic_programming/kanp_sack.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="17" column="10" selection-start-line="17" selection-start-column="10" selection-end-line="17" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/training/DataStructures-Algorithm/Tree/21Top_view.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/training/vanHack/reveresed_args.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="9" selection-start-line="9" selection-end-line="12" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/training/vanHack/print_non_prime.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="12" selection-start-line="12" selection-end-line="12" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/training/vanHack/alter_open_close_stock.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="7" selection-start-line="7" selection-end-line="34" selection-end-column="57" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/training/vanHack/reform_date.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/training/vanHack/Open_close_stock.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1575">
+          <caret line="107" column="39" selection-start-line="107" selection-start-column="31" selection-end-line="107" selection-end-column="39" />
+          <folding>
+            <element signature="e#2222#2237#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/training/DataStructures-Algorithm/dynamic_programming/longest_common_substring.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/training/DataStructures-Algorithm/dynamic_programming/longest_non_overlapping_palindromic_product.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/training/DataStructures-Algorithm/linked_list/SingleLinkedList/16sorted_linked_list.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="435">
-          <caret line="25" column="61" selection-start-line="25" selection-start-column="61" selection-end-line="25" selection-end-column="61" />
+          <caret line="85" column="8" lean-forward="true" selection-start-line="85" selection-start-column="8" selection-end-line="85" selection-end-column="8" />
+          <folding>
+            <element signature="e#681#694#0" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/training/context_manager/transaction.py">
+    <entry file="file://$PROJECT_DIR$/training/DataStructures-Algorithm/linked_list/SingleLinkedList/09linked_list_reversal.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/training/vanHack/alter_non_prime.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1000">
-          <caret line="40" column="0" selection-start-line="40" selection-start-column="0" selection-end-line="40" selection-end-column="0" />
+        <state>
+          <caret selection-end-line="12" selection-end-column="18" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/training/introspection/introspecting_scopes.py">
+    <entry file="file://$PROJECT_DIR$/training/advanced_python/exceptionHandling.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/training/Python_basics/exceptions/demo_exceptions.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/training/Python_basics/exception_errors_11/customRangeException.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/training/Python_basics/exception_errors_11/expectModule.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="250">
-          <caret line="10" column="0" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
+        <state>
+          <folding>
+            <element signature="e#0#14#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/training/context_manager/connection.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="7" selection-start-line="0" selection-start-column="7" selection-end-line="0" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/training/Inheritance_and_Subtype_Polymorphism/09super_instance_bound_proxy.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="375">
-          <caret line="15" column="0" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/training/Inheritance_and_Subtype_Polymorphism/07method_resolution_order.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="625">
-          <caret line="25" column="23" selection-start-line="25" selection-start-column="23" selection-end-line="25" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/training/exceptions/demo_exceptions.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/training/unit_testing/stub_test.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/training/abstractMethod.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/training/Inheritance_and_Subtype_Polymorphism/06details_multiple_inheritance.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="550">
-          <caret line="22" column="0" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/training/Inheritance_and_Subtype_Polymorphism/08super_class_bound_proxy.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="380">
-          <caret line="32" column="26" selection-start-line="32" selection-start-column="26" selection-end-line="32" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/training/regex_div_by_4.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="350">
-          <caret line="14" column="22" selection-start-line="13" selection-start-column="0" selection-end-line="14" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/training/dynamic_programming/reverse_fibonacci.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="350">
-          <caret line="14" column="22" selection-start-line="14" selection-start-column="22" selection-end-line="14" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/training/telnet.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/training/dynamic_programming/fibnoci_using_dp.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="650">
-          <caret line="26" column="19" selection-start-line="26" selection-start-column="19" selection-end-line="26" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/training/introspection/inspect_module.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="125">
-          <caret line="6" column="77" selection-start-line="6" selection-start-column="77" selection-end-line="6" selection-end-column="77" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/training/08.iterables_iteration/map_func.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/training/diagonalDifference.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="100">
-          <caret line="4" column="17" selection-start-line="4" selection-start-column="17" selection-end-line="4" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/training/08.iterables_iteration/filter_func.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="354">
-          <caret line="15" column="12" selection-start-line="15" selection-start-column="12" selection-end-line="15" selection-end-column="48" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/training/posNeg_count.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="100">
-          <caret line="4" column="33" selection-start-line="4" selection-start-column="33" selection-end-line="4" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/training/stringReverse.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/training/staircase.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="2" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/training/miniMaxSum.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="2" selection-end-column="49" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/.PyCharm2016.2/system/python_stubs/325922953/builtins.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="260">
-          <caret line="517" column="4" selection-start-line="517" selection-start-column="4" selection-end-line="517" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/training/birthdayCakeCandles.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="3" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/training/time_conversion.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="9" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pexpect/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://C:/python3.5/Lib/site-packages/winpexpect.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2780">
-          <caret line="327" column="8" selection-start-line="327" selection-start-column="8" selection-end-line="327" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/training/stack_queue_deques/parentheses_bal_check.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/deployment_automation/__init__.py" />
-    <entry file="file://$PROJECT_DIR$/pexpect/ssh_utility.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="50">
-          <caret line="2" column="0" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/training/shortPalindrome.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="325">
-          <caret line="13" column="10" selection-start-line="13" selection-start-column="10" selection-end-line="13" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/deployment_automation/functions.py" />
-    <entry file="file://C:/python3.5/Lib/site-packages/paramiko/client.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="155">
-          <caret line="571" column="88" selection-start-line="571" selection-start-column="85" selection-end-line="571" selection-end-column="88" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/deployment_automation/ssh_utility.py" />
-    <entry file="file://$PROJECT_DIR$/deployment_automation/config.yaml" />
-    <entry file="file://$PROJECT_DIR$/deployment_automation/update_bb_certificates.py" />
-    <entry file="file://$PROJECT_DIR$/POC on Salt cloud for writing new driver for VEC/xstream.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-4025">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/bb_certificate_generation/update_bb_certificates.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1170">
-          <caret line="145" column="0" selection-start-line="145" selection-start-column="0" selection-end-line="147" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/training/find_largest_rectangle.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="25">
-          <caret line="48" column="42" selection-start-line="48" selection-start-column="41" selection-end-line="48" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/bb_certificate_generation/regex_test.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="125">
-          <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/bb_certificate_generation/bridgeburner.toml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/training/degreeOfArray.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="525">
-          <caret line="21" column="18" selection-start-line="21" selection-start-column="18" selection-end-line="21" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/training/largest_streak.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="100">
-          <caret line="4" column="16" selection-start-line="4" selection-start-column="16" selection-end-line="4" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/training/maxIntofGivenInteger.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="325">
-          <caret line="13" column="9" selection-start-line="13" selection-start-column="9" selection-end-line="13" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/training/palindromeWithinString.py">
+    <entry file="file://$PROJECT_DIR$/training/Python_basics/exception_errors_11/own_exception.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="300">
-          <caret line="12" column="4" selection-start-line="12" selection-start-column="4" selection-end-line="12" selection-end-column="4" />
+          <caret line="20" column="27" selection-start-line="20" selection-start-column="14" selection-end-line="20" selection-end-column="27" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/training/binary_search_tree/binary_search_tree.py">
+    <entry file="file://$PROJECT_DIR$/hexa_conversion.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="570">
-          <caret line="64" column="18" selection-start-line="64" selection-start-column="18" selection-end-line="64" selection-end-column="18" />
+        <state relative-caret-position="180">
+          <caret line="13" column="119" selection-start-line="13" selection-start-column="7" selection-end-line="13" selection-end-column="119" />
+          <folding>
+            <element signature="e#105#114#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://C:/python3.5/Lib/ntpath.py">
+    <entry file="file://$PROJECT_DIR$/test2.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="155">
-          <caret line="73" column="4" selection-start-line="73" selection-start-column="4" selection-end-line="73" selection-end-column="4" />
+        <state relative-caret-position="34230">
+          <caret line="2323" column="21" selection-start-line="2323" selection-start-column="21" selection-end-line="2323" selection-end-column="21" />
+          <folding>
+            <element signature="e#0#9#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/training/temp.py">
+    <entry file="file://$PROJECT_DIR$/training/ObjectOriented/class_method_topic/04_class_method_example.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="9" column="19" selection-start-line="9" selection-start-column="19" selection-end-line="9" selection-end-column="19" />
-          <folding />
+        <state relative-caret-position="540">
+          <caret line="36" column="20" selection-start-line="36" selection-start-column="20" selection-end-line="36" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/training/Python_basics/exception_errors_11/exception_example.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="4" column="49" selection-start-line="4" selection-start-column="49" selection-end-line="4" selection-end-column="49" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/training/Python_basics/exception_errors_11/exception_example2.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="7" selection-start-line="7" selection-end-line="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/training/ObjectOriented/abstract_class/01abstract_class.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/training/ObjectOriented/abstract_class/02abstract_properties.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/training/advanced_python/classMethod.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test1.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="6" selection-start-line="6" selection-end-line="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/demo2.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="7215">
+          <caret line="484" column="38" selection-start-line="484" selection-start-column="38" selection-end-line="512" selection-end-column="129" />
+          <folding>
+            <element signature="e#20#124#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/demo3.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2175">
+          <caret line="148" selection-end-line="194" />
+          <folding>
+            <element signature="e#20#124#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ov_sanity.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1365">
+          <caret line="94" column="31" selection-start-line="94" selection-start-column="8" selection-end-line="94" selection-end-column="31" />
+          <folding>
+            <element signature="e#20#124#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/demo.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="554">
+          <caret line="113" selection-start-line="113" selection-end-line="119" selection-end-column="71" />
+          <folding>
+            <element signature="e#848#881#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

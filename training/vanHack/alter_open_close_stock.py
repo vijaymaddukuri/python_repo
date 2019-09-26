@@ -35,16 +35,5 @@ def openAndClosePrices(firstDate, lastDate, weekDay):
             print(one['date'], one['open'], one['close'])
 
 
-try:
-    _firstDate = str(input())
-except:
-    _firstDate = None
-try:
-    _lastDate = str(input())
-except:
-    _lastDate = None
-try:
-    _weekDay = str(input())
-except:
-    _weekDay = None
+
 openAndClosePrices(_firstDate, _lastDate, _weekDay)

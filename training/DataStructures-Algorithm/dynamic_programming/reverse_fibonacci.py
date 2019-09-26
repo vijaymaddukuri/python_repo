@@ -18,4 +18,4 @@ def reverseFibonacci(n):
 
 
 n = 5
-print(reverseFibonacci(n))
+print(reverseFibonacci(7))

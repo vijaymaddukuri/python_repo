@@ -55,7 +55,7 @@ void runStages(String tag) {
 }
 
 @Library('xsPipelineLibs')
-def vs = new devops.VariousStuff1().configure([notifyRecipients : 'sylus.anuranjan@VIJAY.com'])
+def vs = new devops.VariousStuff1().configure([notifyRecipients : 'vicky@VIJAY.com'])
 
 vs.try_node('docker_engine') {
 
