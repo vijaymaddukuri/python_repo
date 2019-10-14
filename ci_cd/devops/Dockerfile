@@ -1,4 +1,4 @@
-FROM hub.docker.com:frolvlad/alpine-java
+FROM ubuntu:18.04
 
 MAINTAINER vijay.maddukuri@VIJAY.com
 
