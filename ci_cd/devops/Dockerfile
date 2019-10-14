@@ -1,4 +1,4 @@
-FROM frolvlad/alpine-java
+FROM hub.docker.com:frolvlad/alpine-java
 
 MAINTAINER vijay.maddukuri@VIJAY.com
 
