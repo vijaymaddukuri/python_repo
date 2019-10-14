@@ -5,3 +5,4 @@
     testImage.inside {
         sh 'make test'
     }
+}
