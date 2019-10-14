@@ -1,6 +1,6 @@
  node {
     checkout scm
-    def testImage = docker.build("VIJAY-image", "./ci_cd/devops/Dockerfile")
+    def testImage = docker.build("vijay-image", "./ci_cd/devops/Dockerfile")
 
     testImage.inside {
         sh 'make test'
