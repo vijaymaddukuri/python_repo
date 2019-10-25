@@ -1,8 +1,8 @@
  node {
-    checkout scm
-    def testImage = docker.build("vijay-image", "./ci_cd/devops")
-
-    testImage.inside {
-        sh 'make test'
+    stages
+    {
+        stage("my test"){
+            sh 'make test'
+        }
     }
 }
