@@ -1,8 +1,10 @@
- node {
-    stages
-    {
-        stage("my test"){
-            sh 'make test'
-        }
+pipeline {
+    agent any
+    stages {
+    stage('Test On Linux') {
+                    steps {
+                        echo 'hello world'
+                    }
+                }
     }
 }
