@@ -1,0 +1,8 @@
+ node {
+    checkout scm
+    def testImage = docker.build("test-image", "./ci_cd/devops/build-image")
+
+    testImage.inside {
+        sh 'make test'
+    }
+}
