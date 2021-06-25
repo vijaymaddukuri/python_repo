@@ -1,0 +1,35 @@
+Questions,
+Id:,Unique Id of the question in the table
+OwnerUserId:,The user who asked this question
+CreationDate:,The date and time at which the question is created
+ClosedDate:,The date and time at which the question is closed
+Score:,Every question in StackOverflow has upvotes and downvotes. This indicates the (upvotes - downvotes) of the question.
+Title:,The title of the question
+Body:,The body of the question
+,
+Answers,
+Id:,Unique Id of the answer in the table
+OwnerUserId:,The user who answered this
+CreationDate:,The date and time at which the answer is created
+ParentId:,Indicates the unique Id of the question to which this answer is given
+Score:,Every answer in StackOverflow has upvotes and downvotes. This indicates the (upvotes - downvotes) of the answer.
+Body:,The body of the answer
+,
+Tags,
+Id:,The unque Id of the question to which this tag was given
+Tag:,comma separated tags
+,
+Users,
+id:,The unique Id of the user in the table
+display_name:,The display name of the user
+creation_date:,The date and time at which the user created their account
+last_access_date:,The date and time at which the user accessed the StackOverflow forum at last
+reputation,"Reputation is calculated by summing up:
+
+question is voted up: +10
+answer is voted up: +10
+answer is marked “accepted”: +15 (+2 to acceptor)
+suggested edit is accepted: +2 (up to +1000 total per user)"
+upvotes,No of time user has been upvoted by other users
+downvotes,No of time user has been downvoted by other users
+views,No of time the user profile has been viewed
